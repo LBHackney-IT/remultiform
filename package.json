@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rollup --config",
     "build:watch": "rollup --config --watch",
-    "test": "npm run format:check && npm run lint && npm run build",
+    "test": "npm run format:check && npm run lint && npm run build && jest --detectOpenHandles",
     "lint": "eslint --report-unused-disable-directives --config ./.eslintrc.full.js '**/*.ts'",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write '**/*'",
@@ -17,6 +17,7 @@
     "prepare": "npm run build"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.20",
     "@types/node": "^12.11.7",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
@@ -24,10 +25,12 @@
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.0.9",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "pretty-quick": "^2.0.0",
     "rollup": "^1.26.0",
     "rollup-plugin-typescript": "^1.0.1",
+    "ts-jest": "^24.1.0",
     "tslib": "^1.10.0",
     "typescript": "^3.6.4"
   },
