@@ -1,3 +1,4 @@
+/* eslint-env node */
 const typescript = require("rollup-plugin-typescript");
 
 const pkg = require("./package.json");

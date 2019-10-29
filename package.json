@@ -9,13 +9,20 @@
   "scripts": {
     "build": "rollup --config",
     "build:watch": "rollup --config --watch",
-    "test": "npm run format:check && npm run build",
+    "test": "npm run format:check && npm run lint && npm run build",
+    "lint": "eslint --report-unused-disable-directives --config ./.eslintrc.full.js '**/*.ts'",
+    "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write '**/*'",
     "format:check": "prettier --check '**/*'",
     "prepare": "npm run build"
   },
   "devDependencies": {
     "@types/node": "^12.11.7",
+    "@typescript-eslint/eslint-plugin": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.0.9",
     "prettier": "^1.18.2",
     "pretty-quick": "^2.0.0",
