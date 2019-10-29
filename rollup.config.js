@@ -1,4 +1,5 @@
 /* eslint-env node */
+const babel = require("rollup-plugin-babel");
 const typescript = require("rollup-plugin-typescript");
 
 const pkg = require("./package.json");
@@ -22,6 +23,10 @@ module.exports = {
   plugins: [
     typescript({
       typescript: require("typescript")
+    }),
+    babel({
+      extensions: [".ts", ".tsx"],
+      exclude: "**/node_modules/**/*"
     })
   ]
 };

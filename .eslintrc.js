@@ -1,7 +1,7 @@
 /* eslint-env node */
-const sharedPlugins = ["prettier"];
-const sharedRuleExtends = ["eslint:recommended"];
-const sharedRulePrettierExtends = ["prettier"];
+const sharedPlugins = ["react", "prettier"];
+const sharedRuleExtends = ["eslint:recommended", "plugin:react/recommended"];
+const sharedRulePrettierExtends = ["prettier", "prettier/react"];
 
 module.exports = {
   parser: "@typescript-eslint/parser",
