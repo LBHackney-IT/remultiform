@@ -3,6 +3,7 @@ const babel = require("rollup-plugin-babel");
 const typescript = require("rollup-plugin-typescript");
 
 const pkg = require("./package.json");
+const tsconfig = require("./tsconfig.json");
 
 module.exports = {
   input: "src/index.ts",
@@ -22,7 +23,15 @@ module.exports = {
   ],
   plugins: [
     typescript({
-      typescript: require("typescript")
+      typescript: require("typescript"),
+      tsconfigOverride: {
+        exclude: [
+          ...tsconfig.exclude,
+          "**/__tests__/**/*",
+          "**/*.spec.*",
+          "**/*.test.*"
+        ]
+      }
     }),
     babel({
       extensions: [".ts", ".tsx"],
