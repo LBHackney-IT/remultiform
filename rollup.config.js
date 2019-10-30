@@ -1,6 +1,6 @@
 /* eslint-env node */
 const babel = require("rollup-plugin-babel");
-const typescript = require("rollup-plugin-typescript");
+const typescript = require("rollup-plugin-typescript2");
 
 const pkg = require("./package.json");
 
