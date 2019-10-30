@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div>
-  Content goes here!
-</div>
+Array [
+  <div />,
+  <img
+    src="test.png"
+  />,
+  <div>
+    test class content
+  </div>,
+  <div>
+    test function content
+  </div>,
+]
 `;
