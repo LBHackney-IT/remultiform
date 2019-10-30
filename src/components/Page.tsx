@@ -13,7 +13,7 @@ export interface PageProps<P = {}> {
   components: PageComponents<P>;
 }
 
-class Page<P> extends React.Component<PageProps<P>> {
+export class Page<P> extends React.Component<PageProps<P>> {
   static propTypes: ValidationMap<PageProps> = {
     components: PropTypes.arrayOf(
       PropTypes.shape({
