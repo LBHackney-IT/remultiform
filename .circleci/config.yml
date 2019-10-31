@@ -1,13 +1,19 @@
 version: 2.1
 
 jobs:
-  docker: 
-    - image: circleci/node:latest
-  steps:
-    - checkout
-    - run:
-       name: Install Dependencies
-       command: npm ci
-   - run:
-       name: Run Tests
-       command: npm test
+  build-and-test:
+    docker: 
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+         name: Install Dependencies
+         command: npm ci
+     - run:
+         name: Run Tests
+         command: npm test
+
+workflows:
+  temp-workflow:
+    jobs:
+      - build-and-test
