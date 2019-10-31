@@ -21,6 +21,31 @@ To run the unit tests, updating changed snapshots:
 npm run test:unit:update
 ```
 
+To run the tests for all examples, including building:
+
+```bash
+npm run test:examples
+```
+
+To run the tests for all examples, including building, updating changed
+snapshots:
+
+```bash
+npm run test:examples:update
+```
+
+To run the full test suite, including building:
+
+```bash
+npm run test:all
+```
+
+To run the full test suite, including building, updating changed snapshots:
+
+```bash
+npm run test:all:update
+```
+
 To run the full test suite, including format checking, linting, and building:
 
 ```bash
