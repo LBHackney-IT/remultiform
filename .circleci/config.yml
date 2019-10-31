@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-         name: Install Dependencies
-         command: npm ci
-     - run:
-         name: Run Tests
-         command: npm test
+          name: Install Dependencies
+          command: npm ci
+      - run:
+          name: Run Tests
+          command: npm test
 
 workflows:
   temp-workflow:
