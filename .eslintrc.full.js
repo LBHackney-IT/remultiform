@@ -22,7 +22,11 @@ const addMissingRecommendedTypeScriptRules = (parserOptions, overrides) => {
     return;
   }
 
-  parserOptions.project = ["./tsconfig.json"];
+  parserOptions.project = [
+    "./tsconfig.json",
+    "./examples/*/tsconfig.json",
+    "./examples/*/__tests__/tsconfig.json"
+  ];
   parserOptions.tsconfigRootDir = __dirname;
 
   overrides[overrideIndex] = {
