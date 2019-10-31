@@ -7,13 +7,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup --config",
+    "build": "npm run clean && rollup --config",
     "build:watch": "rollup --config --watch",
     "test": "npm run format:check && npm run lint && npm run build && jest --detectOpenHandles",
     "lint": "eslint --report-unused-disable-directives --config ./.eslintrc.full.js '**/*.{ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write '**/*'",
     "format:check": "prettier --check '**/*'",
+    "clean": "rm -r ./dist/ || true",
     "prepare": "npm run build"
   },
   "peerDependencies": {
