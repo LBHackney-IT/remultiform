@@ -5,4 +5,9 @@ jobs:
     - image: circleci/node:latest
   steps:
     - checkout
-    - run: echo "Set up Test"
+    - run:
+       name: Install Dependencies
+       command: npm ci
+   - run:
+       name: Run Tests
+       command: npm test
