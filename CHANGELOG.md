@@ -11,3 +11,4 @@ and this project adheres to
 ### Added
 
 - TypeScript support
+- `Page` with support for an array of components to render as children
