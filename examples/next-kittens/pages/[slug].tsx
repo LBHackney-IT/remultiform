@@ -1,6 +1,6 @@
 import { NextPageContext } from "next";
 import React, { Component } from "react";
-import { Page, PageComponents } from "remultiform";
+import { Page, wrapPageComponent } from "remultiform";
 
 interface SlugPageProps {
   kittenDimensions: string[];
@@ -16,15 +16,15 @@ class SlugPage extends Component<SlugPageProps> {
   render(): JSX.Element {
     const { kittenDimensions } = this.props;
 
-    const components: PageComponents = [
-      {
-        id: "image",
+    const componentWrappers = [
+      wrapPageComponent({
+        key: "image",
         Component: "img",
         props: { src: `https://placekitten.com/${kittenDimensions.join("/")}` }
-      }
+      })
     ];
 
-    return <Page components={components} />;
+    return <Page componentWrappers={componentWrappers} />;
   }
 }
 

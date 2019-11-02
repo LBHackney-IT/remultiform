@@ -1,39 +1,24 @@
 import PropTypes, { ValidationMap } from "prop-types";
-import React, { Attributes, ComponentType } from "react";
+import React from "react";
 
-export interface PageComponent<P = {}> {
-  id: string;
-  Component: string | ComponentType<Attributes | P>;
-  props?: P;
+import PageComponentWrapper, {
+  pageComponentWrapperPropType
+} from "../helpers/PageComponentWrapper";
+
+export interface PageProps {
+  componentWrappers: PageComponentWrapper[];
 }
 
-export type PageComponents<P = {}> = PageComponent<P>[];
-
-export interface PageProps<P = {}> {
-  components: PageComponents<P>;
-}
-
-export class Page<P> extends React.Component<PageProps<P>> {
+export class Page extends React.Component<PageProps> {
   static propTypes: ValidationMap<PageProps> = {
-    components: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        Component: PropTypes.elementType.isRequired,
-        props: PropTypes.object
-      }).isRequired
-    ).isRequired
+    componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType)
+      .isRequired
   };
 
   render(): JSX.Element {
-    const { components } = this.props;
+    const { componentWrappers } = this.props;
 
-    return (
-      <>
-        {components.map(({ id, Component, props }) => (
-          <Component key={id} {...props} />
-        ))}
-      </>
-    );
+    return <>{componentWrappers.map(({ key, render }) => render(key))}</>;
   }
 }
 
