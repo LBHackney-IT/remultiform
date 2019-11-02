@@ -18,6 +18,5 @@
       "remultiform": ["../../dist/index", "../../dist/module"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules/**/*", "__tests__/**/*"]
 }

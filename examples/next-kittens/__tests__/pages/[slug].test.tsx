@@ -1,12 +1,10 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import { create } from "react-test-renderer";
 
 import SlugPage from "../../pages/[slug]";
 
 it("renders correctly with all props", () => {
-  const component = renderer.create(
-    <SlugPage kittenDimensions={["200", "300"]} />
-  );
+  const component = create(<SlugPage slug="big-kitten" />);
 
   expect(component).toMatchSnapshot();
 });
