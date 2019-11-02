@@ -4,10 +4,10 @@ import { wrapPageComponent } from "../../helpers/PageComponentWrapper";
 import TestClassComponent from "../components/TestClassComponent";
 import TestFunctionComponent from "../components/TestFunctionComponent";
 
-const singleStepForm: { steps: Step[] } = {
+const multiStepForm: { steps: Step[] } = {
   steps: [
     {
-      key: "test-step",
+      key: "test-step-1",
       componentWrappers: [
         wrapPageComponent({
           key: "test-div",
@@ -15,17 +15,22 @@ const singleStepForm: { steps: Step[] } = {
           props: {}
         }),
         wrapPageComponent({
-          key: "test-img",
-          Component: "img",
-          props: {
-            src: "test.png"
-          }
-        }),
-        wrapPageComponent({
           key: "test-class",
           Component: TestClassComponent,
           props: {
             content: "test class content"
+          }
+        })
+      ]
+    },
+    {
+      key: "test-step-2",
+      componentWrappers: [
+        wrapPageComponent({
+          key: "test-img",
+          Component: "img",
+          props: {
+            src: "test.png"
           }
         }),
         wrapPageComponent({
@@ -40,4 +45,4 @@ const singleStepForm: { steps: Step[] } = {
   ]
 };
 
-export default singleStepForm;
+export default multiStepForm;

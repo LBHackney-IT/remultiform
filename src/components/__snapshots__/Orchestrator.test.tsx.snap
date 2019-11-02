@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with all props 1`] = `
+Array [
+  <img
+    src="test.png"
+  />,
+  <div>
+    test function content
+  </div>,
+]
+`;
+
+exports[`renders correctly without \`currentStepKey\` 1`] = `
+Array [
+  <div />,
+  <div>
+    test class content
+  </div>,
+]
+`;
