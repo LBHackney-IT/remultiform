@@ -9,8 +9,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup --config",
-    "build:watch": "rollup --config --watch",
+    "build": "npm run build:barrels && rollup --config",
+    "build:watch": "npm run build -- --watch",
+    "build:barrels": "barrelsby --config ./barrelsby.json",
     "test": "npm run format:check && npm run lint && npm run test:all",
     "test:update": "npm run format && npm run lint:fix && npm run test:all:update",
     "test:all": "npm run test:unit && npm run test:examples",
@@ -42,6 +43,7 @@
     "@types/react-test-renderer": "^16.9.1",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
+    "barrelsby": "^2.2.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
