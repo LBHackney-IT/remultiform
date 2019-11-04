@@ -15,7 +15,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "remultiform": ["../../dist/index", "../../dist/module"]
+      "remultiform": ["../../dist/index"]
     }
   },
   "exclude": ["**/node_modules/**/*", "__tests__/**/*"]

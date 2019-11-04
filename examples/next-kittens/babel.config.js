@@ -5,9 +5,8 @@ module.exports = {
     [
       "module-resolver",
       {
-        root: ["."],
         alias: {
-          remultiform: "../../dist/module"
+          remultiform: ["../../dist/index"]
         }
       }
     ]
