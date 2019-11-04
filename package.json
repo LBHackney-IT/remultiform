@@ -1,16 +1,16 @@
 {
   "name": "remultiform",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "npm run clean && rollup --config",
+    "build": "rollup --config",
     "build:watch": "rollup --config --watch",
-    "test": "npm run clean && npm run format:check && npm run lint && npm run test:all",
-    "test:update": "npm run clean && npm run format && npm run lint:fix && npm run test:all:update",
+    "test": "npm run format:check && npm run lint && npm run test:all",
+    "test:update": "npm run format && npm run lint:fix && npm run test:all:update",
     "test:all": "npm run test:unit && npm run test:examples",
     "test:all:update": "npm run test:unit:update && npm run test:examples:update",
     "test:unit": "jest --detectOpenHandles",
@@ -21,7 +21,6 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write '**/*'",
     "format:check": "prettier --check '**/*'",
-    "clean": "rm -r ./dist/ || true",
     "prepare": "npm run build"
   },
   "peerDependencies": {
@@ -53,6 +52,9 @@
     "react-test-renderer": "^16.11.0",
     "rollup": "^1.26.0",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-delete": "^1.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-progress": "^1.1.1",
     "rollup-plugin-typescript2": "^0.24.3",
     "ts-jest": "^24.1.0",
     "tslib": "^1.10.0",
