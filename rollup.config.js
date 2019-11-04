@@ -1,6 +1,7 @@
 /* eslint-env node */
 const babel = require("rollup-plugin-babel");
 const del = require("rollup-plugin-delete");
+const resolve = require("rollup-plugin-node-resolve");
 const progress = require("rollup-plugin-progress");
 const typescript = require("rollup-plugin-typescript2");
 
@@ -31,6 +32,7 @@ module.exports = {
     progress({
       clearLine: false
     }),
+    resolve(),
     typescript({
       typescript: require("typescript"),
       tsconfigOverride: {
