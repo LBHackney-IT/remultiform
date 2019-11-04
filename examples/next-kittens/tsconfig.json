@@ -15,7 +15,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "remultiform": ["../../dist/index"]
+      "remultiform": ["../../dist/index", "../../dist/module"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

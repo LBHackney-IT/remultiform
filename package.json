@@ -1,7 +1,7 @@
 {
   "name": "remultiform",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.js",
+  "main": "dist/main.js",
+  "module": "dist/module.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"

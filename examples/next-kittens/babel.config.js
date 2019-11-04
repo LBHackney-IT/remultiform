@@ -7,7 +7,7 @@ module.exports = {
       {
         root: ["."],
         alias: {
-          remultiform: "../../dist/index"
+          remultiform: "../../dist/module"
         }
       }
     ]
