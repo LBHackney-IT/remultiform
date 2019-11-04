@@ -10,7 +10,7 @@ update_configs:
     version_requirement_updates: increase_versions
 
   - package_manager: javascript
-    directory: /examples/
+    directory: /examples/next-kittens/
     update_schedule: live
     allowed_updates:
       - match:
