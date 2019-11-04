@@ -1,5 +1,6 @@
 /* eslint-env node */
 const babel = require("rollup-plugin-babel");
+const progress = require("rollup-plugin-progress");
 const typescript = require("rollup-plugin-typescript2");
 
 const pkg = require("./package.json");
@@ -22,6 +23,9 @@ module.exports = {
     ...Object.keys(pkg.peerDependencies || {})
   ],
   plugins: [
+    progress({
+      clearLine: false
+    }),
     typescript({
       typescript: require("typescript"),
       tsconfigOverride: {
