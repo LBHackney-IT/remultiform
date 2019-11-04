@@ -9,10 +9,54 @@ made.**
 
 We use [Jest](https://jestjs.io/) for testing.
 
+To run the unit tests:
+
+```bash
+npm run test:unit
+```
+
+To run the unit tests, updating changed snapshots:
+
+```bash
+npm run test:unit:update
+```
+
+To run the tests for all examples, including building:
+
+```bash
+npm run test:examples
+```
+
+To run the tests for all examples, including building, updating changed
+snapshots:
+
+```bash
+npm run test:examples:update
+```
+
+To run the full test suite, including building:
+
+```bash
+npm run test:all
+```
+
+To run the full test suite, including building, updating changed snapshots:
+
+```bash
+npm run test:all:update
+```
+
 To run the full test suite, including format checking, linting, and building:
 
 ```bash
 npm test
+```
+
+To run the full test suite, including format checking, linting, and building,
+fixing any issues and updating snapshots:
+
+```bash
+npm run test:update
 ```
 
 ## Formatting the code
