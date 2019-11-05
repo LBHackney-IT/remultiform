@@ -38,6 +38,7 @@ module.exports = {
       tsconfigOverride: {
         exclude: [
           ...tsconfig.exclude,
+          "**/__fixtures__/**/*",
           "**/__tests__/**/*",
           "**/*.spec.*",
           "**/*.test.*"
