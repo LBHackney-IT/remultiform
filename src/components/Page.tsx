@@ -9,7 +9,7 @@ export interface PageProps {
   componentWrappers: PageComponentWrapper[];
 }
 
-export class Page extends React.Component<PageProps> {
+class Page extends React.Component<PageProps> {
   static propTypes: ValidationMap<PageProps> = {
     componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType)
       .isRequired
