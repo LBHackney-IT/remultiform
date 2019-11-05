@@ -1,5 +1,7 @@
 {
   "name": "remultiform",
+  "description": "The React multipage form builder",
+  "license": "MIT",
   "main": "dist/main.js",
   "module": "dist/module.js",
   "types": "dist/index.d.ts",
