@@ -7,6 +7,10 @@ update_configs:
       - match:
           dependency_type: all
           update_type: all
+    automerged_updates:
+      - match:
+          dependency_type: all
+          update_type: semver:patch
     version_requirement_updates: increase_versions
 
   - package_manager: javascript
