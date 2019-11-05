@@ -26,5 +26,4 @@ This example shows how to integrate Remultiform with Next.js.
    npm run dev
    ```
 
-1. Navigate to `http://localhost:3000/200x300`. The slug of the page is in the
-   format `{width}x{length}` of the kitten picture you want.
+1. Navigate to `http://localhost:3000`

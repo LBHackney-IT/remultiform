@@ -1,12 +1,17 @@
 /* eslint-env node */
-const sharedPlugins = ["react", "prettier"];
-const sharedRuleExtends = ["eslint:recommended", "plugin:react/recommended"];
-const sharedRulePrettierExtends = ["prettier", "prettier/react"];
+const sharedPlugins = ["react", "react-hooks", "prettier"];
+const sharedExtends = ["eslint:recommended", "plugin:react/recommended"];
+const sharedPrettierExtends = ["prettier", "prettier/react"];
+const sharedRules = {
+  "react-hooks/rules-of-hooks": "error",
+  "react-hooks/exhaustive-deps": "warn"
+};
 
 module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: [...sharedPlugins],
-  extends: [...sharedRuleExtends, ...sharedRulePrettierExtends],
+  extends: [...sharedExtends, ...sharedPrettierExtends],
+  rules: { ...sharedRules },
   settings: {
     react: {
       version: "detect"
@@ -17,12 +22,13 @@ module.exports = {
       files: ["**/*.ts", "**/*.tsx"],
       plugins: [...sharedPlugins, "@typescript-eslint"],
       extends: [
-        ...sharedRuleExtends,
+        ...sharedExtends,
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        ...sharedRulePrettierExtends,
+        ...sharedPrettierExtends,
         "prettier/@typescript-eslint"
-      ]
+      ],
+      rules: { ...sharedRules }
     }
   ]
 };

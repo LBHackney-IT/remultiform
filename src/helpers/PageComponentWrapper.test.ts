@@ -1,4 +1,4 @@
-import renderer from "react-test-renderer";
+import { create } from "react-test-renderer";
 
 import TestClassComponent from "../__fixtures__/components/TestClassComponent";
 import TestFunctionComponent from "../__fixtures__/components/TestFunctionComponent";
@@ -15,7 +15,7 @@ describe("#render", () => {
       }
     });
 
-    const component = renderer.create(componentWrapper.render());
+    const component = create(componentWrapper.render());
 
     expect(component).toMatchSnapshot();
   });
@@ -29,7 +29,7 @@ describe("#render", () => {
       }
     });
 
-    const component = renderer.create(componentWrapper.render());
+    const component = create(componentWrapper.render());
 
     expect(component).toMatchSnapshot();
   });
@@ -43,7 +43,7 @@ describe("#render", () => {
       }
     });
 
-    const component = renderer.create(componentWrapper.render());
+    const component = create(componentWrapper.render());
 
     expect(component).toMatchSnapshot();
   });
@@ -57,7 +57,7 @@ describe("#render", () => {
       }
     });
 
-    const component = renderer.create(componentWrapper.render("test-key"));
+    const component = create(componentWrapper.render("test-key"));
 
     expect(component).toMatchSnapshot();
   });
@@ -71,7 +71,7 @@ describe("#render", () => {
       }
     });
 
-    const component = renderer.create(componentWrapper.render("test-key"));
+    const component = create(componentWrapper.render("test-key"));
 
     expect(component).toMatchSnapshot();
   });
@@ -85,7 +85,7 @@ describe("#render", () => {
       }
     });
 
-    const component = renderer.create(componentWrapper.render("test-key"));
+    const component = create(componentWrapper.render("test-key"));
 
     expect(component).toMatchSnapshot();
   });

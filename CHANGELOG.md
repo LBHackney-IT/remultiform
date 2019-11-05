@@ -12,3 +12,5 @@ and this project adheres to
 
 - TypeScript support
 - `Page` with support for an array of components to render as children
+- `Orchestrator` to orchestrate rendering the appropriate `Page`
+- `next-kittens` example
