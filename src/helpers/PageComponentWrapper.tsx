@@ -10,7 +10,7 @@ export interface PageComponent<
   props: JSX.LibraryManagedAttributes<C, P>;
 }
 
-export interface PageComponentWrapper {
+interface PageComponentWrapper {
   key: Key;
   render(key?: Key): JSX.Element;
 }

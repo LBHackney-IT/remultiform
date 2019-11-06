@@ -17,7 +17,7 @@ export interface OrchestratorProps {
   steps: Step[];
 }
 
-export class Orchestrator extends React.Component<OrchestratorProps> {
+class Orchestrator extends React.Component<OrchestratorProps> {
   static propTypes: ValidationMap<OrchestratorProps> = {
     currentStepKey: PropTypes.string,
     steps: PropTypes.arrayOf(
