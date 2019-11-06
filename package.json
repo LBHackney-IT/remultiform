@@ -30,6 +30,7 @@
     "react": ">= 16"
   },
   "dependencies": {
+    "idb": "^4.0.5",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
