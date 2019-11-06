@@ -12,6 +12,10 @@ function run-for-each-dir-in {
     fi
 
     if [ -d "$path" ]; then
+      if ! [ -e "$path/package.json" ]; then
+        continue
+      fi
+
       pushd "$path"
       eval "$@"
       popd
