@@ -2,9 +2,9 @@
   "name": "remultiform",
   "description": "The React multipage form builder",
   "license": "MIT",
-  "main": "dist/all.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "files": [
     "dist"
   ],

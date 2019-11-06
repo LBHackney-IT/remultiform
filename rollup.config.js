@@ -1,4 +1,5 @@
 /* eslint-env node */
+const { dirname } = require("path");
 const babel = require("rollup-plugin-babel");
 const del = require("rollup-plugin-delete");
 const { default: multiInput } = require("rollup-plugin-multi-input");
@@ -9,34 +10,6 @@ const typescript = require("rollup-plugin-typescript2");
 const pkg = require("./package.json");
 const tsconfig = require("./tsconfig.json");
 
-const external = [
-  ...Object.keys(pkg.dependencies || {}),
-  ...Object.keys(pkg.peerDependencies || {})
-];
-
-const plugins = [
-  progress({
-    clearLine: false
-  }),
-  resolve(),
-  typescript({
-    typescript: require("typescript"),
-    tsconfigOverride: {
-      exclude: [
-        ...tsconfig.exclude,
-        "**/__fixtures__/**/*",
-        "**/__tests__/**/*",
-        "**/*.spec.*",
-        "**/*.test.*"
-      ]
-    }
-  }),
-  babel({
-    extensions: [".ts", ".tsx"],
-    exclude: "**/node_modules/**/*"
-  })
-];
-
 module.exports = [
   {
     input: [
@@ -45,27 +18,50 @@ module.exports = [
       "!**/__fixtures__/**/*",
       "!**/*.(spec|test).*"
     ],
-    output: {
-      dir: "dist",
-      format: "es"
-    },
-    external,
+    output: [
+      {
+        dir: dirname(pkg.main),
+        format: "cjs"
+      },
+      {
+        dir: dirname(pkg.module),
+        format: "es"
+      }
+    ],
+    external: [
+      ...Object.keys(pkg.dependencies || {}),
+      ...Object.keys(pkg.peerDependencies || {})
+    ],
     plugins: [
       multiInput(),
       del({
-        targets: ["dist/**/*"],
+        targets: [dirname(pkg.main), dirname(pkg.module)],
         verbose: true
       }),
-      ...plugins
+      progress({
+        clearLine: false
+      }),
+      resolve(),
+      typescript({
+        typescript: require("typescript"),
+        useTsconfigDeclarationDir: true,
+        tsconfigOverride: {
+          compilerOptions: {
+            declarationDir: dirname(pkg.types)
+          },
+          exclude: [
+            ...tsconfig.exclude,
+            "**/__fixtures__/**/*",
+            "**/__tests__/**/*",
+            "**/*.spec.*",
+            "**/*.test.*"
+          ]
+        }
+      }),
+      babel({
+        extensions: [".ts", ".tsx"],
+        exclude: "**/node_modules/**/*"
+      })
     ]
-  },
-  {
-    input: "src/index.ts",
-    output: {
-      file: pkg.main,
-      format: "cjs"
-    },
-    external,
-    plugins
   }
 ];
