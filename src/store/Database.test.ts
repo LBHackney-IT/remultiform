@@ -1,6 +1,6 @@
 import { IDBPDatabase, deleteDB } from "idb";
 
-import { Database, Schema } from "./Database";
+import { Database, Schema, TransactionMode } from "./Database";
 
 const testDBName = "databaseTestDB";
 const testStoreName = "testStore";
@@ -273,7 +273,199 @@ describe("#get()", () => {
   });
 });
 
+describe("#transaction()", () => {
+  beforeEach(async () => {
+    db = await Database.open<TestSchema>(testDBName, 1, {
+      upgrade(database) {
+        database.createObjectStore(testStoreName);
+      }
+    });
+  });
+
+  it("defaults to `TransactionMode.ReadOnly`", async () => {
+    const spy = jest.spyOn(IDBDatabase.prototype, "transaction");
+
+    await db.transaction(testStoreName, () => Promise.resolve());
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith(testStoreName, TransactionMode.ReadOnly);
+  });
+
+  it("throws when targeting a missing store", async () => {
+    const missingStoreName = "missingStore";
+
+    await expect(
+      // Cast to get around TypeScript enforcing the type of the store name
+      // (not all users will be using TypeScript).
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (db as Database<any>).transaction(missingStoreName, () =>
+        Promise.resolve()
+      )
+    ).rejects.toThrowError(
+      `No objectStore named ${missingStoreName} in this database`
+    );
+  });
+
+  it("completes the transaction automatically if not performing a database operation on the given store every tick", async () => {
+    const key = "testKey";
+    const value = { a: "test", b: 1 };
+
+    await db.transaction(
+      testStoreName,
+      async store => {
+        await store.add(value, key);
+
+        await new Promise(resolve => {
+          setImmediate(resolve);
+        });
+
+        // We haven't awaited `transaction.done` yet, so we haven't explicitly
+        // waited for the transaction to complete, so if it's complete, it's
+        // because it completed automatically.
+        await expect(db.get(testStoreName, key)).resolves.toEqual(value);
+      },
+      TransactionMode.ReadWrite
+    );
+  });
+
+  it("throws when attempting to add to the transaction after it has automatically completed", async () => {
+    const key = "testKey";
+    const value = { a: "test", b: 1 };
+
+    await db.transaction(
+      testStoreName,
+      async store => {
+        await store.add(value, key);
+
+        await new Promise(resolve => {
+          setImmediate(resolve);
+        });
+
+        await expect(
+          (async (): Promise<void> => {
+            await store.add({ a: "another", b: 2 }, "anotherKey");
+          })()
+        ).rejects.toThrowError(
+          "A request was placed against a transaction which is currently not active, or which is finished"
+        );
+      },
+      TransactionMode.ReadWrite
+    );
+  });
+
+  describe("with `TransactionMode.ReadOnly`", () => {
+    it("allows reading from the store", async () => {
+      const key = "testKey";
+      const value = { a: "test", b: 1 };
+
+      await db.put(testStoreName, key, value);
+
+      await db.transaction(
+        testStoreName,
+        async store => {
+          await expect(store.get(key)).resolves.toEqual(value);
+        },
+        TransactionMode.ReadOnly
+      );
+    });
+
+    it("throws when attempting to write to the store", async () => {
+      await db.transaction(
+        testStoreName,
+        async store => {
+          await expect(
+            (async (): Promise<void> => {
+              await store.add({ a: "test", b: 1 }, "testKey");
+            })()
+          ).rejects.toThrowError(
+            'The mutating operation was attempted in a "readonly" transaction'
+          );
+        },
+        TransactionMode.ReadOnly
+      );
+    });
+  });
+
+  describe("with `TransactionMode.ReadWrite`", () => {
+    it("allows reading from the store", async () => {
+      const key = "testKey";
+      const value = { a: "test", b: 1 };
+
+      await db.put(testStoreName, key, value);
+
+      await db.transaction(
+        testStoreName,
+        async store => {
+          await expect(store.get(key)).resolves.toEqual(value);
+        },
+        TransactionMode.ReadWrite
+      );
+    });
+
+    it("allows writing to the store", async () => {
+      const key = "testKey";
+
+      await db.transaction(
+        testStoreName,
+        async store => {
+          await expect(store.add({ a: "test", b: 1 }, key)).resolves.toEqual(
+            key
+          );
+        },
+        TransactionMode.ReadWrite
+      );
+    });
+  });
+});
+
 describe("#close()", () => {
+  it("eventually closes the IndexedDB database connection once all its transactions complete", async () => {
+    db = await Database.open<TestSchema>(testDBName, 1, {
+      upgrade(database) {
+        database.createObjectStore(testStoreName);
+      }
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const internalDB = (db as any).db as IDBPDatabase<TestSchema>;
+
+    // References to `internalDB._closed` are an internal implementation
+    // detail of `fake-indexeddb`. A real IndexedDB implementation is unlikely
+    // to work in the same way. This is a hack to get around the fact that
+    // `fake-indexeddb` doesn't support the `close` event, which we might
+    // otherwise listen for.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    expect((internalDB as any)._closed).toBeFalsy();
+
+    await db.transaction(
+      testStoreName,
+      async store => {
+        await store.add({ a: "test", b: 1 }, "testKey");
+
+        db.close();
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        expect((internalDB as any)._closed).toBeFalsy();
+      },
+      TransactionMode.ReadWrite
+    );
+
+    const hasClosed = new Promise(resolve => {
+      const checkClosed = (): void => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((internalDB as any)._closed) {
+          resolve(true);
+        }
+
+        setImmediate(checkClosed);
+      };
+
+      checkClosed();
+    });
+
+    await expect(hasClosed).resolves.toBeTruthy();
+  });
+
   it("immediately closes the IndexedDB database connection when there are no open transactions", async () => {
     db = await Database.open<TestSchema>(testDBName);
 

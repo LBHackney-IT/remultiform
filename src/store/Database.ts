@@ -1,6 +1,7 @@
 import {
   DBSchema,
   IDBPDatabase,
+  IDBPObjectStore,
   OpenDBCallbacks,
   StoreKey,
   StoreNames,
@@ -11,6 +12,11 @@ import {
 export { StoreKey, StoreNames, StoreValue };
 
 export type Schema = DBSchema;
+
+export const enum TransactionMode {
+  ReadOnly = "readonly",
+  ReadWrite = "readwrite"
+}
 
 export class Database<S extends Schema> {
   static async open<S extends Schema>(
@@ -46,6 +52,19 @@ export class Database<S extends Schema> {
     if (value !== undefined) {
       return value;
     }
+  }
+
+  async transaction<N extends StoreNames<S>>(
+    storeName: N,
+    tx: (store: IDBPObjectStore<S, StoreNames<S>[], N>) => Promise<void>,
+    mode: TransactionMode = TransactionMode.ReadOnly
+  ): Promise<void> {
+    const transaction = this.db.transaction(storeName, mode);
+    const store = transaction.objectStore(storeName);
+
+    await tx(store);
+
+    await transaction.done;
   }
 
   // It would be better if this waited for the connection to close, but
