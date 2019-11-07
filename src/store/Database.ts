@@ -1,4 +1,14 @@
-import { DBSchema, IDBPDatabase, OpenDBCallbacks, openDB } from "idb";
+import {
+  DBSchema,
+  IDBPDatabase,
+  OpenDBCallbacks,
+  StoreKey,
+  StoreNames,
+  StoreValue,
+  openDB
+} from "idb";
+
+export { StoreKey, StoreNames, StoreValue };
 
 export type Schema = DBSchema;
 
@@ -17,6 +27,14 @@ export class Database<S extends Schema> {
 
   private constructor(db: IDBPDatabase<S>) {
     this.db = db;
+  }
+
+  async put<N extends StoreNames<S>>(
+    storeName: N,
+    key: StoreKey<S, N>,
+    value: StoreValue<S, N>
+  ): Promise<void> {
+    await this.db.put(storeName, value, key);
   }
 
   // It would be better if this waited for the connection to close, but
