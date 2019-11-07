@@ -37,6 +37,17 @@ export class Database<S extends Schema> {
     await this.db.put(storeName, value, key);
   }
 
+  async get<N extends StoreNames<S>>(
+    storeName: N,
+    key: StoreKey<S, N>
+  ): Promise<StoreValue<S, N> | void> {
+    const value = await this.db.get(storeName, key);
+
+    if (value !== undefined) {
+      return value;
+    }
+  }
+
   // It would be better if this waited for the connection to close, but
   // `fake-indexeddb` doesn't support the `close` event we need, making it
   // difficult to implement and difficult to test.

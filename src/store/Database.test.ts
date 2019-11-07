@@ -234,6 +234,45 @@ describe("#put()", () => {
   });
 });
 
+describe("#get()", () => {
+  beforeEach(async () => {
+    db = await Database.open<TestSchema>(testDBName, 1, {
+      upgrade(database) {
+        database.createObjectStore(testStoreName);
+      }
+    });
+  });
+
+  it("returns the value from the targeted store matching the key provided", async () => {
+    const key = "testKey";
+    const value = { a: "test", b: 1 };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const internalDB = (db as any).db as IDBPDatabase<TestSchema>;
+
+    await internalDB.put(testStoreName, value, key);
+
+    await expect(db.get(testStoreName, key)).resolves.toEqual(value);
+  });
+
+  it("returns `undefined` when no data matching the key provided exists in the targeted store", async () => {
+    await expect(db.get(testStoreName, "missingKey")).resolves.toBeUndefined();
+  });
+
+  it("throws when targeting a missing store", async () => {
+    const missingStoreName = "missingStore";
+
+    await expect(
+      // Cast to get around TypeScript enforcing the type of the store name
+      // (not all users will be using TypeScript).
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (db as Database<any>).get(missingStoreName, "testKey")
+    ).rejects.toThrowError(
+      `No objectStore named ${missingStoreName} in this database`
+    );
+  });
+});
+
 describe("#close()", () => {
   it("immediately closes the IndexedDB database connection when there are no open transactions", async () => {
     db = await Database.open<TestSchema>(testDBName);
