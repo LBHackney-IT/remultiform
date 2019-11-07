@@ -3,7 +3,7 @@ import { create } from "react-test-renderer";
 
 import multiStepForm from "../__fixtures__/forms/multiStepForm";
 
-import Orchestrator from "./Orchestrator";
+import { Orchestrator } from "./Orchestrator";
 
 it("renders correctly with all props", () => {
   const component = create(

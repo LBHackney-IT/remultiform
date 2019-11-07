@@ -5,6 +5,5 @@
     "^.*/__fixtures__/.+\\.tsx?$",
     "^.*/__tests__/.+\\.tsx?$",
     "^.+\\.(spec|test)\\.tsx?$"
-  ],
-  "exportDefault": true
+  ]
 }

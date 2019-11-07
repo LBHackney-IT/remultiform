@@ -1,11 +1,12 @@
 import PropTypes, { ValidationMap } from "prop-types";
 import React, { Key } from "react";
 
-import PageComponentWrapper, {
+import {
+  PageComponentWrapper,
   pageComponentWrapperPropType
 } from "../helpers/PageComponentWrapper";
 
-import Page from "./Page";
+import { Page } from "./Page";
 
 export interface Step {
   key: Key;
@@ -17,7 +18,7 @@ export interface OrchestratorProps {
   steps: Step[];
 }
 
-class Orchestrator extends React.Component<OrchestratorProps> {
+export class Orchestrator extends React.Component<OrchestratorProps> {
   static propTypes: ValidationMap<OrchestratorProps> = {
     currentStepKey: PropTypes.string,
     steps: PropTypes.arrayOf(
@@ -48,5 +49,3 @@ class Orchestrator extends React.Component<OrchestratorProps> {
     );
   }
 }
-
-export default Orchestrator;
