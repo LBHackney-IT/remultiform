@@ -16,7 +16,7 @@
     "test:update": "npm run format && npm run lint:fix && npm run test:all:update",
     "test:all": "npm run test:unit && npm run test:examples",
     "test:all:update": "npm run test:unit:update && npm run test:examples:update",
-    "test:unit": "jest --detectOpenHandles",
+    "test:unit": "jest",
     "test:unit:update": "npm run test:unit -- --updateSnapshot",
     "test:examples": "npm run build && bin/test-examples",
     "test:examples:update": "npm run test:examples -- --updateSnapshot",
