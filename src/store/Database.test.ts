@@ -2,24 +2,31 @@ import { IDBPDatabase, deleteDB } from "idb";
 
 import { expectPromise } from "../__tests__/helpers/expect";
 
-import { Database, Schema, TransactionMode } from "./Database";
+import { Database, NamedSchema, TransactionMode } from "./Database";
 
 const testDBName = "databaseTestDB";
 const testStoreName = "testStore";
 
-interface TestSchema extends Schema {
-  [testStoreName]: {
-    key: string;
-    value: {
-      a: string;
-      b: number;
+interface TestSchema extends NamedSchema<typeof testDBName> {
+  schema: {
+    [testStoreName]: {
+      key: string;
+      value: {
+        a: string;
+        b: number;
+      };
     };
   };
 }
 
+let initialDB: Database<TestSchema>;
 let db: Database<TestSchema>;
 
 afterEach(async () => {
+  if (initialDB) {
+    initialDB.close();
+  }
+
   if (db) {
     db.close();
   }
@@ -49,13 +56,7 @@ describe(".open()", () => {
     const initialVersion = 7;
     const currentVersion = 4;
 
-    // It's ok to not be deleting this database at the end of this test because
-    // it uses the same name as the one we do clean up (i.e. it's the same
-    // database).
-    const initialDB = await Database.open<TestSchema>(
-      testDBName,
-      initialVersion
-    );
+    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
 
     initialDB.close();
 
@@ -68,13 +69,7 @@ describe(".open()", () => {
     const initialVersion = 4;
     const currentVersion = 6;
 
-    // It's ok to not be deleting this database at the end of this test because
-    // it uses the same name as the one we do clean up (i.e. it's the same
-    // database).
-    const initialDB = await Database.open<TestSchema>(
-      testDBName,
-      initialVersion
-    );
+    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
 
     initialDB.close();
 
@@ -101,10 +96,7 @@ describe(".open()", () => {
     const version = 5;
     const mock = jest.fn();
 
-    // It's ok to not be deleting this database at the end of this test because
-    // it uses the same name as the one we do clean up (i.e. it's the same
-    // database).
-    const initialDB = await Database.open<TestSchema>(testDBName, version);
+    initialDB = await Database.open<TestSchema>(testDBName, version);
 
     initialDB.close();
 
@@ -122,13 +114,7 @@ describe(".open()", () => {
     const currentVersion = 7;
     const mock = jest.fn();
 
-    // It's ok to not be deleting this database at the end of this test because
-    // it uses the same name as the one we do clean up (i.e. it's the same
-    // database).
-    const initialDB = await Database.open<TestSchema>(
-      testDBName,
-      initialVersion
-    );
+    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
 
     initialDB.close();
 
@@ -147,13 +133,7 @@ describe(".open()", () => {
     const currentVersion = 7;
     const mock = jest.fn();
 
-    // It's ok to not be deleting this database at the end of this test because
-    // it uses the same name as the one we do clean up (i.e. it's the same
-    // database).
-    const initialDB = await Database.open<TestSchema>(
-      testDBName,
-      initialVersion
-    );
+    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
 
     db = await Database.open<TestSchema>(testDBName, currentVersion, {
       blocked() {
@@ -163,8 +143,6 @@ describe(".open()", () => {
       }
     });
 
-    initialDB.close();
-
     expect(mock).toHaveBeenCalledTimes(1);
   });
 
@@ -173,24 +151,15 @@ describe(".open()", () => {
     const currentVersion = 7;
     const mock = jest.fn();
 
-    // It's ok to not be deleting this database at the end of this test because
-    // it uses the same name as the one we do clean up (i.e. it's the same
-    // database).
-    const initialDB = await Database.open<TestSchema>(
-      testDBName,
-      initialVersion,
-      {
-        blocking() {
-          mock();
+    initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
+      blocking() {
+        mock();
 
-          initialDB.close();
-        }
+        initialDB.close();
       }
-    );
+    });
 
     db = await Database.open<TestSchema>(testDBName, currentVersion);
-
-    initialDB.close();
 
     expect(mock).toHaveBeenCalledTimes(1);
   });

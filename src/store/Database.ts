@@ -13,17 +13,36 @@ export { StoreKey, StoreNames, StoreValue };
 
 export type Schema = DBSchema;
 
+export interface NamedSchema<N extends string> {
+  dbNames: N;
+  schema: Schema;
+}
+
 export const enum TransactionMode {
   ReadOnly = "readonly",
   ReadWrite = "readwrite"
 }
 
-export class Database<S extends Schema> {
-  static async open<S extends Schema>(
-    name: string,
+export class Database<
+  NS extends NamedSchema<N>,
+  // We don't expect to ever override these defaults.
+  // This is here to enable `NS` to extend a generic.
+  N extends string = NS["dbNames"],
+  // This is here to be shorthand for internal generic types.
+  S extends NS["schema"] = NS["schema"]
+> {
+  static async open<
+    NS extends NamedSchema<N>,
+    // We don't expect to ever override this default.
+    // This is here to enable `NS` to extend a generic.
+    N extends string = NS["dbNames"]
+  >(
+    name: N,
     version = 1,
-    callbacks: OpenDBCallbacks<S> = {}
-  ): Promise<Database<S>> {
+    callbacks: OpenDBCallbacks<NS["schema"]> = {}
+  ): Promise<Database<NS, N>> {
+    type S = NS["schema"];
+
     const db = await openDB<S>(name, version, callbacks);
 
     return new Database(db);
