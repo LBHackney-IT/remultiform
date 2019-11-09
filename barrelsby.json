@@ -1,9 +1,5 @@
 {
   "directory": "src",
   "delete": true,
-  "exclude": [
-    "^.*/__fixtures__/.+\\.tsx?$",
-    "^.*/__tests__/.+\\.tsx?$",
-    "^.+\\.(spec|test)\\.tsx?$"
-  ]
+  "exclude": ["^.*/__.+__/.+\\.tsx?$", "^.+\\.(spec|test)\\.tsx?$"]
 }
