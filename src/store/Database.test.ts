@@ -1,5 +1,7 @@
 import { IDBPDatabase, deleteDB } from "idb";
 
+import { expectPromise } from "../__tests__/helpers/expect";
+
 import { Database, Schema, TransactionMode } from "./Database";
 
 const testDBName = "databaseTestDB";
@@ -57,11 +59,9 @@ describe(".open()", () => {
 
     initialDB.close();
 
-    await expect(
-      (async (): Promise<void> => {
-        db = await Database.open<TestSchema>(testDBName, currentVersion);
-      })()
-    ).rejects.toThrow();
+    await expectPromise(async () => {
+      db = await Database.open<TestSchema>(testDBName, currentVersion);
+    }).rejects.toThrow();
   });
 
   it("returns a database instance when reopening a database with an newer schema version", async () => {
@@ -341,10 +341,8 @@ describe("#transaction()", () => {
           setImmediate(resolve);
         });
 
-        await expect(
-          (async (): Promise<void> => {
-            await store.add({ a: "another", b: 2 }, "anotherKey");
-          })()
+        await expectPromise(() =>
+          store.add({ a: "another", b: 2 }, "anotherKey")
         ).rejects.toThrowError(
           "A request was placed against a transaction which is currently not active, or which is finished"
         );
@@ -373,10 +371,8 @@ describe("#transaction()", () => {
       await db.transaction(
         testStoreName,
         async store => {
-          await expect(
-            (async (): Promise<void> => {
-              await store.add({ a: "test", b: 1 }, "testKey");
-            })()
+          await expectPromise(() =>
+            store.add({ a: "test", b: 1 }, "testKey")
           ).rejects.toThrowError(
             'The mutating operation was attempted in a "readonly" transaction'
           );
