@@ -55,7 +55,7 @@
     "pretty-quick": "^2.0.0",
     "react": "^16.11.0",
     "react-test-renderer": "^16.11.0",
-    "rollup": "^1.26.0",
+    "rollup": "^1.26.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-delete": "^1.1.0",
     "rollup-plugin-multi-input": "^1.0.2",
