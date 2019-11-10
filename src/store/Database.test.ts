@@ -7,8 +7,9 @@ import { Database, NamedSchema, TransactionMode } from "./Database";
 const testDBName = "databaseTestDB";
 const testStoreName = "testStore";
 
-interface TestSchema extends NamedSchema<typeof testDBName> {
-  schema: {
+type TestSchema = NamedSchema<
+  typeof testDBName,
+  {
     [testStoreName]: {
       key: string;
       value: {
@@ -16,8 +17,8 @@ interface TestSchema extends NamedSchema<typeof testDBName> {
         b: number;
       };
     };
-  };
-}
+  }
+>;
 
 let initialDB: Database<TestSchema>;
 let db: Database<TestSchema>;

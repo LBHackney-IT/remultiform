@@ -1,5 +1,4 @@
 import {
-  DBSchema,
   IDBPDatabase,
   IDBPObjectStore,
   OpenDBCallbacks,
@@ -12,11 +11,20 @@ import {
 
 export { StoreKey, StoreNames, StoreValue };
 
-export type Schema = DBSchema;
+export interface StoreSchema {
+  key: IDBValidKey;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any;
+  indexes?: { [indexName: string]: IDBValidKey };
+}
 
-export interface NamedSchema<N extends string> {
+export interface Schema {
+  [storeName: string]: StoreSchema;
+}
+
+export interface NamedSchema<N extends string, S extends Schema> {
   dbNames: N;
-  schema: Schema;
+  schema: S;
 }
 
 export type Store<
@@ -33,25 +41,23 @@ export const enum TransactionMode {
 export type OpenCallbacks<S extends Schema> = OpenDBCallbacks<S>;
 
 export class Database<
-  NS extends NamedSchema<N>,
-  // We don't expect to ever override these defaults.
-  // This is here to enable `NS` to extend a generic.
+  NS extends NamedSchema<N, S>,
+  // We don't expect to ever override these defaults. They're here to enable
+  // `NS` to extend a generic.
   N extends string = NS["dbNames"],
-  // This is here to be shorthand for internal generic types.
-  S extends NS["schema"] = NS["schema"]
+  S extends Schema = NS["schema"]
 > {
   static async open<
-    NS extends NamedSchema<N>,
-    // We don't expect to ever override this default.
-    // This is here to enable `NS` to extend a generic.
-    N extends string = NS["dbNames"]
+    NS extends NamedSchema<N, S>,
+    // We don't expect to ever override these defaults. They're here to enable
+    // `NS` to extend a generic.
+    N extends string = NS["dbNames"],
+    S extends Schema = NS["schema"]
   >(
     name: N,
     version = 1,
-    { upgrade, blocked, blocking }: OpenCallbacks<NS["schema"]> = {}
+    { upgrade, blocked, blocking }: OpenCallbacks<S> = {}
   ): Promise<Database<NS, N>> {
-    type S = NS["schema"];
-
     const db = await new Promise<IDBPDatabase<S>>(
       (resolvePromise, rejectPromise) => {
         let isRejected = false;
