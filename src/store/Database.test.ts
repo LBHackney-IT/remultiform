@@ -493,4 +493,16 @@ describe("#close()", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect((internalDB as any)._closed).toBeTruthy();
   });
+
+  it("causes transactions created after calling to throw", async () => {
+    await createDBWithStore();
+
+    db.close();
+
+    await expectPromise(() =>
+      db.transaction(testStoreName, () => Promise.resolve())
+    ).rejects.toThrowError(
+      "An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed."
+    );
+  });
 });
