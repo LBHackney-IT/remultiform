@@ -6,6 +6,7 @@ import { Database, NamedSchema, TransactionMode } from "./Database";
 
 const testDBName = "databaseTestDB";
 const testStoreName = "testStore";
+const anotherTestStoreName = "anotherTestStore";
 
 type TestSchema = NamedSchema<
   typeof testDBName,
@@ -16,6 +17,11 @@ type TestSchema = NamedSchema<
         a: string;
         b: number;
       };
+    };
+
+    [anotherTestStoreName]: {
+      key: string;
+      value: number;
     };
   }
 >;
@@ -29,6 +35,7 @@ const createDBWithStore = async (
   return (db = await Database.open<TestSchema>(testDBName, version, {
     upgrade(database) {
       database.createObjectStore(testStoreName);
+      database.createObjectStore(anotherTestStoreName);
     }
   }));
 };
@@ -310,10 +317,18 @@ describe("#transaction()", () => {
   it("defaults to `TransactionMode.ReadOnly`", async () => {
     const spy = jest.spyOn(IDBDatabase.prototype, "transaction");
 
-    await db.transaction(testStoreName, () => Promise.resolve());
+    await db.transaction([testStoreName], () => Promise.resolve());
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith(testStoreName, TransactionMode.ReadOnly);
+    expect(spy).toHaveBeenCalledWith([testStoreName], TransactionMode.ReadOnly);
+  });
+
+  it("provides access to all the stores passed to it", async () => {
+    await db.transaction([testStoreName, anotherTestStoreName], stores => {
+      expect(Object.keys(stores)).toEqual(
+        expect.arrayContaining([testStoreName, anotherTestStoreName])
+      );
+    });
   });
 
   it("throws when targeting a missing store", async () => {
@@ -323,8 +338,40 @@ describe("#transaction()", () => {
       // Cast to get around TypeScript enforcing the type of the store name
       // (not all users will be using TypeScript).
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (db as Database<any>).transaction(missingStoreName, () =>
+      (db as Database<any>).transaction([missingStoreName], () =>
         Promise.resolve()
+      )
+    ).rejects.toThrowError(
+      `No objectStore named ${missingStoreName} in this database`
+    );
+  });
+
+  it("throws when targeting a missing store along with a present store", async () => {
+    const missingStoreName = "missingStore";
+
+    await expect(
+      // Cast to get around TypeScript enforcing the type of the store name
+      // (not all users will be using TypeScript).
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (db as Database<any>).transaction([testStoreName, missingStoreName], () =>
+        Promise.resolve()
+      )
+    ).rejects.toThrowError(
+      `No objectStore named ${missingStoreName} in this database`
+    );
+  });
+
+  it("throws when targeting multiple missing stores", async () => {
+    const missingStoreName = "missingStore";
+    const anotherMissingStoreName = "anotherMissingStore";
+
+    await expect(
+      // Cast to get around TypeScript enforcing the type of the store name
+      // (not all users will be using TypeScript).
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (db as Database<any>).transaction(
+        [missingStoreName, anotherMissingStoreName],
+        () => Promise.resolve()
       )
     ).rejects.toThrowError(
       `No objectStore named ${missingStoreName} in this database`
@@ -336,9 +383,9 @@ describe("#transaction()", () => {
     const value = { a: "test", b: 1 };
 
     await db.transaction(
-      testStoreName,
-      async store => {
-        await store.add(value, key);
+      [testStoreName],
+      async stores => {
+        await stores[testStoreName].add(value, key);
 
         await new Promise(resolve => {
           setImmediate(resolve);
@@ -358,16 +405,16 @@ describe("#transaction()", () => {
     const value = { a: "test", b: 1 };
 
     await db.transaction(
-      testStoreName,
-      async store => {
-        await store.add(value, key);
+      [testStoreName],
+      async stores => {
+        await stores[testStoreName].add(value, key);
 
         await new Promise(resolve => {
           setImmediate(resolve);
         });
 
         await expectPromise(() =>
-          store.add({ a: "another", b: 2 }, "anotherKey")
+          stores[testStoreName].add({ a: "another", b: 2 }, "anotherKey")
         ).rejects.toThrowError(
           "A request was placed against a transaction which is currently not active, or which is finished"
         );
@@ -384,9 +431,9 @@ describe("#transaction()", () => {
       await db.put(testStoreName, key, value);
 
       await db.transaction(
-        testStoreName,
-        async store => {
-          await expect(store.get(key)).resolves.toEqual(value);
+        [testStoreName],
+        async stores => {
+          await expect(stores[testStoreName].get(key)).resolves.toEqual(value);
         },
         TransactionMode.ReadOnly
       );
@@ -394,10 +441,10 @@ describe("#transaction()", () => {
 
     it("throws when attempting to write to the store", async () => {
       await db.transaction(
-        testStoreName,
-        async store => {
+        [testStoreName],
+        async stores => {
           await expectPromise(() =>
-            store.add({ a: "test", b: 1 }, "testKey")
+            stores[testStoreName].add({ a: "test", b: 1 }, "testKey")
           ).rejects.toThrowError(
             'The mutating operation was attempted in a "readonly" transaction'
           );
@@ -415,9 +462,9 @@ describe("#transaction()", () => {
       await db.put(testStoreName, key, value);
 
       await db.transaction(
-        testStoreName,
-        async store => {
-          await expect(store.get(key)).resolves.toEqual(value);
+        [testStoreName],
+        async stores => {
+          await expect(stores[testStoreName].get(key)).resolves.toEqual(value);
         },
         TransactionMode.ReadWrite
       );
@@ -427,11 +474,11 @@ describe("#transaction()", () => {
       const key = "testKey";
 
       await db.transaction(
-        testStoreName,
-        async store => {
-          await expect(store.add({ a: "test", b: 1 }, key)).resolves.toEqual(
-            key
-          );
+        [testStoreName],
+        async stores => {
+          await expect(
+            stores[testStoreName].add({ a: "test", b: 1 }, key)
+          ).resolves.toEqual(key);
         },
         TransactionMode.ReadWrite
       );
@@ -455,9 +502,9 @@ describe("#close()", () => {
     expect((internalDB as any)._closed).toBeFalsy();
 
     await db.transaction(
-      testStoreName,
-      async store => {
-        await store.add({ a: "test", b: 1 }, "testKey");
+      [testStoreName],
+      async stores => {
+        await stores[testStoreName].add({ a: "test", b: 1 }, "testKey");
 
         db.close();
 
@@ -501,7 +548,7 @@ describe("#close()", () => {
     db.close();
 
     await expectPromise(() =>
-      db.transaction(testStoreName, () => Promise.resolve())
+      db.transaction([testStoreName], () => Promise.resolve())
     ).rejects.toThrowError(
       "An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed."
     );
