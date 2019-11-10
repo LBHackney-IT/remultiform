@@ -19,10 +19,18 @@ export interface NamedSchema<N extends string> {
   schema: Schema;
 }
 
+export type Store<
+  S extends Schema,
+  N extends StoreNames<S> = StoreNames<S>,
+  Ns extends StoreNames<S>[] = StoreNames<S>[]
+> = IDBPObjectStore<S, Ns, N>;
+
 export const enum TransactionMode {
   ReadOnly = "readonly",
   ReadWrite = "readwrite"
 }
+
+export type OpenCallbacks<S extends Schema> = OpenDBCallbacks<S>;
 
 export class Database<
   NS extends NamedSchema<N>,
@@ -40,7 +48,7 @@ export class Database<
   >(
     name: N,
     version = 1,
-    { upgrade, blocked, blocking }: OpenDBCallbacks<NS["schema"]> = {}
+    { upgrade, blocked, blocking }: OpenCallbacks<NS["schema"]> = {}
   ): Promise<Database<NS, N>> {
     type S = NS["schema"];
 
@@ -169,7 +177,7 @@ export class Database<
 
   async transaction<N extends StoreNames<S>>(
     storeName: N,
-    tx: (store: IDBPObjectStore<S, StoreNames<S>[], N>) => Promise<void>,
+    tx: (store: Store<S, N>) => Promise<void>,
     mode: TransactionMode = TransactionMode.ReadOnly
   ): Promise<void> {
     const transaction = this.db.transaction(storeName, mode);
