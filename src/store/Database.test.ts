@@ -22,6 +22,16 @@ interface TestSchema extends NamedSchema<typeof testDBName> {
 let initialDB: Database<TestSchema>;
 let db: Database<TestSchema>;
 
+const createDBWithStore = async (
+  version = 1
+): Promise<Database<TestSchema>> => {
+  return (db = await Database.open<TestSchema>(testDBName, version, {
+    upgrade(database) {
+      database.createObjectStore(testStoreName);
+    }
+  }));
+};
+
 afterEach(async () => {
   if (initialDB) {
     initialDB.close();
@@ -224,11 +234,7 @@ describe(".open()", () => {
 
 describe("#put()", () => {
   beforeEach(async () => {
-    db = await Database.open<TestSchema>(testDBName, 1, {
-      upgrade(database) {
-        database.createObjectStore(testStoreName);
-      }
-    });
+    await createDBWithStore();
   });
 
   it("stores the value provided against the key provided in the targeted store", async () => {
@@ -262,11 +268,7 @@ describe("#put()", () => {
 
 describe("#get()", () => {
   beforeEach(async () => {
-    db = await Database.open<TestSchema>(testDBName, 1, {
-      upgrade(database) {
-        database.createObjectStore(testStoreName);
-      }
-    });
+    await createDBWithStore();
   });
 
   it("returns the value from the targeted store matching the key provided", async () => {
@@ -301,11 +303,7 @@ describe("#get()", () => {
 
 describe("#transaction()", () => {
   beforeEach(async () => {
-    db = await Database.open<TestSchema>(testDBName, 1, {
-      upgrade(database) {
-        database.createObjectStore(testStoreName);
-      }
-    });
+    await createDBWithStore();
   });
 
   it("defaults to `TransactionMode.ReadOnly`", async () => {
@@ -441,12 +439,8 @@ describe("#transaction()", () => {
 });
 
 describe("#close()", () => {
-  it("eventually closes the IndexedDB database connection once all its transactions complete", async () => {
-    db = await Database.open<TestSchema>(testDBName, 1, {
-      upgrade(database) {
-        database.createObjectStore(testStoreName);
-      }
-    });
+  it("closes the IndexedDB database connection once all its transactions complete", async () => {
+    await createDBWithStore();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const internalDB = (db as any).db as IDBPDatabase<TestSchema>;
