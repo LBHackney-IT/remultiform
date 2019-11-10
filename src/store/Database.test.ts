@@ -2,7 +2,8 @@ import { IDBPDatabase, deleteDB } from "idb";
 
 import { expectPromise } from "../__tests__/helpers/expect";
 
-import { Database, NamedSchema, TransactionMode } from "./Database";
+import { Database, TransactionMode } from "./Database";
+import { NamedSchema } from "./types";
 
 const testDBName = "databaseTestDB";
 const testStoreName = "testStore";

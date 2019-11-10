@@ -1,51 +1,16 @@
+import { IDBPDatabase, OpenDBCallbacks, openDB, unwrap } from "idb";
+
 import {
-  IDBPDatabase,
-  IDBPObjectStore,
-  IDBPTransaction,
-  OpenDBCallbacks,
+  NamedSchema,
+  Schema,
   StoreKey,
-  StoreNames as DBStoreNames,
+  StoreMap,
+  StoreNames,
   StoreValue,
-  openDB,
-  unwrap
-} from "idb";
-
-export { StoreKey, StoreValue };
-
-export interface StoreSchema {
-  key: IDBValidKey;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any;
-  indexes?: { [indexName: string]: IDBValidKey };
-}
-
-export interface Schema {
-  [storeName: string]: StoreSchema;
-}
-
-export interface NamedSchema<N extends string, S extends Schema> {
-  dbNames: N;
-  schema: S;
-}
-
-export type StoreNames<S extends Schema> = DBStoreNames<S> & string;
-
-export type Transaction<
-  S extends Schema,
-  Names extends StoreNames<S>[] = StoreNames<S>[]
-> = IDBPTransaction<S, Names>;
-
-export type Store<
-  S extends Schema,
-  Names extends StoreNames<S>[] = StoreNames<S>[],
-  Name extends StoreNames<S> = StoreNames<S>
-> = IDBPObjectStore<S, Names, Name>;
-
-export type StoreMap<
-  S extends Schema,
-  Names extends StoreNames<S>[] = StoreNames<S>[],
-  Name extends StoreNames<S> = StoreNames<S>
-> = { [N in Name]: Store<S, Names, N> };
+  Transaction
+} from "./types";
+import { Upgrade } from "./Upgrade";
+import { wrapTransaction } from "./wrappers.internal";
 
 export const enum TransactionMode {
   ReadOnly = "readonly",
@@ -202,17 +167,7 @@ export class Database<
   ): Promise<void> {
     const transaction = this.db.transaction(storeNames, mode);
 
-    const stores = storeNames.reduce(
-      (stores, storeName) => ({
-        ...stores,
-        [storeName]: transaction.objectStore(storeName)
-      }),
-      {} as StoreMap<S, Names, Name>
-    );
-
-    await tx(stores);
-
-    await transaction.done;
+    await wrapTransaction(storeNames, transaction, tx);
   }
 
   // It would be better if this waited for the connection to close, but
