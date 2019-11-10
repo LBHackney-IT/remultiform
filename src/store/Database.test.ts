@@ -78,7 +78,7 @@ describe(".open()", () => {
     expect(db).toBeInstanceOf(Database);
   });
 
-  it("calls the provided upgrade callback when the database doesn't exist", async () => {
+  it("calls the provided upgrade callback and returns a database instance when the database is new", async () => {
     const version = 5;
     const mock = jest.fn();
 
@@ -90,9 +90,11 @@ describe(".open()", () => {
 
     expect(mock).toHaveBeenCalledTimes(1);
     expect(mock).toHaveBeenCalledWith(0, version);
+
+    expect(db).toBeInstanceOf(Database);
   });
 
-  it("doesn't call the provided upgrade callback when the database exists with the same schema version", async () => {
+  it("doesn't call the provided upgrade callback and returns a database instance when the database exists with the same schema version", async () => {
     const version = 5;
     const mock = jest.fn();
 
@@ -107,9 +109,11 @@ describe(".open()", () => {
     });
 
     expect(mock).not.toHaveBeenCalled();
+
+    expect(db).toBeInstanceOf(Database);
   });
 
-  it("calls the provided upgrade callback with the correct schema versions when changing version", async () => {
+  it("calls the provided upgrade callback with the correct schema versions and returns a database instance when changing version", async () => {
     const initialVersion = 5;
     const currentVersion = 7;
     const mock = jest.fn();
@@ -126,9 +130,11 @@ describe(".open()", () => {
 
     expect(mock).toHaveBeenCalledTimes(1);
     expect(mock).toHaveBeenCalledWith(initialVersion, currentVersion);
+
+    expect(db).toBeInstanceOf(Database);
   });
 
-  it("calls the provided blocked callback when attempting to reopen a database already open with a different schema version", async () => {
+  it("calls the provided blocked callback and returns a database instance when attempting to reopen a database that's already open with a different schema version and a blocked callback which resolves the block", async () => {
     const initialVersion = 5;
     const currentVersion = 7;
     const mock = jest.fn();
@@ -144,9 +150,11 @@ describe(".open()", () => {
     });
 
     expect(mock).toHaveBeenCalledTimes(1);
+
+    expect(db).toBeInstanceOf(Database);
   });
 
-  it("calls the provided blocking callback when a new instance of the database with a later schema version attempts to open", async () => {
+  it("calls the earlier provided blocking callback and returns a database instance when attempting to open a new instance of a database with a later schema version while the old instance has a blocking callback which resolves the block", async () => {
     const initialVersion = 5;
     const currentVersion = 7;
     const mock = jest.fn();
@@ -162,6 +170,8 @@ describe(".open()", () => {
     db = await Database.open<TestSchema>(testDBName, currentVersion);
 
     expect(mock).toHaveBeenCalledTimes(1);
+
+    expect(db).toBeInstanceOf(Database);
   });
 });
 
