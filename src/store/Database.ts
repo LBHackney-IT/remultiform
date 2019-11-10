@@ -6,7 +6,8 @@ import {
   StoreKey,
   StoreNames,
   StoreValue,
-  openDB
+  openDB,
+  unwrap
 } from "idb";
 
 export { StoreKey, StoreNames, StoreValue };
@@ -39,11 +40,104 @@ export class Database<
   >(
     name: N,
     version = 1,
-    callbacks: OpenDBCallbacks<NS["schema"]> = {}
+    { upgrade, blocked, blocking }: OpenDBCallbacks<NS["schema"]> = {}
   ): Promise<Database<NS, N>> {
     type S = NS["schema"];
 
-    const db = await openDB<S>(name, version, callbacks);
+    const db = await new Promise<IDBPDatabase<S>>(
+      (resolvePromise, rejectPromise) => {
+        let isRejected = false;
+
+        const resolve = ([db]: [IDBPDatabase<S>, void]): void => {
+          // Due to the internal implementation details of `idb` and IndexedDB
+          // itself, which combine promises and event emitters, in order to
+          // reject the wrapper promise if one of the callbacks throws or
+          // rejects, we need to catch the exception and not re-throw it. This
+          // means the database continues to attempt to open, meaning we may get
+          // a resolution even though it should have rejected before the
+          // promise has a chance to settle. So if we've received a rejection,
+          // we don't also resolve the wrapper promise, so the promise is able
+          // settle with a rejection.
+          if (isRejected) {
+            // If this has been called after we've had a rejection it means this
+            // database was opened in error. The user shouldn't receive a
+            // resolved promise with that opened database, as something has
+            // gone wrong, so they won't be able to close it themselves,
+            // potentially blocking any future attempts to open this database.
+            // So we close the database by default.
+            db.close();
+          } else {
+            resolvePromise(db);
+          }
+        };
+
+        const reject = (reason: Error): void => {
+          isRejected = true;
+
+          rejectPromise(reason);
+        };
+
+        const promiseToOpen = openDB<S>(name, version, {
+          upgrade(...args) {
+            if (upgrade) {
+              // If this callback is allowed to throw, it prevents the
+              // `openDB` promise from ever settling, essentially blocking all
+              // future attempts to open the database. We wrap the `openDB`
+              // promise in one of our own, so we can catch any exceptions, and
+              // lift them up to the user, without swallowing them or blocking
+              // the database.
+              try {
+                upgrade(...args);
+              } catch (err) {
+                reject(err);
+              }
+            }
+          },
+          blocked() {
+            if (blocked) {
+              // If this callback is allowed to throw, it prevents the
+              // `openDB` promise from ever settling, essentially blocking all
+              // future attempts to open the database. We wrap the `openDB`
+              // promise in one of our own, so we can catch any exceptions, and
+              // lift them up to the user, without swallowing them or blocking
+              // the database.
+              try {
+                blocked();
+              } catch (err) {
+                reject(err);
+              }
+            } else {
+              reject(
+                new Error(
+                  `Opening ${name} is blocked by an existing connection ` +
+                    "with a different version"
+                )
+              );
+            }
+          },
+          // We don't wrap `blocking` as it can only occur after the database
+          // has been opened, so it doesn't make sense to let it reject this
+          // promise.
+          blocking
+        });
+
+        const requestToOpen = unwrap(promiseToOpen);
+
+        const promiseToSucceed = new Promise<void>((resolve, reject) => {
+          requestToOpen.addEventListener("error", () => {
+            reject(requestToOpen.error);
+          });
+
+          requestToOpen.addEventListener("success", () => {
+            resolve();
+          });
+        });
+
+        Promise.all([promiseToOpen, promiseToSucceed])
+          .then(resolve)
+          .catch(reject);
+      }
+    );
 
     return new Database(db);
   }
