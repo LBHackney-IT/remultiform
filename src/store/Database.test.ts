@@ -34,9 +34,9 @@ const createDBWithStore = async (
   version = 1
 ): Promise<Database<TestSchema>> => {
   return (db = await Database.open<TestSchema>(testDBName, version, {
-    upgrade(database) {
-      database.createObjectStore(testStoreName);
-      database.createObjectStore(anotherTestStoreName);
+    upgrade(upgrade) {
+      upgrade.createStore(testStoreName);
+      upgrade.createStore(anotherTestStoreName);
     }
   }));
 };
@@ -110,134 +110,256 @@ describe(".open()", () => {
     );
   });
 
-  it("calls the provided upgrade callback and returns a database instance when the database is new", async () => {
-    const version = 5;
-    const mock = jest.fn();
+  describe("with an upgrade callback", () => {
+    it("calls the provided upgrade callback and returns a database instance when the database is new", async () => {
+      const version = 5;
+      const mock = jest.fn();
 
-    db = await Database.open<TestSchema>(testDBName, version, {
-      upgrade(_db, oldVersion, newVersion) {
-        mock(oldVersion, newVersion);
-      }
-    });
-
-    expect(mock).toHaveBeenCalledTimes(1);
-    expect(mock).toHaveBeenCalledWith(0, version);
-
-    expect(db).toBeInstanceOf(Database);
-  });
-
-  it("doesn't call the provided upgrade callback and returns a database instance when the database exists with the same schema version", async () => {
-    const version = 5;
-    const mock = jest.fn();
-
-    initialDB = await Database.open<TestSchema>(testDBName, version);
-
-    initialDB.close();
-
-    db = await Database.open<TestSchema>(testDBName, version, {
-      upgrade(_db, oldVersion, newVersion) {
-        mock(oldVersion, newVersion);
-      }
-    });
-
-    expect(mock).not.toHaveBeenCalled();
-
-    expect(db).toBeInstanceOf(Database);
-  });
-
-  it("calls the provided upgrade callback with the correct schema versions and returns a database instance when changing version", async () => {
-    const initialVersion = 5;
-    const currentVersion = 7;
-    const mock = jest.fn();
-
-    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
-
-    initialDB.close();
-
-    db = await Database.open<TestSchema>(testDBName, currentVersion, {
-      upgrade(_db, oldVersion, newVersion) {
-        mock(oldVersion, newVersion);
-      }
-    });
-
-    expect(mock).toHaveBeenCalledTimes(1);
-    expect(mock).toHaveBeenCalledWith(initialVersion, currentVersion);
-
-    expect(db).toBeInstanceOf(Database);
-  });
-
-  it("throws if the provided upgrade callback throws when called", async () => {
-    const initialVersion = 5;
-    const currentVersion = 7;
-    const error = "test error";
-
-    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
-
-    initialDB.close();
-
-    await expectPromise(async () => {
-      db = await Database.open<TestSchema>(testDBName, currentVersion, {
-        upgrade() {
-          throw new Error(error);
+      db = await Database.open<TestSchema>(testDBName, version, {
+        upgrade(upgrade) {
+          mock(upgrade.oldVersion, upgrade.newVersion);
         }
       });
-    }).rejects.toThrowError(error);
-  });
 
-  it("calls the provided blocked callback and returns a database instance when attempting to reopen a database that's already open with a different schema version and a blocked callback which resolves the block", async () => {
-    const initialVersion = 5;
-    const currentVersion = 7;
-    const mock = jest.fn();
+      expect(mock).toHaveBeenCalledTimes(1);
+      expect(mock).toHaveBeenCalledWith(0, version);
 
-    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
-
-    db = await Database.open<TestSchema>(testDBName, currentVersion, {
-      blocked() {
-        mock();
-
-        initialDB.close();
-      }
+      expect(db).toBeInstanceOf(Database);
     });
 
-    expect(mock).toHaveBeenCalledTimes(1);
+    it("doesn't call the provided upgrade callback and returns a database instance when the database exists with the same schema version", async () => {
+      const version = 5;
+      const mock = jest.fn();
 
-    expect(db).toBeInstanceOf(Database);
+      initialDB = await Database.open<TestSchema>(testDBName, version);
+
+      initialDB.close();
+
+      db = await Database.open<TestSchema>(testDBName, version, {
+        upgrade(upgrade) {
+          mock(upgrade.oldVersion, upgrade.newVersion);
+        }
+      });
+
+      expect(mock).not.toHaveBeenCalled();
+
+      expect(db).toBeInstanceOf(Database);
+    });
+
+    it("calls the provided upgrade callback with the correct schema versions and returns a database instance when changing version", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const mock = jest.fn();
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
+
+      initialDB.close();
+
+      db = await Database.open<TestSchema>(testDBName, currentVersion, {
+        upgrade(upgrade) {
+          mock(upgrade.oldVersion, upgrade.newVersion);
+        }
+      });
+
+      expect(mock).toHaveBeenCalledTimes(1);
+      expect(mock).toHaveBeenCalledWith(initialVersion, currentVersion);
+
+      expect(db).toBeInstanceOf(Database);
+    });
+
+    it("throws if the provided upgrade callback throws when called", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
+
+      initialDB.close();
+
+      await expectPromise(async () => {
+        db = await Database.open<TestSchema>(testDBName, currentVersion, {
+          upgrade() {
+            throw error;
+          }
+        });
+      }).rejects.toThrowError(error);
+    });
+
+    it("throws if the provided upgrade callback returns a promise which throws", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
+
+      initialDB.close();
+
+      await expectPromise(async () => {
+        db = await Database.open<TestSchema>(testDBName, currentVersion, {
+          async upgrade() {
+            await Promise.resolve();
+
+            throw error;
+          }
+        });
+      }).rejects.toThrowError(error);
+    });
   });
 
-  it("throws if the provided blocked callback throws when called", async () => {
-    const initialVersion = 5;
-    const currentVersion = 7;
-    const error = "test error";
+  describe("with a blocked callback", () => {
+    it("calls the provided blocked callback and returns a database instance when attempting to reopen a database that's already open with a different schema version and a blocked callback which resolves the block", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const mock = jest.fn();
 
-    initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
 
-    await expectPromise(async () => {
       db = await Database.open<TestSchema>(testDBName, currentVersion, {
         blocked() {
-          throw new Error(error);
+          mock();
+
+          initialDB.close();
         }
       });
-    }).rejects.toThrowError(error);
-  });
 
-  it("calls the earlier provided blocking callback and returns a database instance when attempting to open a new instance of a database with a later schema version while the old instance has a blocking callback which resolves the block", async () => {
-    const initialVersion = 5;
-    const currentVersion = 7;
-    const mock = jest.fn();
+      expect(mock).toHaveBeenCalledTimes(1);
 
-    initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
-      blocking() {
-        mock();
-
-        initialDB.close();
-      }
+      expect(db).toBeInstanceOf(Database);
     });
 
-    db = await Database.open<TestSchema>(testDBName, currentVersion);
+    it("throws if the provided blocked callback throws when called", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
 
-    expect(mock).toHaveBeenCalledTimes(1);
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
 
-    expect(db).toBeInstanceOf(Database);
+      await expectPromise(async () => {
+        db = await Database.open<TestSchema>(testDBName, currentVersion, {
+          blocked() {
+            throw error;
+          }
+        });
+      }).rejects.toThrowError(error);
+    });
+
+    it("throws if the provided blocked callback returns a promise which throws", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion);
+
+      await expectPromise(async () => {
+        db = await Database.open<TestSchema>(testDBName, currentVersion, {
+          async blocked() {
+            await Promise.resolve();
+
+            throw error;
+          }
+        });
+      }).rejects.toThrowError(error);
+    });
+  });
+
+  describe("with a blocking callback", () => {
+    it("calls the earlier provided blocking callback and returns a database instance when opening a new instance of a database with a later schema version while the old instance has a blocking callback which resolves the block", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const mock = jest.fn();
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
+        blocking() {
+          mock();
+
+          initialDB.close();
+        }
+      });
+
+      db = await Database.open<TestSchema>(testDBName, currentVersion);
+
+      expect(mock).toHaveBeenCalledTimes(1);
+
+      expect(db).toBeInstanceOf(Database);
+    });
+
+    it("throws when attempting to open a new instance of a database with a later schema version while the old instance has a blocking callback that throws when called", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
+      const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
+        blocking() {
+          throw error;
+        }
+      });
+
+      await expectPromise(async () => {
+        db = await Database.open<TestSchema>(testDBName, currentVersion);
+      }).rejects.toThrowError(
+        `Opening ${testDBName} is blocked by an existing connection with a different version`
+      );
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(error);
+    });
+
+    it("returns a database instance when opening a new instance of a database with a later schema version while the old instance has a blocking callback that throws when called after resolving the block", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
+      const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
+        blocking() {
+          initialDB.close();
+
+          throw error;
+        }
+      });
+
+      db = await Database.open<TestSchema>(testDBName, currentVersion);
+
+      expect(db).toBeInstanceOf(Database);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(error);
+    });
+
+    it("returns a database instance when opening a new instance of a database with a later schema version while the old instance has auto-close on blocking turned on", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
+        autoCloseOnBlocking: true
+      });
+
+      db = await Database.open<TestSchema>(testDBName, currentVersion);
+
+      expect(db).toBeInstanceOf(Database);
+    });
+
+    it("returns a database instance when opening a new instance of a database with a later schema version while the old instance has auto-close on blocking turned on even if it has a blocking callback that throws when called", async () => {
+      const initialVersion = 5;
+      const currentVersion = 7;
+      const error = new Error("test error");
+      const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+
+      initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
+        blocking() {
+          throw error;
+        },
+        autoCloseOnBlocking: true
+      });
+
+      db = await Database.open<TestSchema>(testDBName, currentVersion);
+
+      expect(db).toBeInstanceOf(Database);
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(error);
+    });
   });
 });
 

@@ -1,4 +1,4 @@
-import { IDBPDatabase, OpenDBCallbacks, openDB, unwrap } from "idb";
+import { IDBPDatabase, openDB, unwrap } from "idb";
 
 import {
   NamedSchema,
@@ -17,7 +17,15 @@ export const enum TransactionMode {
   ReadWrite = "readwrite"
 }
 
-export type OpenCallbacks<S extends Schema> = OpenDBCallbacks<S>;
+export interface OpenOptions<S extends Schema> {
+  upgrade?(upgrade: Upgrade<S>): void | Promise<void>;
+  blocked?(): void | Promise<void>;
+  // We can't accept a promise for `blocking` because if it takes multiple
+  // ticks to resolve the block, the opening attempt may have already thrown.
+  // Forcing users to perform synchronous actions makes that case less likely.
+  blocking?(): void;
+  autoCloseOnBlocking?: boolean;
+}
 
 export class Database<
   NS extends NamedSchema<N, S>,
@@ -35,7 +43,12 @@ export class Database<
   >(
     name: N,
     version = 1,
-    { upgrade, blocked, blocking }: OpenCallbacks<S> = {}
+    {
+      upgrade,
+      blocked,
+      blocking,
+      autoCloseOnBlocking = false
+    }: OpenOptions<S> = {}
   ): Promise<Database<NS, N>> {
     const db = await new Promise<IDBPDatabase<S>>(
       (resolvePromise, rejectPromise) => {
@@ -71,7 +84,7 @@ export class Database<
         };
 
         const promiseToOpen = openDB<S>(name, version, {
-          upgrade(...args) {
+          upgrade(database, oldVersion, newVersion, transaction) {
             if (upgrade) {
               // If this callback is allowed to throw, it prevents the
               // `openDB` promise from ever settling, essentially blocking all
@@ -80,7 +93,17 @@ export class Database<
               // lift them up to the user, without swallowing them or blocking
               // the database.
               try {
-                upgrade(...args);
+                const up = new Upgrade(
+                  database,
+                  oldVersion,
+                  newVersion,
+                  transaction as Transaction<S>
+                );
+                const promise = upgrade(up);
+
+                if (promise) {
+                  promise.catch(reject);
+                }
               } catch (err) {
                 reject(err);
               }
@@ -95,7 +118,11 @@ export class Database<
               // lift them up to the user, without swallowing them or blocking
               // the database.
               try {
-                blocked();
+                const promise = blocked();
+
+                if (promise) {
+                  promise.catch(reject);
+                }
               } catch (err) {
                 reject(err);
               }
@@ -108,10 +135,25 @@ export class Database<
               );
             }
           },
-          // We don't wrap `blocking` as it can only occur after the database
-          // has been opened, so it doesn't make sense to let it reject this
-          // promise.
-          blocking
+          // We don't wrap `blocking` in the open promise as it can only occur
+          // after the database has been opened, so it doesn't make sense to
+          // let it reject that (probably settled) promise.
+          blocking() {
+            if (blocking) {
+              // If we don't catch and surface any errors, they would be
+              // silently swallowed in some environments. We also want to be
+              // able to automatically close the database regardless of errors.
+              try {
+                blocking();
+              } catch (err) {
+                console.error(err);
+              }
+            }
+
+            if (autoCloseOnBlocking) {
+              db.close();
+            }
+          }
         });
 
         const requestToOpen = unwrap(promiseToOpen);
