@@ -1,4 +1,4 @@
-import { Schema, StoreMap, StoreNames, Transaction } from "./types";
+import { Schema, StoreMap, StoreNames, Transaction } from "../types";
 
 export const wrapTransaction = async <
   S extends Schema,

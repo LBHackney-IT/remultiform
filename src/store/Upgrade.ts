@@ -1,7 +1,7 @@
 import { IDBPDatabase } from "idb";
 
 import { Schema, StoreMap, StoreNames, Store, Transaction } from "./types";
-import { wrapTransaction } from "./wrappers.internal";
+import { wrapTransaction } from "./wrappers/wrapTransaction.internal";
 
 export class Upgrade<S extends Schema> {
   readonly oldVersion: number;
