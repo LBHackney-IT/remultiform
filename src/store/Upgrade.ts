@@ -29,10 +29,6 @@ export class Upgrade<S extends Schema> {
   createStore<Name extends StoreNames<S>>(
     storeName: Name
   ): Store<S, StoreNames<S>[], Name> {
-    // ESLint is wrong about this assertion being unnecessary, probably due to
-    // `StoreNames` having the same name as the internal `StoreNames` type from
-    // `idb`, despite being different.
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return this.db.createObjectStore(storeName) as Store<
       S,
       StoreNames<S>[],
