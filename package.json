@@ -10,9 +10,10 @@
   ],
   "repository": "LBHackney-IT/remultiform",
   "scripts": {
-    "build": "npm run build:barrels && rollup --config",
+    "build": "npm run build:barrels && npm run build:docs && rollup --config",
     "build:watch": "npm run build -- --watch",
     "build:barrels": "barrelsby --config ./barrelsby.json",
+    "build:docs": "typedoc",
     "test": "npm run format:check && npm run lint && npm run test:all",
     "test:update": "npm run format && npm run lint:fix && npm run test:all:update",
     "test:all": "npm run test:unit && npm run test:examples",
@@ -68,6 +69,7 @@
     "rollup-plugin-typescript2": "^0.25.2",
     "ts-jest": "^24.1.0",
     "tslib": "^1.10.0",
+    "typedoc": "^0.15.1",
     "typescript": "^3.7.2"
   },
   "husky": {
