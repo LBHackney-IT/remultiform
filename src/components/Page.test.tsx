@@ -1,9 +1,9 @@
 import React from "react";
 import { create } from "react-test-renderer";
 
-import { Page } from "./Page";
+import { singleStepForm } from "../__fixtures__/forms/singleStepForm";
 
-import singleStepForm from "../__fixtures__/forms/singleStepForm";
+import { Page } from "./Page";
 
 it("renders correctly with all props", () => {
   const component = create(

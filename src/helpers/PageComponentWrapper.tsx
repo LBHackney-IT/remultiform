@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
-import React, { ElementType, Key } from "react";
+import React from "react";
 
 export interface PageComponent<
-  C extends ElementType<P>,
-  P = C extends ElementType<infer T> ? T : {}
+  C extends React.ElementType<P>,
+  P = C extends React.ElementType<infer T> ? T : {}
 > {
-  key: Key;
+  key: React.Key;
   Component: C;
   props: JSX.LibraryManagedAttributes<C, P>;
 }
 
 export interface PageComponentWrapper {
-  key: Key;
-  render(key?: Key): JSX.Element;
+  key: React.Key;
+  render(key?: React.Key): JSX.Element;
 }
 
 export const pageComponentWrapperPropType = PropTypes.exact({
@@ -21,15 +21,15 @@ export const pageComponentWrapperPropType = PropTypes.exact({
 }).isRequired;
 
 export const wrapPageComponent = <
-  C extends ElementType<P>,
-  P = C extends ElementType<infer T> ? T : {}
+  C extends React.ElementType<P>,
+  P = C extends React.ElementType<infer T> ? T : {}
 >({
   key,
   Component,
   props
 }: PageComponent<C, P>): PageComponentWrapper => ({
   key,
-  render(k?: Key): JSX.Element {
+  render(k?: React.Key): JSX.Element {
     return <Component key={k !== undefined ? k : key} {...props} />;
   }
 });

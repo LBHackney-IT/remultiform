@@ -1,5 +1,5 @@
-import PropTypes, { ValidationMap } from "prop-types";
-import React, { Key } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 
 import {
   PageComponentWrapper,
@@ -9,17 +9,21 @@ import {
 import { Page } from "./Page";
 
 export interface Step {
-  key: Key;
+  key: React.Key;
   componentWrappers: PageComponentWrapper[];
 }
 
 export interface OrchestratorProps {
-  currentStepKey?: Key | null;
+  currentStepKey?: React.Key | null;
   steps: Step[];
 }
 
-export class Orchestrator extends React.Component<OrchestratorProps> {
-  static propTypes: ValidationMap<OrchestratorProps> = {
+export class Orchestrator extends React.Component<
+  OrchestratorProps,
+  never,
+  never
+> {
+  static propTypes: PropTypes.ValidationMap<OrchestratorProps> = {
     currentStepKey: PropTypes.string,
     steps: PropTypes.arrayOf(
       PropTypes.exact({

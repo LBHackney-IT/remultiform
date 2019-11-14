@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
-import React, { FunctionComponent } from "react";
+import React from "react";
 
 export interface TestFunctionComponentProps {
   content: string;
 }
 
-const TestFunctionComponent: FunctionComponent<TestFunctionComponentProps> = ({
-  content
-}) => <div>{content}</div>;
+export const TestFunctionComponent: React.FunctionComponent<TestFunctionComponentProps> = (
+  props: TestFunctionComponentProps
+): JSX.Element => {
+  const { content } = props;
+
+  return <div>{content}</div>;
+};
 
 TestFunctionComponent.propTypes = {
   content: PropTypes.string.isRequired
 };
-
-export default TestFunctionComponent;

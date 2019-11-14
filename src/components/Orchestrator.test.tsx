@@ -1,7 +1,7 @@
 import React from "react";
 import { create } from "react-test-renderer";
 
-import multiStepForm from "../__fixtures__/forms/multiStepForm";
+import { multiStepForm } from "../__fixtures__/forms/multiStepForm";
 
 import { Orchestrator } from "./Orchestrator";
 

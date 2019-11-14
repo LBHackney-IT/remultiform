@@ -1,7 +1,7 @@
 import { create } from "react-test-renderer";
 
-import TestClassComponent from "../__fixtures__/components/TestClassComponent";
-import TestFunctionComponent from "../__fixtures__/components/TestFunctionComponent";
+import { TestClassComponent } from "../__fixtures__/components/TestClassComponent";
+import { TestFunctionComponent } from "../__fixtures__/components/TestFunctionComponent";
 
 import { wrapPageComponent } from "./PageComponentWrapper";
 

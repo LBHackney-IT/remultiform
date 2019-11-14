@@ -1,5 +1,8 @@
 import { IDBPDatabase } from "idb";
 
+import { OpenOptions, wrapOpenDB } from "./wrappers/wrapOpenDB.internal";
+import { wrapTransaction } from "./wrappers/wrapTransaction.internal";
+
 import {
   NamedSchema,
   Schema,
@@ -8,8 +11,6 @@ import {
   StoreNames,
   StoreValue
 } from "./types";
-import { OpenOptions, wrapOpenDB } from "./wrappers/wrapOpenDB.internal";
-import { wrapTransaction } from "./wrappers/wrapTransaction.internal";
 
 export { OpenOptions };
 

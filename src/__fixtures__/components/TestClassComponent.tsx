@@ -1,12 +1,14 @@
-import PropTypes, { ValidationMap } from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 export interface TestClassComponentProps {
   content: string;
 }
 
-class TestClassComponent extends React.Component<TestClassComponentProps> {
-  static propTypes: ValidationMap<TestClassComponentProps> = {
+export class TestClassComponent extends React.Component<
+  TestClassComponentProps
+> {
+  static propTypes: PropTypes.ValidationMap<TestClassComponentProps> = {
     content: PropTypes.string.isRequired
   };
 
@@ -16,5 +18,3 @@ class TestClassComponent extends React.Component<TestClassComponentProps> {
     return <div>{content}</div>;
   }
 }
-
-export default TestClassComponent;
