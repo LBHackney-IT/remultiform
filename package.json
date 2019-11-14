@@ -8,6 +8,7 @@
   "files": [
     "dist"
   ],
+  "repository": "LBHackney-IT/remultiform",
   "scripts": {
     "build": "npm run build:barrels && rollup --config",
     "build:watch": "npm run build -- --watch",
