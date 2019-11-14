@@ -14,3 +14,4 @@ and this project adheres to
 - `Page` with support for an array of components to render as children
 - `Orchestrator` to orchestrate rendering the appropriate `Page`
 - `next-kittens` example
+- IndexedDB store wrappers
