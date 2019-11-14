@@ -4,18 +4,39 @@ import { wrapTransaction } from "./wrappers/wrapTransaction.internal";
 
 import { Schema, StoreMap, StoreNames, Store, Transaction } from "./types";
 
-export class Upgrade<S extends Schema> {
+/**
+ * A wrapper for the opening database and transaction during an upgrade.
+ *
+ * An instance of this is created when {@link Database.open} is called with a
+ * schema version number that has never been opened in that environment before.
+ * Use it to upgrade the schema from the old version to the new version. Stores
+ * and indexes can only be created during an upgrade, so some care is advised.
+ */
+export class Upgrade<DBSchema extends Schema> {
+  /**
+   * The schema version before this upgrade.
+   */
   readonly oldVersion: number;
+
+  /**
+   * The schema version after this upgrade.
+   */
   readonly newVersion?: number;
 
-  private readonly db: IDBPDatabase<S>;
-  private readonly tx: Transaction<S>;
+  private readonly db: IDBPDatabase<DBSchema>;
+  private readonly tx: Transaction<DBSchema>;
 
+  /**
+   * This should only be called internally to create an {@link Upgrade} during
+   * an upgrade.
+   *
+   * @ignore
+   */
   constructor(
-    db: IDBPDatabase<S>,
+    db: IDBPDatabase<DBSchema>,
     oldVersion: number,
     newVersion: number | null,
-    tx: Transaction<S>
+    tx: Transaction<DBSchema>
   ) {
     this.db = db;
     this.oldVersion = oldVersion;
@@ -27,19 +48,37 @@ export class Upgrade<S extends Schema> {
     this.tx = tx;
   }
 
-  createStore<Name extends StoreNames<S>>(
+  /**
+   * Create a store in the database.
+   *
+   * Stores can only be created during an upgrade, so this is the opportunity
+   * to do so.
+   */
+  createStore<Name extends StoreNames<DBSchema>>(
     storeName: Name
-  ): Store<S, StoreNames<S>[], Name> {
+  ): Store<DBSchema, StoreNames<DBSchema>[], Name> {
     return this.db.createObjectStore(storeName) as Store<
-      S,
-      StoreNames<S>[],
+      DBSchema,
+      StoreNames<DBSchema>[],
       Name
     >;
   }
 
+  /**
+   * Add operations to the transaction created by this upgrade event.
+   *
+   * @param storeNames - The stores to open the transaction over.
+   *
+   * @param tx - A callback for the transaction to call. Be aware that this
+   * callback, although possibly asynchronous, needs to be updating the
+   * transaction every tick. If no changes to the transaction happen in a tick,
+   * it will automatically commit itself and the transaction will close.
+   */
   async transaction(
-    storeNames: StoreNames<S>[],
-    tx: (stores: StoreMap<S, StoreNames<S>[]>) => void | Promise<void>
+    storeNames: StoreNames<DBSchema>[],
+    tx: (
+      stores: StoreMap<DBSchema, StoreNames<DBSchema>[]>
+    ) => void | Promise<void>
   ): Promise<void> {
     await wrapTransaction(storeNames, this.tx, tx);
   }

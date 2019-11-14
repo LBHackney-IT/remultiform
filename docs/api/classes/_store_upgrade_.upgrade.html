@@ -62,18 +62,29 @@
 					<a href="_store_upgrade_.upgrade.html">Upgrade</a>
 				</li>
 			</ul>
-			<h1>Class Upgrade&lt;S&gt;</h1>
+			<h1>Class Upgrade&lt;DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A wrapper for the opening database and transaction during an upgrade.</p>
+					</div>
+					<p>An instance of this is created when <a href="_store_database_.database.html#open">Database.open</a> is called with a
+						schema version number that has never been opened in that environment before.
+						Use it to upgrade the schema from the old version to the new version. Stores
+					and indexes can only be created during an upgrade, so some care is advised.</p>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>S<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -89,12 +100,6 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_store_upgrade_.upgrade.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
@@ -113,41 +118,6 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Upgrade<span class="tsd-signature-symbol">(</span>db<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDBPDatabase</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span>, oldVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, newVersion<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span>, tx<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#transaction" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_store_upgrade_.upgrade.html" class="tsd-signature-type">Upgrade</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L12">store/Upgrade.ts:12</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>db: <span class="tsd-signature-type">IDBPDatabase</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5>oldVersion: <span class="tsd-signature-type">number</span></h5>
-								</li>
-								<li>
-									<h5>newVersion: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
-								</li>
-								<li>
-									<h5>tx: <a href="../modules/_store_types_.html#transaction" class="tsd-signature-type">Transaction</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_store_upgrade_.upgrade.html" class="tsd-signature-type">Upgrade</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="newversion" class="tsd-anchor"></a>
@@ -155,9 +125,14 @@
 					<div class="tsd-signature tsd-kind-icon">new<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L9">store/Upgrade.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L24">store/Upgrade.ts:24</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The schema version after this upgrade.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="oldversion" class="tsd-anchor"></a>
@@ -165,9 +140,14 @@
 					<div class="tsd-signature tsd-kind-icon">old<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L8">store/Upgrade.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L19">store/Upgrade.ts:19</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The schema version before this upgrade.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -176,19 +156,26 @@
 					<a name="createstore" class="tsd-anchor"></a>
 					<h3>create<wbr>Store</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Store&lt;Name&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#store" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Store&lt;Name&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#store" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L30">store/Upgrade.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L57">store/Upgrade.ts:57</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a store in the database.</p>
+								</div>
+								<p>Stores can only be created during an upgrade, so this is the opportunity
+								to do so.</p>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>Name<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>Name<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -197,7 +184,7 @@
 									<h5>storeName: <span class="tsd-signature-type">Name</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/_store_types_.html#store" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/_store_types_.html#store" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -205,33 +192,47 @@
 					<a name="transaction" class="tsd-anchor"></a>
 					<h3>transaction</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">transaction<span class="tsd-signature-symbol">(</span>storeNames<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span>, tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">transaction<span class="tsd-signature-symbol">(</span>storeNames<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span>, tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L40">store/Upgrade.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Upgrade.ts#L77">store/Upgrade.ts:77</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add operations to the transaction created by this upgrade event.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>storeNames: <a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>storeNames: <a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The stores to open the transaction over.</p>
+									</div>
 								</li>
 								<li>
 									<h5>tx: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A callback for the transaction to call. Be aware that this
+											callback, although possibly asynchronous, needs to be updating the
+											transaction every tick. If no changes to the transaction happen in a tick,
+										it will automatically commit itself and the transaction will close.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>stores<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>stores<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>stores: <a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h5>
+															<h5>stores: <a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span>
@@ -286,9 +287,6 @@
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_store_upgrade_.upgrade.html" class="tsd-kind-icon">Upgrade</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_store_upgrade_.upgrade.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_store_upgrade_.upgrade.html#newversion" class="tsd-kind-icon">new<wbr>Version</a>
 							</li>
