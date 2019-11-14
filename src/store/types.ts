@@ -123,9 +123,17 @@ export type Store<
 
 /**
  * A map of the name of a {@link Store} to its accessor.
+ *
+ * @typeparam TxStoreNames - The array of the names of stores possibly in this
+ * map.
  */
 export type StoreMap<
   DBSchema extends Schema,
-  TxStoreNames extends StoreNames<DBSchema>[] = StoreNames<DBSchema>[],
-  StoreName extends StoreNames<DBSchema> = StoreNames<DBSchema>
-> = { [Name in StoreName]: Store<DBSchema, TxStoreNames, Name> };
+  TxStoreNames extends StoreNames<DBSchema>[] = StoreNames<DBSchema>[]
+> = {
+  [Name in TxStoreNames extends (infer N)[] ? N : never]: Store<
+    DBSchema,
+    TxStoreNames,
+    Name
+  >;
+};

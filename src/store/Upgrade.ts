@@ -37,9 +37,9 @@ export class Upgrade<S extends Schema> {
     >;
   }
 
-  async transaction<Names extends StoreNames<S>[], Name extends StoreNames<S>>(
-    storeNames: Names,
-    tx: (stores: StoreMap<S, StoreNames<S>[], Name>) => void | Promise<void>
+  async transaction(
+    storeNames: StoreNames<S>[],
+    tx: (stores: StoreMap<S, StoreNames<S>[]>) => void | Promise<void>
   ): Promise<void> {
     await wrapTransaction(storeNames, this.tx, tx);
   }

@@ -66,9 +66,9 @@ export class Database<
     }
   }
 
-  async transaction<Names extends StoreNames<S>[], Name extends StoreNames<S>>(
-    storeNames: Names,
-    tx: (stores: StoreMap<S, Names, Name>) => void | Promise<void>,
+  async transaction<DBStoreNames extends StoreNames<S>[]>(
+    storeNames: DBStoreNames,
+    tx: (stores: StoreMap<S, DBStoreNames>) => void | Promise<void>,
     mode: TransactionMode = TransactionMode.ReadOnly
   ): Promise<void> {
     const transaction = this.db.transaction(storeNames, mode);
