@@ -62,21 +62,36 @@
 					<a href="_helpers_pagecomponentwrapper_.pagecomponent.html">PageComponent</a>
 				</li>
 			</ul>
-			<h1>Interface PageComponent&lt;C, P&gt;</h1>
+			<h1>Interface PageComponent&lt;ComponentType, Props&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A component along with the associated properties needed to render it as part
+						of a <a href="_components_orchestrator_.step.html">Step</a>.</p>
+					</div>
+					<pre><code class="language-ts"><span class="hljs-keyword">const</span> component: PageComponent&lt;<span class="hljs-keyword">typeof</span> MyInput&gt; = {
+  key: <span class="hljs-string">"my-input"</span>,
+  Component: MyInput,
+  props: {
+    defaultValue: <span class="hljs-string">"Enter something?"</span>
+  }
+}</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>C<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4>ComponentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 					<li>
-						<h4>P</h4>
+						<h4>Props</h4>
 					</li>
 				</ul>
 			</section>
@@ -108,12 +123,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="component" class="tsd-anchor"></a>
 					<h3>Component</h3>
-					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">C</span></div>
+					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper.tsx#L9">helpers/PageComponentWrapper.tsx:9</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper.tsx#L30">helpers/PageComponentWrapper.tsx:30</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The component class, function, or tag name to render.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="key" class="tsd-anchor"></a>
@@ -121,19 +141,29 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper.tsx#L8">helpers/PageComponentWrapper.tsx:8</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper.tsx#L25">helpers/PageComponentWrapper.tsx:25</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A unique identifier for this component on the page.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="props" class="tsd-anchor"></a>
 					<h3>props</h3>
-					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSX.LibraryManagedAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSX.LibraryManagedAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper.tsx#L10">helpers/PageComponentWrapper.tsx:10</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper.tsx#L35">helpers/PageComponentWrapper.tsx:35</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The props to pass to <a href="_helpers_pagecomponentwrapper_.pagecomponent.html#component">PageComponent.Component</a>.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>

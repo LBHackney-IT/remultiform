@@ -69,6 +69,33 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A step in a multipage form.</p>
+					</div>
+					<p>This represents a single step in the flow of the multipage form.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">const</span> step: Step = {
+  key: <span class="hljs-string">"step-1"</span>,
+  componentWrappers: [
+    wrapPageComponent({
+      key: <span class="hljs-string">"my-image"</span>,
+      Component: <span class="hljs-string">"img"</span>,
+      props: {
+        src: <span class="hljs-string">"/path/to/my.png"</span>
+      }
+    }),
+    wrapPageComponent({
+      key: <span class="hljs-string">"my-input"</span>,
+      Component: MyInput,
+      props: {
+        defaultValue: <span class="hljs-string">"Enter something?"</span>
+      }
+    })
+  ]
+};</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -99,9 +126,16 @@
 					<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <a href="_helpers_pagecomponentwrapper_.pagecomponentwrapper.html" class="tsd-signature-type">PageComponentWrapper</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L13">components/Orchestrator.tsx:13</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L52">components/Orchestrator.tsx:52</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An ordered array of wrapped components to include in this step.</p>
+						</div>
+						<p>Create <a href="_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a> with
+						<a href="../modules/_helpers_pagecomponentwrapper_.html#wrappagecomponent">wrapPageComponent</a>.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="key" class="tsd-anchor"></a>
@@ -109,9 +143,15 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L12">components/Orchestrator.tsx:12</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L44">components/Orchestrator.tsx:44</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The key to uniquely identify the step</p>
+						</div>
+						<p>This is referenced by <a href="_components_orchestrator_.orchestratorprops.html#currentstepkey">OrchestratorProps.currentStepKey</a>.</p>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -146,9 +186,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_components_orchestrator_.orchestrator.html" class="tsd-kind-icon">Orchestrator</a>
-					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_components_orchestrator_.orchestratorprops.html" class="tsd-kind-icon">Orchestrator<wbr>Props</a>
 					</li>
@@ -167,6 +204,9 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_components_orchestrator_.html#orchestrator" class="tsd-kind-icon">Orchestrator</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
