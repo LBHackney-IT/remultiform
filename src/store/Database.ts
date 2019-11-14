@@ -1,8 +1,9 @@
 import { IDBPDatabase } from "idb";
 
-import { OpenOptions, wrapOpenDB } from "./wrappers/wrapOpenDB.internal";
+import { wrapOpenDB } from "./wrappers/wrapOpenDB.internal";
 import { wrapTransaction } from "./wrappers/wrapTransaction.internal";
 
+import { OpenOptions } from "./OpenOptions";
 import {
   NamedSchema,
   Schema,
@@ -11,8 +12,6 @@ import {
   StoreNames,
   StoreValue
 } from "./types";
-
-export { OpenOptions };
 
 export const enum TransactionMode {
   ReadOnly = "readonly",
