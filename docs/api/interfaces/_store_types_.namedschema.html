@@ -62,21 +62,48 @@
 					<a href="_store_types_.namedschema.html">NamedSchema</a>
 				</li>
 			</ul>
-			<h1>Interface NamedSchema&lt;N, S&gt;</h1>
+			<h1>Interface NamedSchema&lt;DBNames, DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The schema for the database, along with the allowed names for databases
+						using that schema.</p>
+					</div>
+					<p>Bear in mind that defining the schema alone won&#39;t set the
+						database up with that schema. It&#39;s used for providing type safety for
+					interacting with the database.</p>
+					<p>Use this interface by providing the generic type parameters, rather than
+					relying on type inference, for best results.</p>
+					<p>See <a href="../classes/_store_database_.database.html#open">Database.open</a> for how to set a database up.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">type</span> MySchema = NamedSchema&lt;
+  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
+  {
+    favouriteColour: {
+      key: <span class="hljs-built_in">string</span>;
+      value: {
+        r: <span class="hljs-built_in">number</span>;
+        g: <span class="hljs-built_in">number</span>;
+        b: <span class="hljs-built_in">number</span>;
+      };
+    };
+  }
+&gt;</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>N<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+						<h4>DBNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
 					</li>
 					<li>
-						<h4>S<span class="tsd-signature-symbol">: </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -107,22 +134,32 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="dbnames" class="tsd-anchor"></a>
 					<h3>db<wbr>Names</h3>
-					<div class="tsd-signature tsd-kind-icon">db<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">N</span></div>
+					<div class="tsd-signature tsd-kind-icon">db<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBNames</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L23">store/types.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L75">store/types.ts:75</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The database names permitted to use this schema.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="schema" class="tsd-anchor"></a>
 					<h3>schema</h3>
-					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">S</span></div>
+					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBSchema</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L24">store/types.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L80">store/types.ts:80</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The database schema.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -179,10 +216,16 @@
 						<a href="../modules/_store_types_.html#store" class="tsd-kind-icon">Store</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/_store_types_.html#storekey" class="tsd-kind-icon">Store<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../modules/_store_types_.html#storemap" class="tsd-kind-icon">Store<wbr>Map</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../modules/_store_types_.html#storenames" class="tsd-kind-icon">Store<wbr>Names</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/_store_types_.html#storevalue" class="tsd-kind-icon">Store<wbr>Value</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../modules/_store_types_.html#transaction" class="tsd-kind-icon">Transaction</a>

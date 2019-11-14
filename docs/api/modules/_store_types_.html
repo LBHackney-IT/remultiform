@@ -82,8 +82,10 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_store_types_.html#store" class="tsd-kind-icon">Store</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_store_types_.html#storekey" class="tsd-kind-icon">Store<wbr>Key</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_store_types_.html#storemap" class="tsd-kind-icon">Store<wbr>Map</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_store_types_.html#storenames" class="tsd-kind-icon">Store<wbr>Names</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_store_types_.html#storevalue" class="tsd-kind-icon">Store<wbr>Value</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_store_types_.html#transaction" class="tsd-kind-icon">Transaction</a></li>
 							</ul>
 						</section>
@@ -95,44 +97,79 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="store" class="tsd-anchor"></a>
 					<h3>Store</h3>
-					<div class="tsd-signature tsd-kind-icon">Store&lt;S, Names, Name&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IDBPObjectStore</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Names</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Name</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">Store&lt;DBSchema, TxStoreNames, StoreName&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IDBPObjectStore</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TxStoreNames</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L34">store/types.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L118">store/types.ts:118</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A store accessor.</p>
+						</div>
+						<p>Stores are semantically similar to tables in other databases.</p>
+					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>S<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+							<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
 						</li>
 						<li>
-							<h4>Names<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4>TxStoreNames<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 						<li>
-							<h4>Name<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="storekey" class="tsd-anchor"></a>
+					<h3>Store<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">Store<wbr>Key&lt;DBSchema, StoreName&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBStoreKey</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L92">store/types.ts:92</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The type of keys for the given store.</p>
+						</div>
+					</div>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						</li>
+						<li>
+							<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="storemap" class="tsd-anchor"></a>
 					<h3>Store<wbr>Map</h3>
-					<div class="tsd-signature tsd-kind-icon">Store<wbr>Map&lt;S, Names, Name&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">Store<wbr>Map&lt;DBSchema, TxStoreNames, StoreName&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L40">store/types.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L127">store/types.ts:127</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A map of the name of a <a href="_store_types_.html#store">Store</a> to its accessor.</p>
+						</div>
+					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>S<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+							<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
 						</li>
 						<li>
-							<h4>Names<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4>TxStoreNames<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 						<li>
-							<h4>Name<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -144,35 +181,69 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="storenames" class="tsd-anchor"></a>
 					<h3>Store<wbr>Names</h3>
-					<div class="tsd-signature tsd-kind-icon">Store<wbr>Names&lt;S&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBStoreNames</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">string</span></div>
+					<div class="tsd-signature tsd-kind-icon">Store<wbr>Names&lt;DBSchema&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBStoreNames</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L27">store/types.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L86">store/types.ts:86</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Known store names extracted from the schema.</p>
+						</div>
+					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>S<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+							<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="storevalue" class="tsd-anchor"></a>
+					<h3>Store<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">Store<wbr>Value&lt;DBSchema, StoreName&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBStoreValue</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L100">store/types.ts:100</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The type of values in the given store.</p>
+						</div>
+					</div>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						</li>
+						<li>
+							<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="transaction" class="tsd-anchor"></a>
 					<h3>Transaction</h3>
-					<div class="tsd-signature tsd-kind-icon">Transaction&lt;S, Names&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IDBPTransaction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Names</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">Transaction&lt;DBSchema, TxStoreNames&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IDBPTransaction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TxStoreNames</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L29">store/types.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L108">store/types.ts:108</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A transaction on one or more stores.</p>
+						</div>
+					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>S<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+							<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
 						</li>
 						<li>
-							<h4>Names<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4>TxStoreNames<span class="tsd-signature-symbol">: </span><a href="_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -219,10 +290,16 @@
 						<a href="_store_types_.html#store" class="tsd-kind-icon">Store</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_store_types_.html#storekey" class="tsd-kind-icon">Store<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_store_types_.html#storemap" class="tsd-kind-icon">Store<wbr>Map</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_store_types_.html#storenames" class="tsd-kind-icon">Store<wbr>Names</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_store_types_.html#storevalue" class="tsd-kind-icon">Store<wbr>Value</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_store_types_.html#transaction" class="tsd-kind-icon">Transaction</a>
