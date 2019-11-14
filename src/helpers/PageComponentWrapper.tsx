@@ -10,7 +10,7 @@ export interface PageComponent<
   props: JSX.LibraryManagedAttributes<C, P>;
 }
 
-interface PageComponentWrapper {
+export interface PageComponentWrapper {
   key: Key;
   render(key?: Key): JSX.Element;
 }
@@ -33,5 +33,3 @@ export const wrapPageComponent = <
     return <Component key={k !== undefined ? k : key} {...props} />;
   }
 });
-
-export default PageComponentWrapper;

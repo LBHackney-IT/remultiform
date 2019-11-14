@@ -18,5 +18,5 @@
       "remultiform": ["../../dist/esm/index"]
     }
   },
-  "exclude": ["**/node_modules/**/*", "__tests__/**/*"]
+  "exclude": ["**/node_modules/**/*", "__*__/**/*"]
 }

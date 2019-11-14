@@ -12,12 +12,7 @@ const tsconfig = require("./tsconfig.json");
 
 module.exports = [
   {
-    input: [
-      "src/**/*.ts?(x)",
-      "!**/__tests__/**/*",
-      "!**/__fixtures__/**/*",
-      "!**/*.(spec|test).*"
-    ],
+    input: ["src/**/*.ts?(x)", "!**/__*__/**/*", "!**/*.(spec|test).*"],
     output: [
       {
         dir: dirname(pkg.main),
@@ -51,8 +46,7 @@ module.exports = [
           },
           exclude: [
             ...tsconfig.exclude,
-            "**/__fixtures__/**/*",
-            "**/__tests__/**/*",
+            "**/__*__/**/*",
             "**/*.spec.*",
             "**/*.test.*"
           ]

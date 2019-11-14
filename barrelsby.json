@@ -2,9 +2,8 @@
   "directory": "src",
   "delete": true,
   "exclude": [
-    "^.*/__fixtures__/.+\\.tsx?$",
-    "^.*/__tests__/.+\\.tsx?$",
-    "^.+\\.(spec|test)\\.tsx?$"
-  ],
-  "exportDefault": true
+    "^.*/__.+__/.+\\.tsx?$",
+    "^.+\\.(spec|test)\\.tsx?$",
+    "^.+\\.internal\\.tsx?$"
+  ]
 }

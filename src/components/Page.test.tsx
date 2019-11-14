@@ -1,7 +1,7 @@
 import React from "react";
 import { create } from "react-test-renderer";
 
-import Page from "./Page";
+import { Page } from "./Page";
 
 import singleStepForm from "../__fixtures__/forms/singleStepForm";
 

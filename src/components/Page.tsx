@@ -1,7 +1,8 @@
 import PropTypes, { ValidationMap } from "prop-types";
 import React from "react";
 
-import PageComponentWrapper, {
+import {
+  PageComponentWrapper,
   pageComponentWrapperPropType
 } from "../helpers/PageComponentWrapper";
 
@@ -9,7 +10,7 @@ export interface PageProps {
   componentWrappers: PageComponentWrapper[];
 }
 
-class Page extends React.Component<PageProps> {
+export class Page extends React.Component<PageProps> {
   static propTypes: ValidationMap<PageProps> = {
     componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType)
       .isRequired
@@ -21,5 +22,3 @@ class Page extends React.Component<PageProps> {
     return <>{componentWrappers.map(({ key, render }) => render(key))}</>;
   }
 }
-
-export default Page;
