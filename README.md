@@ -1,5 +1,12 @@
 # Remultiform
 
+![Project maturity](https://img.shields.io/badge/project_maturity-alpha-blue?style=for-the-badge)
+![Licence](https://img.shields.io/github/license/LBHackney-IT/remultiform?label=licence&style=for-the-badge)
+
+![CircleCI build status](https://img.shields.io/circleci/build/github/LBHackney-IT/remultiform?style=for-the-badge)
+
+![GitHub repo size](https://img.shields.io/github/repo-size/LBHackney-IT/remultiform?style=for-the-badge)
+
 The **Re**act **multi**page **form** builder
 
 **Warning: Remultiform is still in alpha. No promises of API stability are
