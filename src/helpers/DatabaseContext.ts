@@ -7,6 +7,9 @@ import { NamedSchema, Schema } from "../store/types";
  * A React context for passing a database connection to
  * {@link PageComponentWrapper|PageComponentWrappers}.
  *
+ * Normally, you use this by creating an instance somewhere and sharing it
+ * between components via {@link DatabaseProvider}.
+ *
  * ```ts
  * type DBSchema = NamedSchema<
  *   "myDatabase" | "myOtherDatabase",

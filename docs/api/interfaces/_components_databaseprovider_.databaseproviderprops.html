@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>NamedSchema | LBH Frontend React</title>
+	<title>DatabaseProviderProps | LBH Frontend React</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_store_types_.html">&quot;store/types&quot;</a>
+					<a href="../modules/_components_databaseprovider_.html">&quot;components/DatabaseProvider&quot;</a>
 				</li>
 				<li>
-					<a href="_store_types_.namedschema.html">NamedSchema</a>
+					<a href="_components_databaseprovider_.databaseproviderprops.html">DatabaseProviderProps</a>
 				</li>
 			</ul>
-			<h1>Interface NamedSchema&lt;DBNames, DBSchema&gt;</h1>
+			<h1>Interface DatabaseProviderProps&lt;DB&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,38 +72,15 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The schema for the database, along with the allowed names for databases
-						using that schema.</p>
+						<p>The proptypes for <a href="../classes/_components_databaseprovider_.databaseprovider.html">DatabaseProvider</a>.</p>
 					</div>
-					<p>Bear in mind that defining the schema alone won&#39;t set the
-						database up with that schema. It&#39;s used for providing type safety for
-					interacting with the database.</p>
-					<p>Use this interface by providing the generic type parameters, rather than
-					relying on type inference, for best results.</p>
-					<p>See <a href="../classes/_store_database_.database.html#open">Database.open</a> for how to set a database up.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">type</span> MySchema = NamedSchema&lt;
-  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
-  {
-    favouriteColour: {
-      key: <span class="hljs-built_in">string</span>;
-      value: {
-        r: <span class="hljs-built_in">number</span>;
-        g: <span class="hljs-built_in">number</span>;
-        b: <span class="hljs-built_in">number</span>;
-      };
-    };
-  }
-&gt;</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>DBNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
-					</li>
-					<li>
-						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						<h4>DB<span class="tsd-signature-symbol">: </span><a href="../classes/_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -111,7 +88,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">NamedSchema</span>
+						<span class="target">DatabaseProviderProps</span>
 					</li>
 				</ul>
 			</section>
@@ -122,8 +99,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#dbnames" class="tsd-kind-icon">db<wbr>Names</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#schema" class="tsd-kind-icon">schema</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_databaseprovider_.databaseproviderprops.html#children" class="tsd-kind-icon">children</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_databaseprovider_.databaseproviderprops.html#context" class="tsd-kind-icon">context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_databaseprovider_.databaseproviderprops.html#opendatabaseorpromise" class="tsd-kind-icon">open<wbr>Database<wbr>OrPromise</a></li>
 							</ul>
 						</section>
 					</div>
@@ -132,33 +110,47 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="dbnames" class="tsd-anchor"></a>
-					<h3>db<wbr>Names</h3>
-					<div class="tsd-signature tsd-kind-icon">db<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBNames</span></div>
+					<a name="children" class="tsd-anchor"></a>
+					<h3>children</h3>
+					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.ReactNode</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L75">src/store/types.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L31">src/components/DatabaseProvider.tsx:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The database names permitted to use this schema.</p>
+							<p>Child components of this provider.</p>
 						</div>
+						<p>Anything that needs a <a href="../classes/_store_database_.database.html">Database</a> to function should be contained
+						withing this subtree.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="schema" class="tsd-anchor"></a>
-					<h3>schema</h3>
-					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBSchema</span></div>
+					<a name="context" class="tsd-anchor"></a>
+					<h3>context</h3>
+					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <a href="../classes/_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L80">src/store/types.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L23">src/components/DatabaseProvider.tsx:23</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="opendatabaseorpromise" class="tsd-anchor"></a>
+					<h3>open<wbr>Database<wbr>OrPromise</h3>
+					<div class="tsd-signature tsd-kind-icon">open<wbr>Database<wbr>OrPromise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L21">src/components/DatabaseProvider.tsx:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The database schema.</p>
+							<p>An open <a href="../classes/_store_database_.database.html">Database</a> or a promise that will resolve to an one.</p>
 						</div>
+						<p>Normally, you would want to pass the return value of <a href="../classes/_store_database_.database.html#open">Database.open</a>
+						in here directly.</p>
 					</div>
 				</section>
 			</section>
@@ -169,7 +161,7 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_components_databaseprovider_.html">&quot;components/<wbr>Database<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -193,51 +185,36 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_store_upgrade_.html">&quot;store/<wbr>Upgrade&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_store_types_.html">&quot;store/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../classes/_components_databaseprovider_.databaseprovider.html" class="tsd-kind-icon">Database<wbr>Provider</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_store_types_.namedschema.html" class="tsd-kind-icon">Named<wbr>Schema</a>
+						<a href="_components_databaseprovider_.databaseproviderprops.html" class="tsd-kind-icon">Database<wbr>Provider<wbr>Props</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_store_types_.namedschema.html#dbnames" class="tsd-kind-icon">db<wbr>Names</a>
+								<a href="_components_databaseprovider_.databaseproviderprops.html#children" class="tsd-kind-icon">children</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_store_types_.namedschema.html#schema" class="tsd-kind-icon">schema</a>
+								<a href="_components_databaseprovider_.databaseproviderprops.html#context" class="tsd-kind-icon">context</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_components_databaseprovider_.databaseproviderprops.html#opendatabaseorpromise" class="tsd-kind-icon">open<wbr>Database<wbr>OrPromise</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_store_types_.schema.html" class="tsd-kind-icon">Schema</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_store_types_.storeschema.html" class="tsd-kind-icon">Store<wbr>Schema</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#store" class="tsd-kind-icon">Store</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storekey" class="tsd-kind-icon">Store<wbr>Key</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storemap" class="tsd-kind-icon">Store<wbr>Map</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storenames" class="tsd-kind-icon">Store<wbr>Names</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storevalue" class="tsd-kind-icon">Store<wbr>Value</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#transaction" class="tsd-kind-icon">Transaction</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="_components_databaseprovider_.databaseproviderstate.html" class="tsd-kind-icon">Database<wbr>Provider<wbr>State</a>
 					</li>
 				</ul>
 			</nav>
