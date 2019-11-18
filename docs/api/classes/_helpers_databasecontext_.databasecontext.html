@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;components/Orchestrator&quot; | LBH Frontend React</title>
+	<title>DatabaseContext | LBH Frontend React</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,103 +56,87 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_components_orchestrator_.html">&quot;components/Orchestrator&quot;</a>
+					<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/DatabaseContext&quot;</a>
+				</li>
+				<li>
+					<a href="_helpers_databasecontext_.databasecontext.html">DatabaseContext</a>
 				</li>
 			</ul>
-			<h1>External module &quot;components/Orchestrator&quot;</h1>
+			<h1>Class DatabaseContext&lt;DB&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A React context for passing a database connection to
+						<a href="../interfaces/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a>.</p>
+					</div>
+					<pre><code class="language-ts"><span class="hljs-keyword">type</span> DBSchema = NamedSchema&lt;
+  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
+  {
+    favouriteColour: {
+      key: <span class="hljs-built_in">string</span>;
+      value: {
+        r: <span class="hljs-built_in">number</span>;
+        g: <span class="hljs-built_in">number</span>;
+        b: <span class="hljs-built_in">number</span>;
+      };
+    };
+  }
+&gt;;
+
+<span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext&lt;Database&lt;DBSchema&gt;&gt;();</code></pre>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>DB<span class="tsd-signature-symbol">: </span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DatabaseContext</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_components_orchestrator_.orchestratorprops.html" class="tsd-kind-icon">Orchestrator<wbr>Props</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_components_orchestrator_.step.html" class="tsd-kind-icon">Step</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_components_orchestrator_.html#orchestrator" class="tsd-kind-icon">Orchestrator</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_helpers_databasecontext_.databasecontext.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="orchestrator" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> Orchestrator</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Orchestrator<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_components_orchestrator_.orchestratorprops.html" class="tsd-signature-type">OrchestratorProps</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Context<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L116">components/Orchestrator.tsx:116</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L36">helpers/DatabaseContext.ts:36</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A component for orchestrating the rendering of pages for a multipage form.</p>
-								</div>
-								<pre><code class="language-ts"><span class="hljs-keyword">const</span> form: React.FunctionComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-  <span class="hljs-keyword">return</span> (
-    &lt;Orchestrator
-      currentStepKey=<span class="hljs-string">"step-2"</span>
-      steps={[
-        {
-          key: <span class="hljs-string">"step-1"</span>,
-          componentWrappers: [
-            wrapPageComponent({
-              key: <span class="hljs-string">"my-image"</span>,
-              Component: <span class="hljs-string">"img"</span>,
-              props: {
-                src: <span class="hljs-string">"/path/to/my.png"</span>
-              }
-            }),
-            wrapPageComponent({
-              key: <span class="hljs-string">"my-input"</span>,
-              Component: MyInput,
-              props: {
-                defaultValue: <span class="hljs-string">"Enter something?"</span>
-              }
-            })
-          ]
-        },
-        {
-          key: <span class="hljs-string">"step-2"</span>,
-          componentWrappers: [
-            wrapPageComponent({
-              key: <span class="hljs-string">"my-input"</span>,
-              Component: MyInput,
-              props: {
-                defaultValue: <span class="hljs-string">"Enter something else?"</span>
-              }
-            })
-          ]
-        }
-      ]}
-    /&gt;
-  )
-}</code></pre>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>props: <a href="../interfaces/_components_orchestrator_.orchestratorprops.html" class="tsd-signature-type">OrchestratorProps</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -164,43 +148,46 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_components_orchestrator_.html">&quot;components/<wbr>Orchestrator&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
+					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_components_orchestrator_.html">&quot;components/<wbr>Orchestrator&quot;</a>
+						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_components_page_.html">&quot;components/<wbr>Page&quot;</a>
+						<a href="../modules/_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
+						<a href="../modules/_store_database_.html">&quot;store/<wbr>Database&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+						<a href="../modules/_store_openoptions_.html">&quot;store/<wbr>Open<wbr>Options&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_store_database_.html">&quot;store/<wbr>Database&quot;</a>
+						<a href="../modules/_store_upgrade_.html">&quot;store/<wbr>Upgrade&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_store_openoptions_.html">&quot;store/<wbr>Open<wbr>Options&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_store_upgrade_.html">&quot;store/<wbr>Upgrade&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_store_types_.html">&quot;store/types&quot;</a>
+						<a href="../modules/_store_types_.html">&quot;store/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_components_orchestrator_.orchestratorprops.html" class="tsd-kind-icon">Orchestrator<wbr>Props</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_helpers_databasecontext_.databasecontext.html" class="tsd-kind-icon">Database<wbr>Context</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_helpers_databasecontext_.databasecontext.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_components_orchestrator_.step.html" class="tsd-kind-icon">Step</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_components_orchestrator_.html#orchestrator" class="tsd-kind-icon">Orchestrator</a>
-					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
