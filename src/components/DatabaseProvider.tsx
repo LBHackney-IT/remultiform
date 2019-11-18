@@ -47,6 +47,43 @@ interface DatabaseProviderState<
  * This will wait for the database to finish opening on mount. Until
  * {@link DatabaseProviderProps.openDatabaseOrPromise} settles, the
  * {@link DatabaseContext} will store `undefined`, the default value.
+ *
+ * **Important!** You will need to ensure the database closes itself if you ever
+ * need to change {@link DatabaseProviderProps.openDatabaseOrPromise}, or if you
+ * unmount this component. If either of those things happen, this component
+ * will **throw an exception**, (unless unmounting after an error). It is
+ * therefore recommended that this component is contained within an error
+ * boundary that handles exceptions gracefully, probably calling
+ * {@link Database.close}.
+ *
+ * ```js
+ * const DBContext = new DatabaseContext();
+ * const databasePromise = Database.open("myDatabaseWithAnError");
+ *
+ * class Component extends React.Component {
+ *   static getDerivedStateFromError(error) {
+ *     return { error };
+ *   }
+ *
+ *   state = {};
+ *
+ *   render() {
+ *     const { error } = this.state;
+ *
+ *     if (error) {
+ *       return <span>Something went wrong!</span>
+ *     }
+ *
+ *     return (
+ *       <DatabaseProvider
+ *         context={DBContext}
+ *         openDatabaseOrPromise={databasePromise}
+ *       >
+ *         <span>Some content that relies on the database.</span>
+ *       </DatabaseProvider>
+ *   }
+ * }
+ * ```
  */
 export class DatabaseProvider<
   DB extends Database<NamedSchema<string, Schema>>
@@ -104,11 +141,27 @@ export class DatabaseProvider<
   /**
    * @ignore
    */
-  componentDidUpdate(): void {
+  componentDidUpdate(prevProps: Readonly<DatabaseProviderProps<DB>>): void {
     const { error } = this.state;
 
     if (error) {
       throw error;
+    }
+
+    const updatedDatabase = (Object.keys(
+      prevProps
+    ) as (keyof typeof prevProps)[]).some(
+      propName =>
+        propName === "openDatabaseOrPromise" &&
+        prevProps[propName] !== this.props[propName]
+    );
+
+    if (updatedDatabase) {
+      this.setState({
+        error: new Error(
+          "Updating the openDatabaseOrPromise prop of a DatabaseProvider is unsupported"
+        )
+      });
     }
   }
 

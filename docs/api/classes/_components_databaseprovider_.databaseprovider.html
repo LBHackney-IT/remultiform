@@ -77,6 +77,39 @@
 					<p>This will wait for the database to finish opening on mount. Until
 						<a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html#opendatabaseorpromise">DatabaseProviderProps.openDatabaseOrPromise</a> settles, the
 					<a href="_helpers_databasecontext_.databasecontext.html">DatabaseContext</a> will store <code>undefined</code>, the default value.</p>
+					<p><strong>Important!</strong> You will need to ensure the database closes itself if you ever
+						need to change <a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html#opendatabaseorpromise">DatabaseProviderProps.openDatabaseOrPromise</a>, or if you
+						unmount this component. If either of those things happen, this component
+						will <strong>throw an exception</strong>, (unless unmounting after an error). It is
+						therefore recommended that this component is contained within an error
+						boundary that handles exceptions gracefully, probably calling
+					<a href="_store_database_.database.html#close">Database.close</a>.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext();
+<span class="hljs-keyword">const</span> databasePromise = Database.open(<span class="hljs-string">"myDatabaseWithAnError"</span>);
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">static</span> getDerivedStateFromError(error) {
+    <span class="hljs-keyword">return</span> { error };
+  }
+
+  state = {};
+
+  render() {
+    <span class="hljs-keyword">const</span> { error } = <span class="hljs-keyword">this</span>.state;
+
+    <span class="hljs-keyword">if</span> (error) {
+      <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Something went wrong!<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
+    }
+
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DatabaseProvider</span>
+        <span class="hljs-attr">context</span>=<span class="hljs-string">{DBContext}</span>
+        <span class="hljs-attr">openDatabaseOrPromise</span>=<span class="hljs-string">{databasePromise}</span>
+      &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Some content that relies on the database.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">DatabaseProvider</span>&gt;</span></span>
+  }
+}</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
@@ -750,7 +783,7 @@ class Foo extends React.Component {
 					<div class="tsd-signature tsd-kind-icon">prop<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L58">src/components/DatabaseProvider.tsx:58</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L95">src/components/DatabaseProvider.tsx:95</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -759,7 +792,7 @@ class Foo extends React.Component {
 						<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReactElementLike</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReactNodeArray</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.node.isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L69">src/components/DatabaseProvider.tsx:69</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L106">src/components/DatabaseProvider.tsx:106</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -769,7 +802,7 @@ class Foo extends React.Component {
 						<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.instanceOf(DatabaseContext).isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L68">src/components/DatabaseProvider.tsx:68</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L105">src/components/DatabaseProvider.tsx:105</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -779,7 +812,7 @@ class Foo extends React.Component {
 						<div class="tsd-signature tsd-kind-icon">open<wbr>Database<wbr>OrPromise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.oneOfType([PropTypes.instanceOf(Database).isRequired,PropTypes.instanceOf&lt;Promise&lt;Database&lt;NamedSchema&lt;string, Schema&gt;&gt;&gt;&gt;(Promise).isRequired]).isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L61">src/components/DatabaseProvider.tsx:61</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L98">src/components/DatabaseProvider.tsx:98</a></li>
 							</ul>
 						</aside>
 					</section>
