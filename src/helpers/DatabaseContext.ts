@@ -8,7 +8,7 @@ import { NamedSchema, Schema } from "../store/types";
  * {@link PageComponentWrapper|PageComponentWrappers}.
  *
  * Normally, you use this by creating an instance somewhere and sharing it
- * between components via {@link DatabaseProvider}.
+ * between components via {@link DatabaseProvider} and {@link useDatabase}.
  *
  * ```ts
  * type DBSchema = NamedSchema<

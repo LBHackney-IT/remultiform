@@ -16,17 +16,17 @@ made.**
 
 ### Installation
 
-Install the package from NPM in the usual way. Remultiform supports React 16 or
-newer. You will need to install it as a peer dependency.
+Install the package from NPM in the usual way. Remultiform supports React 16.8
+or newer. You will need to install it as a peer dependency.
 
 ```sh
-npm install remultiform react@">=16"
+npm install remultiform react@">=16.8"
 ```
 
 or
 
 ```sh
-yarn add remultiform react@">=16"
+yarn add remultiform react@">=16.8"
 ```
 
 ### Usage

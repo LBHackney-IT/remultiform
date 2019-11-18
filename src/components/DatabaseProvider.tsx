@@ -26,7 +26,9 @@ export interface DatabaseProviderProps<
    * Child components of this provider.
    *
    * Anything that needs a {@link Database} to function should be contained
-   * withing this subtree.
+   * withing this subtree. Use {@link useDatabase} with
+   * {@link DatabaseProviderProps.context} to access the {@link Database} from
+   * within those components.
    */
   children: React.ReactNode;
 }

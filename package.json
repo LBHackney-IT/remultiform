@@ -30,7 +30,7 @@
     "prepare": "npm run build"
   },
   "peerDependencies": {
-    "react": ">= 16"
+    "react": ">= 16.8"
   },
   "dependencies": {
     "idb": "^4.0.5",
