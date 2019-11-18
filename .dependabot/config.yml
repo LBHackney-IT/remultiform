@@ -2,7 +2,7 @@ version: 1
 update_configs:
   - package_manager: javascript
     directory: /
-    update_schedule: live
+    update_schedule: daily
     allowed_updates:
       - match:
           dependency_type: all
@@ -15,7 +15,7 @@ update_configs:
 
   - package_manager: javascript
     directory: /examples/next-kittens/
-    update_schedule: live
+    update_schedule: weekly
     allowed_updates:
       - match:
           dependency_type: all
