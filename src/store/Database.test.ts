@@ -364,6 +364,17 @@ describe(".open()", () => {
   });
 });
 
+describe("#name", () => {
+  it("matches the name of the provided database", () => {
+    const database = new Database<TestSchema>({
+      ...jest.fn()(),
+      name: testDBName
+    });
+
+    expect(database.name).toEqual(testDBName);
+  });
+});
+
 describe("#put()", () => {
   beforeEach(async () => {
     await createDBWithStore();
