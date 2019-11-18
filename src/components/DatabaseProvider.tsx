@@ -116,8 +116,12 @@ export class DatabaseProvider<
    * @ignore
    */
   render(): JSX.Element {
-    const { context, children } = this.props;
-    const { database } = this.state;
+    const { openDatabaseOrPromise, context, children } = this.props;
+    let { database } = this.state;
+
+    if (!database && openDatabaseOrPromise instanceof Database) {
+      database = openDatabaseOrPromise;
+    }
 
     return (
       <context.context.Provider value={database}>

@@ -28,6 +28,18 @@ beforeEach(() => {
   databseOpenSpy = spyOnDatabaseOpen();
 });
 
+it("renders correctly with a resolved database", async () => {
+  const database = await Database.open("testDBName");
+
+  const component = create(
+    <DatabaseProvider context={DBContext} openDatabaseOrPromise={database}>
+      <TestDatabaseConsumer context={DBContext} />
+    </DatabaseProvider>
+  );
+
+  expect(component).toMatchSnapshot();
+});
+
 it("renders correctly before the database resolves", () => {
   const databasePromise = Database.open("testDBName");
 

@@ -13,6 +13,13 @@ exports[`renders correctly before the database resolves 1`] = `
 </span>
 `;
 
+exports[`renders correctly with a resolved database 1`] = `
+<span>
+  Database name: 
+  testDBName
+</span>
+`;
+
 exports[`throws if the database rejects 1`] = `
 Array [
   Array [
