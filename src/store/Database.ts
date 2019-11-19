@@ -16,7 +16,7 @@ import {
 /**
  * Possible modes for transactions created by {@link Database.transaction}.
  */
-export const enum TransactionMode {
+export enum TransactionMode {
   ReadOnly = "readonly",
   ReadWrite = "readwrite"
 }
