@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly after the database resolves 1`] = `
+<span>
+  Database name: 
+  testDBName
+</span>
+`;
+
+exports[`renders correctly before the database resolves 1`] = `
+<span>
+  No database
+</span>
+`;
+
+exports[`renders correctly when changing children 1`] = `
+<div>
+  Updated test content
+</div>
+`;
+
+exports[`renders correctly when changing non-\`openDatabaseOrPromise\` and non-children props 1`] = `
+<span>
+  Test content
+</span>
+`;
+
+exports[`renders correctly with a resolved database 1`] = `
+<span>
+  Database name: 
+  testDBName
+</span>
+`;
+
+exports[`throws if the database rejects 1`] = `
+Array [
+  Array [
+    "Error: Uncaught [Error: test error]
+    at reportException (<rootDir>/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at invokeEventListeners (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:209:9)
+    at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:119:9)
+    at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:82:17)
+    at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/nodes/HTMLElement-impl.js:30:27)
+    at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:157:21)
+    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
+    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
+    at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15092:9)
+    at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:697:12)",
+    [Error: test error],
+  ],
+  Array [
+    "The above error occurred in the <DatabaseProvider> component:
+    in DatabaseProvider
+    in TestErrorBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+  ],
+]
+`;
+
+exports[`throws if the database rejects 2`] = `
+<span>
+  Caught error: 
+  Error: test error
+</span>
+`;
+
+exports[`throws when changing the \`openDatabaseOrPromise\` prop 1`] = `
+Array [
+  Array [
+    "Error: Uncaught [Error: Updating the openDatabaseOrPromise prop of a DatabaseProvider is unsupported]
+    at reportException (<rootDir>/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at invokeEventListeners (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:209:9)
+    at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:119:9)
+    at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:82:17)
+    at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/nodes/HTMLElement-impl.js:30:27)
+    at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:157:21)
+    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
+    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
+    at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15092:9)
+    at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:697:12)",
+    [Error: Updating the openDatabaseOrPromise prop of a DatabaseProvider is unsupported],
+  ],
+  Array [
+    "The above error occurred in the <DatabaseProvider> component:
+    in DatabaseProvider (created by Wrapper)
+    in TestErrorBoundary (created by Wrapper)
+    in Wrapper
+
+React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+  ],
+]
+`;
+
+exports[`throws when changing the \`openDatabaseOrPromise\` prop 2`] = `
+<span>
+  Caught error: 
+  Error: Updating the openDatabaseOrPromise prop of a DatabaseProvider is unsupported
+</span>
+`;

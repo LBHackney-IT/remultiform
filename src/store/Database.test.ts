@@ -1,6 +1,7 @@
 import { IDBPDatabase, deleteDB } from "idb";
 
 import { expectPromise } from "../__tests__/helpers/expect";
+import { spyOnConsoleError } from "../__tests__/helpers/spies";
 
 import { Database, TransactionMode } from "./Database";
 import { NamedSchema } from "./types";
@@ -287,7 +288,7 @@ describe(".open()", () => {
       const initialVersion = 5;
       const currentVersion = 7;
       const error = new Error("test error");
-      const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+      const consoleErrorSpy = spyOnConsoleError();
 
       initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
         blocking() {
@@ -301,15 +302,15 @@ describe(".open()", () => {
         `Opening ${testDBName} is blocked by an existing connection with a different version`
       );
 
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(error);
+      expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(error);
     });
 
     it("returns a database instance when opening a new instance of a database with a later schema version while the old instance has a blocking callback that throws when called after resolving the block", async () => {
       const initialVersion = 5;
       const currentVersion = 7;
       const error = new Error("test error");
-      const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+      const consoleErrorSpy = spyOnConsoleError();
 
       initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
         blocking() {
@@ -323,8 +324,8 @@ describe(".open()", () => {
 
       expect(db).toBeInstanceOf(Database);
 
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(error);
+      expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(error);
     });
 
     it("returns a database instance when opening a new instance of a database with a later schema version while the old instance has auto-close on blocking turned on", async () => {
@@ -344,7 +345,7 @@ describe(".open()", () => {
       const initialVersion = 5;
       const currentVersion = 7;
       const error = new Error("test error");
-      const spy = jest.spyOn(console, "error").mockImplementation(() => {});
+      const consoleErrorSpy = spyOnConsoleError();
 
       initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
         blocking() {
@@ -357,9 +358,20 @@ describe(".open()", () => {
 
       expect(db).toBeInstanceOf(Database);
 
-      expect(spy).toHaveBeenCalledTimes(1);
-      expect(spy).toHaveBeenCalledWith(error);
+      expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(error);
     });
+  });
+});
+
+describe("#name", () => {
+  it("matches the name of the provided database", () => {
+    const database = new Database<TestSchema>({
+      ...jest.fn()(),
+      name: testDBName
+    });
+
+    expect(database.name).toEqual(testDBName);
   });
 });
 

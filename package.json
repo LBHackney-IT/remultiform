@@ -30,7 +30,7 @@
     "prepare": "npm run build"
   },
   "peerDependencies": {
-    "react": ">= 16"
+    "react": ">= 16.8"
   },
   "dependencies": {
     "idb": "^4.0.5",
@@ -72,7 +72,7 @@
     "rollup-plugin-typescript2": "^0.25.2",
     "ts-jest": "^24.1.0",
     "tslib": "^1.10.0",
-    "typedoc": "^0.15.1",
+    "typedoc": "^0.15.2",
     "typescript": "^3.7.2"
   },
   "husky": {

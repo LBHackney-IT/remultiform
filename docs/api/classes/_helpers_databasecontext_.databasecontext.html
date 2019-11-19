@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;store/Database&quot; | LBH Frontend React</title>
+	<title>DatabaseContext | LBH Frontend React</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,33 +56,91 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_store_database_.html">&quot;store/Database&quot;</a>
+					<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/DatabaseContext&quot;</a>
+				</li>
+				<li>
+					<a href="_helpers_databasecontext_.databasecontext.html">DatabaseContext</a>
 				</li>
 			</ul>
-			<h1>External module &quot;store/Database&quot;</h1>
+			<h1>Class DatabaseContext&lt;DB&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A React context for passing a database connection to
+						<a href="../interfaces/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a>.</p>
+					</div>
+					<p>Normally, you use this by creating an instance somewhere and sharing it
+					between components via <a href="_components_databaseprovider_.databaseprovider.html">DatabaseProvider</a> and <a href="../modules/_hooks_usedatabase_.html#usedatabase">useDatabase</a>.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">type</span> DBSchema = NamedSchema&lt;
+  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
+  {
+    favouriteColour: {
+      key: <span class="hljs-built_in">string</span>;
+      value: {
+        r: <span class="hljs-built_in">number</span>;
+        g: <span class="hljs-built_in">number</span>;
+        b: <span class="hljs-built_in">number</span>;
+      };
+    };
+  }
+&gt;;
+
+<span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext&lt;Database&lt;DBSchema&gt;&gt;();</code></pre>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>DB<span class="tsd-signature-symbol">: </span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DatabaseContext</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumerations</h3>
+							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum tsd-parent-kind-external-module"><a href="../enums/_store_database_.transactionmode.html" class="tsd-kind-icon">Transaction<wbr>Mode</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../classes/_store_database_.database.html" class="tsd-kind-icon">Database</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_helpers_databasecontext_.databasecontext.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Context<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L39">src/helpers/DatabaseContext.ts:39</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -93,45 +151,51 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_components_databaseprovider_.html">&quot;components/<wbr>Database<wbr>Provider&quot;</a>
+						<a href="../modules/_components_databaseprovider_.html">&quot;components/<wbr>Database<wbr>Provider&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_components_orchestrator_.html">&quot;components/<wbr>Orchestrator&quot;</a>
+						<a href="../modules/_components_orchestrator_.html">&quot;components/<wbr>Orchestrator&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_components_page_.html">&quot;components/<wbr>Page&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_hooks_usedatabase_.html">&quot;hooks/use<wbr>Database&quot;</a>
+						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_store_database_.html">&quot;store/<wbr>Database&quot;</a>
+						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_store_openoptions_.html">&quot;store/<wbr>Open<wbr>Options&quot;</a>
+						<a href="../modules/_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_store_upgrade_.html">&quot;store/<wbr>Upgrade&quot;</a>
+						<a href="../modules/_hooks_usedatabase_.html">&quot;hooks/use<wbr>Database&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_store_types_.html">&quot;store/types&quot;</a>
+						<a href="../modules/_store_database_.html">&quot;store/<wbr>Database&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_store_openoptions_.html">&quot;store/<wbr>Open<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_store_upgrade_.html">&quot;store/<wbr>Upgrade&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_store_types_.html">&quot;store/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_store_database_.transactionmode.html" class="tsd-kind-icon">Transaction<wbr>Mode</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_helpers_databasecontext_.databasecontext.html" class="tsd-kind-icon">Database<wbr>Context</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_helpers_databasecontext_.databasecontext.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../classes/_store_database_.database.html" class="tsd-kind-icon">Database</a>
-					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>

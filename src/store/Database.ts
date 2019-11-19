@@ -81,10 +81,23 @@ export class Database<
     return new Database(db);
   }
 
+  /**
+   * The name of the IndexedDB database.
+   */
+  readonly name: string;
+
   private readonly db: IDBPDatabase<DBSchema>;
 
-  private constructor(db: IDBPDatabase<DBSchema>) {
+  /**
+   * Do not use this directly. Use {@link Database.open} to create a new
+   * {@link Database}.
+   *
+   * @ignore
+   */
+  constructor(db: IDBPDatabase<DBSchema>) {
     this.db = db;
+
+    this.name = this.db.name;
   }
 
   /**

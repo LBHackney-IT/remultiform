@@ -15,3 +15,5 @@ and this project adheres to
 - `Orchestrator` to orchestrate rendering the appropriate `Page`
 - `next-kittens` example
 - IndexedDB store wrappers
+- `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing database
+  to components via context
