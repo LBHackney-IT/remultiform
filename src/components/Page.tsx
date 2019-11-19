@@ -1,4 +1,4 @@
-import PropTypes, { ValidationMap } from "prop-types";
+import PropTypes from "prop-types";
 import React from "react";
 
 import {
@@ -6,19 +6,49 @@ import {
   pageComponentWrapperPropType
 } from "../helpers/PageComponentWrapper";
 
+/**
+ * The proptypes for {@link Page}.
+ *
+ * ```ts
+ * const pageProps: PageProps = {
+ *   componentWrappers: [
+ *     wrapPageComponent({
+ *       key: "my-image",
+ *       Component: "img",
+ *       props: {
+ *         src: "/path/to/my.png"
+ *       }
+ *     }),
+ *     wrapPageComponent({
+ *       key: "my-input",
+ *       Component: MyInput,
+ *       props: {
+ *         defaultValue: "Enter something?"
+ *       }
+ *     })
+ *   ]
+ * };
+ * ```
+ */
 export interface PageProps {
+  /**
+   * An ordered array of wrapped components to display on the page.
+   *
+   * Create {@link PageComponentWrapper|PageComponentWrappers} with
+   * {@link wrapPageComponent}.
+   */
   componentWrappers: PageComponentWrapper[];
 }
 
-export class Page extends React.Component<PageProps> {
-  static propTypes: ValidationMap<PageProps> = {
-    componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType)
-      .isRequired
-  };
+/**
+ * A component for rendering a page of a multipage form.
+ */
+export const Page: React.FunctionComponent<PageProps> = (props: PageProps) => {
+  const { componentWrappers } = props;
 
-  render(): JSX.Element {
-    const { componentWrappers } = this.props;
+  return <>{componentWrappers.map(({ key, render }) => render(key))}</>;
+};
 
-    return <>{componentWrappers.map(({ key, render }) => render(key))}</>;
-  }
-}
+Page.propTypes = {
+  componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType).isRequired
+};

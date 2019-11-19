@@ -1,10 +1,10 @@
 import { Step } from "../../components/Orchestrator";
 import { wrapPageComponent } from "../../helpers/PageComponentWrapper";
 
-import TestClassComponent from "../components/TestClassComponent";
-import TestFunctionComponent from "../components/TestFunctionComponent";
+import { TestClassComponent } from "../components/TestClassComponent";
+import { TestFunctionComponent } from "../components/TestFunctionComponent";
 
-const multiStepForm: { steps: Step[] } = {
+export const multiStepForm: { steps: Step[] } = {
   steps: [
     {
       key: "test-step-1",
@@ -44,5 +44,3 @@ const multiStepForm: { steps: Step[] } = {
     }
   ]
 };
-
-export default multiStepForm;

@@ -29,6 +29,11 @@ or
 yarn add remultiform react@">=16"
 ```
 
+### Usage
+
+See the [documentation website](https://lbhackney-it.github.io/remultiform/api/)
+(generated with [TypeDoc](https://typedoc.org/)).
+
 ## For contributors
 
 ### Running the tests
@@ -84,6 +89,29 @@ fixing any issues and updating snapshots:
 ```bash
 npm run test:update
 ```
+
+### Documenting the code
+
+We use [TypeDoc](https://typedoc.org/) to generate our documentation website
+from the types and comments in our code. We use GitHub pages to
+[host that site](https://lbhackney-it.github.io/remultiform/api/).
+
+TypeDoc has a syntax similar to that of [JSDoc](https://jsdoc.app/), but unlike
+with JSDoc, we shouldn't specify types or label every property or argument, as
+they are generated from the TypeScript directly. See
+[here](https://typedoc.org/guides/doccomments/) for the syntax supported by
+TypeDoc.
+
+Documentation is generated as part of the build step (which you should be doing
+after making any changes to types or comments), but to regenerate the
+documentation on its own:
+
+```sh
+npm run build:docs
+```
+
+You can (and should) test the output by opening `docs/api/index.html` from your
+local filesystem in your browser and commit it alongside the changes.
 
 ### Formatting the code
 

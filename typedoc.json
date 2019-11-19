@@ -1,0 +1,19 @@
+{
+  "exclude": [
+    "src/index.ts",
+    "**/node_modules/**/*",
+    "**/__*__/**/*",
+    "**/*.spec.*",
+    "**/*.test.*",
+    "**/*.setup.*",
+    "**/*.internal.*"
+  ],
+  "excludePrivate": true,
+  "gitRevision": "master",
+  "includeDeclarations": true,
+  "listInvalidSymbolLinks": true,
+  "mode": "modules",
+  "name": "LBH Frontend React",
+  "out": "docs/api/",
+  "theme": "default"
+}

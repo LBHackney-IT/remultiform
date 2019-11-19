@@ -8,10 +8,14 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: npm ci
+          command: |
+            npm ci
+            bin/ci/check-git
       - run:
           name: Run Tests
-          command: npm test
+          command: |
+            npm test
+            bin/ci/check-git
 
 workflows:
   ci:
