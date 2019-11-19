@@ -1,0 +1,23 @@
+# The people in this file are **not** responsible for reviewing this code.
+# That falls to the people working on it directly. These people are here to
+# explicitly notify them, to keep them informed of what's happening to this
+# repository.
+
+# The default, matching to all changes, overriden by any later rules.
+*             @erbridge @CJWaszczuk
+
+# Any changes in the root of the repository.
+/*            @erbridge @CJWaszczuk @LBHELewis
+
+# Any changes in a directory starting with `.` in the root of the repository.
+/.*/          @LBHackney-IT/mat-developers @LBHELewis
+
+/docs/        @erbridge @CJWaszczuk @LBHELewis
+/docs/adr/    @LBHackney-IT/mat-developers @LBHELewis
+
+/src/         @LBHackney-IT/mat-developers @LBHELewis
+/examples/    @LBHackney-IT/mat-developers @LBHELewis
+
+# We disable these to reduce noise from Dependabot.
+package.json
+package-lock.json

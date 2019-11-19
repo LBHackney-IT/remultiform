@@ -142,6 +142,13 @@ To run the linter in fix mode:
 npm run lint:fix
 ```
 
+We can also check that all files (except `package.json` and `package-lock.json`
+because Dependabot can get very noisy) have code owners:
+
+```sh
+npm run lint:codeowners
+```
+
 ## Architecture decision records
 
 We use ADRs to document architecture decisions that we make. They can be found
