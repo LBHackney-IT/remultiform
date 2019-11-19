@@ -13,6 +13,9 @@ if [[ $CHANGED_FILES ]]; then
   echo "$CHANGED_FILES"
   echo
   echo "We expected this to be a clean run."
+  echo
+
+  git diff
 
   exit 1
 fi
