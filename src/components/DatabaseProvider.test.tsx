@@ -205,7 +205,7 @@ it("renders correctly when changing non-`openDatabaseOrPromise` and non-children
   const Wrapper = ({
     context
   }: {
-    context: DatabaseContext<typeof database>;
+    context: DatabaseContext<NamedSchema<"testDBName", {}>>;
   }): JSX.Element => (
     <DatabaseProvider context={context} openDatabaseOrPromise={database}>
       <span>Test content</span>

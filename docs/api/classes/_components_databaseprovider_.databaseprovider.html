@@ -62,7 +62,7 @@
 					<a href="_components_databaseprovider_.databaseprovider.html">DatabaseProvider</a>
 				</li>
 			</ul>
-			<h1>Class DatabaseProvider&lt;DB&gt;</h1>
+			<h1>Class DatabaseProvider&lt;DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -116,7 +116,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>DB<span class="tsd-signature-symbol">: </span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -124,7 +124,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">Component</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">&gt;</span>
+						<span class="tsd-signature-type">Component</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">DatabaseProvider</span>
@@ -183,8 +183,8 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -197,7 +197,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>props: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>props: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_components_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></h4>
@@ -221,7 +221,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>props: <a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>props: <a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
@@ -265,7 +265,7 @@ context!: React.ContextType&lt;<span class="hljs-keyword">typeof</span> MyContex
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="props" class="tsd-anchor"></a>
 					<h3>props</h3>
-					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from Component.props</p>
 						<ul>
@@ -376,7 +376,7 @@ class Foo extends React.Component {
 					<a name="unsafe_componentwillreceiveprops" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -411,7 +411,7 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -425,7 +425,7 @@ class Foo extends React.Component {
 					<a name="unsafe_componentwillupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> UNSAFE_<wbr>component<wbr>Will<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -458,10 +458,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -545,7 +545,7 @@ class Foo extends React.Component {
 					<a name="componentwillreceiveprops" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Will<wbr>Receive<wbr>Props</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -579,7 +579,7 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -593,7 +593,7 @@ class Foo extends React.Component {
 					<a name="componentwillupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Will<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -625,10 +625,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -666,7 +666,7 @@ class Foo extends React.Component {
 					<a name="getsnapshotbeforeupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> get<wbr>Snapshot<wbr>Before<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update<span class="tsd-signature-symbol">(</span>prevProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, prevState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update<span class="tsd-signature-symbol">(</span>prevProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, prevState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -688,10 +688,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>prevProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>prevProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>prevState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>prevState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">never</span>
@@ -718,7 +718,7 @@ class Foo extends React.Component {
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof DatabaseProviderState&lt;DB&gt;</span></h4>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof DatabaseProviderState&lt;DBSchema&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -738,7 +738,7 @@ class Foo extends React.Component {
 					<a name="shouldcomponentupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> should<wbr>Component<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">should<wbr>Component<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">should<wbr>Component<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -761,10 +761,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DB</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_databaseprovider_.databaseproviderstate.html" class="tsd-signature-type">DatabaseProviderState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -783,7 +783,7 @@ class Foo extends React.Component {
 					<div class="tsd-signature tsd-kind-icon">prop<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L95">src/components/DatabaseProvider.tsx:95</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L93">src/components/DatabaseProvider.tsx:93</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
@@ -792,17 +792,17 @@ class Foo extends React.Component {
 						<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReactElementLike</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReactNodeArray</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.node.isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L106">src/components/DatabaseProvider.tsx:106</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L104">src/components/DatabaseProvider.tsx:104</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="proptypes.context-1" class="tsd-anchor"></a>
 						<h3>context</h3>
-						<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.instanceOf(DatabaseContext).isRequired</span></div>
+						<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.instanceOf(DatabaseContext).isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L105">src/components/DatabaseProvider.tsx:105</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L103">src/components/DatabaseProvider.tsx:103</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -812,7 +812,7 @@ class Foo extends React.Component {
 						<div class="tsd-signature tsd-kind-icon">open<wbr>Database<wbr>OrPromise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.oneOfType([PropTypes.instanceOf(Database).isRequired,PropTypes.instanceOf&lt;Promise&lt;Database&lt;NamedSchema&lt;string, Schema&gt;&gt;&gt;&gt;(Promise).isRequired]).isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L98">src/components/DatabaseProvider.tsx:98</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/DatabaseProvider.tsx#L96">src/components/DatabaseProvider.tsx:96</a></li>
 							</ul>
 						</aside>
 					</section>

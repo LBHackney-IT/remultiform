@@ -25,20 +25,20 @@ import { NamedSchema, Schema } from "../store/types";
  *   }
  * >;
  *
- * const DBContext = new DatabaseContext<Database<DBSchema>>();
+ * const DBContext = new DatabaseContext<DBSchema>();
  * ```
  */
 // This class exists to make it easier to enforce types in other parts of the
 // library.
-export class DatabaseContext<DB extends Database<NamedSchema<string, Schema>>> {
+export class DatabaseContext<DBSchema extends NamedSchema<string, Schema>> {
   /**
    * The React context itself.
    *
    * @ignore
    */
-  readonly context: React.Context<DB | undefined>;
+  readonly context: React.Context<Database<DBSchema> | undefined>;
 
   constructor() {
-    this.context = createContext<DB | undefined>(undefined);
+    this.context = createContext<Database<DBSchema> | undefined>(undefined);
   }
 }

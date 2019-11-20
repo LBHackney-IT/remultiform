@@ -1,21 +1,18 @@
 import React, { useContext } from "react";
 
 import { DatabaseContext } from "../../helpers/DatabaseContext";
-import { Database } from "../../store/Database";
 import { NamedSchema, Schema } from "../../store/types";
 
 export interface TestDatabaseConsumerProps<
-  DB extends Database<NamedSchema<string, Schema>> = Database<
-    NamedSchema<string, Schema>
-  >
+  DBSchema extends NamedSchema<string, Schema> = NamedSchema<string, Schema>
 > {
-  context: DatabaseContext<DB>;
+  context: DatabaseContext<DBSchema>;
 }
 
 export const TestDatabaseConsumer: React.FunctionComponent<TestDatabaseConsumerProps> = <
-  DB extends Database<NamedSchema<string, Schema>>
+  DBSchema extends NamedSchema<string, Schema>
 >(
-  props: TestDatabaseConsumerProps<DB>
+  props: TestDatabaseConsumerProps<DBSchema>
 ): JSX.Element => {
   const { context } = props;
 

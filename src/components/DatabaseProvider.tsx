@@ -10,7 +10,7 @@ import { NamedSchema, Schema } from "../store/types";
  * The proptypes for {@link DatabaseProvider}.
  */
 export interface DatabaseProviderProps<
-  DB extends Database<NamedSchema<string, Schema>>
+  DBSchema extends NamedSchema<string, Schema>
 > {
   /**
    * An open {@link Database} or a promise that will resolve to an one.
@@ -18,9 +18,9 @@ export interface DatabaseProviderProps<
    * Normally, you would want to pass the return value of {@link Database.open}
    * in here directly.
    */
-  openDatabaseOrPromise: DB | Promise<DB>;
+  openDatabaseOrPromise: Database<DBSchema> | Promise<Database<DBSchema>>;
 
-  context: DatabaseContext<DB>;
+  context: DatabaseContext<DBSchema>;
 
   /**
    * Child components of this provider.
@@ -33,10 +33,8 @@ export interface DatabaseProviderProps<
   children: React.ReactNode;
 }
 
-interface DatabaseProviderState<
-  DB extends Database<NamedSchema<string, Schema>>
-> {
-  database?: DB;
+interface DatabaseProviderState<DBSchema extends NamedSchema<string, Schema>> {
+  database?: Database<DBSchema>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
@@ -86,14 +84,14 @@ interface DatabaseProviderState<
  * ```
  */
 export class DatabaseProvider<
-  DB extends Database<NamedSchema<string, Schema>>
+  DBSchema extends NamedSchema<string, Schema>
 > extends React.Component<
-  DatabaseProviderProps<DB>,
-  DatabaseProviderState<DB>,
+  DatabaseProviderProps<DBSchema>,
+  DatabaseProviderState<DBSchema>,
   never
 > {
   static propTypes: PropTypes.ValidationMap<
-    DatabaseProviderProps<Database<NamedSchema<string, Schema>>>
+    DatabaseProviderProps<NamedSchema<string, Schema>>
   > = {
     openDatabaseOrPromise: PropTypes.oneOfType([
       PropTypes.instanceOf(Database).isRequired,
@@ -109,7 +107,7 @@ export class DatabaseProvider<
   /**
    * @ignore
    */
-  state: DatabaseProviderState<DB> = {};
+  state: DatabaseProviderState<DBSchema> = {};
 
   private isUnmounted = true;
 
@@ -121,14 +119,14 @@ export class DatabaseProvider<
 
     const { openDatabaseOrPromise } = this.props;
 
-    const stateUpdate: Partial<DatabaseProviderState<DB>> = {};
+    const stateUpdate: Partial<DatabaseProviderState<DBSchema>> = {};
 
     try {
       const database = await openDatabaseOrPromise;
 
       stateUpdate.database = database;
-    } catch (error) {
-      stateUpdate.error = error;
+    } catch (err) {
+      stateUpdate.error = err;
     }
 
     if (this.isUnmounted) {
@@ -141,7 +139,9 @@ export class DatabaseProvider<
   /**
    * @ignore
    */
-  componentDidUpdate(prevProps: Readonly<DatabaseProviderProps<DB>>): void {
+  componentDidUpdate(
+    prevProps: Readonly<DatabaseProviderProps<DBSchema>>
+  ): void {
     const { error } = this.state;
 
     if (error) {
