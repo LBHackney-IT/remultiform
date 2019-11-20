@@ -113,16 +113,15 @@ export class Database<
 
   /**
    * Get a value from a store.
+   *
+   * Resolves to `undefined` if no value exists for the given key in the given
+   * store.
    */
   async get<DBStoreName extends StoreNames<DBSchema>>(
     storeName: DBStoreName,
     key: StoreKey<DBSchema, DBStoreName>
-  ): Promise<StoreValue<DBSchema, DBStoreName> | void> {
-    const value = await this.db.get(storeName, key);
-
-    if (value !== undefined) {
-      return value;
-    }
+  ): Promise<StoreValue<DBSchema, DBStoreName> | undefined> {
+    return this.db.get(storeName, key);
   }
 
   /**
