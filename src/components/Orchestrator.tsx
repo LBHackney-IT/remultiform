@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  PageComponentWrapper,
-  pageComponentWrapperPropType
-} from "../helpers/PageComponentWrapper";
+import { PageComponentWrapper } from "../helpers/PageComponentWrapper";
 
 import { Page } from "./Page";
 
@@ -17,14 +14,14 @@ import { Page } from "./Page";
  * const step: Step = {
  *   key: "step-1",
  *   componentWrappers: [
- *     wrapPageComponent({
+ *     PageComponentWrapper.wrap({
  *       key: "my-image",
  *       Component: "img",
  *       props: {
  *         src: "/path/to/my.png"
  *       }
  *     }),
- *     wrapPageComponent({
+ *     PageComponentWrapper.wrap({
  *       key: "my-input",
  *       Component: MyInput,
  *       props: {
@@ -47,7 +44,7 @@ export interface Step {
    * An ordered array of wrapped components to include in this step.
    *
    * Create {@link PageComponentWrapper|PageComponentWrappers} with
-   * {@link wrapPageComponent}.
+   * {@link PageComponentWrapper.wrap}.
    */
   componentWrappers: PageComponentWrapper[];
 }
@@ -80,14 +77,14 @@ export interface OrchestratorProps {
  *         {
  *           key: "step-1",
  *           componentWrappers: [
- *             wrapPageComponent({
+ *             PageComponentWrapper.wrap({
  *               key: "my-image",
  *               Component: "img",
  *               props: {
  *                 src: "/path/to/my.png"
  *               }
  *             }),
- *             wrapPageComponent({
+ *             PageComponentWrapper.wrap({
  *               key: "my-input",
  *               Component: MyInput,
  *               props: {
@@ -99,7 +96,7 @@ export interface OrchestratorProps {
  *         {
  *           key: "step-2",
  *           componentWrappers: [
- *             wrapPageComponent({
+ *             PageComponentWrapper.wrap({
  *               key: "my-input",
  *               Component: MyInput,
  *               props: {
@@ -139,8 +136,9 @@ Orchestrator.propTypes = {
         PropTypes.string.isRequired,
         PropTypes.number.isRequired
       ]).isRequired,
-      componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType)
-        .isRequired
+      componentWrappers: PropTypes.arrayOf(
+        PageComponentWrapper.propType.isRequired
+      ).isRequired
     }).isRequired
   ).isRequired
 };

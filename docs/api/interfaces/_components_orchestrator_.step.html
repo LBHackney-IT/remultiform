@@ -78,14 +78,14 @@
 					<pre><code class="language-ts"><span class="hljs-keyword">const</span> step: Step = {
   key: <span class="hljs-string">"step-1"</span>,
   componentWrappers: [
-    wrapPageComponent({
+    PageComponentWrapper.wrap({
       key: <span class="hljs-string">"my-image"</span>,
       Component: <span class="hljs-string">"img"</span>,
       props: {
         src: <span class="hljs-string">"/path/to/my.png"</span>
       }
     }),
-    wrapPageComponent({
+    PageComponentWrapper.wrap({
       key: <span class="hljs-string">"my-input"</span>,
       Component: MyInput,
       props: {
@@ -123,18 +123,18 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="componentwrappers" class="tsd-anchor"></a>
 					<h3>component<wbr>Wrappers</h3>
-					<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <a href="_helpers_pagecomponentwrapper_.pagecomponentwrapper.html" class="tsd-signature-type">PageComponentWrapper</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <a href="../classes/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html" class="tsd-signature-type">PageComponentWrapper</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L52">src/components/Orchestrator.tsx:52</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L49">src/components/Orchestrator.tsx:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>An ordered array of wrapped components to include in this step.</p>
 						</div>
-						<p>Create <a href="_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a> with
-						<a href="../modules/_helpers_pagecomponentwrapper_.html#wrappagecomponent">wrapPageComponent</a>.</p>
+						<p>Create <a href="../classes/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a> with
+						<a href="../classes/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html#wrap">PageComponentWrapper.wrap</a>.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -143,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L44">src/components/Orchestrator.tsx:44</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L41">src/components/Orchestrator.tsx:41</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,6 +172,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_pagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
