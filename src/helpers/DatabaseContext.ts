@@ -30,7 +30,9 @@ import { NamedSchema, Schema } from "../store/types";
  */
 // This class exists to make it easier to enforce types in other parts of the
 // library.
-export class DatabaseContext<DBSchema extends NamedSchema<string, Schema>> {
+export class DatabaseContext<
+  DBSchema extends NamedSchema<string, number, Schema>
+> {
   /**
    * The React context itself.
    *

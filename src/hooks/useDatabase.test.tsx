@@ -28,7 +28,7 @@ it("returns the database from the nearest database context provider", async () =
   expect.hasAssertions();
 
   const DBContext = new DatabaseContext();
-  const db = await Database.open("testDBName");
+  const db = await Database.open("testDBName", 1);
 
   const Tester = (): JSX.Element => {
     const database = useDatabase(DBContext);

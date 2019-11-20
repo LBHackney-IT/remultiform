@@ -12,6 +12,7 @@ const anotherTestStoreName = "anotherTestStore";
 
 type TestSchema = NamedSchema<
   typeof testDBName,
+  number,
   {
     [testStoreName]: {
       key: string;
@@ -666,7 +667,7 @@ describe("#close()", () => {
   });
 
   it("immediately closes the IndexedDB database connection when there are no open transactions", async () => {
-    db = await Database.open<TestSchema>(testDBName);
+    db = await Database.open<TestSchema>(testDBName, 1);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const internalDB = (db as any).db as IDBPDatabase<TestSchema>;
