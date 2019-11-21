@@ -1,10 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {
-  PageComponentWrapper,
-  pageComponentWrapperPropType
-} from "../helpers/PageComponentWrapper";
+import { PageComponentWrapper } from "../helpers/PageComponentWrapper";
 
 /**
  * The proptypes for {@link Page}.
@@ -12,14 +9,14 @@ import {
  * ```ts
  * const pageProps: PageProps = {
  *   componentWrappers: [
- *     wrapPageComponent({
+ *     PageComponentWrapper.wrap({
  *       key: "my-image",
  *       Component: "img",
  *       props: {
  *         src: "/path/to/my.png"
  *       }
  *     }),
- *     wrapPageComponent({
+ *     PageComponentWrapper.wrap({
  *       key: "my-input",
  *       Component: MyInput,
  *       props: {
@@ -35,7 +32,7 @@ export interface PageProps {
    * An ordered array of wrapped components to display on the page.
    *
    * Create {@link PageComponentWrapper|PageComponentWrappers} with
-   * {@link wrapPageComponent}.
+   * {@link PageComponentWrapper.wrap}.
    */
   componentWrappers: PageComponentWrapper[];
 }
@@ -50,5 +47,6 @@ export const Page: React.FunctionComponent<PageProps> = (props: PageProps) => {
 };
 
 Page.propTypes = {
-  componentWrappers: PropTypes.arrayOf(pageComponentWrapperPropType).isRequired
+  componentWrappers: PropTypes.arrayOf(PageComponentWrapper.propType.isRequired)
+    .isRequired
 };

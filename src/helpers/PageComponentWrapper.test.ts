@@ -3,11 +3,47 @@ import { create } from "react-test-renderer";
 import { TestClassComponent } from "../__fixtures__/components/TestClassComponent";
 import { TestFunctionComponent } from "../__fixtures__/components/TestFunctionComponent";
 
-import { wrapPageComponent } from "./PageComponentWrapper";
+import { PageComponentWrapper } from "./PageComponentWrapper";
 
-describe("#render", () => {
+describe(".propType", () => {
+  it("exists", () => {
+    expect(PageComponentWrapper.propType).toBeDefined();
+  });
+});
+
+describe(".wrap()", () => {
+  it("returns an `PageComponentWrapper`", () => {
+    const componentWrapper = PageComponentWrapper.wrap({
+      key: "test-class",
+      Component: TestClassComponent,
+      props: {
+        content: "test class content"
+      }
+    });
+
+    expect(componentWrapper).toBeInstanceOf(PageComponentWrapper);
+  });
+});
+
+describe("#key", () => {
+  it("matches the key provided during construction", () => {
+    const key = "test-key";
+
+    const componentWrapper = PageComponentWrapper.wrap({
+      key,
+      Component: TestClassComponent,
+      props: {
+        content: "test class content"
+      }
+    });
+
+    expect(componentWrapper.key).toEqual(key);
+  });
+});
+
+describe("#render()", () => {
   it("renders correctly for intrinsic elements without providing a key", () => {
-    const componentWrapper = wrapPageComponent({
+    const componentWrapper = PageComponentWrapper.wrap({
       key: "test-function",
       Component: "img",
       props: {
@@ -21,7 +57,7 @@ describe("#render", () => {
   });
 
   it("renders correctly for class components without providing a key", () => {
-    const componentWrapper = wrapPageComponent({
+    const componentWrapper = PageComponentWrapper.wrap({
       key: "test-class",
       Component: TestClassComponent,
       props: {
@@ -35,7 +71,7 @@ describe("#render", () => {
   });
 
   it("renders correctly for function components without providing a key", () => {
-    const componentWrapper = wrapPageComponent({
+    const componentWrapper = PageComponentWrapper.wrap({
       key: "test-function",
       Component: TestFunctionComponent,
       props: {
@@ -49,7 +85,7 @@ describe("#render", () => {
   });
 
   it("renders correctly for intrinsic elements when providing a key", () => {
-    const componentWrapper = wrapPageComponent({
+    const componentWrapper = PageComponentWrapper.wrap({
       key: "test-function",
       Component: "img",
       props: {
@@ -63,7 +99,7 @@ describe("#render", () => {
   });
 
   it("renders correctly for class components when providing a key", () => {
-    const componentWrapper = wrapPageComponent({
+    const componentWrapper = PageComponentWrapper.wrap({
       key: "test-class",
       Component: TestClassComponent,
       props: {
@@ -77,7 +113,7 @@ describe("#render", () => {
   });
 
   it("renders correctly for function components when providing a key", () => {
-    const componentWrapper = wrapPageComponent({
+    const componentWrapper = PageComponentWrapper.wrap({
       key: "test-function",
       Component: TestFunctionComponent,
       props: {
