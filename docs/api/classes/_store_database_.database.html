@@ -170,7 +170,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L160">src/store/Database.ts:160</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L159">src/store/Database.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -189,19 +189,21 @@
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">get&lt;DBStoreName&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBStoreName</span>, key<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get&lt;DBStoreName&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBStoreName</span>, key<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L117">src/store/Database.ts:117</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L120">src/store/Database.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Get a value from a store.</p>
 								</div>
+								<p>Resolves to <code>undefined</code> if no value exists for the given key in the given
+								store.</p>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
@@ -218,7 +220,7 @@
 									<h5>key: <a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -272,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L140">src/store/Database.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L139">src/store/Database.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
