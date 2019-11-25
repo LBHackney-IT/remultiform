@@ -40,7 +40,18 @@ export class DatabaseContext<
    */
   readonly context: React.Context<Database<DBSchema> | undefined>;
 
+  /**
+   * The consumer component for this context.
+   *
+   * Use it to wrap components that need the database in the usual React
+   * consumer way.
+   */
+  readonly Consumer: React.ExoticComponent<
+    React.ConsumerProps<Database<DBSchema> | undefined>
+  >;
+
   constructor() {
     this.context = createContext<Database<DBSchema> | undefined>(undefined);
+    this.Consumer = this.context.Consumer;
   }
 }

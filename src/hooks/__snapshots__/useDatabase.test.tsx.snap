@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with an unsupported React version throws if \`React.useContext\` is undefined 1`] = `
+Array [
+  Array [
+    "The above error occurred in the <Tester> component:
+    in Tester
+    in TestErrorBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+  ],
+]
+`;
+
+exports[`with an unsupported React version throws if \`React.useContext\` is undefined 2`] = `
+<span>
+  Caught error: 
+  TypeError: react_1.default.useContext is not a function
+</span>
+`;
