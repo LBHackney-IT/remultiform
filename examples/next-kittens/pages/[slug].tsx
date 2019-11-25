@@ -1,6 +1,11 @@
 import { NextPageContext } from "next";
 import React, { Component } from "react";
-import { Orchestrator, PageComponentWrapper, Step } from "remultiform";
+import {
+  Orchestrator,
+  PageComponent,
+  PageComponentWrapper,
+  Step
+} from "remultiform";
 
 interface SlugPageProps {
   slug: string;
@@ -10,21 +15,25 @@ const steps: Step[] = [
   {
     key: "small-kitten",
     componentWrappers: [
-      PageComponentWrapper.wrap({
-        key: "image",
-        Component: "img",
-        props: { src: `https://placekitten.com/200/300` }
-      })
+      PageComponentWrapper.wrap(
+        new PageComponent({
+          key: "image",
+          Component: "img",
+          props: { src: `https://placekitten.com/200/300` }
+        })
+      )
     ]
   },
   {
     key: "big-kitten",
     componentWrappers: [
-      PageComponentWrapper.wrap({
-        key: "image",
-        Component: "img",
-        props: { src: `https://placekitten.com/900/600` }
-      })
+      PageComponentWrapper.wrap(
+        new PageComponent({
+          key: "image",
+          Component: "img",
+          props: { src: `https://placekitten.com/900/600` }
+        })
+      )
     ]
   }
 ];
