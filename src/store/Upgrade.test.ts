@@ -1,3 +1,5 @@
+import "fake-indexeddb/auto";
+
 import { IDBPDatabase, deleteDB, openDB } from "idb";
 
 import { expectPromise } from "../__tests__/helpers/expect";
