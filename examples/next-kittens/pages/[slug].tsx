@@ -1,6 +1,6 @@
 import { NextPageContext } from "next";
 import React, { Component } from "react";
-import { Orchestrator, Step, PageComponentWrapper } from "remultiform";
+import { Orchestrator, PageComponentWrapper, Step } from "remultiform";
 
 interface SlugPageProps {
   slug: string;
