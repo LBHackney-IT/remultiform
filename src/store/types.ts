@@ -11,22 +11,22 @@ import {
  *
  * Stores are semantically similar to tables in other databases.
  */
-export interface StoreSchema {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface StoreSchema<Value = any> {
   /**
    * The type of keys used by the store.
    */
-  key: IDBValidKey;
+  key: string | number;
 
   /**
    * The type of values stored in the store.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any;
+  value: Value;
 
   /**
    * A map of any indexes the store has.
    */
-  indexes?: { [indexName: string]: IDBValidKey };
+  indexes?: { [indexName: string]: string | number };
 }
 
 /**
