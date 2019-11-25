@@ -62,7 +62,7 @@
 					<a href="_store_types_.namedschema.html">NamedSchema</a>
 				</li>
 			</ul>
-			<h1>Interface NamedSchema&lt;DBNames, DBSchema&gt;</h1>
+			<h1>Interface NamedSchema&lt;DBNames, Versions, DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -83,6 +83,7 @@
 					<p>See <a href="../classes/_store_database_.database.html#open">Database.open</a> for how to set a database up.</p>
 					<pre><code class="language-ts"><span class="hljs-keyword">type</span> MySchema = NamedSchema&lt;
   <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
+  <span class="hljs-number">3</span>,
   {
     favouriteColour: {
       key: <span class="hljs-built_in">string</span>;
@@ -101,6 +102,9 @@
 				<ul class="tsd-type-parameters">
 					<li>
 						<h4>DBNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+					</li>
+					<li>
+						<h4>Versions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h4>
 					</li>
 					<li>
 						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
@@ -124,6 +128,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#dbnames" class="tsd-kind-icon">db<wbr>Names</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#schema" class="tsd-kind-icon">schema</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#versions" class="tsd-kind-icon">versions</a></li>
 							</ul>
 						</section>
 					</div>
@@ -137,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">db<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBNames</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L75">src/store/types.ts:75</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L80">src/store/types.ts:80</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -152,12 +157,27 @@
 					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBSchema</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L80">src/store/types.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L90">src/store/types.ts:90</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The database schema.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="versions" class="tsd-anchor"></a>
+					<h3>versions</h3>
+					<div class="tsd-signature tsd-kind-icon">versions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Versions</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L85">src/store/types.ts:85</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The versions of the database this schema represents.</p>
 						</div>
 					</div>
 				</section>
@@ -216,6 +236,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_store_types_.namedschema.html#schema" class="tsd-kind-icon">schema</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_store_types_.namedschema.html#versions" class="tsd-kind-icon">versions</a>
 							</li>
 						</ul>
 					</li>

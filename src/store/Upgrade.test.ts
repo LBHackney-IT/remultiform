@@ -11,6 +11,7 @@ const anotherTestStoreName = "anotherTestStore";
 
 type TestSchema = NamedSchema<
   typeof testDBName,
+  number,
   {
     [testStoreName]: {
       key: string;

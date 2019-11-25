@@ -28,31 +28,13 @@ export enum TransactionMode {
  *
  * @typeparam NamedDBSchema - The schema for the database, along with the
  * allowed names for databases using that schema.
- *
- * @typeparam DBNames - The allowed names for the database. You are unlikely
- * to want to override the default value, derived from `NamedDBSchema`.
- *
- * @typeparam DBSchema - The schema for the database. You are unlikely to want
- * to override the default value, derived from `NamedDBSchema`.
  */
-export class Database<
-  NamedDBSchema extends NamedSchema<DBNames, DBSchema>,
-  // We don't expect to ever override these defaults. They're here to provide
-  // convenient type aliases.
-  DBNames extends string = NamedDBSchema["dbNames"],
-  DBSchema extends Schema = NamedDBSchema["schema"]
-> {
+export class Database<DBSchema extends NamedSchema<string, number, Schema>> {
   /**
    * Open a new database connection.
    *
    * @typeparam NamedDBSchema - The schema for the database, along with the
    * allowed names for databases using that schema.
-   *
-   * @typeparam DBNames - The allowed names for the database. You are unlikely
-   * to want to override the default value, derived from `NamedDBSchema`.
-   *
-   * @typeparam DBSchema - The schema for the database. You are unlikely to want
-   * to override the default value, derived from `NamedDBSchema`.
    *
    * @param name - The name of the database.
    *
@@ -65,17 +47,11 @@ export class Database<
    *
    * @returns A promise to an open {@link Database} ready to be accessed.
    */
-  static async open<
-    NamedDBSchema extends NamedSchema<DBNames, DBSchema>,
-    // We don't expect to ever override these defaults. They're here to provide
-    // convenient type aliases.
-    DBNames extends string = NamedDBSchema["dbNames"],
-    DBSchema extends Schema = NamedDBSchema["schema"]
-  >(
-    name: DBNames,
-    version = 1,
-    openOptions: OpenOptions<DBSchema> = {}
-  ): Promise<Database<NamedDBSchema, DBNames>> {
+  static async open<DBSchema extends NamedSchema<string, number, Schema>>(
+    name: DBSchema["dbNames"],
+    version: DBSchema["versions"],
+    openOptions: OpenOptions<DBSchema["schema"]> = {}
+  ): Promise<Database<DBSchema>> {
     const db = await wrapOpenDB(name, version, openOptions);
 
     return new Database(db);
@@ -86,7 +62,7 @@ export class Database<
    */
   readonly name: string;
 
-  private readonly db: IDBPDatabase<DBSchema>;
+  private readonly db: IDBPDatabase<DBSchema["schema"]>;
 
   /**
    * Do not use this directly. Use {@link Database.open} to create a new
@@ -94,7 +70,7 @@ export class Database<
    *
    * @ignore
    */
-  constructor(db: IDBPDatabase<DBSchema>) {
+  constructor(db: IDBPDatabase<DBSchema["schema"]>) {
     this.db = db;
 
     this.name = this.db.name;
@@ -103,10 +79,10 @@ export class Database<
   /**
    * Create or update a value in a store.
    */
-  async put<DBStoreName extends StoreNames<DBSchema>>(
+  async put<DBStoreName extends StoreNames<DBSchema["schema"]>>(
     storeName: DBStoreName,
-    key: StoreKey<DBSchema, DBStoreName>,
-    value: StoreValue<DBSchema, DBStoreName>
+    key: StoreKey<DBSchema["schema"], DBStoreName>,
+    value: StoreValue<DBSchema["schema"], DBStoreName>
   ): Promise<void> {
     await this.db.put(storeName, value, key);
   }
@@ -117,10 +93,10 @@ export class Database<
    * Resolves to `undefined` if no value exists for the given key in the given
    * store.
    */
-  async get<DBStoreName extends StoreNames<DBSchema>>(
+  async get<DBStoreName extends StoreNames<DBSchema["schema"]>>(
     storeName: DBStoreName,
-    key: StoreKey<DBSchema, DBStoreName>
-  ): Promise<StoreValue<DBSchema, DBStoreName> | undefined> {
+    key: StoreKey<DBSchema["schema"], DBStoreName>
+  ): Promise<StoreValue<DBSchema["schema"], DBStoreName> | undefined> {
     return this.db.get(storeName, key);
   }
 
@@ -136,9 +112,11 @@ export class Database<
    *
    * @param mode - The mode to open the transaction in.
    */
-  async transaction<DBStoreNames extends StoreNames<DBSchema>[]>(
+  async transaction<DBStoreNames extends StoreNames<DBSchema["schema"]>[]>(
     storeNames: DBStoreNames,
-    tx: (stores: StoreMap<DBSchema, DBStoreNames>) => void | Promise<void>,
+    tx: (
+      stores: StoreMap<DBSchema["schema"], DBStoreNames>
+    ) => void | Promise<void>,
     mode: TransactionMode = TransactionMode.ReadOnly
   ): Promise<void> {
     const transaction = this.db.transaction(storeNames, mode);

@@ -20,7 +20,7 @@ import { TestErrorBoundary } from "../__fixtures__/components/TestErrorBoundary"
 const DBContext = new DatabaseContext();
 
 let databseOpenSpy: jest.SpyInstance<
-  Promise<Database<NamedSchema<string, Schema>>>,
+  Promise<Database<NamedSchema<string, number, Schema>>>,
   [string, number?, OpenOptions<Schema>?]
 >;
 
@@ -29,7 +29,7 @@ beforeEach(() => {
 });
 
 it("renders correctly with a resolved database", async () => {
-  const database = await Database.open("testDBName");
+  const database = await Database.open("testDBName", 1);
 
   const component = create(
     <DatabaseProvider context={DBContext} openDatabaseOrPromise={database}>
@@ -41,7 +41,7 @@ it("renders correctly with a resolved database", async () => {
 });
 
 it("renders correctly before the database resolves", () => {
-  const databasePromise = Database.open("testDBName");
+  const databasePromise = Database.open("testDBName", 1);
 
   const component = create(
     <DatabaseProvider
@@ -56,7 +56,7 @@ it("renders correctly before the database resolves", () => {
 });
 
 it("renders correctly after the database resolves", async () => {
-  const databasePromise = Database.open("testDBName");
+  const databasePromise = Database.open("testDBName", 1);
 
   let component: ReactTestRenderer | undefined = undefined;
 
@@ -89,7 +89,7 @@ it("throws if the database rejects", async () => {
     throw new Error("test error");
   });
 
-  const databasePromise = Database.open("testDBName");
+  const databasePromise = Database.open("testDBName", 1);
 
   let component: ReactTestRenderer | undefined = undefined;
 
@@ -122,7 +122,7 @@ it("throws if the database rejects", async () => {
 it("renders correctly when changing children", async () => {
   const key = "key";
 
-  const database = await Database.open("testDBName");
+  const database = await Database.open("testDBName", 1);
 
   const Wrapper = ({
     children
@@ -157,15 +157,17 @@ it("renders correctly when changing children", async () => {
 });
 
 it("throws when changing the `openDatabaseOrPromise` prop", async () => {
+  type TestSchema = NamedSchema<"testDBName" | "newTestDBName", 1, {}>;
+
   const key = "key";
 
-  const database = await Database.open("testDBName");
-  const newDatabase = await Database.open("newTestDBName");
+  const database = await Database.open<TestSchema>("testDBName", 1);
+  const newDatabase = await Database.open<TestSchema>("newTestDBName", 1);
 
   const Wrapper = ({
     database
   }: {
-    database: Database<NamedSchema<string, Schema>>;
+    database: Database<TestSchema>;
   }): JSX.Element => (
     <TestErrorBoundary>
       <DatabaseProvider context={DBContext} openDatabaseOrPromise={database}>
@@ -195,9 +197,11 @@ it("throws when changing the `openDatabaseOrPromise` prop", async () => {
 });
 
 it("renders correctly when changing non-`openDatabaseOrPromise` and non-children props", async () => {
+  type TestSchema = NamedSchema<"testDBName", 1, {}>;
+
   const key = "key";
 
-  const database = await Database.open("testDBName");
+  const database = await Database.open<TestSchema>("testDBName", 1);
 
   const DBContext = new DatabaseContext();
   const NewDBContext = new DatabaseContext();
@@ -205,7 +209,7 @@ it("renders correctly when changing non-`openDatabaseOrPromise` and non-children
   const Wrapper = ({
     context
   }: {
-    context: DatabaseContext<NamedSchema<"testDBName", {}>>;
+    context: DatabaseContext<TestSchema>;
   }): JSX.Element => (
     <DatabaseProvider context={context} openDatabaseOrPromise={database}>
       <span>Test content</span>

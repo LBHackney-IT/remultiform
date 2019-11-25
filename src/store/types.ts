@@ -55,6 +55,7 @@ export interface Schema {
  * ```ts
  * type MySchema = NamedSchema<
  *   "myDatabase" | "myOtherDatabase",
+ *   3,
  *   {
  *     favouriteColour: {
  *       key: string;
@@ -68,11 +69,20 @@ export interface Schema {
  * >
  * ```
  */
-export interface NamedSchema<DBNames extends string, DBSchema extends Schema> {
+export interface NamedSchema<
+  DBNames extends string,
+  Versions extends number,
+  DBSchema extends Schema
+> {
   /**
    * The database names permitted to use this schema.
    */
   dbNames: DBNames;
+
+  /**
+   * The versions of the database this schema represents.
+   */
+  versions: Versions;
 
   /**
    * The database schema.

@@ -9,7 +9,9 @@ import { Schema, NamedSchema } from "../store/types";
  * A React hook to get the {@link Database} instance from the nearest
  * {@link DatabaseProvider} using the same {@link DatabaseContext}.
  */
-export const useDatabase = <DBSchema extends NamedSchema<string, Schema>>(
+export const useDatabase = <
+  DBSchema extends NamedSchema<string, number, Schema>
+>(
   DBContext: DatabaseContext<DBSchema>
 ): Database<DBSchema> | undefined => {
   return useContext(DBContext.context);

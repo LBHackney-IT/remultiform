@@ -10,7 +10,7 @@ import { NamedSchema, Schema } from "../store/types";
  * The proptypes for {@link DatabaseProvider}.
  */
 export interface DatabaseProviderProps<
-  DBSchema extends NamedSchema<string, Schema>
+  DBSchema extends NamedSchema<string, number, Schema>
 > {
   /**
    * An open {@link Database} or a promise that will resolve to an one.
@@ -33,7 +33,9 @@ export interface DatabaseProviderProps<
   children: React.ReactNode;
 }
 
-interface DatabaseProviderState<DBSchema extends NamedSchema<string, Schema>> {
+interface DatabaseProviderState<
+  DBSchema extends NamedSchema<string, number, Schema>
+> {
   database?: Database<DBSchema>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
@@ -56,7 +58,7 @@ interface DatabaseProviderState<DBSchema extends NamedSchema<string, Schema>> {
  *
  * ```js
  * const DBContext = new DatabaseContext();
- * const databasePromise = Database.open("myDatabaseWithAnError");
+ * const databasePromise = Database.open("myDatabaseWithAnError", 1);
  *
  * class Component extends React.Component {
  *   static getDerivedStateFromError(error) {
@@ -84,20 +86,20 @@ interface DatabaseProviderState<DBSchema extends NamedSchema<string, Schema>> {
  * ```
  */
 export class DatabaseProvider<
-  DBSchema extends NamedSchema<string, Schema>
+  DBSchema extends NamedSchema<string, number, Schema>
 > extends React.Component<
   DatabaseProviderProps<DBSchema>,
   DatabaseProviderState<DBSchema>,
   never
 > {
   static propTypes: PropTypes.ValidationMap<
-    DatabaseProviderProps<NamedSchema<string, Schema>>
+    DatabaseProviderProps<NamedSchema<string, number, Schema>>
   > = {
     openDatabaseOrPromise: PropTypes.oneOfType([
       PropTypes.instanceOf(Database).isRequired,
-      PropTypes.instanceOf<Promise<Database<NamedSchema<string, Schema>>>>(
-        Promise
-      ).isRequired
+      PropTypes.instanceOf<
+        Promise<Database<NamedSchema<string, number, Schema>>>
+      >(Promise).isRequired
     ]).isRequired,
 
     context: PropTypes.instanceOf(DatabaseContext).isRequired,

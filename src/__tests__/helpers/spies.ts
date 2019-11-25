@@ -15,7 +15,7 @@ export const spyOnConsoleError = (): jest.SpyInstance<
 };
 
 export const spyOnDatabaseOpen = (): jest.SpyInstance<
-  Promise<Database<NamedSchema<string, Schema>>>,
+  Promise<Database<NamedSchema<string, number, Schema>>>,
   [string, number?, OpenOptions<Schema>?]
 > => {
   const spy = jest.spyOn(Database, "open");

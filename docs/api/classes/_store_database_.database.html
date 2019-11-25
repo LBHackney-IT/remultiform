@@ -62,7 +62,7 @@
 					<a href="_store_database_.database.html">Database</a>
 				</li>
 			</ul>
-			<h1>Class Database&lt;NamedDBSchema, DBNames, DBSchema&gt;</h1>
+			<h1>Class Database&lt;DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -75,37 +75,19 @@
 						<p>A wrapper for an IndexedDB connection.</p>
 					</div>
 					<p>Call <a href="_store_database_.database.html#open">Database.open</a> to create a new database connection.</p>
+					<dl class="tsd-comment-tags">
+						<dt>typeparam</dt>
+						<dd><p>The schema for the database, along with the
+							allowed names for databases using that schema.</p>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>NamedDBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBNames</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The schema for the database, along with the
-								allowed names for databases using that schema.</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<h4>DBNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The allowed names for the database. You are unlikely
-								to want to override the default value, derived from <code>NamedDBSchema</code>.</p>
-							</div>
-						</div>
-					</li>
-					<li>
-						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The schema for the database. You are unlikely to want
-								to override the default value, derived from <code>NamedDBSchema</code>.</p>
-							</div>
-						</div>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -148,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L87">src/store/Database.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L63">src/store/Database.ts:63</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -170,7 +152,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L159">src/store/Database.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L137">src/store/Database.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -189,13 +171,13 @@
 					<a name="get" class="tsd-anchor"></a>
 					<h3>get</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">get&lt;DBStoreName&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBStoreName</span>, key<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get&lt;DBStoreName&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBStoreName</span>, key<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L120">src/store/Database.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L96">src/store/Database.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -208,7 +190,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>DBStoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>DBStoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -217,10 +199,10 @@
 									<h5>storeName: <span class="tsd-signature-type">DBStoreName</span></h5>
 								</li>
 								<li>
-									<h5>key: <a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>key: <a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -228,13 +210,13 @@
 					<a name="put" class="tsd-anchor"></a>
 					<h3>put</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">put&lt;DBStoreName&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBStoreName</span>, key<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span>, value<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">put&lt;DBStoreName&gt;<span class="tsd-signature-symbol">(</span>storeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBStoreName</span>, key<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span>, value<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L106">src/store/Database.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L82">src/store/Database.ts:82</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,7 +227,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>DBStoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									<h4>DBStoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -254,10 +236,10 @@
 									<h5>storeName: <span class="tsd-signature-type">DBStoreName</span></h5>
 								</li>
 								<li>
-									<h5>key: <a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>key: <a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>value: <a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>value: <a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -274,7 +256,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L139">src/store/Database.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L115">src/store/Database.ts:115</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -285,7 +267,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>DBStoreNames<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+									<h4>DBStoreNames<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -307,14 +289,14 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>stores<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreNames</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>stores<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreNames</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>stores: <a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreNames</span><span class="tsd-signature-symbol">&gt;</span></h5>
+															<h5>stores: <a href="../modules/_store_types_.html#storemap" class="tsd-signature-type">StoreMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBStoreNames</span><span class="tsd-signature-symbol">&gt;</span></h5>
 														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span>
@@ -341,54 +323,42 @@
 					<a name="open" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> open</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">open&lt;NamedDBSchema, DBNames, DBSchema&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBNames</span>, version<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, openOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_store_openoptions_.openoptions.html" class="tsd-signature-type">OpenOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NamedDBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBNames</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">open&lt;DBSchema&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBSchema[&quot;dbNames&quot;]</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DBSchema[&quot;versions&quot;]</span>, openOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_store_openoptions_.openoptions.html" class="tsd-signature-type">OpenOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L68">src/store/Database.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L50">src/store/Database.ts:50</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Open a new database connection.</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>typeparam</dt>
+									<dd><p>The schema for the database, along with the
+										allowed names for databases using that schema.</p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>NamedDBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBNames</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h4>
-									<div class="tsd-comment tsd-typography">
-										<p>The schema for the database, along with the
-										allowed names for databases using that schema.</p>
-									</div>
-								</li>
-								<li>
-									<h4>DBNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
-									<div class="tsd-comment tsd-typography">
-										<p>The allowed names for the database. You are unlikely
-										to want to override the default value, derived from <code>NamedDBSchema</code>.</p>
-									</div>
-								</li>
-								<li>
-									<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
-									<div class="tsd-comment tsd-typography">
-										<p>The schema for the database. You are unlikely to want
-										to override the default value, derived from <code>NamedDBSchema</code>.</p>
-									</div>
+									<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">DBNames</span></h5>
+									<h5>name: <span class="tsd-signature-type">DBSchema[&quot;dbNames&quot;]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The name of the database.</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> version: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></h5>
+									<h5>version: <span class="tsd-signature-type">DBSchema[&quot;versions&quot;]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The schema version you want to open. This can only ever
 											increase. See <a href="../interfaces/_store_openoptions_.openoptions.html#upgrade">OpenOptions.upgrade</a> for how to upgrade the schema
@@ -396,14 +366,14 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> openOptions: <a href="../interfaces/_store_openoptions_.openoptions.html" class="tsd-signature-type">OpenOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> openOptions: <a href="../interfaces/_store_openoptions_.openoptions.html" class="tsd-signature-type">OpenOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The options and callbacks for opening the database.
 										See <a href="../interfaces/_store_openoptions_.openoptions.html">OpenOptions</a> for details.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">NamedDBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBNames</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>A promise to an open <a href="_store_database_.database.html">Database</a> ready to be accessed.</p>
 						</li>
 					</ul>
