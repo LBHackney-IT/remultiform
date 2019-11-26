@@ -28,8 +28,6 @@ type TestSchema = NamedSchema<
   }
 >;
 
-const DBContext = new DatabaseContext<TestSchema>();
-
 const testDatabaseMap = new DatabaseMap<TestSchema, "testStore">({
   storeName: "testStore",
   key: 0
@@ -70,9 +68,10 @@ it("renders correctly without a default value for the component", () => {
 
 it("renders correctly with a database context", async () => {
   const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
 
   const component = create(
-    <DatabaseProvider openDatabaseOrPromise={openPromise} context={DBContext}>
+    <DatabaseProvider context={DBContext}>
       <DBContext.Consumer>
         {(database): JSX.Element => (
           <WrappedPageComponent
@@ -106,12 +105,13 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
   });
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
 
   let component: ReactTestRenderer | undefined = undefined;
 
   await act(async () => {
     component = create(
-      <DatabaseProvider openDatabaseOrPromise={openPromise} context={DBContext}>
+      <DatabaseProvider context={DBContext}>
         <DBContext.Consumer>
           {(database): JSX.Element => (
             <WrappedPageComponent
@@ -147,12 +147,13 @@ it("uses the default value when fetching the stored value returns `undefined`", 
   });
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
 
   let component: ReactTestRenderer | undefined = undefined;
 
   await act(async () => {
     component = create(
-      <DatabaseProvider openDatabaseOrPromise={openPromise} context={DBContext}>
+      <DatabaseProvider context={DBContext}>
         <DBContext.Consumer>
           {(database): JSX.Element => (
             <WrappedPageComponent
@@ -189,9 +190,10 @@ it("is disabled while the database is opening", async () => {
   databaseGetSpy.mockImplementation(async () => {});
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
 
   const component = create(
-    <DatabaseProvider openDatabaseOrPromise={openPromise} context={DBContext}>
+    <DatabaseProvider context={DBContext}>
       <DBContext.Consumer>
         {(database): JSX.Element => (
           <WrappedPageComponent database={database} component={pageComponent} />
@@ -232,9 +234,10 @@ it("is disabled while fetching the stored value from the database", async () => 
   });
 
   const database = await Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(database);
 
   const component = create(
-    <DatabaseProvider openDatabaseOrPromise={database} context={DBContext}>
+    <DatabaseProvider context={DBContext}>
       <DBContext.Consumer>
         {(database): JSX.Element => (
           <WrappedPageComponent database={database} component={pageComponent} />

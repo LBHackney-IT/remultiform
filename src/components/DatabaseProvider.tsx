@@ -12,14 +12,6 @@ import { NamedSchema, Schema } from "../store/types";
 export interface DatabaseProviderProps<
   DBSchema extends NamedSchema<string, number, Schema>
 > {
-  /**
-   * An open {@link Database} or a promise that will resolve to an one.
-   *
-   * Normally, you would want to pass the return value of {@link Database.open}
-   * in here directly.
-   */
-  openDatabaseOrPromise: Database<DBSchema> | Promise<Database<DBSchema>>;
-
   context: DatabaseContext<DBSchema>;
 
   /**
@@ -52,20 +44,19 @@ interface DatabaseProviderState<
  * A React context provider for a {@link Database}.
  *
  * This will wait for the database to finish opening on mount. Until
- * {@link DatabaseProviderProps.openDatabaseOrPromise} settles, the
- * {@link DatabaseContext} will store `undefined`, the default value.
+ * {@link DatabaseContext.database} settles, the {@link DatabaseContext} will
+ * store `undefined`, the default value.
  *
  * **Important!** You will need to ensure the database closes itself if you ever
- * need to change {@link DatabaseProviderProps.openDatabaseOrPromise}, or if you
- * unmount this component. If either of those things happen, this component
- * will **throw an exception**, (unless unmounting after an error). It is
- * therefore recommended that this component is contained within an error
- * boundary that handles exceptions gracefully, probably calling
- * {@link Database.close}.
+ * need to change {@link DatabaseContext.database}, or if you unmount this
+ * component. If either of those things happen, this component will **throw an
+ * exception**, (unless unmounting after an error). It is therefore recommended
+ * that this component is contained within an error boundary that handles
+ * exceptions gracefully, probably calling {@link Database.close}.
  *
  * ```js
- * const DBContext = new DatabaseContext();
  * const databasePromise = Database.open("myDatabaseWithAnError", 1);
+ * const DBContext = new DatabaseContext(databasePromise);
  *
  * class Component extends React.Component {
  *   static getDerivedStateFromError(error) {
@@ -84,7 +75,6 @@ interface DatabaseProviderState<
  *     return (
  *       <DatabaseProvider
  *         context={DBContext}
- *         openDatabaseOrPromise={databasePromise}
  *       >
  *         <span>Some content that relies on the database.</span>
  *       </DatabaseProvider>
@@ -102,13 +92,6 @@ export class DatabaseProvider<
   static propTypes: PropTypes.ValidationMap<
     DatabaseProviderProps<NamedSchema<string, number, Schema>>
   > = {
-    openDatabaseOrPromise: PropTypes.oneOfType([
-      PropTypes.instanceOf(Database).isRequired,
-      PropTypes.instanceOf<
-        Promise<Database<NamedSchema<string, number, Schema>>>
-      >(Promise).isRequired
-    ]).isRequired,
-
     context: PropTypes.instanceOf(DatabaseContext).isRequired,
     children: PropTypes.node.isRequired
   };
@@ -126,7 +109,9 @@ export class DatabaseProvider<
   async componentDidMount(): Promise<void> {
     this.isUnmounted = false;
 
-    const { openDatabaseOrPromise } = this.props;
+    const {
+      context: { database: openDatabaseOrPromise }
+    } = this.props;
 
     const stateUpdate: Partial<DatabaseProviderState<DBSchema>> = {};
 
@@ -157,18 +142,20 @@ export class DatabaseProvider<
       throw error;
     }
 
-    const updatedDatabase = (Object.keys(
+    const updatedContext = (Object.keys(
       prevProps
     ) as (keyof typeof prevProps)[]).some(
       propName =>
-        propName === "openDatabaseOrPromise" &&
-        prevProps[propName] !== this.props[propName]
+        propName === "context" && prevProps[propName] !== this.props[propName]
     );
 
-    if (updatedDatabase) {
+    if (
+      updatedContext &&
+      this.props.context.database !== prevProps.context.database
+    ) {
       this.setState({
         error: new Error(
-          "Updating the openDatabaseOrPromise prop of a DatabaseProvider is unsupported"
+          "Updating the context prop of a DatabaseProvider to one with a different database is unsupported"
         )
       });
     }
@@ -178,8 +165,9 @@ export class DatabaseProvider<
    * @ignore
    */
   render(): JSX.Element {
-    const { openDatabaseOrPromise, context, children } = this.props;
+    const { context, children } = this.props;
     let { database } = this.state;
+    const { database: openDatabaseOrPromise } = context;
 
     if (!database && openDatabaseOrPromise instanceof Database) {
       database = openDatabaseOrPromise;
