@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import { DatabaseContext } from "../helpers/DatabaseContext";
 import { PageComponentWrapper } from "../helpers/PageComponentWrapper/PageComponentWrapper";
 
 import { NamedSchema, Schema } from "../store/types";
 
+import { DatabaseProvider } from "./DatabaseProvider";
 import { Page } from "./Page";
 
 /**
@@ -40,6 +42,14 @@ export interface OrchestratorProps<
   DBSchema extends NamedSchema<string, number, Schema>
 > {
   /**
+   * A context wrapper for a {@link Database} instance.
+   *
+   * You must provide this if any of your components are instances of
+   * {@link DynamicPageComponent} for them to work as expected.
+   */
+  context?: DatabaseContext<DBSchema> | null;
+
+  /**
    * The key of the current step to be rendered.
    */
   currentStepKey?: React.Key | null;
@@ -59,18 +69,28 @@ export const Orchestrator = <
 >(
   props: OrchestratorProps<DBSchema>
 ): JSX.Element => {
-  const { currentStepKey, steps } = props;
+  const { context, currentStepKey, steps } = props;
 
   const currentStep =
     steps.find(({ key }) => key === currentStepKey) || steps[0];
 
+  if (context) {
+    return (
+      <DatabaseProvider context={context}>
+        <Page
+          context={context}
+          key={currentStep.key}
+          componentWrappers={currentStep.componentWrappers}
+        />
+      </DatabaseProvider>
+    );
+  }
+
   return (
-    <>
-      <Page
-        key={currentStep.key}
-        componentWrappers={currentStep.componentWrappers}
-      />
-    </>
+    <Page
+      key={currentStep.key}
+      componentWrappers={currentStep.componentWrappers}
+    />
   );
 };
 
