@@ -14,3 +14,18 @@ Array [
   </div>,
 ]
 `;
+
+exports[`renders correctly without optional props 1`] = `
+Array [
+  <div />,
+  <img
+    src="test.png"
+  />,
+  <div>
+    test class content
+  </div>,
+  <div>
+    test function content
+  </div>,
+]
+`;

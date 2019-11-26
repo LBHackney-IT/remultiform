@@ -1,12 +1,12 @@
-import React from "react";
-import { create } from "react-test-renderer";
+import { ReactTestRenderer, act, create } from "react-test-renderer";
 
 import { TestClassComponent } from "../../__fixtures__/components/TestClassComponent";
 import { TestDynamicComponent } from "../../__fixtures__/components/TestDynamicComponent";
 import { TestFunctionComponent } from "../../__fixtures__/components/TestFunctionComponent";
 
-import { WrappedPageComponent } from "../../components/WrappedPageComponent";
+import { promiseToWaitForNextTick } from "../../__tests__/helpers/promise";
 
+import { Database } from "../../store/Database";
 import { NamedSchema } from "../../store/types";
 
 import { DatabaseMap } from "./DatabaseMap";
@@ -72,61 +72,8 @@ describe(".wrapDynamic()", () => {
   });
 });
 
-describe("new ()", () => {
-  it("returns a `PageComponentWrapper` when called with any element while expecting the element to be static", () => {
-    const wrapper = new PageComponentWrapper(
-      "test-key",
-      (<div>Not a WrappedPageComponent</div>)
-    );
-
-    expect(wrapper).toBeInstanceOf(PageComponentWrapper);
-  });
-
-  it("returns a `PageComponentWrapper` when called with a `WrappedPageComponent` element while expecting the element to be dynamic", () => {
-    const key = "test-key";
-
-    const wrapper = new PageComponentWrapper(
-      key,
-      (
-        <WrappedPageComponent
-          component={
-            new DynamicPageComponent({
-              key,
-              Component: TestDynamicComponent,
-              props: {
-                content: "test content"
-              },
-              defaultValue: "test default",
-              databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
-                storeName,
-                key: 0
-              })
-            })
-          }
-        />
-      ),
-      true
-    );
-
-    expect(wrapper).toBeInstanceOf(PageComponentWrapper);
-  });
-
-  it("throws when called with a non-`WrappedPageComponent` element while expecting the element to be dynamic", () => {
-    expect(
-      () =>
-        new PageComponentWrapper(
-          "test-key",
-          (<div>Not a WrappedPageComponent</div>),
-          true
-        )
-    ).toThrowError(
-      "Expected element to be WrappedPageComponent but received div"
-    );
-  });
-});
-
 describe("#key", () => {
-  it("matches the key provided when wrapping a `PageComponent`", () => {
+  it("matches the key provided when wrapping a `StaticPageComponent`", () => {
     const key = "test-key";
 
     const componentWrapper = PageComponentWrapper.wrapStatic(
@@ -164,7 +111,7 @@ describe("#key", () => {
   });
 });
 
-describe("#element", () => {
+describe("#render()", () => {
   it("renders correctly for intrinsic elements", () => {
     const componentWrapper = PageComponentWrapper.wrapStatic(
       new StaticPageComponent({
@@ -176,7 +123,7 @@ describe("#element", () => {
       })
     );
 
-    const component = create(componentWrapper.element);
+    const component = create(componentWrapper.render({}));
 
     expect(component).toMatchSnapshot();
   });
@@ -192,7 +139,7 @@ describe("#element", () => {
       })
     );
 
-    const component = create(componentWrapper.element);
+    const component = create(componentWrapper.render({}));
 
     expect(component).toMatchSnapshot();
   });
@@ -208,7 +155,7 @@ describe("#element", () => {
       })
     );
 
-    const component = create(componentWrapper.element);
+    const component = create(componentWrapper.render({}));
 
     expect(component).toMatchSnapshot();
   });
@@ -229,7 +176,51 @@ describe("#element", () => {
       })
     );
 
-    const component = create(componentWrapper.element);
+    const component = create(componentWrapper.render({}));
+
+    expect(component).toMatchSnapshot();
+  });
+
+  it("renders correctly for components with controlled props with a database", async () => {
+    const databaseGetSpy = jest.spyOn(Database.prototype, "get");
+
+    let resolveGetPromise: () => void;
+    const getPromise = new Promise<void>(resolve => {
+      resolveGetPromise = resolve;
+    });
+
+    databaseGetSpy.mockImplementation(async (storeName, key) => {
+      await promiseToWaitForNextTick();
+
+      resolveGetPromise();
+
+      return `${storeName}/${key}`;
+    });
+
+    const componentWrapper = PageComponentWrapper.wrapDynamic(
+      new DynamicPageComponent({
+        key: "test-component",
+        Component: TestDynamicComponent,
+        props: {
+          content: "test content"
+        },
+        defaultValue: "test default",
+        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+          storeName,
+          key: 0
+        })
+      })
+    );
+
+    const database = await Database.open<TestSchema>("testDBName", 1);
+
+    let component: ReactTestRenderer | undefined = undefined;
+
+    await act(async () => {
+      component = create(componentWrapper.render({ database }));
+
+      await getPromise;
+    });
 
     expect(component).toMatchSnapshot();
   });

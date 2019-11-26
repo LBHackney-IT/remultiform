@@ -3,6 +3,7 @@ import React from "react";
 
 import { WrappedPageComponent } from "../../components/WrappedPageComponent";
 
+import { Database } from "../../store/Database";
 import { NamedSchema, Schema, StoreNames, StoreValue } from "../../store/types";
 
 import {
@@ -10,6 +11,12 @@ import {
   DynamicPageComponent
 } from "./DynamicPageComponent";
 import { StaticPageComponent } from "./StaticPageComponent";
+
+export interface PageComponentWrapperRenderProps<
+  DBSchema extends NamedSchema<string, number, Schema>
+> {
+  database?: Database<DBSchema>;
+}
 
 /**
  * A wrapper for a {@link StaticPageComponent} or {@link DynamicPageComponent}
@@ -20,18 +27,20 @@ import { StaticPageComponent } from "./StaticPageComponent";
  */
 // This mostly exists so we can have strict type inference on our components.
 // By wrapping the component in a generic function, the type of the component
-// has to be infered in order to call the function. Returning this non-generic
-// type from that function means we can have non-generic components depend on
+// has to be infered in order to call the function. Returning this less generic
+// type from that function means we can have simple generic components depend on
 // it. This gives us strong typing with little effort for the user.
-export class PageComponentWrapper {
+export class PageComponentWrapper<
+  DBSchema extends NamedSchema<string, number, Schema>
+> {
   /**
    * The proptype validator for a {@link PageComponentWrapper}.
    */
   static readonly propType: PropTypes.Requireable<
-    PageComponentWrapper
+    PageComponentWrapper<NamedSchema<string, number, Schema>>
   > = PropTypes.exact({
     key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    element: PropTypes.element.isRequired
+    render: PropTypes.func.isRequired
   });
 
   /**
@@ -43,10 +52,11 @@ export class PageComponentWrapper {
    */
   static wrapStatic<Props>(
     component: StaticPageComponent<React.ElementType<Props>, Props>
-  ): PageComponentWrapper {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ): PageComponentWrapper<any> {
     const { key, Component } = component;
 
-    let element: JSX.Element;
+    let render: () => JSX.Element;
 
     if (typeof Component === "string") {
       const {
@@ -54,17 +64,19 @@ export class PageComponentWrapper {
         props
       } = component as StaticPageComponent<keyof JSX.IntrinsicElements, {}>;
 
-      element = <IntrinsicElement key={key} {...props} />;
+      // eslint-disable-next-line react/display-name
+      render = (): JSX.Element => <IntrinsicElement key={key} {...props} />;
     } else {
       const {
         Component: ReactComponent,
         props
       } = component as StaticPageComponent<React.ComponentType<Props>, Props>;
 
-      element = <ReactComponent key={key} {...props} />;
+      // eslint-disable-next-line react/display-name
+      render = (): JSX.Element => <ReactComponent key={key} {...props} />;
     }
 
-    return new PageComponentWrapper(key, element);
+    return new PageComponentWrapper(key, render);
   }
 
   /**
@@ -88,27 +100,26 @@ export class PageComponentWrapper {
       DBSchema,
       StoreName
     >
-  ): PageComponentWrapper {
+  ): PageComponentWrapper<DBSchema> {
     const { key } = component;
 
-    return new PageComponentWrapper(
-      key,
-      (
-        <WrappedPageComponent<Props, DBSchema, StoreName>
-          key={key}
-          component={component}
-        />
-      ),
-      true
-    );
+    return new PageComponentWrapper(key, ({ database }) => (
+      <WrappedPageComponent<Props, DBSchema, StoreName>
+        database={database}
+        key={key}
+        component={component}
+      />
+    ));
   }
 
   readonly key: React.Key;
 
   /**
-   * The element for including in a page.
+   * A function to render an instance of the component for including in a page.
    */
-  readonly element: JSX.Element;
+  readonly render: (
+    props: PageComponentWrapperRenderProps<DBSchema>
+  ) => JSX.Element;
 
   /**
    * Do not use this directly. Use {@link PageComponentWrapper.wrapStatic} or
@@ -117,16 +128,11 @@ export class PageComponentWrapper {
    *
    * @ignore
    */
-  constructor(key: React.Key, element: JSX.Element, isDynamic = false) {
+  constructor(
+    key: React.Key,
+    render: (props: PageComponentWrapperRenderProps<DBSchema>) => JSX.Element
+  ) {
     this.key = key;
-
-    if (isDynamic && element.type.name !== WrappedPageComponent.name) {
-      throw new Error(
-        `Expected element to be ${WrappedPageComponent.name} but ` +
-          `received ${element.type}`
-      );
-    }
-
-    this.element = element;
+    this.render = render;
   }
 }

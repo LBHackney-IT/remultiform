@@ -3,6 +3,8 @@ import React from "react";
 
 import { PageComponentWrapper } from "../helpers/PageComponentWrapper/PageComponentWrapper";
 
+import { NamedSchema, Schema } from "../store/types";
+
 import { Page } from "./Page";
 
 /**
@@ -10,7 +12,10 @@ import { Page } from "./Page";
  *
  * This represents a single step in the flow of the multipage form.
  */
-export interface Step {
+export interface Step<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  DBSchema extends NamedSchema<string, number, Schema> = any
+> {
   /**
    * The key to uniquely identify the step
    *
@@ -25,13 +30,15 @@ export interface Step {
    * {@link PageComponentWrapper.wrapStatic} and
    * {@link PageComponentWrapper.wrapDynamic}.
    */
-  componentWrappers: PageComponentWrapper[];
+  componentWrappers: PageComponentWrapper<DBSchema>[];
 }
 
 /**
  * The proptypes for {@link Orchestrator}.
  */
-export interface OrchestratorProps {
+export interface OrchestratorProps<
+  DBSchema extends NamedSchema<string, number, Schema>
+> {
   /**
    * The key of the current step to be rendered.
    */
@@ -41,14 +48,16 @@ export interface OrchestratorProps {
    * An array of steps to possibly render based on
    * {@link OrchestratorProps.currentStepKey}.
    */
-  steps: Step[];
+  steps: Step<DBSchema>[];
 }
 
 /**
  * A component for orchestrating the rendering of pages for a multipage form.
  */
-export const Orchestrator: React.FunctionComponent<OrchestratorProps> = (
-  props: OrchestratorProps
+export const Orchestrator = <
+  DBSchema extends NamedSchema<string, number, Schema>
+>(
+  props: OrchestratorProps<DBSchema>
 ): JSX.Element => {
   const { currentStepKey, steps } = props;
 
@@ -78,4 +87,6 @@ Orchestrator.propTypes = {
       ).isRequired
     }).isRequired
   ).isRequired
-};
+} as PropTypes.ValidationMap<
+  OrchestratorProps<NamedSchema<string, number, Schema>>
+>;
