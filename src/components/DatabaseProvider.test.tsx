@@ -229,3 +229,77 @@ it("renders correctly when changing non-`openDatabaseOrPromise` and non-children
 
   expect(component).toMatchSnapshot();
 });
+
+it("throws when unmounting without an error", async () => {
+  type TestSchema = NamedSchema<"testDBName" | "newTestDBName", 1, {}>;
+
+  const database = await Database.open<TestSchema>("testDBName", 1);
+
+  let component: ReactTestRenderer | undefined = undefined;
+
+  act(() => {
+    component = create(
+      <TestErrorBoundary>
+        <DatabaseProvider context={DBContext} openDatabaseOrPromise={database}>
+          <span>Test content</span>
+        </DatabaseProvider>
+      </TestErrorBoundary>
+    );
+  });
+
+  const consoleErrorSpy = spyOnConsoleError();
+
+  act(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    component!.update(
+      <TestErrorBoundary>
+        <span>Test content</span>
+      </TestErrorBoundary>
+    );
+  });
+
+  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+
+  consoleErrorSpy.mockRestore();
+
+  expect(component).toMatchSnapshot();
+});
+
+it("doesn't throw when unmounting without an error with `allowUnmounting` enabled", async () => {
+  type TestSchema = NamedSchema<"testDBName" | "newTestDBName", 1, {}>;
+
+  const database = await Database.open<TestSchema>("testDBName", 1);
+
+  let component: ReactTestRenderer | undefined = undefined;
+
+  act(() => {
+    component = create(
+      <TestErrorBoundary>
+        <DatabaseProvider
+          context={DBContext}
+          openDatabaseOrPromise={database}
+          allowUnmounting
+        >
+          <span>Test content</span>
+        </DatabaseProvider>
+      </TestErrorBoundary>
+    );
+  });
+
+  const consoleErrorSpy = spyOnConsoleError();
+
+  act(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    component!.update(
+      <TestErrorBoundary>
+        <span>Test content</span>
+      </TestErrorBoundary>
+    );
+  });
+
+  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+
+  consoleErrorSpy.mockRestore();
+
+  expect(component).toMatchSnapshot();
+});

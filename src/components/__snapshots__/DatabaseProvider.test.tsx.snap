@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`doesn't throw when unmounting without an error with \`allowUnmounting\` enabled 1`] = `Array []`;
+
+exports[`doesn't throw when unmounting without an error with \`allowUnmounting\` enabled 2`] = `
+<span>
+  Test content
+</span>
+`;
+
 exports[`renders correctly after the database resolves 1`] = `
 <span>
   Database name: 
@@ -96,5 +104,38 @@ exports[`throws when changing the \`openDatabaseOrPromise\` prop 2`] = `
 <span>
   Caught error: 
   Error: Updating the openDatabaseOrPromise prop of a DatabaseProvider is unsupported
+</span>
+`;
+
+exports[`throws when unmounting without an error 1`] = `
+Array [
+  Array [
+    "Error: Uncaught [Error: Unmounting a DatabaseProvider outside of an error is unsupported]
+    at reportException (<rootDir>/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at invokeEventListeners (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:209:9)
+    at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:119:9)
+    at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:82:17)
+    at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/nodes/HTMLElement-impl.js:30:27)
+    at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:157:21)
+    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
+    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
+    at safelyCallComponentWillUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12018:5)
+    at commitUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12507:11)",
+    [Error: Unmounting a DatabaseProvider outside of an error is unsupported],
+  ],
+  Array [
+    "The above error occurred in the <DatabaseProvider> component:
+    in DatabaseProvider
+    in TestErrorBoundary
+
+React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+  ],
+]
+`;
+
+exports[`throws when unmounting without an error 2`] = `
+<span>
+  Caught error: 
+  Error: Unmounting a DatabaseProvider outside of an error is unsupported
 </span>
 `;
