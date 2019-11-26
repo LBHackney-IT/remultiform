@@ -31,6 +31,13 @@ export interface DatabaseProviderProps<
    * within those components.
    */
   children: React.ReactNode;
+
+  /**
+   * Allow unmounting outside of an error case.
+   *
+   * **Important!** Don't set this flag unless you know what you're doing.
+   */
+  allowUnmounting?: boolean | null;
 }
 
 interface DatabaseProviderState<
@@ -191,9 +198,10 @@ export class DatabaseProvider<
   componentWillUnmount(): void {
     this.isUnmounted = true;
 
+    const { allowUnmounting } = this.props;
     const { error } = this.state;
 
-    if (error) {
+    if (error || allowUnmounting) {
       return;
     }
 
