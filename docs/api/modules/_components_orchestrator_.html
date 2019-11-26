@@ -98,53 +98,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L113">src/components/Orchestrator.tsx:113</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L50">src/components/Orchestrator.tsx:50</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>A component for orchestrating the rendering of pages for a multipage form.</p>
 								</div>
-								<pre><code class="language-ts"><span class="hljs-keyword">const</span> form: React.FunctionComponent = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-  <span class="hljs-keyword">return</span> (
-    &lt;Orchestrator
-      currentStepKey=<span class="hljs-string">"step-2"</span>
-      steps={[
-        {
-          key: <span class="hljs-string">"step-1"</span>,
-          componentWrappers: [
-            PageComponentWrapper.wrap({
-              key: <span class="hljs-string">"my-image"</span>,
-              Component: <span class="hljs-string">"img"</span>,
-              props: {
-                src: <span class="hljs-string">"/path/to/my.png"</span>
-              }
-            }),
-            PageComponentWrapper.wrap({
-              key: <span class="hljs-string">"my-input"</span>,
-              Component: MyInput,
-              props: {
-                defaultValue: <span class="hljs-string">"Enter something?"</span>
-              }
-            })
-          ]
-        },
-        {
-          key: <span class="hljs-string">"step-2"</span>,
-          componentWrappers: [
-            PageComponentWrapper.wrap({
-              key: <span class="hljs-string">"my-input"</span>,
-              Component: MyInput,
-              props: {
-                defaultValue: <span class="hljs-string">"Enter something else?"</span>
-              }
-            })
-          ]
-        }
-      ]}
-    /&gt;
-  )
-}</code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -174,13 +134,22 @@
 						<a href="_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_components_wrappedpagecomponent_.html">&quot;components/<wbr>Wrapped<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_helpers_pagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component&quot;</a>
+						<a href="_helpers_pagecomponentwrapper_databasemap_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Database<wbr>Map&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+						<a href="_helpers_pagecomponentwrapper_dynamicpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Dynamic<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_helpers_pagecomponentwrapper_staticpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Static<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_hooks_usedatabase_.html">&quot;hooks/use<wbr>Database&quot;</a>

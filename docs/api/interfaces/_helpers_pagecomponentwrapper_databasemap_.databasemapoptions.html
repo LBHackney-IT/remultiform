@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>NamedSchema | LBH Frontend React</title>
+	<title>DatabaseMapOptions | LBH Frontend React</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_store_types_.html">&quot;store/types&quot;</a>
+					<a href="../modules/_helpers_pagecomponentwrapper_databasemap_.html">&quot;helpers/PageComponentWrapper/DatabaseMap&quot;</a>
 				</li>
 				<li>
-					<a href="_store_types_.namedschema.html">NamedSchema</a>
+					<a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html">DatabaseMapOptions</a>
 				</li>
 			</ul>
-			<h1>Interface NamedSchema&lt;DBNames, Versions, DBSchema&gt;</h1>
+			<h1>Interface DatabaseMapOptions&lt;DBSchema, StoreName&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,42 +72,18 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The schema for the database, along with the allowed names for databases
-						using that schema.</p>
+						<p>The options for <a href="../classes/_helpers_pagecomponentwrapper_databasemap_.databasemap.html">DatabaseMap</a>.</p>
 					</div>
-					<p>Bear in mind that defining the schema alone won&#39;t set the
-						database up with that schema. It&#39;s used for providing type safety for
-					interacting with the database.</p>
-					<p>Use this interface by providing the generic type parameters, rather than
-					relying on type inference, for best results.</p>
-					<p>See <a href="../classes/_store_database_.database.html#open">Database.open</a> for how to set a database up.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">type</span> MySchema = NamedSchema&lt;
-  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
-  <span class="hljs-number">3</span>,
-  {
-    favouriteColour: {
-      key: <span class="hljs-built_in">string</span>;
-      value: {
-        r: <span class="hljs-built_in">number</span>;
-        g: <span class="hljs-built_in">number</span>;
-        b: <span class="hljs-built_in">number</span>;
-      };
-    };
-  }
-&gt;</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>DBNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 					<li>
-						<h4>Versions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h4>
-					</li>
-					<li>
-						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a></h4>
+						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -115,7 +91,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">NamedSchema</span>
+						<span class="target">DatabaseMapOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -126,9 +102,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#dbnames" class="tsd-kind-icon">db<wbr>Names</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#schema" class="tsd-kind-icon">schema</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_store_types_.namedschema.html#versions" class="tsd-kind-icon">versions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html#storename" class="tsd-kind-icon">store<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -137,47 +112,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="dbnames" class="tsd-anchor"></a>
-					<h3>db<wbr>Names</h3>
-					<div class="tsd-signature tsd-kind-icon">db<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBNames</span></div>
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <a href="../modules/_store_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L80">src/store/types.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper/DatabaseMap.ts#L20">src/helpers/PageComponentWrapper/DatabaseMap.ts:20</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The database names permitted to use this schema.</p>
+							<p>The key in <a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html#storename">DatabaseMapOptions.storeName</a> to fetch and update.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="schema" class="tsd-anchor"></a>
-					<h3>schema</h3>
-					<div class="tsd-signature tsd-kind-icon">schema<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DBSchema</span></div>
+					<a name="storename" class="tsd-anchor"></a>
+					<h3>store<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">store<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StoreName</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L90">src/store/types.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper/DatabaseMap.ts#L15">src/helpers/PageComponentWrapper/DatabaseMap.ts:15</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The database schema.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="versions" class="tsd-anchor"></a>
-					<h3>versions</h3>
-					<div class="tsd-signature tsd-kind-icon">versions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Versions</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/types.ts#L85">src/store/types.ts:85</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The versions of the database this schema represents.</p>
+							<p>The name of the <a href="../classes/_store_database_.database.html">Database</a> store to fetch and update.</p>
 						</div>
 					</div>
 				</section>
@@ -204,7 +164,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_helpers_pagecomponentwrapper_databasemap_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Database<wbr>Map&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -228,55 +188,31 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_store_upgrade_.html">&quot;store/<wbr>Upgrade&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_store_types_.html">&quot;store/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../classes/_helpers_pagecomponentwrapper_databasemap_.databasemap.html" class="tsd-kind-icon">Database<wbr>Map</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_store_types_.namedschema.html" class="tsd-kind-icon">Named<wbr>Schema</a>
+						<a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html" class="tsd-kind-icon">Database<wbr>Map<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_store_types_.namedschema.html#dbnames" class="tsd-kind-icon">db<wbr>Names</a>
+								<a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html#key" class="tsd-kind-icon">key</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_store_types_.namedschema.html#schema" class="tsd-kind-icon">schema</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_store_types_.namedschema.html#versions" class="tsd-kind-icon">versions</a>
+								<a href="_helpers_pagecomponentwrapper_databasemap_.databasemapoptions.html#storename" class="tsd-kind-icon">store<wbr>Name</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_store_types_.schema.html" class="tsd-kind-icon">Schema</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_store_types_.storeschema.html" class="tsd-kind-icon">Store<wbr>Schema</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#store" class="tsd-kind-icon">Store</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storekey" class="tsd-kind-icon">Store<wbr>Key</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storemap" class="tsd-kind-icon">Store<wbr>Map</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storenames" class="tsd-kind-icon">Store<wbr>Names</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#storevalue" class="tsd-kind-icon">Store<wbr>Value</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_store_types_.html#transaction" class="tsd-kind-icon">Transaction</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

@@ -1,7 +1,7 @@
 import { Step } from "../../components/Orchestrator";
 
-import { PageComponent } from "../../helpers/PageComponent";
-import { PageComponentWrapper } from "../../helpers/PageComponentWrapper";
+import { PageComponentWrapper } from "../../helpers/PageComponentWrapper/PageComponentWrapper";
+import { StaticPageComponent } from "../../helpers/PageComponentWrapper/StaticPageComponent";
 
 import { TestClassComponent } from "../components/TestClassComponent";
 import { TestFunctionComponent } from "../components/TestFunctionComponent";
@@ -11,15 +11,15 @@ export const multiStepForm: { steps: Step[] } = {
     {
       key: "test-step-1",
       componentWrappers: [
-        PageComponentWrapper.wrap(
-          new PageComponent({
+        PageComponentWrapper.wrapStatic(
+          new StaticPageComponent({
             key: "test-div",
             Component: "div",
             props: {}
           })
         ),
-        PageComponentWrapper.wrap(
-          new PageComponent({
+        PageComponentWrapper.wrapStatic(
+          new StaticPageComponent({
             key: "test-class",
             Component: TestClassComponent,
             props: {
@@ -32,8 +32,8 @@ export const multiStepForm: { steps: Step[] } = {
     {
       key: "test-step-2",
       componentWrappers: [
-        PageComponentWrapper.wrap(
-          new PageComponent({
+        PageComponentWrapper.wrapStatic(
+          new StaticPageComponent({
             key: "test-img",
             Component: "img",
             props: {
@@ -41,8 +41,8 @@ export const multiStepForm: { steps: Step[] } = {
             }
           })
         ),
-        PageComponentWrapper.wrap(
-          new PageComponent({
+        PageComponentWrapper.wrapStatic(
+          new StaticPageComponent({
             key: "test-function",
             Component: TestFunctionComponent,
             props: {

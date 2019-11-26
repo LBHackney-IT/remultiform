@@ -2,8 +2,8 @@ import { NextPageContext } from "next";
 import React, { Component } from "react";
 import {
   Orchestrator,
-  PageComponent,
   PageComponentWrapper,
+  StaticPageComponent,
   Step
 } from "remultiform";
 
@@ -15,8 +15,8 @@ const steps: Step[] = [
   {
     key: "small-kitten",
     componentWrappers: [
-      PageComponentWrapper.wrap(
-        new PageComponent({
+      PageComponentWrapper.wrapStatic(
+        new StaticPageComponent({
           key: "image",
           Component: "img",
           props: { src: `https://placekitten.com/200/300` }
@@ -27,8 +27,8 @@ const steps: Step[] = [
   {
     key: "big-kitten",
     componentWrappers: [
-      PageComponentWrapper.wrap(
-        new PageComponent({
+      PageComponentWrapper.wrapStatic(
+        new StaticPageComponent({
           key: "image",
           Component: "img",
           props: { src: `https://placekitten.com/900/600` }

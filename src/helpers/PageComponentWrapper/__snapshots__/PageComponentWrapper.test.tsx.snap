@@ -6,6 +6,19 @@ exports[`#element renders correctly for class components 1`] = `
 </div>
 `;
 
+exports[`#element renders correctly for components with controlled props 1`] = `
+<div>
+  <div>
+    test content
+  </div>
+  <input
+    data-testid="input"
+    disabled={true}
+    onChange={[Function]}
+  />
+</div>
+`;
+
 exports[`#element renders correctly for function components 1`] = `
 <div>
   test function content

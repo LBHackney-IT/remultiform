@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 
 /**
- * The options for {@link PageComponent}.
+ * The options for {@link StaticPageComponent}.
  */
-export interface PageComponentOptions<
+export interface StaticPageComponentOptions<
   ComponentType extends React.ElementType<Props>,
   Props
 > {
@@ -18,7 +18,7 @@ export interface PageComponentOptions<
   Component: ComponentType;
 
   /**
-   * The props to pass to {@link PageComponentOptions.Component}.
+   * The props to pass to {@link StaticPageComponentOptions.Component}.
    */
   props: Props;
 }
@@ -26,6 +26,9 @@ export interface PageComponentOptions<
 /**
  * A component along with the associated properties needed to render it as part
  * of a {@link Step}.
+ *
+ * If you need your component to interact with a {@link Database}, use
+ * a {@link DynamicPageComponent} instead.
  *
  * ```ts
  * const myInput = new PageComponent({
@@ -37,15 +40,15 @@ export interface PageComponentOptions<
  * });
  * ```
  */
-export class PageComponent<
+export class StaticPageComponent<
   ComponentType extends React.ElementType<Props>,
   Props
 > {
   /**
-   * The proptype validator for a {@link PageComponent}.
+   * The proptype validator for a {@link StaticPageComponent}.
    */
   static propType: PropTypes.Requireable<
-    PageComponent<
+    StaticPageComponent<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       React.ElementType<any>,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,7 +71,7 @@ export class PageComponent<
   readonly Component: ComponentType;
   readonly props: Props;
 
-  constructor(options: PageComponentOptions<ComponentType, Props>) {
+  constructor(options: StaticPageComponentOptions<ComponentType, Props>) {
     const { key, Component, props } = options;
 
     this.key = key;

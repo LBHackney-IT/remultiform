@@ -17,3 +17,7 @@ and this project adheres to
 - IndexedDB store wrappers
 - `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing database
   to components via context
+- `StaticPageComponent`, `DynamicPageComponent`,
+  `DynamicPageComponentDatabaseMap`, `PageComponentWrapper`, and
+  `WrappedPageComponent` for wrapping components and connecting them to an
+  IndexedDB store

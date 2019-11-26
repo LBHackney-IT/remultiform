@@ -1,38 +1,18 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import { PageComponentWrapper } from "../helpers/PageComponentWrapper";
+import { PageComponentWrapper } from "../helpers/PageComponentWrapper/PageComponentWrapper";
 
 /**
  * The proptypes for {@link Page}.
- *
- * ```ts
- * const pageProps: PageProps = {
- *   componentWrappers: [
- *     PageComponentWrapper.wrap({
- *       key: "my-image",
- *       Component: "img",
- *       props: {
- *         src: "/path/to/my.png"
- *       }
- *     }),
- *     PageComponentWrapper.wrap({
- *       key: "my-input",
- *       Component: MyInput,
- *       props: {
- *         defaultValue: "Enter something?"
- *       }
- *     })
- *   ]
- * };
- * ```
  */
 export interface PageProps {
   /**
    * An ordered array of wrapped components to display on the page.
    *
    * Create {@link PageComponentWrapper|PageComponentWrappers} with
-   * {@link PageComponentWrapper.wrap}.
+   * {@link PageComponentWrapper.wrapStatic} or
+   * {@link PageComponentWrapper.wrapDynamic}.
    */
   componentWrappers: PageComponentWrapper[];
 }
