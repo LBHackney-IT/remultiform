@@ -20,3 +20,11 @@ describe("#context", () => {
     create(<Tester />);
   });
 });
+
+describe("#Consumer", () => {
+  it("matches the consumer of the context provided", () => {
+    const DBContext = new DatabaseContext();
+
+    expect(DBContext.Consumer).toStrictEqual(DBContext.context.Consumer);
+  });
+});

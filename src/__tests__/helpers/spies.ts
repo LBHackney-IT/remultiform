@@ -2,6 +2,8 @@ import { Database } from "../../store/Database";
 import { OpenOptions } from "../../store/OpenOptions";
 import { NamedSchema, Schema } from "../../store/types";
 
+import { promiseToWaitForNextTick } from "./promise";
+
 export const spyOnConsoleError = (): jest.SpyInstance<
   void,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,9 +22,11 @@ export const spyOnDatabaseOpen = (): jest.SpyInstance<
 > => {
   const spy = jest.spyOn(Database, "open");
 
-  spy.mockImplementation(name =>
-    Promise.resolve(new Database({ ...jest.fn()(), name }))
-  );
+  spy.mockImplementation(async (name, version) => {
+    await promiseToWaitForNextTick();
+
+    return new Database({ ...jest.fn()(), name, version });
+  });
 
   return spy;
 };

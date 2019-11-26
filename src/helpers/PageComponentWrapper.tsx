@@ -4,7 +4,7 @@ import React from "react";
 import { PageComponent } from "./PageComponent";
 
 /**
- * A wrapper for {@link PageComponent} for a use in a {@link Step}.
+ * A wrapper for {@link PageComponent} for use in a {@link Step}.
  *
  * Create these using {@link PageComponentWrapper.wrap}.
  */
@@ -21,39 +21,48 @@ export class PageComponentWrapper {
     PageComponentWrapper
   > = PropTypes.exact({
     key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    render: PropTypes.func.isRequired
+    element: PropTypes.element.isRequired
   });
 
   /**
-   * Wrap a {@link PageComponent} in a {@link PageComponentWrapper} or ready to
+   * Wrap a {@link PageComponent} in a {@link PageComponentWrapper} ready to
    * be included in a {@link Step}.
    *
    * You shouldn't need to provide any of the type parameters. They should be
    * infered from the {@link PageComponent} passed in.
    */
-  static wrap<
-    ComponentType extends React.ElementType<Props>,
-    Props = ComponentType extends React.ElementType<infer T> ? T : never
-  >(component: PageComponent<ComponentType, Props>): PageComponentWrapper {
-    const { key, Component, props } = component;
+  static wrap<Props>(
+    component: PageComponent<React.ElementType<Props>, Props>
+  ): PageComponentWrapper {
+    const { key, Component } = component;
 
-    return new PageComponentWrapper(
-      key,
-      (k: React.Key = key): JSX.Element => {
-        return <Component key={k} {...props} />;
-      }
-    );
+    let element: JSX.Element;
+
+    if (typeof Component === "string") {
+      const { Component: IntrinsicElement, props } = component as PageComponent<
+        keyof JSX.IntrinsicElements,
+        {}
+      >;
+
+      element = <IntrinsicElement key={key} {...props} />;
+    } else {
+      const { Component: ReactComponent, props } = component as PageComponent<
+        React.ComponentType<Props>,
+        Props
+      >;
+
+      element = <ReactComponent key={key} {...props} />;
+    }
+
+    return new PageComponentWrapper(key, element);
   }
 
   readonly key: React.Key;
 
   /**
-   * The function to render the component.
-   *
-   * @param key - The key to give the generated component. Defaults to
-   * {@link PageComponentWrapper.key}.
+   * The element for including in a page.
    */
-  readonly render: (key?: React.Key) => JSX.Element;
+  readonly element: JSX.Element;
 
   /**
    * Do not use this directly. Use {@link PageComponentWrapper.wrap} to create
@@ -61,8 +70,8 @@ export class PageComponentWrapper {
    *
    * @ignore
    */
-  constructor(key: React.Key, render: (key?: React.Key) => JSX.Element) {
+  constructor(key: React.Key, element: JSX.Element) {
     this.key = key;
-    this.render = render;
+    this.element = element;
   }
 }

@@ -43,7 +43,7 @@ export interface PageProps {
 export const Page: React.FunctionComponent<PageProps> = (props: PageProps) => {
   const { componentWrappers } = props;
 
-  return <>{componentWrappers.map(({ key, render }) => render(key))}</>;
+  return <>{componentWrappers.map(({ element }) => element)}</>;
 };
 
 Page.propTypes = {

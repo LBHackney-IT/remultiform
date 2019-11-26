@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PageComponent | LBH Frontend React</title>
+	<title>PageComponentOptions | LBH Frontend React</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_helpers_pagecomponent_.html">&quot;helpers/PageComponent&quot;</a>
 				</li>
 				<li>
-					<a href="_helpers_pagecomponent_.pagecomponent.html">PageComponent</a>
+					<a href="_helpers_pagecomponent_.pagecomponentoptions.html">PageComponentOptions</a>
 				</li>
 			</ul>
-			<h1>Interface PageComponent&lt;ComponentType, Props&gt;</h1>
+			<h1>Interface PageComponentOptions&lt;ComponentType, Props&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,16 +72,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A component along with the associated properties needed to render it as part
-						of a <a href="_components_orchestrator_.step.html">Step</a>.</p>
+						<p>The options for <a href="../classes/_helpers_pagecomponent_.pagecomponent.html">PageComponent</a>.</p>
 					</div>
-					<pre><code class="language-ts"><span class="hljs-keyword">const</span> component: PageComponent&lt;<span class="hljs-keyword">typeof</span> MyInput&gt; = {
-  key: <span class="hljs-string">"my-input"</span>,
-  Component: MyInput,
-  props: {
-    defaultValue: <span class="hljs-string">"Enter something?"</span>
-  }
-}</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
@@ -99,7 +91,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PageComponent</span>
+						<span class="target">PageComponentOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -110,9 +102,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponent_.pagecomponent.html#component" class="tsd-kind-icon">Component</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponent_.pagecomponent.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponent_.pagecomponent.html#props" class="tsd-kind-icon">props</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponent_.pagecomponentoptions.html#component" class="tsd-kind-icon">Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponent_.pagecomponentoptions.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponent_.pagecomponentoptions.html#props" class="tsd-kind-icon">props</a></li>
 							</ul>
 						</section>
 					</div>
@@ -126,7 +118,7 @@
 					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L29">src/helpers/PageComponent.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L18">src/helpers/PageComponent.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -141,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L24">src/helpers/PageComponent.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L13">src/helpers/PageComponent.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -153,15 +145,15 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="props" class="tsd-anchor"></a>
 					<h3>props</h3>
-					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSX.LibraryManagedAttributes</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Props</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L34">src/helpers/PageComponent.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L23">src/helpers/PageComponent.ts:23</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The props to pass to <a href="_helpers_pagecomponent_.pagecomponent.html#component">PageComponent.Component</a>.</p>
+							<p>The props to pass to <a href="_helpers_pagecomponent_.pagecomponentoptions.html#component">PageComponentOptions.Component</a>.</p>
 						</div>
 					</div>
 				</section>
@@ -210,19 +202,22 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../classes/_helpers_pagecomponent_.pagecomponent.html" class="tsd-kind-icon">Page<wbr>Component</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_helpers_pagecomponent_.pagecomponent.html" class="tsd-kind-icon">Page<wbr>Component</a>
+						<a href="_helpers_pagecomponent_.pagecomponentoptions.html" class="tsd-kind-icon">Page<wbr>Component<wbr>Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_helpers_pagecomponent_.pagecomponent.html#component" class="tsd-kind-icon">Component</a>
+								<a href="_helpers_pagecomponent_.pagecomponentoptions.html#component" class="tsd-kind-icon">Component</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_helpers_pagecomponent_.pagecomponent.html#key" class="tsd-kind-icon">key</a>
+								<a href="_helpers_pagecomponent_.pagecomponentoptions.html#key" class="tsd-kind-icon">key</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_helpers_pagecomponent_.pagecomponent.html#props" class="tsd-kind-icon">props</a>
+								<a href="_helpers_pagecomponent_.pagecomponentoptions.html#props" class="tsd-kind-icon">props</a>
 							</li>
 						</ul>
 					</li>

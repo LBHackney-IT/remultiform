@@ -1,6 +1,9 @@
+import "fake-indexeddb/auto";
+
 import { IDBPDatabase, deleteDB, openDB } from "idb";
 
 import { expectPromise } from "../__tests__/helpers/expect";
+import { promiseToWaitForNextTick } from "../__tests__/helpers/promise";
 
 import { NamedSchema, Transaction } from "./types";
 import { Upgrade } from "./Upgrade";
@@ -231,9 +234,7 @@ describe("#transaction()", () => {
     await upgrade.transaction([testStoreName], async stores => {
       await stores[testStoreName].add(value, key);
 
-      await new Promise(resolve => {
-        setImmediate(resolve);
-      });
+      await promiseToWaitForNextTick();
 
       // We haven't awaited `transaction.done` yet, so we haven't explicitly
       // waited for the transaction to complete, so if it's complete, it's
@@ -249,9 +250,7 @@ describe("#transaction()", () => {
     await upgrade.transaction([testStoreName], async stores => {
       await stores[testStoreName].add(value, key);
 
-      await new Promise(resolve => {
-        setImmediate(resolve);
-      });
+      await promiseToWaitForNextTick();
 
       await expectPromise(() =>
         stores[testStoreName].add(2, "anotherKey")

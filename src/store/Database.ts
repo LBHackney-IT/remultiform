@@ -62,6 +62,9 @@ export class Database<DBSchema extends NamedSchema<string, number, Schema>> {
    */
   readonly name: string;
 
+  /**
+   * The `idb` wrapper of the IndexedDB database this {@link Database} wraps.
+   */
   private readonly db: IDBPDatabase<DBSchema["schema"]>;
 
   /**

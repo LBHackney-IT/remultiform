@@ -1,6 +1,6 @@
 {
   "exclude": [
-    "src/index.ts",
+    "src/**/index.ts",
     "**/node_modules/**/*",
     "**/__*__/**/*",
     "**/*.spec.*",

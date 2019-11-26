@@ -4,6 +4,9 @@ import { TestClassComponent } from "../__fixtures__/components/TestClassComponen
 import { TestFunctionComponent } from "../__fixtures__/components/TestFunctionComponent";
 
 import { PageComponentWrapper } from "./PageComponentWrapper";
+import { PageComponent } from "./PageComponent";
+
+jest.mock("../store/Database");
 
 describe(".propType", () => {
   it("exists", () => {
@@ -13,115 +16,83 @@ describe(".propType", () => {
 
 describe(".wrap()", () => {
   it("returns an `PageComponentWrapper`", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-class",
-      Component: TestClassComponent,
-      props: {
-        content: "test class content"
-      }
-    });
+    const componentWrapper = PageComponentWrapper.wrap(
+      new PageComponent({
+        key: "test-class",
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
 
     expect(componentWrapper).toBeInstanceOf(PageComponentWrapper);
   });
 });
 
 describe("#key", () => {
-  it("matches the key provided during construction", () => {
+  it("matches the key provided when wrapping a `PageComponent`", () => {
     const key = "test-key";
 
-    const componentWrapper = PageComponentWrapper.wrap({
-      key,
-      Component: TestClassComponent,
-      props: {
-        content: "test class content"
-      }
-    });
+    const componentWrapper = PageComponentWrapper.wrap(
+      new PageComponent({
+        key,
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
 
     expect(componentWrapper.key).toEqual(key);
   });
 });
 
-describe("#render()", () => {
-  it("renders correctly for intrinsic elements without providing a key", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-function",
-      Component: "img",
-      props: {
-        src: "test.png"
-      }
-    });
+describe("#element", () => {
+  it("renders correctly for intrinsic elements", () => {
+    const componentWrapper = PageComponentWrapper.wrap(
+      new PageComponent({
+        key: "test-function",
+        Component: "img",
+        props: {
+          src: "test.png"
+        }
+      })
+    );
 
-    const component = create(componentWrapper.render());
-
-    expect(component).toMatchSnapshot();
-  });
-
-  it("renders correctly for class components without providing a key", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-class",
-      Component: TestClassComponent,
-      props: {
-        content: "test class content"
-      }
-    });
-
-    const component = create(componentWrapper.render());
+    const component = create(componentWrapper.element);
 
     expect(component).toMatchSnapshot();
   });
 
-  it("renders correctly for function components without providing a key", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-function",
-      Component: TestFunctionComponent,
-      props: {
-        content: "test function content"
-      }
-    });
+  it("renders correctly for class components", () => {
+    const componentWrapper = PageComponentWrapper.wrap(
+      new PageComponent({
+        key: "test-class",
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
 
-    const component = create(componentWrapper.render());
-
-    expect(component).toMatchSnapshot();
-  });
-
-  it("renders correctly for intrinsic elements when providing a key", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-function",
-      Component: "img",
-      props: {
-        src: "test.png"
-      }
-    });
-
-    const component = create(componentWrapper.render("test-key"));
+    const component = create(componentWrapper.element);
 
     expect(component).toMatchSnapshot();
   });
 
-  it("renders correctly for class components when providing a key", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-class",
-      Component: TestClassComponent,
-      props: {
-        content: "test class content"
-      }
-    });
+  it("renders correctly for function components", () => {
+    const componentWrapper = PageComponentWrapper.wrap(
+      new PageComponent({
+        key: "test-function",
+        Component: TestFunctionComponent,
+        props: {
+          content: "test function content"
+        }
+      })
+    );
 
-    const component = create(componentWrapper.render("test-key"));
-
-    expect(component).toMatchSnapshot();
-  });
-
-  it("renders correctly for function components when providing a key", () => {
-    const componentWrapper = PageComponentWrapper.wrap({
-      key: "test-function",
-      Component: TestFunctionComponent,
-      props: {
-        content: "test function content"
-      }
-    });
-
-    const component = create(componentWrapper.render("test-key"));
+    const component = create(componentWrapper.element);
 
     expect(component).toMatchSnapshot();
   });

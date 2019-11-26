@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DatabaseContext | LBH Frontend React</title>
+	<title>PageComponent | LBH Frontend React</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/DatabaseContext&quot;</a>
+					<a href="../modules/_helpers_pagecomponent_.html">&quot;helpers/PageComponent&quot;</a>
 				</li>
 				<li>
-					<a href="_helpers_databasecontext_.databasecontext.html">DatabaseContext</a>
+					<a href="_helpers_pagecomponent_.pagecomponent.html">PageComponent</a>
 				</li>
 			</ul>
-			<h1>Class DatabaseContext&lt;DBSchema&gt;</h1>
+			<h1>Class PageComponent&lt;ComponentType, Props&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,33 +72,26 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A React context for passing a database connection to
-						<a href="_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a>.</p>
+						<p>A component along with the associated properties needed to render it as part
+						of a <a href="../interfaces/_components_orchestrator_.step.html">Step</a>.</p>
 					</div>
-					<p>Normally, you use this by creating an instance somewhere and sharing it
-					between components via <a href="_components_databaseprovider_.databaseprovider.html">DatabaseProvider</a> and <a href="../modules/_hooks_usedatabase_.html#usedatabase">useDatabase</a>.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">type</span> DBSchema = NamedSchema&lt;
-  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
-  {
-    favouriteColour: {
-      key: <span class="hljs-built_in">string</span>;
-      value: {
-        r: <span class="hljs-built_in">number</span>;
-        g: <span class="hljs-built_in">number</span>;
-        b: <span class="hljs-built_in">number</span>;
-      };
-    };
+					<pre><code class="language-ts"><span class="hljs-keyword">const</span> myInput = <span class="hljs-keyword">new</span> PageComponent({
+  key: <span class="hljs-string">"my-input"</span>,
+  Component: MyInput,
+  props: {
+    className: <span class="hljs-string">"my-input-class"</span>
   }
-&gt;;
-
-<span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext&lt;DBSchema&gt;();</code></pre>
+});</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4>ComponentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li>
+						<h4>Props</h4>
 					</li>
 				</ul>
 			</section>
@@ -106,7 +99,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DatabaseContext</span>
+						<span class="target">PageComponent</span>
 					</li>
 				</ul>
 			</section>
@@ -117,13 +110,16 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_helpers_databasecontext_.databasecontext.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_helpers_pagecomponent_.pagecomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_helpers_databasecontext_.databasecontext.html#consumer" class="tsd-kind-icon">Consumer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_helpers_pagecomponent_.pagecomponent.html#component" class="tsd-kind-icon">Component</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_helpers_pagecomponent_.pagecomponent.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_helpers_pagecomponent_.pagecomponent.html#props" class="tsd-kind-icon">props</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_helpers_pagecomponent_.pagecomponent.html#proptype" class="tsd-kind-icon">prop<wbr>Type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -135,16 +131,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Context<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Page<wbr>Component<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_helpers_pagecomponent_.pagecomponentoptions.html" class="tsd-signature-type">PageComponentOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_helpers_pagecomponent_.pagecomponent.html" class="tsd-signature-type">PageComponent</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L51">src/helpers/DatabaseContext.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L69">src/helpers/PageComponent.ts:69</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></h4>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/_helpers_pagecomponent_.pagecomponentoptions.html" class="tsd-signature-type">PageComponentOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_helpers_pagecomponent_.pagecomponent.html" class="tsd-signature-type">PageComponent</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -152,20 +154,48 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="consumer" class="tsd-anchor"></a>
-					<h3>Consumer</h3>
-					<div class="tsd-signature tsd-kind-icon">Consumer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ExoticComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ConsumerProps</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="component" class="tsd-anchor"></a>
+					<h3>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L49">src/helpers/DatabaseContext.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L68">src/helpers/PageComponent.ts:68</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L67">src/helpers/PageComponent.ts:67</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="props" class="tsd-anchor"></a>
+					<h3>props</h3>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Props</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L69">src/helpers/PageComponent.ts:69</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="proptype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> prop<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">prop<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_pagecomponent_.pagecomponent.html" class="tsd-signature-type">PageComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.exact({key: PropTypes.oneOfType([PropTypes.string.isRequired,PropTypes.number.isRequired]).isRequired,Component: (PropTypes.elementType as PropTypes.Requireable&lt;// eslint-disable-next-line @typescript-eslint/no-explicit-anyReact.ElementType&lt;any&gt;&gt;).isRequired,props: PropTypes.object.isRequired,defaultValue: PropTypes.any.isRequired})</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponent.ts#L47">src/helpers/PageComponent.ts:47</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The consumer component for this context.</p>
+							<p>The proptype validator for a <a href="_helpers_pagecomponent_.pagecomponent.html">PageComponent</a>.</p>
 						</div>
-						<p>Use it to wrap components that need the database in the usual React
-						consumer way.</p>
 					</div>
 				</section>
 			</section>
@@ -185,10 +215,10 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_helpers_pagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -216,18 +246,30 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_helpers_databasecontext_.databasecontext.html" class="tsd-kind-icon">Database<wbr>Context</a>
+						<a href="_helpers_pagecomponent_.pagecomponent.html" class="tsd-kind-icon">Page<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_helpers_databasecontext_.databasecontext.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_helpers_pagecomponent_.pagecomponent.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_helpers_databasecontext_.databasecontext.html#consumer" class="tsd-kind-icon">Consumer</a>
+								<a href="_helpers_pagecomponent_.pagecomponent.html#component" class="tsd-kind-icon">Component</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_helpers_pagecomponent_.pagecomponent.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_helpers_pagecomponent_.pagecomponent.html#props" class="tsd-kind-icon">props</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_helpers_pagecomponent_.pagecomponent.html#proptype" class="tsd-kind-icon">prop<wbr>Type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../interfaces/_helpers_pagecomponent_.pagecomponentoptions.html" class="tsd-kind-icon">Page<wbr>Component<wbr>Options</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
