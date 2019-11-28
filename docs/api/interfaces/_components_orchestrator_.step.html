@@ -62,7 +62,7 @@
 					<a href="_components_orchestrator_.step.html">Step</a>
 				</li>
 			</ul>
-			<h1>Interface Step</h1>
+			<h1>Interface Step&lt;DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -75,26 +75,15 @@
 						<p>A step in a multipage form.</p>
 					</div>
 					<p>This represents a single step in the flow of the multipage form.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">const</span> step: Step = {
-  key: <span class="hljs-string">"step-1"</span>,
-  componentWrappers: [
-    PageComponentWrapper.wrap({
-      key: <span class="hljs-string">"my-image"</span>,
-      Component: <span class="hljs-string">"img"</span>,
-      props: {
-        src: <span class="hljs-string">"/path/to/my.png"</span>
-      }
-    }),
-    PageComponentWrapper.wrap({
-      key: <span class="hljs-string">"my-input"</span>,
-      Component: MyInput,
-      props: {
-        defaultValue: <span class="hljs-string">"Enter something?"</span>
-      }
-    })
-  ]
-};</code></pre>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
@@ -123,18 +112,19 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="componentwrappers" class="tsd-anchor"></a>
 					<h3>component<wbr>Wrappers</h3>
-					<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <a href="../classes/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html" class="tsd-signature-type">PageComponentWrapper</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <a href="../classes/_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html" class="tsd-signature-type">PageComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L49">src/components/Orchestrator.tsx:49</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L35">src/components/Orchestrator.tsx:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>An ordered array of wrapped components to include in this step.</p>
 						</div>
-						<p>Create <a href="../classes/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a> with
-						<a href="../classes/_helpers_pagecomponentwrapper_.pagecomponentwrapper.html#wrap">PageComponentWrapper.wrap</a>.</p>
+						<p>Create <a href="../classes/_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a> with
+							<a href="../classes/_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html#wrapstatic">PageComponentWrapper.wrapStatic</a> and
+						<a href="../classes/_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html#wrapdynamic">PageComponentWrapper.wrapDynamic</a>.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -143,7 +133,7 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L41">src/components/Orchestrator.tsx:41</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L26">src/components/Orchestrator.tsx:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -171,13 +161,22 @@
 						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_components_wrappedpagecomponent_.html">&quot;components/<wbr>Wrapped<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_helpers_pagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component&quot;</a>
+						<a href="../modules/_helpers_pagecomponentwrapper_databasemap_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Database<wbr>Map&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+						<a href="../modules/_helpers_pagecomponentwrapper_dynamicpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Dynamic<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_pagecomponentwrapper_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_pagecomponentwrapper_staticpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Static<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_hooks_usedatabase_.html">&quot;hooks/use<wbr>Database&quot;</a>
@@ -198,12 +197,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_components_orchestrator_.orchestratorprops.html" class="tsd-kind-icon">Orchestrator<wbr>Props</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_components_orchestrator_.step.html" class="tsd-kind-icon">Step</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -216,7 +215,7 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../modules/_components_orchestrator_.html#orchestrator" class="tsd-kind-icon">Orchestrator</a>
 					</li>
 				</ul>

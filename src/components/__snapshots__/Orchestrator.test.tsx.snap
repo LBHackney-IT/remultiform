@@ -11,7 +11,7 @@ Array [
 ]
 `;
 
-exports[`renders correctly without \`currentStepKey\` 1`] = `
+exports[`renders correctly without optional props 1`] = `
 Array [
   <div />,
   <div>

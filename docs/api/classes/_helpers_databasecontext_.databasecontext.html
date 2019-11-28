@@ -72,13 +72,14 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A React context for passing a database connection to
-						<a href="_helpers_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a>.</p>
+						<p>A wrapper for a React context for passing a database connection to
+						<a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html">PageComponentWrappers</a>.</p>
 					</div>
 					<p>Normally, you use this by creating an instance somewhere and sharing it
 					between components via <a href="_components_databaseprovider_.databaseprovider.html">DatabaseProvider</a> and <a href="../modules/_hooks_usedatabase_.html#usedatabase">useDatabase</a>.</p>
 					<pre><code class="language-ts"><span class="hljs-keyword">type</span> DBSchema = NamedSchema&lt;
   <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
+  <span class="hljs-number">5</span>,
   {
     favouriteColour: {
       key: <span class="hljs-built_in">string</span>;
@@ -91,7 +92,8 @@
   }
 &gt;;
 
-<span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext&lt;DBSchema&gt;();</code></pre>
+<span class="hljs-keyword">const</span> databasePromise = Database.open(<span class="hljs-string">"myDatabase"</span>, <span class="hljs-number">5</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext(databasePromise);</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
@@ -124,6 +126,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_helpers_databasecontext_.databasecontext.html#consumer" class="tsd-kind-icon">Consumer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_helpers_databasecontext_.databasecontext.html#database" class="tsd-kind-icon">database</a></li>
 							</ul>
 						</section>
 					</div>
@@ -135,15 +138,33 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Context<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Context<span class="tsd-signature-symbol">(</span>openDatabaseOrPromise<span class="tsd-signature-symbol">: </span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L51">src/helpers/DatabaseContext.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L58">src/helpers/DatabaseContext.ts:58</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new <a href="_helpers_databasecontext_.databasecontext.html">DatabaseContext</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>openDatabaseOrPromise: <a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>An open <a href="_store_database_.database.html">Database</a> or a promise that
+												will resolve to an one. Normally, you would want to pass the return value
+											of <a href="_store_database_.database.html#open">Database.open</a> in here directly.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></h4>
 						</li>
 					</ul>
@@ -157,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">Consumer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ExoticComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ConsumerProps</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L49">src/helpers/DatabaseContext.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L56">src/helpers/DatabaseContext.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -166,6 +187,21 @@
 						</div>
 						<p>Use it to wrap components that need the database in the usual React
 						consumer way.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="database" class="tsd-anchor"></a>
+					<h3>database</h3>
+					<div class="tsd-signature tsd-kind-icon">database<span class="tsd-signature-symbol">:</span> <a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/DatabaseContext.ts#L41">src/helpers/DatabaseContext.ts:41</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An open <a href="_store_database_.database.html">Database</a> or a promise that will resolve to an one.</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -185,14 +221,23 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_components_wrappedpagecomponent_.html">&quot;components/<wbr>Wrapped<wbr>Page<wbr>Component&quot;</a>
+					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_helpers_databasecontext_.html">&quot;helpers/<wbr>Database<wbr>Context&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_helpers_pagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component&quot;</a>
+						<a href="../modules/_helpers_pagecomponentwrapper_databasemap_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Database<wbr>Map&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_helpers_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+						<a href="../modules/_helpers_pagecomponentwrapper_dynamicpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Dynamic<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_pagecomponentwrapper_pagecomponentwrapper_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Page<wbr>Component<wbr>Wrapper&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_pagecomponentwrapper_staticpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Static<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_hooks_usedatabase_.html">&quot;hooks/use<wbr>Database&quot;</a>
@@ -223,6 +268,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_helpers_databasecontext_.databasecontext.html#consumer" class="tsd-kind-icon">Consumer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_helpers_databasecontext_.databasecontext.html#database" class="tsd-kind-icon">database</a>
 							</li>
 						</ul>
 					</li>

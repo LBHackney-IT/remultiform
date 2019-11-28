@@ -7,15 +7,27 @@ import { spyOnConsoleError } from "../__tests__/helpers/spies";
 
 import { DatabaseContext } from "../helpers/DatabaseContext";
 
-import { useDatabase } from "./useDatabase";
 import { Database } from "../store/Database";
+import { NamedSchema, Schema } from "../store/types";
+
+import { useDatabase } from "./useDatabase";
 
 jest.mock("../store/Database");
+
+let openDatabasePromise: Promise<Database<NamedSchema<string, number, Schema>>>;
+
+beforeEach(() => {
+  openDatabasePromise = Database.open("testDBName", 1);
+});
+
+afterEach(async () => {
+  await openDatabasePromise;
+});
 
 it("returns `undefined` when not a child of a database context provider", () => {
   expect.hasAssertions();
 
-  const DBContext = new DatabaseContext();
+  const DBContext = new DatabaseContext(openDatabasePromise);
 
   const Tester = (): JSX.Element => {
     const database = useDatabase(DBContext);
@@ -31,7 +43,7 @@ it("returns `undefined` when not a child of a database context provider", () => 
 it("returns the database from the nearest database context provider", async () => {
   expect.hasAssertions();
 
-  const DBContext = new DatabaseContext();
+  const DBContext = new DatabaseContext(openDatabasePromise);
   const db = await Database.open("testDBName", 1);
 
   const Tester = (): JSX.Element => {
@@ -66,7 +78,7 @@ describe("with an unsupported React version", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     delete (React as any).useContext;
 
-    const DBContext = new DatabaseContext();
+    const DBContext = new DatabaseContext(openDatabasePromise);
 
     const Tester = (): JSX.Element => {
       useDatabase(DBContext);

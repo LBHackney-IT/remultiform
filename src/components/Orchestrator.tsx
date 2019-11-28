@@ -1,38 +1,23 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import { PageComponentWrapper } from "../helpers/PageComponentWrapper";
+import { DatabaseContext } from "../helpers/DatabaseContext";
+import { PageComponentWrapper } from "../helpers/PageComponentWrapper/PageComponentWrapper";
 
+import { NamedSchema, Schema } from "../store/types";
+
+import { DatabaseProvider } from "./DatabaseProvider";
 import { Page } from "./Page";
 
 /**
  * A step in a multipage form.
  *
  * This represents a single step in the flow of the multipage form.
- *
- * ```ts
- * const step: Step = {
- *   key: "step-1",
- *   componentWrappers: [
- *     PageComponentWrapper.wrap({
- *       key: "my-image",
- *       Component: "img",
- *       props: {
- *         src: "/path/to/my.png"
- *       }
- *     }),
- *     PageComponentWrapper.wrap({
- *       key: "my-input",
- *       Component: MyInput,
- *       props: {
- *         defaultValue: "Enter something?"
- *       }
- *     })
- *   ]
- * };
- * ```
  */
-export interface Step {
+export interface Step<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  DBSchema extends NamedSchema<string, number, Schema> = any
+> {
   /**
    * The key to uniquely identify the step
    *
@@ -44,15 +29,26 @@ export interface Step {
    * An ordered array of wrapped components to include in this step.
    *
    * Create {@link PageComponentWrapper|PageComponentWrappers} with
-   * {@link PageComponentWrapper.wrap}.
+   * {@link PageComponentWrapper.wrapStatic} and
+   * {@link PageComponentWrapper.wrapDynamic}.
    */
-  componentWrappers: PageComponentWrapper[];
+  componentWrappers: PageComponentWrapper<DBSchema>[];
 }
 
 /**
  * The proptypes for {@link Orchestrator}.
  */
-export interface OrchestratorProps {
+export interface OrchestratorProps<
+  DBSchema extends NamedSchema<string, number, Schema>
+> {
+  /**
+   * A context wrapper for a {@link Database} instance.
+   *
+   * You must provide this if any of your components are instances of
+   * {@link DynamicPageComponent} for them to work as expected.
+   */
+  context?: DatabaseContext<DBSchema> | null;
+
   /**
    * The key of the current step to be rendered.
    */
@@ -62,69 +58,39 @@ export interface OrchestratorProps {
    * An array of steps to possibly render based on
    * {@link OrchestratorProps.currentStepKey}.
    */
-  steps: Step[];
+  steps: Step<DBSchema>[];
 }
 
 /**
  * A component for orchestrating the rendering of pages for a multipage form.
- *
- * ```ts
- * const form: React.FunctionComponent = () => {
- *   return (
- *     <Orchestrator
- *       currentStepKey="step-2"
- *       steps={[
- *         {
- *           key: "step-1",
- *           componentWrappers: [
- *             PageComponentWrapper.wrap({
- *               key: "my-image",
- *               Component: "img",
- *               props: {
- *                 src: "/path/to/my.png"
- *               }
- *             }),
- *             PageComponentWrapper.wrap({
- *               key: "my-input",
- *               Component: MyInput,
- *               props: {
- *                 defaultValue: "Enter something?"
- *               }
- *             })
- *           ]
- *         },
- *         {
- *           key: "step-2",
- *           componentWrappers: [
- *             PageComponentWrapper.wrap({
- *               key: "my-input",
- *               Component: MyInput,
- *               props: {
- *                 defaultValue: "Enter something else?"
- *               }
- *             })
- *           ]
- *         }
- *       ]}
- *     />
- *   )
- * }
  */
-export const Orchestrator: React.FunctionComponent<OrchestratorProps> = (
-  props: OrchestratorProps
+export const Orchestrator = <
+  DBSchema extends NamedSchema<string, number, Schema>
+>(
+  props: OrchestratorProps<DBSchema>
 ): JSX.Element => {
-  const { currentStepKey, steps } = props;
+  const { context, currentStepKey, steps } = props;
 
   const currentStep =
     steps.find(({ key }) => key === currentStepKey) || steps[0];
 
+  if (context) {
+    return (
+      <DatabaseProvider context={context}>
+        <Page
+          context={context}
+          key={currentStep.key}
+          componentWrappers={currentStep.componentWrappers}
+        />
+      </DatabaseProvider>
+    );
+  }
+
   return (
-    <>
-      <Page
-        key={currentStep.key}
-        componentWrappers={currentStep.componentWrappers}
-      />
-    </>
+    <Page
+      key={currentStep.key}
+      componentWrappers={currentStep.componentWrappers}
+    />
   );
 };
 
@@ -141,4 +107,6 @@ Orchestrator.propTypes = {
       ).isRequired
     }).isRequired
   ).isRequired
-};
+} as PropTypes.ValidationMap<
+  OrchestratorProps<NamedSchema<string, number, Schema>>
+>;

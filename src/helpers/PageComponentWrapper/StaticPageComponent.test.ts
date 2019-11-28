@@ -1,10 +1,10 @@
-import { PageComponent } from "./PageComponent";
+import { StaticPageComponent } from "./StaticPageComponent";
 
 describe("#key", () => {
   it("matches the `key` provided to the constructor", () => {
     const key = "test-key";
 
-    const pageComponent = new PageComponent({
+    const pageComponent = new StaticPageComponent({
       key,
       Component: "div",
       props: {}
@@ -18,7 +18,7 @@ describe("#Component", () => {
   it("matches the `Component` provided to the constructor", () => {
     const Component = "div";
 
-    const pageComponent = new PageComponent({
+    const pageComponent = new StaticPageComponent({
       key: "test-key",
       Component,
       props: {}
@@ -32,7 +32,7 @@ describe("#props", () => {
   it("matches the `props` provided to the constructor", () => {
     const props = { src: "test.png" };
 
-    const pageComponent = new PageComponent({
+    const pageComponent = new StaticPageComponent({
       key: "test-key",
       Component: "img",
       props
