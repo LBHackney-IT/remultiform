@@ -192,9 +192,9 @@ export class DynamicPageComponent<
    * @param valuePropType - An optional proptype validator for the type of
    * {@link DynamicPageComponentControlledProps.value}.
    */
-  static controlledPropTypes<T>(
-    valuePropType: PropTypes.Requireable<T>
-  ): PropTypes.ValidationMap<DynamicPageComponentControlledProps<T>> {
+  static controlledPropTypes<Value>(
+    valuePropType: PropTypes.Requireable<Value>
+  ): PropTypes.ValidationMap<DynamicPageComponentControlledProps<Value>> {
     return {
       value: valuePropType,
       onValueChange: PropTypes.func.isRequired,

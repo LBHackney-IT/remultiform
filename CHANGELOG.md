@@ -21,3 +21,5 @@ and this project adheres to
   `DynamicPageComponentDatabaseMap`, `PageComponentWrapper`, and
   `WrappedPageComponent` for wrapping components and connecting them to an
   IndexedDB store
+- `makeDatabase`, a Higher Order Component to make wrapping dynamic components
+  more straightforward
