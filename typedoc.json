@@ -13,7 +13,7 @@
   "includeDeclarations": true,
   "listInvalidSymbolLinks": true,
   "mode": "modules",
-  "name": "LBH Frontend React",
+  "name": "Remultiform",
   "out": "docs/api/",
   "theme": "default"
 }
