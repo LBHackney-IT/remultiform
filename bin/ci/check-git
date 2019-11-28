@@ -15,7 +15,7 @@ if [[ $CHANGED_FILES ]]; then
   echo "We expected this to be a clean run."
   echo
 
-  git diff
+  git --no-pager diff
 
   exit 1
 fi
