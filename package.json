@@ -57,7 +57,7 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-jsdoc": "^18.1.4",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "fake-indexeddb": "^3.0.0",
     "husky": "^3.1.0",
