@@ -52,7 +52,7 @@
     "@typescript-eslint/parser": "^2.8.0",
     "barrelsby": "^2.2.0",
     "codeowners-enforcer": "^1.0.3",
-    "core-js-bundle": "^3.4.1",
+    "core-js-bundle": "^3.4.7",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-jsdoc": "^18.1.4",
