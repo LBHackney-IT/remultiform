@@ -73,6 +73,25 @@ describe("#props", () => {
   });
 });
 
+describe("#databaseMap", () => {
+  it("matches the `databaseMap` provided to the constructor", () => {
+    const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+      storeName: "testStore",
+      key: 0
+    });
+
+    const pageComponent = new DynamicPageComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      defaultValue: "test value",
+      databaseMap
+    });
+
+    expect(pageComponent.databaseMap).toStrictEqual(databaseMap);
+  });
+});
+
 describe("#defaultValue", () => {
   it("matches the `defaultValue` provided to the constructor", () => {
     const defaultValue = "test value";
@@ -103,24 +122,5 @@ describe("#defaultValue", () => {
     });
 
     expect(pageComponent.defaultValue).toBeUndefined();
-  });
-});
-
-describe("#databaseMap", () => {
-  it("matches the `databaseMap` provided to the constructor", () => {
-    const databaseMap = new DatabaseMap<TestSchema, "testStore">({
-      storeName: "testStore",
-      key: 0
-    });
-
-    const pageComponent = new DynamicPageComponent({
-      key: "test-key",
-      Component: TestDynamicComponent,
-      props: { content: "test content" },
-      defaultValue: "test value",
-      databaseMap
-    });
-
-    expect(pageComponent.databaseMap).toStrictEqual(databaseMap);
   });
 });
