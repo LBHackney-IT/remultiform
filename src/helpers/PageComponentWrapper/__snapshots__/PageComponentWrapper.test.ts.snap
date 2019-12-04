@@ -15,6 +15,7 @@ exports[`#render() renders correctly for components with controlled props 1`] = 
     data-testid="input"
     disabled={true}
     onChange={[Function]}
+    value=""
   />
 </div>
 `;

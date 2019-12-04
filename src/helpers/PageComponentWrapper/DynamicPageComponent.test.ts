@@ -124,3 +124,37 @@ describe("#defaultValue", () => {
     expect(pageComponent.defaultValue).toBeUndefined();
   });
 });
+
+describe("#emptyValue", () => {
+  it("matches the `emptyValue` provided to the constructor", () => {
+    const emptyValue = "test empty value";
+
+    const pageComponent = new DynamicPageComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      defaultValue: "test default value",
+      emptyValue,
+      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(pageComponent.emptyValue).toEqual(emptyValue);
+  });
+
+  it("is an empty string when no `emptyValue` is provided to the constructor", () => {
+    const pageComponent = new DynamicPageComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(pageComponent.emptyValue).toEqual("");
+  });
+});

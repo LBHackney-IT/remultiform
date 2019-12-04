@@ -40,6 +40,7 @@ const testPageComponent = new DynamicPageComponent({
     content: "test content"
   },
   defaultValue: "test default",
+  emptyValue: "test empty",
   databaseMap: testDatabaseMap
 });
 
@@ -119,6 +120,36 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
   expect(component).toMatchSnapshot();
 });
 
+it("uses the empty value before it fetches from the database", async () => {
+  const get = spyOnDatabaseGet();
+
+  const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
+
+  let component: ReactTestRenderer | undefined = undefined;
+
+  await act(async () => {
+    component = create(
+      <DatabaseProvider context={DBContext}>
+        <DBContext.Consumer>
+          {(database): JSX.Element => (
+            <WrappedPageComponent
+              database={database}
+              component={testPageComponent}
+            />
+          )}
+        </DBContext.Consumer>
+      </DatabaseProvider>
+    );
+
+    await openPromise;
+  });
+
+  expect(component).toMatchSnapshot();
+
+  await get.settle;
+});
+
 it("uses the default value when fetching the stored value returns `undefined`", async () => {
   const get = spyOnDatabaseGet(false);
 
@@ -135,6 +166,45 @@ it("uses the default value when fetching the stored value returns `undefined`", 
             <WrappedPageComponent
               database={database}
               component={testPageComponent}
+            />
+          )}
+        </DBContext.Consumer>
+      </DatabaseProvider>
+    );
+
+    await openPromise;
+    await get.settle;
+  });
+
+  expect(component).toMatchSnapshot();
+});
+
+it("uses the empty value when fetching the stored value returns `undefined` and there is no default value", async () => {
+  const get = spyOnDatabaseGet(false);
+
+  const pageComponent = new DynamicPageComponent({
+    key: "test-component",
+    Component: TestDynamicComponent,
+    props: {
+      content: "test content"
+    },
+    emptyValue: "test empty",
+    databaseMap: testDatabaseMap
+  });
+
+  const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
+
+  let component: ReactTestRenderer | undefined = undefined;
+
+  await act(async () => {
+    component = create(
+      <DatabaseProvider context={DBContext}>
+        <DBContext.Consumer>
+          {(database): JSX.Element => (
+            <WrappedPageComponent
+              database={database}
+              component={pageComponent}
             />
           )}
         </DBContext.Consumer>

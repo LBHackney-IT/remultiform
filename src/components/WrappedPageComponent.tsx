@@ -42,7 +42,7 @@ interface WrappedPageComponentState<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
-  value?: StoreValue<DBSchema["schema"], StoreName>;
+  value?: "" | StoreValue<DBSchema["schema"], StoreName>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   isFetching: boolean;
@@ -86,6 +86,7 @@ export class WrappedPageComponent<
    * @ignore
    */
   state: WrappedPageComponentState<DBSchema, StoreName> = {
+    value: this.props.component.emptyValue,
     isFetching: false
   };
 
@@ -164,7 +165,7 @@ export class WrappedPageComponent<
 
     const {
       database,
-      component: { databaseMap, defaultValue }
+      component: { databaseMap, defaultValue, emptyValue }
     } = this.props;
 
     if (!database || !databaseMap) {
@@ -189,6 +190,12 @@ export class WrappedPageComponent<
 
       if (stateUpdate.value === undefined) {
         stateUpdate.value = nullAsUndefined(defaultValue);
+      }
+
+      if (stateUpdate.value === undefined) {
+        // We need to do this to keep the component as a controlled component.
+        // The controlled prop must always be defined.
+        stateUpdate.value = emptyValue;
       }
 
       // Clear the error if it was set.
