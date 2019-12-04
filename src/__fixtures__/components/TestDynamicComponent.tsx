@@ -33,6 +33,8 @@ export const TestDynamicComponent: React.FunctionComponent<TestDynamicComponentP
   );
 };
 
+TestDynamicComponent.displayName = "TestDynamicComponent";
+
 TestDynamicComponent.propTypes = {
   content: PropTypes.string.isRequired,
   ...DynamicPageComponent.controlledPropTypes(PropTypes.string)

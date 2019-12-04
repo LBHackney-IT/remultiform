@@ -28,3 +28,5 @@ export const TestDatabaseConsumer: React.FunctionComponent<TestDatabaseConsumerP
 
   return <span>No database</span>;
 };
+
+TestDatabaseConsumer.displayName = "TestDatabaseConsumer";
