@@ -11,7 +11,13 @@ import {
   StoreValue
 } from "../types";
 
-export class Database<DBSchema extends NamedSchema<string, number, Schema>> {
+const { Database: ActualDatabase } = jest.requireActual("../Database");
+
+export { ActualDatabase };
+
+export class Database<
+  DBSchema extends NamedSchema<string, number, Schema>
+> extends ActualDatabase<DBSchema> {
   static async open<DBSchema extends NamedSchema<string, number, Schema>>(
     name: DBSchema["dbNames"],
     version: DBSchema["versions"]
@@ -21,14 +27,8 @@ export class Database<DBSchema extends NamedSchema<string, number, Schema>> {
     return new Database({ ...jest.fn()(), name, version });
   }
 
-  readonly name: string;
-
-  protected readonly db: IDBPDatabase<DBSchema["schema"]>;
-
   constructor(db: IDBPDatabase<DBSchema["schema"]>) {
-    this.db = db;
-
-    this.name = this.db.name;
+    super(db);
   }
 
   async put(): Promise<void> {
