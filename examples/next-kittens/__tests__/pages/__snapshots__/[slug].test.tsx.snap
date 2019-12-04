@@ -1,7 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly with all props 1`] = `
-<img
-  src="https://placekitten.com/900/600"
-/>
+Array [
+  <img
+    src="https://placekitten.com/900/600"
+  />,
+  <button
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+  >
+    Small kitten
+  </button>,
+]
 `;

@@ -36,6 +36,10 @@ export interface WrappedPageComponentProps<
     DBSchema,
     StoreName
   >;
+
+  onChange?:
+    | ((value: StoreValue<DBSchema["schema"], StoreName>) => void)
+    | null;
 }
 
 interface WrappedPageComponentState<
@@ -79,7 +83,8 @@ export class WrappedPageComponent<
     >
   > = {
     database: PropTypes.instanceOf(Database),
-    component: DynamicPageComponent.propType.isRequired
+    component: DynamicPageComponent.propType.isRequired,
+    onChange: PropTypes.func
   };
 
   /**
@@ -216,6 +221,12 @@ export class WrappedPageComponent<
   ): void {
     if (this.isUnmounted) {
       return;
+    }
+
+    const { onChange } = this.props;
+
+    if (onChange) {
+      onChange(value);
     }
 
     this.setState(state => ({ ...state, value }));

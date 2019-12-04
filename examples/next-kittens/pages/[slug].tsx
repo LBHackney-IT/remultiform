@@ -7,13 +7,17 @@ import {
   Step
 } from "remultiform";
 
+import { makeSubmit } from "../components/makeSubmit";
+
 interface SlugPageProps {
   slug: string;
 }
 
 const steps: Step[] = [
   {
-    key: "small-kitten",
+    slug: "small-kitten",
+    nextSlug: "big-kitten",
+    Submit: makeSubmit({ href: "/big-kitten", value: "Big kitten" }),
     componentWrappers: [
       PageComponentWrapper.wrapStatic(
         new StaticPageComponent({
@@ -25,7 +29,9 @@ const steps: Step[] = [
     ]
   },
   {
-    key: "big-kitten",
+    slug: "big-kitten",
+    nextSlug: "small-kitten",
+    Submit: makeSubmit({ href: "/small-kitten", value: "Small kitten" }),
     componentWrappers: [
       PageComponentWrapper.wrapStatic(
         new StaticPageComponent({
@@ -48,7 +54,15 @@ class SlugPage extends Component<SlugPageProps> {
   render(): JSX.Element {
     const { slug } = this.props;
 
-    return <Orchestrator currentStepKey={slug} steps={steps} />;
+    return (
+      <>
+        <Orchestrator
+          initialSlug={slug}
+          steps={steps}
+          manageStepTransitions={false}
+        />
+      </>
+    );
   }
 }
 

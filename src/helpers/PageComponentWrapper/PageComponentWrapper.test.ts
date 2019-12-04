@@ -111,6 +111,120 @@ describe("#key", () => {
   });
 });
 
+describe("#databaseMap", () => {
+  it("is undefined when wrapping a `StaticPageComponent`", () => {
+    const componentWrapper = PageComponentWrapper.wrapStatic(
+      new StaticPageComponent({
+        key: "test-key",
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
+
+    expect(componentWrapper.databaseMap).toBeUndefined();
+  });
+
+  it("matches the database map provided when wrapping a `DynamicPageComponent`", () => {
+    const databaseMap = new DatabaseMap<TestSchema, typeof storeName>({
+      storeName,
+      key: 0
+    });
+
+    const componentWrapper = PageComponentWrapper.wrapDynamic(
+      new DynamicPageComponent({
+        key: "test-key",
+        Component: TestDynamicComponent,
+        props: {
+          content: "test content"
+        },
+        defaultValue: "test default",
+        emptyValue: "test empty",
+        databaseMap
+      })
+    );
+
+    expect(componentWrapper.databaseMap).toStrictEqual(databaseMap);
+  });
+});
+
+describe("#defaultValue", () => {
+  it("is undefined when wrapping a `StaticPageComponent`", () => {
+    const componentWrapper = PageComponentWrapper.wrapStatic(
+      new StaticPageComponent({
+        key: "test-key",
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
+
+    expect(componentWrapper.defaultValue).toBeUndefined();
+  });
+
+  it("matches the database map provided when wrapping a `DynamicPageComponent`", () => {
+    const defaultValue = "test default";
+
+    const componentWrapper = PageComponentWrapper.wrapDynamic(
+      new DynamicPageComponent({
+        key: "test-key",
+        Component: TestDynamicComponent,
+        props: {
+          content: "test content"
+        },
+        defaultValue,
+        emptyValue: "test empty",
+        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+          storeName,
+          key: 0
+        })
+      })
+    );
+
+    expect(componentWrapper.defaultValue).toEqual(defaultValue);
+  });
+});
+
+describe("#emptyValue", () => {
+  it("is an empty string when wrapping a `StaticPageComponent`", () => {
+    const componentWrapper = PageComponentWrapper.wrapStatic(
+      new StaticPageComponent({
+        key: "test-key",
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
+
+    expect(componentWrapper.emptyValue).toEqual("");
+  });
+
+  it("matches the database map provided when wrapping a `DynamicPageComponent`", () => {
+    const emptyValue = "test empty";
+
+    const componentWrapper = PageComponentWrapper.wrapDynamic(
+      new DynamicPageComponent({
+        key: "test-key",
+        Component: TestDynamicComponent,
+        props: {
+          content: "test content"
+        },
+        defaultValue: "test default",
+        emptyValue,
+        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+          storeName,
+          key: 0
+        })
+      })
+    );
+
+    expect(componentWrapper.emptyValue).toEqual(emptyValue);
+  });
+});
+
 describe("#render()", () => {
   it("renders correctly for intrinsic elements", () => {
     const componentWrapper = PageComponentWrapper.wrapStatic(
@@ -123,7 +237,7 @@ describe("#render()", () => {
       })
     );
 
-    const component = create(componentWrapper.render({}));
+    const component = create(componentWrapper.render({ onChange: () => {} }));
 
     expect(component).toMatchSnapshot();
   });
@@ -139,7 +253,7 @@ describe("#render()", () => {
       })
     );
 
-    const component = create(componentWrapper.render({}));
+    const component = create(componentWrapper.render({ onChange: () => {} }));
 
     expect(component).toMatchSnapshot();
   });
@@ -155,7 +269,7 @@ describe("#render()", () => {
       })
     );
 
-    const component = create(componentWrapper.render({}));
+    const component = create(componentWrapper.render({ onChange: () => {} }));
 
     expect(component).toMatchSnapshot();
   });
@@ -169,6 +283,7 @@ describe("#render()", () => {
           content: "test content"
         },
         defaultValue: "test default",
+        emptyValue: "test empty",
         databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
@@ -176,7 +291,7 @@ describe("#render()", () => {
       })
     );
 
-    const component = create(componentWrapper.render({}));
+    const component = create(componentWrapper.render({ onChange: () => {} }));
 
     expect(component).toMatchSnapshot();
   });
@@ -192,6 +307,7 @@ describe("#render()", () => {
           content: "test content"
         },
         defaultValue: "test default",
+        emptyValue: "test empty",
         databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
@@ -204,7 +320,9 @@ describe("#render()", () => {
     let component: ReactTestRenderer | undefined = undefined;
 
     await act(async () => {
-      component = create(componentWrapper.render({ database }));
+      component = create(
+        componentWrapper.render({ database, onChange: () => {} })
+      );
 
       await get.settle;
     });

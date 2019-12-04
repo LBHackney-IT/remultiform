@@ -1,15 +1,17 @@
-import { Step } from "../../components/Orchestrator";
-
 import { PageComponentWrapper } from "../../helpers/PageComponentWrapper/PageComponentWrapper";
 import { StaticPageComponent } from "../../helpers/PageComponentWrapper/StaticPageComponent";
+import { Step } from "../../helpers/Step";
 
+import { SimpleSubmit } from "../components/SimpleSubmit";
 import { TestClassComponent } from "../components/TestClassComponent";
 import { TestFunctionComponent } from "../components/TestFunctionComponent";
 
-export const multiStepForm: { steps: Step[] } = {
+export const staticForm: { steps: Step[] } = {
   steps: [
     {
-      key: "test-step-1",
+      slug: "test-step-1",
+      nextSlug: "test-step-2",
+      Submit: SimpleSubmit,
       componentWrappers: [
         PageComponentWrapper.wrapStatic(
           new StaticPageComponent({
@@ -18,20 +20,6 @@ export const multiStepForm: { steps: Step[] } = {
             props: {}
           })
         ),
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
-            key: "test-class",
-            Component: TestClassComponent,
-            props: {
-              content: "test class content"
-            }
-          })
-        )
-      ]
-    },
-    {
-      key: "test-step-2",
-      componentWrappers: [
         PageComponentWrapper.wrapStatic(
           new StaticPageComponent({
             key: "test-img",
@@ -47,6 +35,31 @@ export const multiStepForm: { steps: Step[] } = {
             Component: TestFunctionComponent,
             props: {
               content: "test function content"
+            }
+          })
+        ),
+        PageComponentWrapper.wrapStatic(
+          new StaticPageComponent({
+            key: "test-class",
+            Component: TestClassComponent,
+            props: {
+              content: "test class content"
+            }
+          })
+        )
+      ]
+    },
+    {
+      slug: "test-step-2",
+      nextSlug: "test-step-1",
+      Submit: SimpleSubmit,
+      componentWrappers: [
+        PageComponentWrapper.wrapStatic(
+          new StaticPageComponent({
+            key: "test-img-2",
+            Component: "img",
+            props: {
+              src: "another.png"
             }
           })
         )

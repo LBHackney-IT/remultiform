@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TransactionMode | Remultiform</title>
+	<title>OrchestratorState | Remultiform</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,59 +56,49 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_store_database_.html">&quot;store/Database&quot;</a>
+					<a href="../modules/_components_orchestrator_.html">&quot;components/Orchestrator&quot;</a>
 				</li>
 				<li>
-					<a href="_store_database_.transactionmode.html">TransactionMode</a>
+					<a href="_components_orchestrator_.orchestratorstate.html">OrchestratorState</a>
 				</li>
 			</ul>
-			<h1>Enumeration TransactionMode</h1>
+			<h1>Interface OrchestratorState</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Possible modes for transactions created by <a href="../classes/_store_database_.database.html#transaction">Database.transaction</a>.</p>
-					</div>
-				</div>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">OrchestratorState</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_store_database_.transactionmode.html#readonly" class="tsd-kind-icon">Read<wbr>Only</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_store_database_.transactionmode.html#readwrite" class="tsd-kind-icon">Read<wbr>Write</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_components_orchestrator_.orchestratorstate.html#currentslug" class="tsd-kind-icon">current<wbr>Slug</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="readonly" class="tsd-anchor"></a>
-					<h3>Read<wbr>Only</h3>
-					<div class="tsd-signature tsd-kind-icon">Read<wbr>Only<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;readonly&quot;</span></div>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+					<a name="currentslug" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> current<wbr>Slug</h3>
+					<div class="tsd-signature tsd-kind-icon">current<wbr>Slug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L20">src/store/Database.ts:20</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="readwrite" class="tsd-anchor"></a>
-					<h3>Read<wbr>Write</h3>
-					<div class="tsd-signature tsd-kind-icon">Read<wbr>Write<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;readwrite&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/store/Database.ts#L21">src/store/Database.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L67">src/components/Orchestrator.tsx:67</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -123,7 +113,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_databaseprovider_.html">&quot;components/<wbr>Database<wbr>Provider&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_components_orchestrator_.html">&quot;components/<wbr>Orchestrator&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -159,7 +149,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_hooks_usedatabase_.html">&quot;hooks/use<wbr>Database&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_store_database_.html">&quot;store/<wbr>Database&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -175,24 +165,24 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../classes/_components_orchestrator_.orchestrator.html" class="tsd-kind-icon">Orchestrator</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_components_orchestrator_.orchestratorprops.html" class="tsd-kind-icon">Orchestrator<wbr>Props</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="_store_database_.transactionmode.html" class="tsd-kind-icon">Transaction<wbr>Mode</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_components_orchestrator_.orchestratorstate.html" class="tsd-kind-icon">Orchestrator<wbr>State</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="_store_database_.transactionmode.html#readonly" class="tsd-kind-icon">Read<wbr>Only</a>
-							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="_store_database_.transactionmode.html#readwrite" class="tsd-kind-icon">Read<wbr>Write</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
+								<a href="_components_orchestrator_.orchestratorstate.html#currentslug" class="tsd-kind-icon">current<wbr>Slug</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../classes/_store_database_.database.html" class="tsd-kind-icon">Database</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

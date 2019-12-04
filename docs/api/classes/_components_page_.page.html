@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>WrappedPageComponent | Remultiform</title>
+	<title>Page | Remultiform</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_components_wrappedpagecomponent_.html">&quot;components/WrappedPageComponent&quot;</a>
+					<a href="../modules/_components_page_.html">&quot;components/Page&quot;</a>
 				</li>
 				<li>
-					<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html">WrappedPageComponent</a>
+					<a href="_components_page_.page.html">Page</a>
 				</li>
 			</ul>
-			<h1>Class WrappedPageComponent&lt;Props, DBSchema, StoreName&gt;</h1>
+			<h1>Class Page&lt;DBSchema, StoreName&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,24 +72,13 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A wrapped <a href="_helpers_pagecomponentwrapper_dynamicpagecomponent_.dynamicpagecomponent.html">DynamicPageComponent</a>.</p>
+						<p>A component for rendering a page of a multipage form.</p>
 					</div>
-					<p>This handles interfacing between the
-						<a href="../interfaces/_helpers_pagecomponentwrapper_dynamicpagecomponent_.dynamicpagecomponentcontrolledprops.html">DynamicPageComponentControlledProps</a> of a component and a
-						<a href="_store_database_.database.html">Database</a> instance via a <a href="_helpers_databasecontext_.databasecontext.html">DatabaseContext</a> and a
-					<a href="_helpers_pagecomponentwrapper_databasemap_.databasemap.html">DatabaseMap</a>.</p>
-					<p>This component passes <a href="../interfaces/_helpers_pagecomponentwrapper_dynamicpagecomponent_.dynamicpagecomponentcontrolledprops.html#disabled">DynamicPageComponentControlledProps.disabled</a>
-						as <code>true</code> when waiting for <a href="_store_database_.database.html">Database</a> operations to settle. The
-						wrapped component should disable functionality appropriately to ensure data
-					doesn&#39;t get out of sync.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
-					<li>
-						<h4>Props</h4>
-					</li>
 					<li>
 						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
@@ -102,10 +91,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">Component</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">&gt;</span>
+						<span class="tsd-signature-type">Component</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">&gt;</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">WrappedPageComponent</span>
+								<span class="target">Page</span>
 							</li>
 						</ul>
 					</li>
@@ -118,38 +107,42 @@
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#context" class="tsd-kind-icon">context</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#props" class="tsd-kind-icon">props</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#refs" class="tsd-kind-icon">refs</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#contexttype" class="tsd-kind-icon">context<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#context" class="tsd-kind-icon">context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#props" class="tsd-kind-icon">props</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#refs" class="tsd-kind-icon">refs</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="_components_page_.page.html#contexttype" class="tsd-kind-icon">context<wbr>Type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#unsafe_componentwillmount" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Mount</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#unsafe_componentwillreceiveprops" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#unsafe_componentwillupdate" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentdidcatch" class="tsd-kind-icon">component<wbr>Did<wbr>Catch</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentwillmount" class="tsd-kind-icon">component<wbr>Will<wbr>Mount</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentwillreceiveprops" class="tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentwillupdate" class="tsd-kind-icon">component<wbr>Will<wbr>Update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#forceupdate" class="tsd-kind-icon">force<wbr>Update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#getsnapshotbeforeupdate" class="tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#setstate" class="tsd-kind-icon">set<wbr>State</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#shouldcomponentupdate" class="tsd-kind-icon">should<wbr>Component<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#unsafe_componentwillmount" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Mount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#unsafe_componentwillreceiveprops" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#unsafe_componentwillupdate" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentdidcatch" class="tsd-kind-icon">component<wbr>Did<wbr>Catch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentdidmount" class="tsd-kind-icon">component<wbr>Did<wbr>Mount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentdidupdate" class="tsd-kind-icon">component<wbr>Did<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentwillmount" class="tsd-kind-icon">component<wbr>Will<wbr>Mount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentwillreceiveprops" class="tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentwillunmount" class="tsd-kind-icon">component<wbr>Will<wbr>Unmount</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#componentwillupdate" class="tsd-kind-icon">component<wbr>Will<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#forceupdate" class="tsd-kind-icon">force<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#getsnapshotbeforeupdate" class="tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="_components_page_.page.html#setstate" class="tsd-kind-icon">set<wbr>State</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_components_page_.page.html#shouldcomponentupdate" class="tsd-kind-icon">should<wbr>Component<wbr>Update</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Object literals</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-static"><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#proptypes" class="tsd-kind-icon">prop<wbr>Types</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-overwrite"><a href="_components_page_.page.html#state" class="tsd-kind-icon">state</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-static"><a href="_components_page_.page.html#proptypes" class="tsd-kind-icon">prop<wbr>Types</a></li>
 							</ul>
 						</section>
 					</div>
@@ -161,8 +154,8 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Wrapped<wbr>Page<wbr>Component<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html" class="tsd-signature-type">WrappedPageComponent</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Wrapped<wbr>Page<wbr>Component<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html" class="tsd-signature-type">WrappedPageComponent</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Page<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_page_.page.html" class="tsd-signature-type">Page</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Page<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_components_page_.page.html" class="tsd-signature-type">Page</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -175,10 +168,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>props: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>props: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html" class="tsd-signature-type">WrappedPageComponent</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_components_page_.page.html" class="tsd-signature-type">Page</a></h4>
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
@@ -199,13 +192,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>props: <a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>props: <a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html" class="tsd-signature-type">WrappedPageComponent</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_components_page_.page.html" class="tsd-signature-type">Page</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -243,7 +236,7 @@ context!: React.ContextType&lt;<span class="hljs-keyword">typeof</span> MyContex
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="props" class="tsd-anchor"></a>
 					<h3>props</h3>
-					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from Component.props</p>
 						<ul>
@@ -354,7 +347,7 @@ class Foo extends React.Component {
 					<a name="unsafe_componentwillreceiveprops" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -389,7 +382,7 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -403,7 +396,7 @@ class Foo extends React.Component {
 					<a name="unsafe_componentwillupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> UNSAFE_<wbr>component<wbr>Will<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -436,10 +429,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -476,6 +469,65 @@ class Foo extends React.Component {
 								</li>
 								<li>
 									<h5>errorInfo: <span class="tsd-signature-type">ErrorInfo</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="componentdidmount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Did<wbr>Mount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Did<wbr>Mount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ComponentLifecycle.componentDidMount</p>
+								<ul>
+									<li>Defined in node_modules/@types/react/index.d.ts:566</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Called immediately after a component is mounted. Setting state here will trigger re-rendering.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="componentdidupdate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Did<wbr>Update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Did<wbr>Update<span class="tsd-signature-symbol">(</span>prevProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, prevState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, snapshot<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">SS</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from NewLifecycle.componentDidUpdate</p>
+								<ul>
+									<li>Defined in node_modules/@types/react/index.d.ts:629</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Called immediately after updating occurs. Not called for the initial render.</p>
+								</div>
+								<p>The snapshot is only present if getSnapshotBeforeUpdate is present and returns non-null.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>prevProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>prevState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> snapshot: <span class="tsd-signature-type">SS</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -523,7 +575,7 @@ class Foo extends React.Component {
 					<a name="componentwillreceiveprops" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Will<wbr>Receive<wbr>Props</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -557,7 +609,7 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -568,10 +620,34 @@ class Foo extends React.Component {
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="componentwillunmount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Will<wbr>Unmount</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Unmount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ComponentLifecycle.componentWillUnmount</p>
+								<ul>
+									<li>Defined in node_modules/@types/react/index.d.ts:582</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Called immediately before a component is destroyed. Perform any necessary cleanup in this method, such as
+									cancelled network requests, or cleaning up any DOM elements created in <code>componentDidMount</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="componentwillupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> component<wbr>Will<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">component<wbr>Will<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -603,10 +679,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -644,7 +720,7 @@ class Foo extends React.Component {
 					<a name="getsnapshotbeforeupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> get<wbr>Snapshot<wbr>Before<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update<span class="tsd-signature-symbol">(</span>prevProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, prevState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update<span class="tsd-signature-symbol">(</span>prevProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, prevState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -666,10 +742,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>prevProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>prevProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>prevState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>prevState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">never</span>
@@ -696,7 +772,7 @@ class Foo extends React.Component {
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof WrappedPageComponentState&lt;DBSchema, StoreName&gt;</span></h4>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof PageState&lt;DBSchema, StoreName&gt;</span></h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -716,7 +792,7 @@ class Foo extends React.Component {
 					<a name="shouldcomponentupdate" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> should<wbr>Component<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">should<wbr>Component<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">should<wbr>Component<wbr>Update<span class="tsd-signature-symbol">(</span>nextProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextState<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, nextContext<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -739,10 +815,10 @@ class Foo extends React.Component {
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-signature-type">WrappedPageComponentProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextProps: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pageprops.html" class="tsd-signature-type">PageProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-signature-type">WrappedPageComponentState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>nextState: <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_components_page_.pagestate.html" class="tsd-signature-type">PageState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>nextContext: <span class="tsd-signature-type">any</span></h5>
@@ -755,42 +831,81 @@ class Foo extends React.Component {
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-overwrite">
+					<a name="state" class="tsd-anchor"></a>
+					<h3>state</h3>
+					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<p>Overrides Component.state</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L92">src/components/Page.tsx:92</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="state.wrappervalues" class="tsd-anchor"></a>
+						<h3>wrapper<wbr>Values</h3>
+						<div class="tsd-signature tsd-kind-icon">wrapper<wbr>Values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;this.props.componentWrappers.reduce((values, { key, emptyValue }) &#x3D;&gt; ({ ...values, [key]: emptyValue }),{} as PageState&lt;DBSchema, StoreName&gt;[&quot;wrapperValues&quot;])</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L93">src/components/Page.tsx:93</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-type-declaration">
+							<h4>Type declaration</h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-index-signature">
+									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+						</div>
+					</section>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-static">
 					<a name="proptypes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> prop<wbr>Types</h3>
 					<div class="tsd-signature tsd-kind-icon">prop<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/WrappedPageComponent.tsx#L77">src/components/WrappedPageComponent.tsx:77</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L80">src/components/Page.tsx:80</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="proptypes.component" class="tsd-anchor"></a>
-						<h3>component</h3>
-						<div class="tsd-signature tsd-kind-icon">component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_pagecomponentwrapper_dynamicpagecomponent_.dynamicpagecomponent.html" class="tsd-signature-type">DynamicPageComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentClass</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FunctionComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;DynamicPageComponent.propType.isRequired</span></div>
+						<a name="proptypes.submit" class="tsd-anchor"></a>
+						<h3>Submit</h3>
+						<div class="tsd-signature tsd-kind-icon">Submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.func.isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/WrappedPageComponent.tsx#L86">src/components/WrappedPageComponent.tsx:86</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L88">src/components/Page.tsx:88</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="proptypes.database" class="tsd-anchor"></a>
-						<h3>database</h3>
-						<div class="tsd-signature tsd-kind-icon">database<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.instanceOf(Database)</span></div>
+						<a name="proptypes.aftersubmit" class="tsd-anchor"></a>
+						<h3>after<wbr>Submit</h3>
+						<div class="tsd-signature tsd-kind-icon">after<wbr>Submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.func</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/WrappedPageComponent.tsx#L85">src/components/WrappedPageComponent.tsx:85</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L89">src/components/Page.tsx:89</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="proptypes.onchange" class="tsd-anchor"></a>
-						<h3>on<wbr>Change</h3>
-						<div class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.func</span></div>
+						<a name="proptypes.componentwrappers" class="tsd-anchor"></a>
+						<h3>component<wbr>Wrappers</h3>
+						<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html" class="tsd-signature-type">PageComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.arrayOf(PageComponentWrapper.propType.isRequired).isRequired</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/WrappedPageComponent.tsx#L87">src/components/WrappedPageComponent.tsx:87</a></li>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L85">src/components/Page.tsx:85</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="proptypes.context-1" class="tsd-anchor"></a>
+						<h3>context</h3>
+						<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.instanceOf(DatabaseContext)</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Page.tsx#L84">src/components/Page.tsx:84</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -809,13 +924,13 @@ class Foo extends React.Component {
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_orchestrator_.html">&quot;components/<wbr>Orchestrator&quot;</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_submit_.html">&quot;components/<wbr>Submit&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_wrappedpagecomponent_.html">&quot;components/<wbr>Wrapped<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -861,68 +976,80 @@ class Foo extends React.Component {
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html" class="tsd-kind-icon">Wrapped<wbr>Page<wbr>Component</a>
+						<a href="_components_page_.page.html" class="tsd-kind-icon">Page</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="_components_page_.page.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#context" class="tsd-kind-icon">context</a>
+								<a href="_components_page_.page.html#context" class="tsd-kind-icon">context</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#props" class="tsd-kind-icon">props</a>
+								<a href="_components_page_.page.html#props" class="tsd-kind-icon">props</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#refs" class="tsd-kind-icon">refs</a>
+								<a href="_components_page_.page.html#refs" class="tsd-kind-icon">refs</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#contexttype" class="tsd-kind-icon">context<wbr>Type</a>
+								<a href="_components_page_.page.html#contexttype" class="tsd-kind-icon">context<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#unsafe_componentwillmount" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Mount</a>
+								<a href="_components_page_.page.html#unsafe_componentwillmount" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Mount</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#unsafe_componentwillreceiveprops" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props</a>
+								<a href="_components_page_.page.html#unsafe_componentwillreceiveprops" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Receive<wbr>Props</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#unsafe_componentwillupdate" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update</a>
+								<a href="_components_page_.page.html#unsafe_componentwillupdate" class="tsd-kind-icon">UNSAFE_<wbr>component<wbr>Will<wbr>Update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentdidcatch" class="tsd-kind-icon">component<wbr>Did<wbr>Catch</a>
+								<a href="_components_page_.page.html#componentdidcatch" class="tsd-kind-icon">component<wbr>Did<wbr>Catch</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentwillmount" class="tsd-kind-icon">component<wbr>Will<wbr>Mount</a>
+								<a href="_components_page_.page.html#componentdidmount" class="tsd-kind-icon">component<wbr>Did<wbr>Mount</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentwillreceiveprops" class="tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props</a>
+								<a href="_components_page_.page.html#componentdidupdate" class="tsd-kind-icon">component<wbr>Did<wbr>Update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#componentwillupdate" class="tsd-kind-icon">component<wbr>Will<wbr>Update</a>
+								<a href="_components_page_.page.html#componentwillmount" class="tsd-kind-icon">component<wbr>Will<wbr>Mount</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#forceupdate" class="tsd-kind-icon">force<wbr>Update</a>
+								<a href="_components_page_.page.html#componentwillreceiveprops" class="tsd-kind-icon">component<wbr>Will<wbr>Receive<wbr>Props</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#getsnapshotbeforeupdate" class="tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update</a>
+								<a href="_components_page_.page.html#componentwillunmount" class="tsd-kind-icon">component<wbr>Will<wbr>Unmount</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_components_page_.page.html#componentwillupdate" class="tsd-kind-icon">component<wbr>Will<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_components_page_.page.html#forceupdate" class="tsd-kind-icon">force<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_components_page_.page.html#getsnapshotbeforeupdate" class="tsd-kind-icon">get<wbr>Snapshot<wbr>Before<wbr>Update</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#setstate" class="tsd-kind-icon">set<wbr>State</a>
+								<a href="_components_page_.page.html#setstate" class="tsd-kind-icon">set<wbr>State</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#shouldcomponentupdate" class="tsd-kind-icon">should<wbr>Component<wbr>Update</a>
+								<a href="_components_page_.page.html#shouldcomponentupdate" class="tsd-kind-icon">should<wbr>Component<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_components_page_.page.html#state" class="tsd-kind-icon">state</a>
 							</li>
 							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-static">
-								<a href="_components_wrappedpagecomponent_.wrappedpagecomponent.html#proptypes" class="tsd-kind-icon">prop<wbr>Types</a>
+								<a href="_components_page_.page.html#proptypes" class="tsd-kind-icon">prop<wbr>Types</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentprops.html" class="tsd-kind-icon">Wrapped<wbr>Page<wbr>Component<wbr>Props</a>
+						<a href="../interfaces/_components_page_.pageprops.html" class="tsd-kind-icon">Page<wbr>Props</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../interfaces/_components_wrappedpagecomponent_.wrappedpagecomponentstate.html" class="tsd-kind-icon">Wrapped<wbr>Page<wbr>Component<wbr>State</a>
+						<a href="../interfaces/_components_page_.pagestate.html" class="tsd-kind-icon">Page<wbr>State</a>
 					</li>
 				</ul>
 			</nav>

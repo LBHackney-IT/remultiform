@@ -6,16 +6,22 @@ import { WrappedPageComponent } from "../../components/WrappedPageComponent";
 import { Database } from "../../store/Database";
 import { NamedSchema, Schema, StoreNames, StoreValue } from "../../store/types";
 
+import { DatabaseMap } from "./DatabaseMap";
 import {
   DynamicPageComponentType,
   DynamicPageComponent
 } from "./DynamicPageComponent";
 import { StaticPageComponent } from "./StaticPageComponent";
 
+/**
+ * The proptypes for {@link PageComponentWrapper.render}.
+ */
 export interface PageComponentWrapperRenderProps<
-  DBSchema extends NamedSchema<string, number, Schema>
+  DBSchema extends NamedSchema<string, number, Schema>,
+  StoreName extends StoreNames<DBSchema["schema"]>
 > {
   database?: Database<DBSchema>;
+  onChange(value: StoreValue<DBSchema["schema"], StoreName>): void;
 }
 
 /**
@@ -31,16 +37,21 @@ export interface PageComponentWrapperRenderProps<
 // type from that function means we can have simple generic components depend on
 // it. This gives us strong typing with little effort for the user.
 export class PageComponentWrapper<
-  DBSchema extends NamedSchema<string, number, Schema>
+  DBSchema extends NamedSchema<string, number, Schema>,
+  StoreName extends StoreNames<DBSchema["schema"]>
 > {
   /**
    * The proptype validator for a {@link PageComponentWrapper}.
    */
   static readonly propType: PropTypes.Requireable<
-    PageComponentWrapper<NamedSchema<string, number, Schema>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    PageComponentWrapper<NamedSchema<string, number, any>, string>
   > = PropTypes.exact({
-    key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    render: PropTypes.func.isRequired
+    key: PropTypes.string.isRequired,
+    render: PropTypes.func.isRequired,
+    databaseMap: PropTypes.instanceOf(DatabaseMap),
+    defaultValue: PropTypes.any,
+    emptyValue: PropTypes.any.isRequired
   });
 
   /**
@@ -53,7 +64,7 @@ export class PageComponentWrapper<
   static wrapStatic<Props>(
     component: StaticPageComponent<React.ElementType<Props>, Props>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): PageComponentWrapper<any> {
+  ): PageComponentWrapper<any, string> {
     const { key, Component } = component;
 
     let render: () => JSX.Element;
@@ -100,26 +111,49 @@ export class PageComponentWrapper<
       DBSchema,
       StoreName
     >
-  ): PageComponentWrapper<DBSchema> {
-    const { key } = component;
+  ): PageComponentWrapper<DBSchema, StoreName> {
+    const { key, databaseMap, defaultValue, emptyValue } = component;
 
-    return new PageComponentWrapper(key, ({ database }) => (
-      <WrappedPageComponent<Props, DBSchema, StoreName>
-        database={database}
-        key={key}
-        component={component}
-      />
-    ));
+    const render = (
+      props: PageComponentWrapperRenderProps<DBSchema, StoreName>
+    ): JSX.Element => (
+      <WrappedPageComponent key={key} component={component} {...props} />
+    );
+
+    return new PageComponentWrapper(
+      key,
+      render,
+      databaseMap,
+      defaultValue,
+      emptyValue
+    );
   }
 
-  readonly key: React.Key;
+  readonly key: string;
 
   /**
    * A function to render an instance of the component for including in a page.
    */
   readonly render: (
-    props: PageComponentWrapperRenderProps<DBSchema>
+    props: PageComponentWrapperRenderProps<DBSchema, StoreName>
   ) => JSX.Element;
+
+  /**
+   * The properies needed to map the user-entered value for the wrapped
+   * component to the {@link Database}.
+   */
+  readonly databaseMap?: DatabaseMap<DBSchema, StoreName> | null;
+
+  /**
+   * The optional default value to store in the {@link Database} if the
+   * component hasn't been changed by the user.
+   */
+  readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+
+  /**
+   * The value to consider as an empty input when updating the {@link Database}.
+   */
+  readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
 
   /**
    * Do not use this directly. Use {@link PageComponentWrapper.wrapStatic} or
@@ -129,10 +163,18 @@ export class PageComponentWrapper<
    * @ignore
    */
   constructor(
-    key: React.Key,
-    render: (props: PageComponentWrapperRenderProps<DBSchema>) => JSX.Element
+    key: string,
+    render: (
+      props: PageComponentWrapperRenderProps<DBSchema, StoreName>
+    ) => JSX.Element,
+    databaseMap?: DatabaseMap<DBSchema, StoreName>,
+    defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,
+    emptyValue: "" | StoreValue<DBSchema["schema"], StoreName> = ""
   ) {
     this.key = key;
     this.render = render;
+    this.databaseMap = databaseMap;
+    this.defaultValue = defaultValue;
+    this.emptyValue = emptyValue;
   }
 }
