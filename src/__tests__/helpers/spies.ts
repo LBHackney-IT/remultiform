@@ -30,3 +30,47 @@ export const spyOnDatabaseOpen = (): jest.SpyInstance<
 
   return spy;
 };
+
+export const spyOnDatabaseGet = (
+  getSomething = true
+): {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  spy: jest.SpyInstance<Promise<any>, [string, any]>;
+  settle: Promise<void[]>;
+  calls: Promise<void>[];
+} => {
+  let settleInitial: (() => void) | undefined;
+  const get = {
+    spy: jest.spyOn(Database.prototype, "get"),
+    settle: Promise.all([
+      new Promise<void>(resolve => {
+        settleInitial = resolve;
+      })
+    ]),
+    calls: [] as Promise<void>[]
+  };
+
+  get.spy.mockImplementation(async (storeName, key) => {
+    let settleThis: () => void = () => {};
+    const promise = new Promise<void>(resolve => {
+      settleThis = resolve;
+    });
+
+    get.calls.push(promise);
+    get.settle = Promise.all(get.calls);
+
+    if (settleInitial) {
+      settleInitial();
+
+      settleInitial = undefined;
+    }
+
+    await promiseToWaitForNextTick();
+
+    settleThis();
+
+    return getSomething ? `${storeName}/${key}` : undefined;
+  });
+
+  return get;
+};

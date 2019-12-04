@@ -3,7 +3,7 @@ import { ReactTestRenderer, act, create } from "react-test-renderer";
 
 import { TestDynamicComponent } from "../__fixtures__/components/TestDynamicComponent";
 
-import { promiseToWaitForNextTick } from "../__tests__/helpers/promise";
+import { spyOnDatabaseGet } from "../__tests__/helpers/spies";
 
 import { DatabaseMap } from "../helpers/PageComponentWrapper/DatabaseMap";
 import { DynamicPageComponent } from "../helpers/PageComponentWrapper/DynamicPageComponent";
@@ -89,20 +89,7 @@ it("renders correctly with a database context", async () => {
 });
 
 it("fetches the stored value specified by the `databaseMap` when a database provided by context finishes opening", async () => {
-  const databaseGetSpy = jest.spyOn(Database.prototype, "get");
-
-  let resolveGetPromise: () => void;
-  const getPromise = new Promise<void>(resolve => {
-    resolveGetPromise = resolve;
-  });
-
-  databaseGetSpy.mockImplementation(async (storeName, key) => {
-    await promiseToWaitForNextTick();
-
-    resolveGetPromise();
-
-    return `${storeName}/${key}`;
-  });
+  const get = spyOnDatabaseGet();
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(openPromise);
@@ -124,27 +111,16 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
     );
 
     await openPromise;
-    await getPromise;
+    await get.settle;
   });
 
-  expect(databaseGetSpy).toHaveBeenCalledTimes(1);
+  expect(get.spy).toHaveBeenCalledTimes(1);
 
   expect(component).toMatchSnapshot();
 });
 
 it("uses the default value when fetching the stored value returns `undefined`", async () => {
-  const databaseGetSpy = jest.spyOn(Database.prototype, "get");
-
-  let resolveGetPromise: () => void;
-  const getPromise = new Promise<void>(resolve => {
-    resolveGetPromise = resolve;
-  });
-
-  databaseGetSpy.mockImplementation(async () => {
-    await promiseToWaitForNextTick();
-
-    resolveGetPromise();
-  });
+  const get = spyOnDatabaseGet(false);
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(openPromise);
@@ -166,7 +142,7 @@ it("uses the default value when fetching the stored value returns `undefined`", 
     );
 
     await openPromise;
-    await getPromise;
+    await get.settle;
   });
 
   expect(component).toMatchSnapshot();
@@ -185,9 +161,7 @@ it("is disabled while the database is opening", async () => {
     databaseMap: testDatabaseMap
   });
 
-  const databaseGetSpy = jest.spyOn(Database.prototype, "get");
-
-  databaseGetSpy.mockImplementation(async () => {});
+  const get = spyOnDatabaseGet();
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(openPromise);
@@ -205,6 +179,7 @@ it("is disabled while the database is opening", async () => {
   expect(component).toMatchSnapshot();
 
   await openPromise;
+  await get.settle;
 });
 
 it("is disabled while fetching the stored value from the database", async () => {
@@ -220,18 +195,7 @@ it("is disabled while fetching the stored value from the database", async () => 
     databaseMap: testDatabaseMap
   });
 
-  const databaseGetSpy = jest.spyOn(Database.prototype, "get");
-
-  let resolveGetPromise: () => void;
-  const getPromise = new Promise<void>(resolve => {
-    resolveGetPromise = resolve;
-  });
-
-  databaseGetSpy.mockImplementation(async () => {
-    await promiseToWaitForNextTick();
-
-    resolveGetPromise();
-  });
+  const get = spyOnDatabaseGet();
 
   const database = await Database.open<TestSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(database);
@@ -248,5 +212,5 @@ it("is disabled while fetching the stored value from the database", async () => 
 
   expect(component).toMatchSnapshot();
 
-  await getPromise;
+  await get.settle;
 });

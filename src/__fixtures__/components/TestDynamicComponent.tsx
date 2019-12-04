@@ -24,9 +24,9 @@ export const TestDynamicComponent: React.FunctionComponent<TestDynamicComponentP
       <input
         data-testid="input"
         value={nullAsUndefined(value)}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-          onValueChange(event.target.value)
-        }
+        onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
+          onValueChange(event.target.value);
+        }}
         disabled={disabled}
       />
     </div>

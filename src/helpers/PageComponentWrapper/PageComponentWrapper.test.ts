@@ -4,7 +4,7 @@ import { TestClassComponent } from "../../__fixtures__/components/TestClassCompo
 import { TestDynamicComponent } from "../../__fixtures__/components/TestDynamicComponent";
 import { TestFunctionComponent } from "../../__fixtures__/components/TestFunctionComponent";
 
-import { promiseToWaitForNextTick } from "../../__tests__/helpers/promise";
+import { spyOnDatabaseGet } from "../../__tests__/helpers/spies";
 
 import { Database } from "../../store/Database";
 import { NamedSchema } from "../../store/types";
@@ -182,20 +182,7 @@ describe("#render()", () => {
   });
 
   it("renders correctly for components with controlled props with a database", async () => {
-    const databaseGetSpy = jest.spyOn(Database.prototype, "get");
-
-    let resolveGetPromise: () => void;
-    const getPromise = new Promise<void>(resolve => {
-      resolveGetPromise = resolve;
-    });
-
-    databaseGetSpy.mockImplementation(async (storeName, key) => {
-      await promiseToWaitForNextTick();
-
-      resolveGetPromise();
-
-      return `${storeName}/${key}`;
-    });
+    const get = spyOnDatabaseGet();
 
     const componentWrapper = PageComponentWrapper.wrapDynamic(
       new DynamicPageComponent({
@@ -219,7 +206,7 @@ describe("#render()", () => {
     await act(async () => {
       component = create(componentWrapper.render({ database }));
 
-      await getPromise;
+      await get.settle;
     });
 
     expect(component).toMatchSnapshot();
