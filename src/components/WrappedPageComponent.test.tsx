@@ -49,7 +49,19 @@ it("renders correctly with all non-context props", () => {
     <WrappedPageComponent component={testPageComponent} />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={true}
+        onChange={[Function]}
+        value="test empty"
+      />
+    </div>
+  `);
 });
 
 it("renders correctly without a default value for the component", () => {
@@ -64,7 +76,19 @@ it("renders correctly without a default value for the component", () => {
 
   const component = create(<WrappedPageComponent component={pageComponent} />);
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={true}
+        onChange={[Function]}
+        value=""
+      />
+    </div>
+  `);
 });
 
 it("renders correctly with a database context", async () => {
@@ -84,7 +108,19 @@ it("renders correctly with a database context", async () => {
     </DatabaseProvider>
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={true}
+        onChange={[Function]}
+        value="test empty"
+      />
+    </div>
+  `);
 
   await openPromise;
 });
@@ -117,7 +153,19 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
 
   expect(get.spy).toHaveBeenCalledTimes(1);
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={false}
+        onChange={[Function]}
+        value="testStore/0"
+      />
+    </div>
+  `);
 });
 
 it("uses the empty value before it fetches from the database", async () => {
@@ -145,7 +193,19 @@ it("uses the empty value before it fetches from the database", async () => {
     await openPromise;
   });
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={false}
+        onChange={[Function]}
+        value="testStore/0"
+      />
+    </div>
+  `);
 
   await get.settle;
 });
@@ -176,7 +236,19 @@ it("uses the default value when fetching the stored value returns `undefined`", 
     await get.settle;
   });
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={false}
+        onChange={[Function]}
+        value="test default"
+      />
+    </div>
+  `);
 });
 
 it("uses the empty value when fetching the stored value returns `undefined` and there is no default value", async () => {
@@ -215,7 +287,19 @@ it("uses the empty value when fetching the stored value returns `undefined` and 
     await get.settle;
   });
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={false}
+        onChange={[Function]}
+        value="test empty"
+      />
+    </div>
+  `);
 });
 
 it("is disabled while the database is opening", async () => {
@@ -246,7 +330,11 @@ it("is disabled while the database is opening", async () => {
     </DatabaseProvider>
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      Is disabled
+    </div>
+  `);
 
   await openPromise;
   await get.settle;
@@ -280,7 +368,11 @@ it("is disabled while fetching the stored value from the database", async () => 
     </DatabaseProvider>
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      Is disabled
+    </div>
+  `);
 
   await get.settle;
 });

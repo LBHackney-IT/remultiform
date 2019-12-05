@@ -33,13 +33,66 @@ it("renders correctly with all props", async () => {
     />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="test-img-2"
+      >
+        Wrapped
+         
+        img
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next page
+      </button>,
+    ]
+  `);
 });
 
 it("renders correctly without optional props", () => {
   const component = create(<Orchestrator steps={staticForm.steps} />);
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="test-div"
+      >
+        Wrapped
+         
+        div
+      </div>,
+      <div
+        data-testid="test-img"
+      >
+        Wrapped
+         
+        img
+      </div>,
+      <div
+        data-testid="test-function"
+      >
+        Wrapped
+         
+        TestFunctionComponent
+      </div>,
+      <div
+        data-testid="test-class"
+      >
+        Wrapped
+         
+        TestClassComponent
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next page
+      </button>,
+    ]
+  `);
 });
 
 it("renders correctly with steps containing dynamic components", async () => {
@@ -50,13 +103,57 @@ it("renders correctly with steps containing dynamic components", async () => {
     <Orchestrator context={DBContext} steps={dynamicForm.steps} />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="test-img"
+      >
+        Wrapped
+         
+        img
+      </div>,
+      <div
+        data-testid="test-dynamic-component"
+      >
+        Wrapped 
+        TestDynamicComponent
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next page
+      </button>,
+    ]
+  `);
 });
 
 it("renders correctly with steps containing dynamic components without a database context", () => {
   const component = create(<Orchestrator steps={dynamicForm.steps} />);
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="test-img"
+      >
+        Wrapped
+         
+        img
+      </div>,
+      <div
+        data-testid="test-dynamic-component"
+      >
+        Wrapped 
+        TestDynamicComponent
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next page
+      </button>,
+    ]
+  `);
 });
 
 it("throws when attempting to render from an unknown slug", () => {
@@ -68,11 +165,26 @@ it("throws when attempting to render from an unknown slug", () => {
     </TestErrorBoundary>
   );
 
-  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+  expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`
+    Array [
+      Array [
+        "The above error occurred in the <Orchestrator> component:
+        in Orchestrator
+        in TestErrorBoundary
+
+    React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+      ],
+    ]
+  `);
 
   consoleErrorSpy.mockRestore();
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Caught error: 
+      Error: Step with slug "unknown-slug" could not be found
+    </span>
+  `);
 });
 
 it("renders the next step when the page is submitted", async () => {
@@ -92,7 +204,22 @@ it("renders the next step when the page is submitted", async () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   await waitForElement(() => getByTestId(nextStep!.componentWrappers[0].key));
 
-  expect(container).toMatchSnapshot();
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <div
+        data-testid="test-img-2"
+      >
+        Wrapped
+         
+        img
+      </div>
+      <button
+        data-testid="submit"
+      >
+        Next page
+      </button>
+    </div>
+  `);
 });
 
 it("doesn't render the next step after the page is submitted when `manageStepTransitions` is false", async () => {
@@ -110,7 +237,43 @@ it("doesn't render the next step after the page is submitted when `manageStepTra
     getByTestId(staticForm.steps[0].componentWrappers[0].key)
   );
 
-  expect(container).toMatchSnapshot();
+  expect(container).toMatchInlineSnapshot(`
+    <div>
+      <div
+        data-testid="test-div"
+      >
+        Wrapped
+         
+        div
+      </div>
+      <div
+        data-testid="test-img"
+      >
+        Wrapped
+         
+        img
+      </div>
+      <div
+        data-testid="test-function"
+      >
+        Wrapped
+         
+        TestFunctionComponent
+      </div>
+      <div
+        data-testid="test-class"
+      >
+        Wrapped
+         
+        TestClassComponent
+      </div>
+      <button
+        data-testid="submit"
+      >
+        Next page
+      </button>
+    </div>
+  `);
 });
 
 it("calls the `onNextStep` callback after the page is submitted", () => {

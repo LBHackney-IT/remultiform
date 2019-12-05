@@ -65,7 +65,15 @@ it("renders correctly for function components", () => {
     />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <input
+      className="test-class"
+      disabled={true}
+      onChange={[Function]}
+      type="text"
+      value="test value"
+    />
+  `);
 });
 
 it("renders correctly for class components", () => {
@@ -124,7 +132,15 @@ it("renders correctly for class components", () => {
     />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <input
+      className="test-class"
+      disabled={true}
+      onChange={[Function]}
+      type="text"
+      value="test value"
+    />
+  `);
 });
 
 it("creates a component with a sensible display name when the original component is an intrinsic element", () => {
@@ -398,5 +414,23 @@ it("creates a component with the correct proptypes when the original component h
     Component.displayName || "unknown"
   );
 
-  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+  expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`
+    Array [
+      Array [
+        "Warning: Failed prop type: Invalid prop \`className\` of type \`number\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`string\`.",
+      ],
+      Array [
+        "Warning: Failed prop type: Invalid prop \`type\` of value \`not-text\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected one of [\\"text\\"].",
+      ],
+      Array [
+        "Warning: Failed prop type: Invalid prop \`value\` of type \`number\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`string\`.",
+      ],
+      Array [
+        "Warning: Failed prop type: Invalid prop \`onValueChange\` of type \`string\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`function\`.",
+      ],
+      Array [
+        "Warning: Failed prop type: Invalid prop \`disabled\` of type \`string\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`boolean\`.",
+      ],
+    ]
+  `);
 });

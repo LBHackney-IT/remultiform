@@ -239,7 +239,11 @@ describe("#render()", () => {
 
     const component = create(componentWrapper.render({ onChange: () => {} }));
 
-    expect(component).toMatchSnapshot();
+    expect(component).toMatchInlineSnapshot(`
+      <img
+        src="test.png"
+      />
+    `);
   });
 
   it("renders correctly for class components", () => {
@@ -255,7 +259,11 @@ describe("#render()", () => {
 
     const component = create(componentWrapper.render({ onChange: () => {} }));
 
-    expect(component).toMatchSnapshot();
+    expect(component).toMatchInlineSnapshot(`
+      <div>
+        test class content
+      </div>
+    `);
   });
 
   it("renders correctly for function components", () => {
@@ -271,7 +279,11 @@ describe("#render()", () => {
 
     const component = create(componentWrapper.render({ onChange: () => {} }));
 
-    expect(component).toMatchSnapshot();
+    expect(component).toMatchInlineSnapshot(`
+      <div>
+        test function content
+      </div>
+    `);
   });
 
   it("renders correctly for components with controlled props", () => {
@@ -293,7 +305,19 @@ describe("#render()", () => {
 
     const component = create(componentWrapper.render({ onChange: () => {} }));
 
-    expect(component).toMatchSnapshot();
+    expect(component).toMatchInlineSnapshot(`
+      <div>
+        <div>
+          test content
+        </div>
+        <input
+          data-testid="input"
+          disabled={true}
+          onChange={[Function]}
+          value="test empty"
+        />
+      </div>
+    `);
   });
 
   it("renders correctly for components with controlled props with a database", async () => {
@@ -327,6 +351,18 @@ describe("#render()", () => {
       await get.settle;
     });
 
-    expect(component).toMatchSnapshot();
+    expect(component).toMatchInlineSnapshot(`
+      <div>
+        <div>
+          test content
+        </div>
+        <input
+          data-testid="input"
+          disabled={false}
+          onChange={[Function]}
+          value="testStore/0"
+        />
+      </div>
+    `);
   });
 });
