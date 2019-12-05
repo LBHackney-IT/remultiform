@@ -4,6 +4,7 @@
   "exclude": [
     "^.*/__.+__/.+\\.tsx?$",
     "^.+\\.(spec|test)\\.tsx?$",
+    "^.*/internal/.+\\.tsx?$",
     "^.+\\.internal\\.tsx?$"
   ],
   "location": "all"

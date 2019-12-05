@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { SubmitProps, submitPropTypes } from "remultiform/components/Submit";
+import { SubmitProps, submitPropTypes } from "remultiform/step";
 
 export const makeSubmit = ({
   href,

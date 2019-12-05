@@ -1,10 +1,9 @@
-import { DatabaseMap } from "../../helpers/PageComponentWrapper/DatabaseMap";
-import { DynamicPageComponent } from "../../helpers/PageComponentWrapper/DynamicPageComponent";
-import { PageComponentWrapper } from "../../helpers/PageComponentWrapper/PageComponentWrapper";
-import { StaticPageComponent } from "../../helpers/PageComponentWrapper/StaticPageComponent";
-import { Step } from "../../helpers/Step";
-
-import { NamedSchema } from "../../store/types";
+import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
+import { DatabaseMap } from "../../component-wrapper/DatabaseMap";
+import { DynamicComponent } from "../../component-wrapper/DynamicComponent";
+import { StaticComponent } from "../../component-wrapper/StaticComponent";
+import { NamedSchema } from "../../database/types";
+import { StepDefinition } from "../../step/StepDefinition";
 
 import { SimpleSubmit } from "../components/SimpleSubmit";
 import { TestDynamicComponent } from "../components/TestDynamicComponent";
@@ -20,15 +19,15 @@ export type DynamicFormSchema = NamedSchema<
   }
 >;
 
-export const dynamicForm: { steps: Step[] } = {
+export const dynamicForm: { steps: StepDefinition[] } = {
   steps: [
     {
       slug: "test-step-1",
       nextSlug: "test-step-2",
       Submit: SimpleSubmit,
       componentWrappers: [
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-img",
             Component: "img",
             props: {
@@ -36,8 +35,8 @@ export const dynamicForm: { steps: Step[] } = {
             }
           })
         ),
-        PageComponentWrapper.wrapDynamic(
-          new DynamicPageComponent({
+        ComponentWrapper.wrapDynamic(
+          new DynamicComponent({
             key: "test-dynamic-component",
             Component: TestDynamicComponent,
             props: {
@@ -56,8 +55,8 @@ export const dynamicForm: { steps: Step[] } = {
       nextSlug: "test-step-1",
       Submit: SimpleSubmit,
       componentWrappers: [
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-img-2",
             Component: "img",
             props: {
@@ -65,8 +64,8 @@ export const dynamicForm: { steps: Step[] } = {
             }
           })
         ),
-        PageComponentWrapper.wrapDynamic(
-          new DynamicPageComponent({
+        ComponentWrapper.wrapDynamic(
+          new DynamicComponent({
             key: "test-dynamic-component",
             Component: TestDynamicComponent,
             props: {

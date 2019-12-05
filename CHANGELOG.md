@@ -11,15 +11,14 @@ and this project adheres to
 ### Added
 
 - TypeScript support
-- `Page` with support for an array of components to render as children
-- `Orchestrator` to orchestrate rendering the appropriate `Page`
+- `StepDefinition` for defining a single step in the multipage form
+- `Orchestrator` to orchestrate rendering the appropriate `StepDefinition`
 - `next-kittens` example
 - IndexedDB store wrappers
-- `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing database
-  to components via context
-- `StaticPageComponent`, `DynamicPageComponent`,
-  `DynamicPageComponentDatabaseMap`, `PageComponentWrapper`, and
-  `WrappedPageComponent` for wrapping components and connecting them to an
-  IndexedDB store
+- `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing
+  `Database` to components via context
+- `StaticComponent`, `DynamicComponent`, `DynamicComponentDatabaseMap`,
+  `ComponentWrapper`, and `WrappedComponent` for wrapping components and
+  connecting them to a `Database`
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward

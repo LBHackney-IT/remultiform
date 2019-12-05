@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 
-import { DatabaseContext } from "../../helpers/DatabaseContext";
-import { NamedSchema, Schema } from "../../store/types";
+import { NamedSchema, Schema } from "../../database/types";
+import { DatabaseContext } from "../../database-context/DatabaseContext";
 
 export interface TestDatabaseConsumerProps<
   DBSchema extends NamedSchema<string, number, Schema> = NamedSchema<
     string,
     number,
-    Schema
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    any
   >
 > {
   context: DatabaseContext<DBSchema>;

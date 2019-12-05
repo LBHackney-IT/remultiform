@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {
-  DynamicPageComponent,
-  DynamicPageComponentControlledProps
-} from "../../helpers/PageComponentWrapper/DynamicPageComponent";
+  DynamicComponent,
+  DynamicComponentControlledProps
+} from "../../component-wrapper/DynamicComponent";
 
-export type TestDynamicComponentProps = DynamicPageComponentControlledProps<
+export type TestDynamicComponentProps = DynamicComponentControlledProps<
   string
 > & {
   content: string;
@@ -37,5 +37,5 @@ TestDynamicComponent.displayName = "TestDynamicComponent";
 
 TestDynamicComponent.propTypes = {
   content: PropTypes.string.isRequired,
-  ...DynamicPageComponent.controlledPropTypes(PropTypes.string)
+  ...DynamicComponent.controlledPropTypes(PropTypes.string)
 };
