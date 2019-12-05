@@ -1,27 +1,27 @@
-import { PageComponentWrapper } from "../../helpers/PageComponentWrapper/PageComponentWrapper";
-import { StaticPageComponent } from "../../helpers/PageComponentWrapper/StaticPageComponent";
-import { Step } from "../../helpers/Step";
-
+import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
+import { StaticComponent } from "../../component-wrapper/StaticComponent";
+import { StepDefinition } from "../../step/StepDefinition";
 import { SimpleSubmit } from "../components/SimpleSubmit";
+
 import { TestClassComponent } from "../components/TestClassComponent";
 import { TestFunctionComponent } from "../components/TestFunctionComponent";
 
-export const staticForm: { steps: Step[] } = {
+export const staticForm: { steps: StepDefinition[] } = {
   steps: [
     {
       slug: "test-step-1",
       nextSlug: "test-step-2",
       Submit: SimpleSubmit,
       componentWrappers: [
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-div",
             Component: "div",
             props: {}
           })
         ),
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-img",
             Component: "img",
             props: {
@@ -29,8 +29,8 @@ export const staticForm: { steps: Step[] } = {
             }
           })
         ),
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-function",
             Component: TestFunctionComponent,
             props: {
@@ -38,8 +38,8 @@ export const staticForm: { steps: Step[] } = {
             }
           })
         ),
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-class",
             Component: TestClassComponent,
             props: {
@@ -54,8 +54,8 @@ export const staticForm: { steps: Step[] } = {
       nextSlug: "test-step-1",
       Submit: SimpleSubmit,
       componentWrappers: [
-        PageComponentWrapper.wrapStatic(
-          new StaticPageComponent({
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
             key: "test-img-2",
             Component: "img",
             props: {

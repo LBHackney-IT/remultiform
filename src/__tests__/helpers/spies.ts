@@ -1,6 +1,6 @@
-import { Database, TransactionMode } from "../../store/Database";
-import { OpenOptions } from "../../store/OpenOptions";
-import { NamedSchema, Schema, StoreMap } from "../../store/types";
+import { Database, TransactionMode } from "../../database/Database";
+import { OpenOptions } from "../../database/OpenOptions";
+import { NamedSchema, StoreMap } from "../../database/types";
 
 import { promiseToWaitForNextTick } from "./promise";
 
@@ -17,8 +17,10 @@ export const spyOnConsoleError = (): jest.SpyInstance<
 };
 
 export const spyOnDatabaseOpen = (): jest.SpyInstance<
-  Promise<Database<NamedSchema<string, number, Schema>>>,
-  [string, number?, OpenOptions<Schema>?]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Promise<Database<NamedSchema<string, number, any>>>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [string, number?, OpenOptions<any>?]
 > => {
   const spy = jest.spyOn(Database, "open");
 

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import { SubmitProps } from "../../components/Submit";
+import { SubmitProps } from "../../step/Submit";
 
 export type SimpleSubmitProps = SubmitProps;
 
@@ -12,7 +12,7 @@ export const SimpleSubmit: React.FunctionComponent<SimpleSubmitProps> = (
 
   return (
     <button onClick={onSubmit} data-testid="submit">
-      Next page
+      Next step
     </button>
   );
 };

@@ -1,3 +1,4 @@
+/* eslint-env node */
 const { resolve } = require("path");
 
 const rootDirName = resolve(__dirname, "..", "..", "..");
