@@ -72,8 +72,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The proptypes of the extra props injected by {@link WrappedComponent}
-						for connecting a <a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> with a <a href="../classes/_database_database_.database.html">Database</a>.</p>
+						<p>The proptypes of the extra props injected when rendering the
+						<a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> to connect it to a <a href="../classes/_database_database_.database.html">Database</a>.</p>
 					</div>
 					<p>When implementing a <a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> you should make sure to
 						hook these props up to the relevant props in the component you&#39;re wrapping in
@@ -134,11 +134,11 @@
 						<div class="lead">
 							<p>A flag for whether or not the component is disabled for input.</p>
 						</div>
-						<p>{@link WrappedComponent} sets this to <code>true</code> when waiting for
-							<a href="../classes/_database_database_.database.html">Database</a> operations to settle. The wrapped component should
-							disable functionality appropriately. If you choose not to handle this prop,
-							be aware that unsaved user entered data may be overwritten when the
-						<a href="../classes/_database_database_.database.html">Database</a> operation does eventually settle.</p>
+						<p>This is set to <code>true</code> when waiting for <a href="../classes/_database_database_.database.html">Database</a> operations to
+							settle. The wrapped component should disable functionality appropriately.
+							If you choose not to handle this prop, be aware that unsaved user entered
+							data may be overwritten when the <a href="../classes/_database_database_.database.html">Database</a> operation does
+						eventually settle.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">

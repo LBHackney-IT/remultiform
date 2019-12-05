@@ -21,7 +21,7 @@ export interface DatabaseMapOptions<
 }
 
 /**
- * A class to tell {@link WrappedComponent} how its
+ * A class to tell a {@link DynamicComponent} how its
  * {@link DynamicComponentControlledProps} maps to the {@link Database}.
  *
  * Unlike most generic types in this library, you will need to explicitly set
