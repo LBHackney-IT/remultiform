@@ -73,6 +73,25 @@ describe("#props", () => {
   });
 });
 
+describe("#databaseMap", () => {
+  it("matches the `databaseMap` provided to the constructor", () => {
+    const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+      storeName: "testStore",
+      key: 0
+    });
+
+    const pageComponent = new DynamicPageComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      defaultValue: "test value",
+      databaseMap
+    });
+
+    expect(pageComponent.databaseMap).toStrictEqual(databaseMap);
+  });
+});
+
 describe("#defaultValue", () => {
   it("matches the `defaultValue` provided to the constructor", () => {
     const defaultValue = "test value";
@@ -106,21 +125,36 @@ describe("#defaultValue", () => {
   });
 });
 
-describe("#databaseMap", () => {
-  it("matches the `databaseMap` provided to the constructor", () => {
-    const databaseMap = new DatabaseMap<TestSchema, "testStore">({
-      storeName: "testStore",
-      key: 0
-    });
+describe("#emptyValue", () => {
+  it("matches the `emptyValue` provided to the constructor", () => {
+    const emptyValue = "test empty value";
 
     const pageComponent = new DynamicPageComponent({
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      defaultValue: "test value",
-      databaseMap
+      defaultValue: "test default value",
+      emptyValue,
+      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
     });
 
-    expect(pageComponent.databaseMap).toStrictEqual(databaseMap);
+    expect(pageComponent.emptyValue).toEqual(emptyValue);
+  });
+
+  it("is an empty string when no `emptyValue` is provided to the constructor", () => {
+    const pageComponent = new DynamicPageComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(pageComponent.emptyValue).toEqual("");
   });
 });

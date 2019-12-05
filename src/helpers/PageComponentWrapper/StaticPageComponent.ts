@@ -10,7 +10,7 @@ export interface StaticPageComponentOptions<
   /**
    * A unique identifier for this component on the page.
    */
-  key: React.Key;
+  key: string;
 
   /**
    * The component class, function, or tag name to render.
@@ -55,10 +55,7 @@ export class StaticPageComponent<
       any
     >
   > = PropTypes.exact({
-    key: PropTypes.oneOfType([
-      PropTypes.string.isRequired,
-      PropTypes.number.isRequired
-    ]).isRequired,
+    key: PropTypes.string.isRequired,
     Component: (PropTypes.elementType as PropTypes.Requireable<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       React.ElementType<any>
@@ -67,7 +64,7 @@ export class StaticPageComponent<
     defaultValue: PropTypes.any.isRequired
   });
 
-  readonly key: React.Key;
+  readonly key: string;
   readonly Component: ComponentType;
   readonly props: Props;
 

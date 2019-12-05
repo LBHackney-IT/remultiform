@@ -27,7 +27,7 @@ export interface DynamicPageComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicPageComponentControlledProps.onValueChange}.
    */
-  value: Value | null | undefined;
+  value: "" | Value | null | undefined;
 
   /**
    * The callback to call when the component's value changes.
@@ -37,7 +37,7 @@ export interface DynamicPageComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicPageComponentControlledProps.value}.
    */
-  onValueChange(value: Value): void;
+  onValueChange(value: "" | Value): void;
 
   /**
    * A flag for whether or not the component is disabled for input.
@@ -80,7 +80,7 @@ export interface DynamicPageComponentOptions<
   /**
    * A unique identifier for this component on the page.
    */
-  key: React.Key;
+  key: string;
 
   /**
    * The component class or function to render.
@@ -115,6 +115,14 @@ export interface DynamicPageComponentOptions<
    * the component is.
    */
   defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+
+  /**
+   * The value representing an empty value for this component.
+   *
+   * If you leave this unspecified, it will assume the empty value is an empty
+   * string.
+   */
+  emptyValue?: StoreValue<DBSchema["schema"], StoreName>;
 }
 
 /**
@@ -143,6 +151,7 @@ export interface DynamicPageComponentOptions<
  *     className: "my-input-class"
  *   },
  *   defaultValue: "Nothing here...",
+ *   emptyValue: "",
  *   databaseMap: myDatabaseMap
  * });
  * ```
@@ -169,17 +178,12 @@ export class DynamicPageComponent<
       StoreNames<Schema>
     >
   > = PropTypes.exact({
-    key: PropTypes.oneOfType([
-      PropTypes.string.isRequired,
-      PropTypes.number.isRequired
-    ]).isRequired,
-    Component: (PropTypes.elementType as PropTypes.Requireable<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      DynamicPageComponentType<any, any>
-    >).isRequired,
+    key: PropTypes.string.isRequired,
+    Component: PropTypes.func.isRequired,
     props: PropTypes.object.isRequired,
     databaseMap: DatabaseMap.propType.isRequired,
-    defaultValue: PropTypes.any
+    defaultValue: PropTypes.any,
+    emptyValue: PropTypes.any.isRequired
   });
 
   /**
@@ -202,11 +206,12 @@ export class DynamicPageComponent<
     };
   }
 
-  readonly key: React.Key;
+  readonly key: string;
   readonly Component: ComponentType;
   readonly props: Props;
   readonly databaseMap: DatabaseMap<DBSchema, StoreName>;
   readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+  readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
 
   constructor(
     options: DynamicPageComponentOptions<
@@ -216,12 +221,23 @@ export class DynamicPageComponent<
       StoreName
     >
   ) {
-    const { key, Component, props, databaseMap, defaultValue } = options;
+    const {
+      key,
+      Component,
+      props,
+      databaseMap,
+      defaultValue,
+      emptyValue
+    } = options;
 
     this.key = key;
     this.Component = Component;
     this.props = props;
     this.databaseMap = databaseMap;
     this.defaultValue = defaultValue;
+
+    // We need to do this to keep the component as a controlled component. The
+    // controlled prop must always be defined.
+    this.emptyValue = emptyValue === undefined ? "" : emptyValue;
   }
 }

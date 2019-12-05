@@ -36,13 +36,17 @@ export interface WrappedPageComponentProps<
     DBSchema,
     StoreName
   >;
+
+  onChange?:
+    | ((value: StoreValue<DBSchema["schema"], StoreName>) => void)
+    | null;
 }
 
 interface WrappedPageComponentState<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
-  value?: StoreValue<DBSchema["schema"], StoreName>;
+  value?: "" | StoreValue<DBSchema["schema"], StoreName>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   isFetching: boolean;
@@ -79,13 +83,15 @@ export class WrappedPageComponent<
     >
   > = {
     database: PropTypes.instanceOf(Database),
-    component: DynamicPageComponent.propType.isRequired
+    component: DynamicPageComponent.propType.isRequired,
+    onChange: PropTypes.func
   };
 
   /**
    * @ignore
    */
   state: WrappedPageComponentState<DBSchema, StoreName> = {
+    value: this.props.component.emptyValue,
     isFetching: false
   };
 
@@ -164,7 +170,7 @@ export class WrappedPageComponent<
 
     const {
       database,
-      component: { databaseMap, defaultValue }
+      component: { databaseMap, defaultValue, emptyValue }
     } = this.props;
 
     if (!database || !databaseMap) {
@@ -191,6 +197,12 @@ export class WrappedPageComponent<
         stateUpdate.value = nullAsUndefined(defaultValue);
       }
 
+      if (stateUpdate.value === undefined) {
+        // We need to do this to keep the component as a controlled component.
+        // The controlled prop must always be defined.
+        stateUpdate.value = emptyValue;
+      }
+
       // Clear the error if it was set.
       stateUpdate.error = undefined;
     } catch (err) {
@@ -209,6 +221,12 @@ export class WrappedPageComponent<
   ): void {
     if (this.isUnmounted) {
       return;
+    }
+
+    const { onChange } = this.props;
+
+    if (onChange) {
+      onChange(value);
     }
 
     this.setState(state => ({ ...state, value }));

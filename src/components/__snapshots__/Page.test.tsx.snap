@@ -2,30 +2,63 @@
 
 exports[`renders correctly with all props 1`] = `
 Array [
-  <div />,
-  <img
-    src="test.png"
-  />,
-  <div>
-    test class content
+  <div
+    data-testid="test-img"
+  >
+    Wrapped
+     
+    img
   </div>,
-  <div>
-    test function content
+  <div
+    data-testid="test-dynamic-component"
+  >
+    Wrapped 
+    TestDynamicComponent
   </div>,
+  <button
+    data-testid="submit"
+    onClick={[Function]}
+  >
+    Next page
+  </button>,
 ]
 `;
 
 exports[`renders correctly without optional props 1`] = `
 Array [
-  <div />,
-  <img
-    src="test.png"
-  />,
-  <div>
-    test class content
+  <div
+    data-testid="test-div"
+  >
+    Wrapped
+     
+    div
   </div>,
-  <div>
-    test function content
+  <div
+    data-testid="test-img"
+  >
+    Wrapped
+     
+    img
   </div>,
+  <div
+    data-testid="test-function"
+  >
+    Wrapped
+     
+    TestFunctionComponent
+  </div>,
+  <div
+    data-testid="test-class"
+  >
+    Wrapped
+     
+    TestClassComponent
+  </div>,
+  <button
+    data-testid="submit"
+    onClick={[Function]}
+  >
+    Next page
+  </button>,
 ]
 `;

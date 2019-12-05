@@ -62,18 +62,28 @@
 					<a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapperrenderprops.html">PageComponentWrapperRenderProps</a>
 				</li>
 			</ul>
-			<h1>Interface PageComponentWrapperRenderProps&lt;DBSchema&gt;</h1>
+			<h1>Interface PageComponentWrapperRenderProps&lt;DBSchema, StoreName&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The proptypes for <a href="../classes/_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapper.html#render">PageComponentWrapper.render</a>.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
 						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li>
+						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -95,6 +105,12 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapperrenderprops.html#database" class="tsd-kind-icon">database</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapperrenderprops.html#onchange" class="tsd-kind-icon">on<wbr>Change</a></li>
+							</ul>
+						</section>
 					</div>
 				</section>
 			</section>
@@ -106,9 +122,35 @@
 					<div class="tsd-signature tsd-kind-icon">database<span class="tsd-signature-symbol">:</span> <a href="../classes/_store_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper/PageComponentWrapper.tsx#L18">src/helpers/PageComponentWrapper/PageComponentWrapper.tsx:18</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper/PageComponentWrapper.tsx#L23">src/helpers/PageComponentWrapper/PageComponentWrapper.tsx:23</a></li>
 						</ul>
 					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="onchange" class="tsd-anchor"></a>
+					<h3>on<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Change<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/helpers/PageComponentWrapper/PageComponentWrapper.tsx#L24">src/helpers/PageComponentWrapper/PageComponentWrapper.tsx:24</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <a href="../modules/_store_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -128,6 +170,9 @@
 						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_components_submit_.html">&quot;components/<wbr>Submit&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_wrappedpagecomponent_.html">&quot;components/<wbr>Wrapped<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -144,6 +189,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_pagecomponentwrapper_staticpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Static<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_step_.html">&quot;helpers/<wbr>Step&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_hocs_makedynamic_.html">&quot;hocs/make<wbr>Dynamic&quot;</a>
@@ -177,6 +225,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapperrenderprops.html#database" class="tsd-kind-icon">database</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="_helpers_pagecomponentwrapper_pagecomponentwrapper_.pagecomponentwrapperrenderprops.html#onchange" class="tsd-kind-icon">on<wbr>Change</a>
 							</li>
 						</ul>
 					</li>

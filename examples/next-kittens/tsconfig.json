@@ -15,7 +15,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "remultiform": ["../../dist/esm/index"]
+      "remultiform": ["../../dist/esm"],
+      "remultiform/*": ["../../dist/esm/*"]
     }
   },
   "exclude": ["**/node_modules/**/*", "**/__*__/**/*"]

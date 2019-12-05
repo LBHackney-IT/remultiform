@@ -62,7 +62,7 @@
 					<a href="_components_orchestrator_.orchestratorprops.html">OrchestratorProps</a>
 				</li>
 			</ul>
-			<h1>Interface OrchestratorProps&lt;DBSchema&gt;</h1>
+			<h1>Interface OrchestratorProps&lt;DBSchema, StoreName&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The proptypes for <a href="../modules/_components_orchestrator_.html#orchestrator">Orchestrator</a>.</p>
+						<p>The proptypes for <a href="../classes/_components_orchestrator_.orchestrator.html">Orchestrator</a>.</p>
 					</div>
 				</div>
 			</section>
@@ -81,6 +81,9 @@
 				<ul class="tsd-type-parameters">
 					<li>
 						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_store_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_store_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li>
+						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_store_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -100,7 +103,9 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_orchestrator_.orchestratorprops.html#context" class="tsd-kind-icon">context</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_orchestrator_.orchestratorprops.html#currentstepkey" class="tsd-kind-icon">current<wbr>Step<wbr>Key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_orchestrator_.orchestratorprops.html#initialslug" class="tsd-kind-icon">initial<wbr>Slug</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_orchestrator_.orchestratorprops.html#managesteptransitions" class="tsd-kind-icon">manage<wbr>Step<wbr>Transitions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_orchestrator_.orchestratorprops.html#onnextstep" class="tsd-kind-icon">on<wbr>Next<wbr>Step</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_components_orchestrator_.orchestratorprops.html#steps" class="tsd-kind-icon">steps</a></li>
 							</ul>
 						</section>
@@ -115,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <a href="../classes/_helpers_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L50">src/components/Orchestrator.tsx:50</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L25">src/components/Orchestrator.tsx:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -127,33 +132,78 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="currentstepkey" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> current<wbr>Step<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">current<wbr>Step<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.Key</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<a name="initialslug" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> initial<wbr>Slug</h3>
+					<div class="tsd-signature tsd-kind-icon">initial<wbr>Slug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L55">src/components/Orchestrator.tsx:55</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L38">src/components/Orchestrator.tsx:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The key of the current step to be rendered.</p>
+							<p>The <a href="_helpers_step_.step.html#slug">Step.slug</a> to start the form on.</p>
 						</div>
+						<p>Defaults to the slug of the first <a href="_helpers_step_.step.html">Step</a> in
+						<a href="_components_orchestrator_.orchestratorprops.html#steps">OrchestratorProps.steps</a>.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="managesteptransitions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> manage<wbr>Step<wbr>Transitions</h3>
+					<div class="tsd-signature tsd-kind-icon">manage<wbr>Step<wbr>Transitions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L46">src/components/Orchestrator.tsx:46</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Whether the <a href="../classes/_components_orchestrator_.orchestrator.html">Orchestrator</a> should manage <a href="_helpers_step_.step.html">Step</a> transitions or
+							you want to manage them yourself via routing, for example.</p>
+						</div>
+						<p>Defaults to <code>true</code>.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="onnextstep" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> on<wbr>Next<wbr>Step</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Next<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L63">src/components/Orchestrator.tsx:63</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The callback to call when the <a href="../classes/_components_orchestrator_.orchestrator.html">Orchestrator</a> is about to transition
+							to the next <a href="_helpers_step_.step.html">Step</a>.</p>
+						</div>
+						<p>This is called after the <a href="../classes/_components_page_.page.html">Page</a> has been submitted, and the
+						<a href="../classes/_store_database_.database.html">Database</a> transaction has completed.</p>
+						<p>If <a href="_components_orchestrator_.orchestratorprops.html#managesteptransitions">OrchestratorProps.manageStepTransitions</a> is <code>true</code> this is
+						called immediately before it renders the new <a href="_helpers_step_.step.html">Step</a>.</p>
+						<p>Use this for any side effects that you might want when transitioning
+						<a href="_helpers_step_.step.html">Steps</a>.</p>
+						<dl class="tsd-comment-tags">
+							<dt>param</dt>
+							<dd><p>The next <a href="_helpers_step_.step.html#slug">Step.slug</a>.</p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="steps" class="tsd-anchor"></a>
 					<h3>steps</h3>
-					<div class="tsd-signature tsd-kind-icon">steps<span class="tsd-signature-symbol">:</span> <a href="_components_orchestrator_.step.html" class="tsd-signature-type">Step</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">steps<span class="tsd-signature-symbol">:</span> <a href="_helpers_step_.step.html" class="tsd-signature-type">Step</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L61">src/components/Orchestrator.tsx:61</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/components/Orchestrator.tsx#L30">src/components/Orchestrator.tsx:30</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>An array of steps to possibly render based on
-							<a href="_components_orchestrator_.orchestratorprops.html#currentstepkey">OrchestratorProps.currentStepKey</a>.</p>
+							<p>An array of steps to render.</p>
 						</div>
 					</div>
 				</section>
@@ -175,6 +225,9 @@
 						<a href="../modules/_components_page_.html">&quot;components/<wbr>Page&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_components_submit_.html">&quot;components/<wbr>Submit&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_components_wrappedpagecomponent_.html">&quot;components/<wbr>Wrapped<wbr>Page<wbr>Component&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -191,6 +244,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_helpers_pagecomponentwrapper_staticpagecomponent_.html">&quot;helpers/<wbr>Page<wbr>Component<wbr>Wrapper/<wbr>Static<wbr>Page<wbr>Component&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_helpers_step_.html">&quot;helpers/<wbr>Step&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_hocs_makedynamic_.html">&quot;hocs/make<wbr>Dynamic&quot;</a>
@@ -214,6 +270,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../classes/_components_orchestrator_.orchestrator.html" class="tsd-kind-icon">Orchestrator</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
@@ -223,7 +282,13 @@
 								<a href="_components_orchestrator_.orchestratorprops.html#context" class="tsd-kind-icon">context</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_components_orchestrator_.orchestratorprops.html#currentstepkey" class="tsd-kind-icon">current<wbr>Step<wbr>Key</a>
+								<a href="_components_orchestrator_.orchestratorprops.html#initialslug" class="tsd-kind-icon">initial<wbr>Slug</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_components_orchestrator_.orchestratorprops.html#managesteptransitions" class="tsd-kind-icon">manage<wbr>Step<wbr>Transitions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_components_orchestrator_.orchestratorprops.html#onnextstep" class="tsd-kind-icon">on<wbr>Next<wbr>Step</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_components_orchestrator_.orchestratorprops.html#steps" class="tsd-kind-icon">steps</a>
@@ -232,11 +297,8 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_components_orchestrator_.step.html" class="tsd-kind-icon">Step</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../modules/_components_orchestrator_.html#orchestrator" class="tsd-kind-icon">Orchestrator</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_components_orchestrator_.orchestratorstate.html" class="tsd-kind-icon">Orchestrator<wbr>State</a>
 					</li>
 				</ul>
 			</nav>

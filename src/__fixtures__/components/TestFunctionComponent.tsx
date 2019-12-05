@@ -13,6 +13,8 @@ export const TestFunctionComponent: React.FunctionComponent<TestFunctionComponen
   return <div>{content}</div>;
 };
 
+TestFunctionComponent.displayName = "TestFunctionComponent";
+
 TestFunctionComponent.propTypes = {
   content: PropTypes.string.isRequired
 };
