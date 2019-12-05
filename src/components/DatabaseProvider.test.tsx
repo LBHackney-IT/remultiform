@@ -36,7 +36,12 @@ it("renders correctly with a resolved database", async () => {
     </DatabaseProvider>
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Database name: 
+      testDBName
+    </span>
+  `);
 });
 
 it("renders correctly before the database resolves", () => {
@@ -49,7 +54,11 @@ it("renders correctly before the database resolves", () => {
     </DatabaseProvider>
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      No database
+    </span>
+  `);
 });
 
 it("renders correctly after the database resolves", async () => {
@@ -68,7 +77,12 @@ it("renders correctly after the database resolves", async () => {
     await databasePromise;
   });
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Database name: 
+      testDBName
+    </span>
+  `);
 });
 
 it("throws if the database rejects", async () => {
@@ -105,11 +119,40 @@ it("throws if the database rejects", async () => {
     await internalDatabasePromise;
   });
 
-  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+  expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`
+    Array [
+      Array [
+        "Error: Uncaught [Error: test error]
+        at reportException (<rootDir>/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+        at invokeEventListeners (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:209:9)
+        at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:119:9)
+        at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:82:17)
+        at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/nodes/HTMLElement-impl.js:30:27)
+        at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:157:21)
+        at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
+        at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
+        at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15092:9)
+        at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:697:12)",
+        [Error: test error],
+      ],
+      Array [
+        "The above error occurred in the <DatabaseProvider> component:
+        in DatabaseProvider
+        in TestErrorBoundary
+
+    React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+      ],
+    ]
+  `);
 
   consoleErrorSpy.mockRestore();
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Caught error: 
+      Error: test error
+    </span>
+  `);
 });
 
 it("renders correctly when changing children", async () => {
@@ -145,7 +188,11 @@ it("renders correctly when changing children", async () => {
     );
   });
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      Updated test content
+    </div>
+  `);
 });
 
 it("throws when changing the `context` prop with a different database instance", async () => {
@@ -184,11 +231,41 @@ it("throws when changing the `context` prop with a different database instance",
     component!.update(<Wrapper key={key} context={NewDBContext} />);
   });
 
-  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+  expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`
+    Array [
+      Array [
+        "Error: Uncaught [Error: Updating the context prop of a DatabaseProvider to one with a different database is unsupported]
+        at reportException (<rootDir>/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+        at invokeEventListeners (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:209:9)
+        at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:119:9)
+        at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:82:17)
+        at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/nodes/HTMLElement-impl.js:30:27)
+        at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:157:21)
+        at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
+        at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
+        at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15092:9)
+        at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:697:12)",
+        [Error: Updating the context prop of a DatabaseProvider to one with a different database is unsupported],
+      ],
+      Array [
+        "The above error occurred in the <DatabaseProvider> component:
+        in DatabaseProvider (created by Wrapper)
+        in TestErrorBoundary (created by Wrapper)
+        in Wrapper
+
+    React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+      ],
+    ]
+  `);
 
   consoleErrorSpy.mockRestore();
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Caught error: 
+      Error: Updating the context prop of a DatabaseProvider to one with a different database is unsupported
+    </span>
+  `);
 });
 
 it("renders correctly when changing the `context` prop with the same database instance", async () => {
@@ -221,7 +298,11 @@ it("renders correctly when changing the `context` prop with the same database in
     component!.update(<Wrapper key={key} context={NewDBContext} />);
   });
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Test content
+    </span>
+  `);
 });
 
 it("throws when unmounting without an error", async () => {
@@ -251,11 +332,40 @@ it("throws when unmounting without an error", async () => {
     );
   });
 
-  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+  expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`
+    Array [
+      Array [
+        "Error: Uncaught [Error: Unmounting a DatabaseProvider outside of an error is unsupported]
+        at reportException (<rootDir>/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+        at invokeEventListeners (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:209:9)
+        at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:119:9)
+        at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:82:17)
+        at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/nodes/HTMLElement-impl.js:30:27)
+        at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:157:21)
+        at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
+        at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
+        at safelyCallComponentWillUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12018:5)
+        at commitUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12507:11)",
+        [Error: Unmounting a DatabaseProvider outside of an error is unsupported],
+      ],
+      Array [
+        "The above error occurred in the <DatabaseProvider> component:
+        in DatabaseProvider
+        in TestErrorBoundary
+
+    React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+      ],
+    ]
+  `);
 
   consoleErrorSpy.mockRestore();
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Caught error: 
+      Error: Unmounting a DatabaseProvider outside of an error is unsupported
+    </span>
+  `);
 });
 
 it("doesn't throw when unmounting without an error with `allowUnmounting` enabled", async () => {
@@ -285,9 +395,13 @@ it("doesn't throw when unmounting without an error with `allowUnmounting` enable
     );
   });
 
-  expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+  expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`Array []`);
 
   consoleErrorSpy.mockRestore();
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    <span>
+      Test content
+    </span>
+  `);
 });

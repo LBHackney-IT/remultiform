@@ -94,10 +94,25 @@ describe("with an unsupported React version", () => {
       </TestErrorBoundary>
     );
 
-    expect(consoleErrorSpy.mock.calls).toMatchSnapshot();
+    expect(consoleErrorSpy.mock.calls).toMatchInlineSnapshot(`
+      Array [
+        Array [
+          "The above error occurred in the <Tester> component:
+          in Tester
+          in TestErrorBoundary
+
+      React will try to recreate this component tree from scratch using the error boundary you provided, TestErrorBoundary.",
+        ],
+      ]
+    `);
 
     consoleErrorSpy.mockRestore();
 
-    expect(component).toMatchSnapshot();
+    expect(component).toMatchInlineSnapshot(`
+      <span>
+        Caught error: 
+        TypeError: react_1.default.useContext is not a function
+      </span>
+    `);
   });
 });

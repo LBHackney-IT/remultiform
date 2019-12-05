@@ -39,7 +39,29 @@ it("renders correctly with all props", async () => {
     />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="test-img"
+      >
+        Wrapped
+         
+        img
+      </div>,
+      <div
+        data-testid="test-dynamic-component"
+      >
+        Wrapped 
+        TestDynamicComponent
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next page
+      </button>,
+    ]
+  `);
 });
 
 it("renders correctly without optional props", () => {
@@ -50,7 +72,44 @@ it("renders correctly without optional props", () => {
     />
   );
 
-  expect(component).toMatchSnapshot();
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="test-div"
+      >
+        Wrapped
+         
+        div
+      </div>,
+      <div
+        data-testid="test-img"
+      >
+        Wrapped
+         
+        img
+      </div>,
+      <div
+        data-testid="test-function"
+      >
+        Wrapped
+         
+        TestFunctionComponent
+      </div>,
+      <div
+        data-testid="test-class"
+      >
+        Wrapped
+         
+        TestClassComponent
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next page
+      </button>,
+    ]
+  `);
 });
 
 it("calls the after submit callback after submission", () => {
