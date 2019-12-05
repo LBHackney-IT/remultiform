@@ -5,8 +5,8 @@ import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
 import { DatabaseMap } from "./DatabaseMap";
 
 /**
- * The proptypes of the extra props injected by {@link WrappedComponent}
- * for connecting a {@link DynamicComponent} with a {@link Database}.
+ * The proptypes of the extra props injected when rendering the
+ * {@link DynamicComponent} to connect it to a {@link Database}.
  *
  * When implementing a {@link DynamicComponent} you should make sure to
  * hook these props up to the relevant props in the component you're wrapping in
@@ -42,11 +42,11 @@ export interface DynamicComponentControlledProps<Value> {
   /**
    * A flag for whether or not the component is disabled for input.
    *
-   * {@link WrappedComponent} sets this to `true` when waiting for
-   * {@link Database} operations to settle. The wrapped component should
-   * disable functionality appropriately. If you choose not to handle this prop,
-   * be aware that unsaved user entered data may be overwritten when the
-   * {@link Database} operation does eventually settle.
+   * This is set to `true` when waiting for {@link Database} operations to
+   * settle. The wrapped component should disable functionality appropriately.
+   * If you choose not to handle this prop, be aware that unsaved user entered
+   * data may be overwritten when the {@link Database} operation does
+   * eventually settle.
    */
   disabled: boolean;
 }
@@ -95,8 +95,8 @@ export interface DynamicComponentOptions<
   /**
    * The static props to pass to {@link DynamicComponentOptions.Component}.
    *
-   * These should not include the {@link DynamicComponentControlledProps},
-   * which are injected by {@link WrappedComponent}.
+   * These should not include the {@link DynamicComponentControlledProps}, which
+   * are injected automatically.
    */
   props: Props;
 
