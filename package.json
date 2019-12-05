@@ -27,7 +27,8 @@
     "lint:codeowners": "codeowners-enforcer -i 'package.json' -i 'package-lock.json'",
     "format": "prettier --write '**/*'",
     "format:check": "prettier --check '**/*'",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "preversion": "npm install && npm test && bin/check-git"
   },
   "peerDependencies": {
     "react": ">= 16"

@@ -154,6 +154,49 @@
 				<p>We can also check that all files (except <code>package.json</code> and <code>package-lock.json</code>
 				because Dependabot can get very noisy) have code owners:</p>
 				<pre><code class="language-sh">npm run lint:codeowners</code></pre>
+				<a href="#releasing-versions" id="releasing-versions" style="color: inherit; text-decoration: none;">
+					<h3>Releasing versions</h3>
+				</a>
+				<ol>
+					<li><p>Create a new branch called <code>release/vx.y.z</code>, where <code>x.y.z</code> is the new version
+						number, following <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+					</li>
+					<li><p>Update <code>CHANGELOG.md</code> to batch the changes in this version under a heading in
+						the following format:</p>
+						<pre><code class="language-md"><span class="hljs-section">## [Unreleased]</span>
+
+<span class="hljs-section">## [x.y.z] - DD-MM-YYYY</span>
+
+<span class="hljs-section">### Added</span>
+
+...
+
+<span class="hljs-section">## [a.b.c] - DD-MM-YYYY</span>
+
+<span class="hljs-section">### Added</span>
+
+...
+</code></pre>
+					</li>
+				</ol>
+				<pre><code>
+<span class="hljs-number">1</span>. Commit the <span class="hljs-keyword">changes</span> <span class="hljs-keyword">as</span> <span class="hljs-string">"Update the changelog in preparation for `vx.y.z`"</span>.
+
+<span class="hljs-number">1</span>. Run the <span class="hljs-keyword">version</span> bumping <span class="hljs-keyword">scrip</span><span class="hljs-variable">t:</span>
+
+   ```<span class="hljs-keyword">sh</span>
+   bin/bump-<span class="hljs-keyword">version</span> <span class="hljs-string">"x.y.z"</span></code></pre><ol>
+					<li><p>Push the branch and create a pull request, copying the contents of this
+						version from the changelog into the description.</p>
+					</li>
+					<li><p>Get the pull request reviewed.</p>
+					</li>
+					<li><p>When approved and ready to publish:</p>
+						<pre><code class="language-sh">bin/publish <span class="hljs-string">"x.y.z"</span></code></pre>
+					</li>
+					<li><p>Merge the pull request and publicize the release.</p>
+					</li>
+				</ol>
 				<a href="#architecture-decision-records" id="architecture-decision-records" style="color: inherit; text-decoration: none;">
 					<h2>Architecture decision records</h2>
 				</a>

@@ -152,6 +152,56 @@ because Dependabot can get very noisy) have code owners:
 npm run lint:codeowners
 ```
 
+### Releasing versions
+
+1. Create a new branch called `release/vx.y.z`, where `x.y.z` is the new version
+   number, following [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+1. Update `CHANGELOG.md` to batch the changes in this version under a heading in
+   the following format:
+
+   ```md
+   ## [Unreleased]
+
+   ## [x.y.z] - DD-MM-YYYY
+
+   ### Added
+
+   ...
+
+   ## [a.b.c] - DD-MM-YYYY
+
+   ### Added
+
+   ...
+
+   [unreleased]:
+     https://github.com/LBHackney-IT/remultiform/compare/vx.y.z...HEAD
+   [x.y.z]: https://github.com/LBHackney-IT/remultiform/compare/va.b.c...vx.y.z
+   [a.b.c]: ...
+   ```
+
+1. Commit the changes as "Update the changelog in preparation for `vx.y.z`".
+
+1. Run the version bumping script:
+
+   ```sh
+   bin/bump-version "x.y.z"
+   ```
+
+1. Push the branch and create a pull request, copying the contents of this
+   version from the changelog into the description.
+
+1. Get the pull request reviewed.
+
+1. When approved and ready to publish:
+
+   ```sh
+   bin/publish "x.y.z"
+   ```
+
+1. Merge the pull request and publicize the release.
+
 ## Architecture decision records
 
 We use ADRs to document architecture decisions that we make. They can be found
