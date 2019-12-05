@@ -37,8 +37,12 @@ fi
 
 git checkout "refs/tags/$TAG_NAME"
 
+npm ci
 npm publish
 
 git checkout master
+git pull
+
+npm ci
 
 echo "You're done. Merge the pull request and tell the world!"
