@@ -4,20 +4,72 @@ jobs:
   install-and-test:
     docker:
       - image: circleci/node:12.13.0
+
     steps:
       - checkout
+
       - run:
-          name: Install Dependencies
+          name: Install dependencies
           command: |
             npm ci
             bin/check-git
+
       - run:
-          name: Run Tests
+          name: Run tests
           command: |
             npm test
             bin/check-git
+
+  deploy-docs:
+    parameters:
+      use_cache:
+        type: boolean
+        default: false
+
+    docker:
+      - image: circleci/node:12.13.0
+
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          name: Add GitHub SSH key
+          fingerprints:
+            - "55:cf:27:30:6c:89:da:65:2b:a6:4f:32:22:be:f6:e6"
+      - run:
+          name: Set up Git user
+          command: |
+            git config user.email "ci@hackney"
+            git config user.name "CI"
+
+      - run:
+          name: Install dependencies
+          command: npm ci
+
+      - run:
+          name: Build docs
+          command: |
+            npm run build:docs
+            bin/check-git
+      - run:
+          name: Commit and deploy docs to GitHub pages
+          command: |
+            git checkout gh-pages
+            git reset --hard origin/gh-pages
+            rm -r docs/
+            cp -r tmp/docs docs
+            git add docs
+            git commit -m "Update the docs to match $CIRCLE_SHA1"
+            git push origin gh-pages
 
 workflows:
   ci:
     jobs:
       - install-and-test
+
+      - deploy-docs:
+          filters:
+            branches:
+              only: master
+          requires:
+            - install-and-test

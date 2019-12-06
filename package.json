@@ -11,7 +11,7 @@
   ],
   "repository": "LBHackney-IT/remultiform",
   "scripts": {
-    "build": "npm run build:barrels && npm run build:docs && rollup --config",
+    "build": "npm run build:barrels && rollup --config",
     "build:watch": "npm run build -- --watch",
     "build:barrels": "barrelsby --config ./barrelsby.json",
     "build:docs": "typedoc",
