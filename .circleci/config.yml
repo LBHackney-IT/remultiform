@@ -2,6 +2,11 @@ version: 2.1
 
 jobs:
   install-and-test:
+    parameters:
+      cache_dependencies:
+        type: boolean
+        default: false
+
     docker:
       - image: circleci/node:12.13.0
 
@@ -13,6 +18,15 @@ jobs:
           command: |
             npm ci
             bin/check-git
+      - when:
+          condition: <<parameters.cache_dependencies>>
+          steps:
+            - save_cache:
+                name: Save dependency cache
+                key:
+                  v1-depencencies-{{ arch }}-{{ checksum "package-lock.json" }}
+                paths:
+                  - node_modules/
 
       - run:
           name: Run tests
@@ -42,9 +56,20 @@ jobs:
             git config user.email "ci@hackney"
             git config user.name "CI"
 
-      - run:
-          name: Install dependencies
-          command: npm ci
+      - when:
+          condition: <<parameters.use_cache>>
+          steps:
+            - restore_cache:
+                name: Restore dependency cache
+                key:
+                  v1-depencencies-{{ arch }}-{{ checksum "package-lock.json" }}
+
+      - unless:
+          condition: <<parameters.use_cache>>
+          steps:
+            - run:
+                name: Install dependencies
+                command: npm ci
 
       - run:
           name: Build docs
@@ -63,13 +88,22 @@ jobs:
             git push origin gh-pages
 
 workflows:
-  ci:
+  check:
     jobs:
-      - install-and-test
+      - install-and-test:
+          filters:
+            branches:
+              ignore: master
 
-      - deploy-docs:
+  check-and-deploy-docs:
+    jobs:
+      - install-and-test:
           filters:
             branches:
               only: master
+          cache_dependencies: true
+
+      - deploy-docs:
           requires:
             - install-and-test
+          use_cache: true
