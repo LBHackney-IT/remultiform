@@ -15,9 +15,7 @@ jobs:
 
       - run:
           name: Install dependencies
-          command: |
-            npm ci
-            bin/check-git
+          command: npm ci
       - when:
           condition: <<parameters.cache_dependencies>>
           steps:
