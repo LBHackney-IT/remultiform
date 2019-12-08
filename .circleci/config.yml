@@ -100,14 +100,14 @@ workflows:
       - install-and-test:
           filters:
             branches:
-              ignore: master
+              ignore: chore/build-the-docs-on-ci
 
   check-and-deploy-docs:
     jobs:
       - install-and-test:
           filters:
             branches:
-              only: master
+              only: chore/build-the-docs-on-ci
           cache_dependencies: true
 
       - deploy-docs:
