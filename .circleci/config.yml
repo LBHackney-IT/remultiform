@@ -28,11 +28,20 @@ jobs:
                 paths:
                   - node_modules/
 
+      - restore_cache:
+          name: Restore examples cache
+          key: v1-depencencies-examples-{{ arch }}
       - run:
           name: Run tests
           command: |
             npm test
             bin/check-git
+      - save_cache:
+          name: Save examples cache
+          key: v1-depencencies-examples-{{ arch }}
+          paths:
+            - examples/next-kittens/node_modules/
+            - examples/next-kittens/.next/cache/
 
   deploy-docs:
     parameters:
