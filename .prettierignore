@@ -4,8 +4,8 @@ node_modules/
 
 /bin/
 /dist/
-/docs/api/
 /src/**/index.ts
+/tmp/
 
 LICENCE
 *.snap

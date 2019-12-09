@@ -15,6 +15,6 @@
   "listInvalidSymbolLinks": true,
   "mode": "modules",
   "name": "Remultiform",
-  "out": "docs/api/",
+  "out": "tmp/docs/",
   "theme": "default"
 }

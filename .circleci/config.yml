@@ -2,22 +2,117 @@ version: 2.1
 
 jobs:
   install-and-test:
+    parameters:
+      cache_dependencies:
+        type: boolean
+        default: false
+
     docker:
       - image: circleci/node:12.13.0
+
     steps:
       - checkout
+
       - run:
-          name: Install Dependencies
-          command: |
-            npm ci
-            bin/check-git
+          name: Install dependencies
+          command: npm ci
+      - when:
+          condition: <<parameters.cache_dependencies>>
+          steps:
+            - save_cache:
+                name: Save dependency cache
+                key:
+                  v1-depencencies-{{ arch }}-{{ checksum "package-lock.json" }}
+                paths:
+                  - node_modules/
+
+      - restore_cache:
+          name: Restore examples cache
+          key: v1-depencencies-examples-{{ arch }}
       - run:
-          name: Run Tests
+          name: Run tests
           command: |
             npm test
             bin/check-git
+      - save_cache:
+          name: Save examples cache
+          key: v1-depencencies-examples-{{ arch }}
+          paths:
+            - examples/next-kittens/node_modules/
+            - examples/next-kittens/.next/cache/
+
+  deploy-docs:
+    parameters:
+      use_cache:
+        type: boolean
+        default: false
+
+    docker:
+      - image: circleci/node:12.13.0
+
+    steps:
+      - checkout
+
+      - add_ssh_keys:
+          name: Add GitHub SSH key
+          fingerprints:
+            - "55:cf:27:30:6c:89:da:65:2b:a6:4f:32:22:be:f6:e6"
+      - run:
+          name: Set up Git user
+          command: |
+            git config user.email "ci@hackney"
+            git config user.name "CI"
+
+      - when:
+          condition: <<parameters.use_cache>>
+          steps:
+            - restore_cache:
+                name: Restore dependency cache
+                key:
+                  v1-depencencies-{{ arch }}-{{ checksum "package-lock.json" }}
+
+      - unless:
+          condition: <<parameters.use_cache>>
+          steps:
+            - run:
+                name: Install dependencies
+                command: npm ci
+
+      - run:
+          name: Build docs
+          command: |
+            npm run build:docs
+            bin/check-git
+      - run:
+          name: Commit and deploy docs to GitHub pages
+          command: |
+            git checkout gh-pages
+            git reset --hard origin/gh-pages
+            rm -r docs/
+            cp -r tmp/docs docs
+            git add docs
+            git commit -m "Update the docs to match $CIRCLE_SHA1"
+            git push origin gh-pages
 
 workflows:
-  ci:
+  check:
     jobs:
-      - install-and-test
+      - install-and-test:
+          name: install-and-test-branch
+          filters:
+            branches:
+              ignore: master
+
+  check-and-deploy-docs:
+    jobs:
+      - install-and-test:
+          name: install-and-test-master
+          filters:
+            branches:
+              only: master
+          cache_dependencies: true
+
+      - deploy-docs:
+          requires:
+            - install-and-test-master
+          use_cache: true
