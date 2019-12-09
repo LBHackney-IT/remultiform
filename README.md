@@ -7,6 +7,14 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/LBHackney-IT/remultiform?style=for-the-badge)
 
+![Package version](https://img.shields.io/npm/v/remultiform?style=for-the-badge)
+![Bundle size](https://img.shields.io/bundlephobia/min/remultiform?style=for-the-badge)
+
+![TypeScript supported](https://img.shields.io/npm/types/remultiform?style=for-the-badge)
+![TypeScript version](https://img.shields.io/npm/dependency-version/remultiform/dev/typescript?style=for-the-badge)
+
+![Supported React versions](https://img.shields.io/npm/dependency-version/remultiform/peer/react?style=for-the-badge)
+
 The **Re**act **multi**page **form** builder
 
 **Warning: Remultiform is still in alpha. No promises of API stability are
