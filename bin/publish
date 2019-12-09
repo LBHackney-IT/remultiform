@@ -26,8 +26,6 @@ fi
 
 git tag --annotate --message "Version $VERSION" "$TAG_NAME" "origin/$RELEASE_BRANCH_NAME"
 
-git push origin "refs/tags/$TAG_NAME:refs/tags/$TAG_NAME"
-
 read -rp "Are you ready to publish to NPM? [yN] " PUBLISH_TO_NPM
 
 if [[ $PUBLISH_TO_NPM != "y" ]] && [[ $PUBLISH_TO_NPM != "Y" ]]; then
@@ -37,8 +35,14 @@ fi
 
 git checkout "refs/tags/$TAG_NAME"
 
+npm ci
 npm publish
 
+git push origin "refs/tags/$TAG_NAME:refs/tags/$TAG_NAME"
+
 git checkout master
+git pull
+
+npm ci
 
 echo "You're done. Merge the pull request and tell the world!"
