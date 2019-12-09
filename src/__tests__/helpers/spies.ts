@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Database, TransactionMode } from "../../database/Database";
 import { OpenOptions } from "../../database/OpenOptions";
 import { NamedSchema, StoreMap } from "../../database/types";

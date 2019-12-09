@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/unbound-method */
 import { render, fireEvent } from "@testing-library/react";
 import React from "react";
 import { create } from "react-test-renderer";

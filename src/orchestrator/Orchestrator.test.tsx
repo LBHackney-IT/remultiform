@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { render, fireEvent, waitForElement } from "@testing-library/react";
 import React from "react";
 import { create } from "react-test-renderer";

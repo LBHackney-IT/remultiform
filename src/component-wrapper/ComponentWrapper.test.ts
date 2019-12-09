@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { ReactTestRenderer, act, create } from "react-test-renderer";
 
 import { TestClassComponent } from "../__fixtures__/components/TestClassComponent";
