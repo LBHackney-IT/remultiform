@@ -29,7 +29,7 @@ git tag --annotate --message "Version $VERSION" "$TAG_NAME" "origin/$RELEASE_BRA
 read -rp "Are you ready to publish to NPM? [yN] " PUBLISH_TO_NPM
 
 if [[ $PUBLISH_TO_NPM != "y" ]] && [[ $PUBLISH_TO_NPM != "Y" ]]; then
-  echo "You've already pushed a Git tag to origin, so make sure to clean that up before trying again"
+  echo "You've created a Git tag, so make sure to clean that up before trying again"
   exit 1
 fi
 
@@ -43,6 +43,6 @@ git push origin "refs/tags/$TAG_NAME:refs/tags/$TAG_NAME"
 git checkout master
 git pull
 
-npm ci
+npm install
 
 echo "You're done. Merge the pull request and tell the world!"
