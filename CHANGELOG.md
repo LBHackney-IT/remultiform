@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed `DatabaseMap` to `ComponentDatabaseMap`
+
 ## [0.0.3] - 18-12-2019
 
 ### Added

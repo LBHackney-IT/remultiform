@@ -6,7 +6,7 @@ import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
 
 import { WrappedComponent } from "./internal/WrappedComponent";
 
-import { DatabaseMap } from "./DatabaseMap";
+import { ComponentDatabaseMap } from "./ComponentDatabaseMap";
 import { DynamicComponentType, DynamicComponent } from "./DynamicComponent";
 import { StaticComponent } from "./StaticComponent";
 
@@ -47,7 +47,10 @@ export class ComponentWrapper<
     key: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     renderWhen: PropTypes.func.isRequired,
-    databaseMap: PropTypes.instanceOf(DatabaseMap),
+    databaseMap: PropTypes.instanceOf<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ComponentDatabaseMap<NamedSchema<string, number, any>, string>
+    >(ComponentDatabaseMap),
     defaultValue: PropTypes.any,
     emptyValue: PropTypes.any.isRequired
   });
@@ -163,7 +166,7 @@ export class ComponentWrapper<
    * The properies needed to map the user-entered value for the wrapped
    * component to the {@link Database}.
    */
-  readonly databaseMap?: DatabaseMap<DBSchema, StoreName> | null;
+  readonly databaseMap?: ComponentDatabaseMap<DBSchema, StoreName> | null;
 
   /**
    * The optional default value to store in the {@link Database} if the
@@ -193,7 +196,7 @@ export class ComponentWrapper<
         | ""
         | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
     }) => boolean,
-    databaseMap?: DatabaseMap<DBSchema, StoreName>,
+    databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
     defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,
     emptyValue: "" | StoreValue<DBSchema["schema"], StoreName> = ""
   ) {

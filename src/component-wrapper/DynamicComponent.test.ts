@@ -2,7 +2,7 @@ import { TestDynamicComponent } from "../__fixtures__/components/TestDynamicComp
 
 import { NamedSchema } from "../database/types";
 
-import { DatabaseMap } from "./DatabaseMap";
+import { ComponentDatabaseMap } from "./ComponentDatabaseMap";
 import { DynamicComponent } from "./DynamicComponent";
 
 type TestSchema = NamedSchema<
@@ -25,7 +25,7 @@ describe("#key", () => {
       Component: TestDynamicComponent,
       props: { content: "test content" },
       defaultValue: "test value",
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -44,7 +44,7 @@ describe("#Component", () => {
       Component,
       props: { content: "test content" },
       defaultValue: "test value",
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -63,7 +63,7 @@ describe("#props", () => {
       Component: TestDynamicComponent,
       props,
       defaultValue: "test value",
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -82,7 +82,7 @@ describe("#renderWhen", () => {
       Component: TestDynamicComponent,
       props: { content: "test content" },
       renderWhen,
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -96,7 +96,7 @@ describe("#renderWhen", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -108,7 +108,7 @@ describe("#renderWhen", () => {
 
 describe("#databaseMap", () => {
   it("matches the `databaseMap` provided to the constructor", () => {
-    const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+    const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
       storeName: "testStore",
       key: 0
     });
@@ -134,7 +134,7 @@ describe("#defaultValue", () => {
       Component: TestDynamicComponent,
       props: { content: "test content" },
       defaultValue,
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -148,7 +148,7 @@ describe("#defaultValue", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -168,7 +168,7 @@ describe("#emptyValue", () => {
       props: { content: "test content" },
       defaultValue: "test default value",
       emptyValue,
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })
@@ -182,7 +182,7 @@ describe("#emptyValue", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
       })

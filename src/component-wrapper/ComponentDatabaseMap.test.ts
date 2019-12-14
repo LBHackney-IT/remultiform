@@ -1,6 +1,6 @@
 import { NamedSchema } from "../database/types";
 
-import { DatabaseMap } from "./DatabaseMap";
+import { ComponentDatabaseMap } from "./ComponentDatabaseMap";
 
 type TestSchema = NamedSchema<
   string,
@@ -22,7 +22,10 @@ describe("#storeName", () => {
   it("matches the `storeName` provided to the constructor", () => {
     const storeName = "anotherTestStore";
 
-    const databaseMap = new DatabaseMap<TestSchema, "anotherTestStore">({
+    const databaseMap = new ComponentDatabaseMap<
+      TestSchema,
+      "anotherTestStore"
+    >({
       storeName,
       key: 0
     });
@@ -35,7 +38,7 @@ describe("#key", () => {
   it("matches the `key` provided to the constructor", () => {
     const key = 5;
 
-    const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+    const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
       storeName: "testStore",
       key
     });

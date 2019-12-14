@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
 
-import { DatabaseMap } from "./DatabaseMap";
+import { ComponentDatabaseMap } from "./ComponentDatabaseMap";
 
 /**
  * The proptypes of the extra props injected when rendering the
@@ -122,9 +122,9 @@ export interface DynamicComponentOptions<
    * The configuration telling the {@link DynamicComponent} how to interface
    * with the {@link Database}.
    *
-   * See {@link DatabaseMap} for more details.
+   * See {@link ComponentDatabaseMap} for more details.
    */
-  databaseMap: DatabaseMap<DBSchema, StoreName>;
+  databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
 
   /**
    * The value to default to when nothing exists in the provided database store.
@@ -157,7 +157,10 @@ export interface DynamicComponentOptions<
  * ```ts
  * const storeName = "myStore";
  *
- * const myDatabaseMap = new DatabaseMap<MyDBSchema, typeof storeName>({
+ * const myDatabaseMap = new ComponentDatabaseMap<
+ *   MyDBSchema,
+ *   typeof storeName
+ * >({
  *   storeName,
  *   key: "input-0"
  * });
@@ -201,7 +204,7 @@ export class DynamicComponent<
     Component: PropTypes.func.isRequired,
     props: PropTypes.object.isRequired,
     renderWhen: PropTypes.func.isRequired,
-    databaseMap: DatabaseMap.propType.isRequired,
+    databaseMap: ComponentDatabaseMap.propType.isRequired,
     defaultValue: PropTypes.any,
     emptyValue: PropTypes.any.isRequired
   });
@@ -234,7 +237,7 @@ export class DynamicComponent<
       | ""
       | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
   }) => boolean;
-  readonly databaseMap: DatabaseMap<DBSchema, StoreName>;
+  readonly databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
   readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
   readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
 

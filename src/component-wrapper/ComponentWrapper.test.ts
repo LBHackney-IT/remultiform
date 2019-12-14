@@ -10,8 +10,8 @@ import { spyOnDatabaseGet } from "../__tests__/helpers/spies";
 import { Database } from "../database/Database";
 import { NamedSchema } from "../database/types";
 
+import { ComponentDatabaseMap } from "./ComponentDatabaseMap";
 import { ComponentWrapper } from "./ComponentWrapper";
-import { DatabaseMap } from "./DatabaseMap";
 import { DynamicComponent } from "./DynamicComponent";
 import { StaticComponent } from "./StaticComponent";
 
@@ -62,7 +62,7 @@ describe(".wrapDynamic()", () => {
           content: "test content"
         },
         defaultValue: "test default",
-        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
         })
@@ -101,7 +101,7 @@ describe("#key", () => {
           content: "test content"
         },
         defaultValue: "test default",
-        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
         })
@@ -128,7 +128,7 @@ describe("#databaseMap", () => {
   });
 
   it("matches the database map provided when wrapping a `DynamicComponent`", () => {
-    const databaseMap = new DatabaseMap<TestSchema, typeof storeName>({
+    const databaseMap = new ComponentDatabaseMap<TestSchema, typeof storeName>({
       storeName,
       key: 0
     });
@@ -177,7 +177,7 @@ describe("#defaultValue", () => {
         },
         defaultValue,
         emptyValue: "test empty",
-        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
         })
@@ -215,7 +215,7 @@ describe("#emptyValue", () => {
         },
         defaultValue: "test default",
         emptyValue,
-        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
         })
@@ -297,7 +297,7 @@ describe("#render()", () => {
         },
         defaultValue: "test default",
         emptyValue: "test empty",
-        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
         })
@@ -333,7 +333,7 @@ describe("#render()", () => {
         },
         defaultValue: "test default",
         emptyValue: "test empty",
-        databaseMap: new DatabaseMap<TestSchema, typeof storeName>({
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
         })

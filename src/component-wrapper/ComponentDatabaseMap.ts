@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { NamedSchema, Schema, StoreKey, StoreNames } from "../database/types";
 
 /**
- * The options for {@link DatabaseMap}.
+ * The options for {@link ComponentDatabaseMap}.
  */
-export interface DatabaseMapOptions<
+export interface ComponentDatabaseMapOptions<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
@@ -15,7 +15,7 @@ export interface DatabaseMapOptions<
   storeName: StoreName;
 
   /**
-   * The key in {@link DatabaseMapOptions.storeName} to fetch and update.
+   * The key in {@link ComponentDatabaseMapOptions.storeName} to fetch and update.
    */
   key: StoreKey<DBSchema["schema"], StoreName>;
 }
@@ -33,16 +33,16 @@ export interface DatabaseMapOptions<
  *
  * @typeparam StoreName - The name of the {@link Database} store this maps to.
  */
-export class DatabaseMap<
+export class ComponentDatabaseMap<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   /**
-   * The proptype validator for a {@link DatabaseMap}.
+   * The proptype validator for a {@link ComponentDatabaseMap}.
    */
   static propType: PropTypes.Requireable<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    DatabaseMap<NamedSchema<string, number, any>, string>
+    ComponentDatabaseMap<NamedSchema<string, number, any>, string>
   > = PropTypes.exact({
     storeName: PropTypes.string.isRequired,
     key: PropTypes.oneOfType([
@@ -54,7 +54,7 @@ export class DatabaseMap<
   readonly storeName: StoreName;
   readonly key: StoreKey<DBSchema["schema"], StoreName>;
 
-  constructor(options: DatabaseMapOptions<DBSchema, StoreName>) {
+  constructor(options: ComponentDatabaseMapOptions<DBSchema, StoreName>) {
     const { storeName, key } = options;
 
     this.storeName = storeName;

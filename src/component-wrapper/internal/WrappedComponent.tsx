@@ -63,7 +63,7 @@ interface WrappedComponentState<
  * This handles interfacing between the
  * {@link DynamicComponentControlledProps} of a component and a
  * {@link Database} instance via a {@link DatabaseContext} and a
- * {@link DatabaseMap}.
+ * {@link ComponentDatabaseMap}.
  *
  * This component passes {@link DynamicComponentControlledProps.disabled}
  * as `true` when waiting for {@link Database} operations to settle. The

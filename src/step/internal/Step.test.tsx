@@ -13,8 +13,8 @@ import {
   spyOnDatabaseTransaction
 } from "../../__tests__/helpers/spies";
 
+import { ComponentDatabaseMap } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
-import { DatabaseMap } from "../../component-wrapper/DatabaseMap";
 import { DynamicComponent } from "../../component-wrapper/DynamicComponent";
 import { StaticComponent } from "../../component-wrapper/StaticComponent";
 import { Database } from "../../database/Database";
@@ -230,7 +230,7 @@ it("persists data to the database when submitted", async () => {
     }
   >;
 
-  const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
     key: 0
   });
@@ -305,7 +305,7 @@ it("deletes the corresponding data from the database when submitted with the emp
     }
   >;
 
-  const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
     key: 0
   });

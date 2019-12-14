@@ -8,7 +8,7 @@ import {
   StoreValue
 } from "../../database/types";
 
-import { DatabaseMap } from "../DatabaseMap";
+import { ComponentDatabaseMap } from "../ComponentDatabaseMap";
 import { DynamicComponentType, DynamicComponent } from "../DynamicComponent";
 import { StaticComponent } from "../StaticComponent";
 
@@ -98,7 +98,7 @@ export class ComponentWrapper<
         | ""
         | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
     }) => boolean,
-    databaseMap?: DatabaseMap<DBSchema, StoreName>,
+    databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
     defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,
     emptyValue?: "" | StoreValue<DBSchema["schema"], StoreName>
   ) {

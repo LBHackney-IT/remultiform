@@ -10,7 +10,7 @@ import { NamedSchema } from "../../database/types";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { DatabaseProvider } from "../../database-context/DatabaseProvider";
 
-import { DatabaseMap } from "../DatabaseMap";
+import { ComponentDatabaseMap } from "../ComponentDatabaseMap";
 import { DynamicComponent } from "../DynamicComponent";
 
 import { WrappedComponent } from "./WrappedComponent";
@@ -28,7 +28,7 @@ type TestSchema = NamedSchema<
   }
 >;
 
-const testDatabaseMap = new DatabaseMap<TestSchema, "testStore">({
+const testDatabaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
   storeName: "testStore",
   key: 0
 });

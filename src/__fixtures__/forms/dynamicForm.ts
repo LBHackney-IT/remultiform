@@ -1,5 +1,5 @@
+import { ComponentDatabaseMap } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
-import { DatabaseMap } from "../../component-wrapper/DatabaseMap";
 import { DynamicComponent } from "../../component-wrapper/DynamicComponent";
 import { StaticComponent } from "../../component-wrapper/StaticComponent";
 import { NamedSchema } from "../../database/types";
@@ -42,7 +42,10 @@ export const dynamicForm: { steps: StepDefinition[] } = {
             props: {
               content: "test content"
             },
-            databaseMap: new DatabaseMap<DynamicFormSchema, "testStore">({
+            databaseMap: new ComponentDatabaseMap<
+              DynamicFormSchema,
+              "testStore"
+            >({
               storeName: "testStore",
               key: 0
             })
@@ -71,7 +74,10 @@ export const dynamicForm: { steps: StepDefinition[] } = {
             props: {
               content: "more test content"
             },
-            databaseMap: new DatabaseMap<DynamicFormSchema, "testStore">({
+            databaseMap: new ComponentDatabaseMap<
+              DynamicFormSchema,
+              "testStore"
+            >({
               storeName: "testStore",
               key: 1
             })
