@@ -44,9 +44,8 @@ and this project adheres to
 - IndexedDB store wrappers
 - `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing
   `Database` to components via context
-- `StaticComponent`, `DynamicComponent`, `DynamicComponentDatabaseMap`,
-  `ComponentWrapper`, and `WrappedComponent` for wrapping components and
-  connecting them to a `Database`
+- `StaticComponent`, `DynamicComponent`, `DatabaseMap`, `ComponentWrapper`, and
+  `WrappedComponent` for wrapping components and connecting them to a `Database`
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward
 
