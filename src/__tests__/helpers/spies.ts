@@ -82,12 +82,12 @@ export const spyOnDatabaseTransaction = (): {
     [
       string[],
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (stores: StoreMap<any, string[]>) => void | Promise<void>,
+      (stores: StoreMap<any>) => void | Promise<void>,
       (TransactionMode | undefined)?
     ]
   >;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  stores: StoreMap<any, string[]>;
+  stores: StoreMap<any>;
   settle: Promise<void[]>;
   calls: Promise<void>[];
 } => {
@@ -95,7 +95,7 @@ export const spyOnDatabaseTransaction = (): {
   const transaction = {
     spy: jest.spyOn(Database.prototype, "transaction"),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    stores: {} as StoreMap<any, string[]>,
+    stores: {} as StoreMap<any>,
     settle: Promise.all([
       new Promise<void>(resolve => {
         settleInitial = resolve;
