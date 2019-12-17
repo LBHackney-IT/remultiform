@@ -59,13 +59,14 @@ export interface OrchestratorProps<
    * to the next {@link StepDefinition}.
    *
    * This is called after the step has been submitted, and the
-   * {@link Database} transaction has completed.
-   *
-   * If {@link OrchestratorProps.manageStepTransitions} is `true` this is
-   * called immediately before it renders the new {@link StepDefinition}.
+   * {@link Database} transaction has completed. It is called immediately before
+   * it renders the new {@link StepDefinition} (if
+   * {@link OrchestratorProps.manageStepTransitions} is `true`).
    *
    * Use this for any side effects that you might want when transitioning
-   * {@link StepDefinition|Steps}.
+   * {@link StepDefinition|steps} and for handling transitions to a
+   * {@link StepDefinition.nextSlug} that isn't managed by the
+   * {@link Orchestrator}.
    *
    * @param slug - The next {@link StepDefinition.slug}.
    */
@@ -159,15 +160,25 @@ export class Orchestrator<
   }
 
   private handleSubmit(): void {
-    const { manageStepTransitions, onNextStep } = this.props;
+    const { steps, manageStepTransitions, onNextStep } = this.props;
     const { nextSlug } = this.currentStep();
 
     if (onNextStep) {
       onNextStep(nextSlug);
     }
 
-    if (manageStepTransitions) {
+    if (!manageStepTransitions) {
+      return;
+    }
+
+    if (steps.map(step => step.slug).includes(nextSlug)) {
       this.setState(state => ({ ...state, currentSlug: nextSlug }));
+    } else if (!onNextStep) {
+      throw new Error(
+        `Unable to transition to next slug "${nextSlug}" due to it not ` +
+          "existing in the managed steps, and there is no onNextStep prop to " +
+          "call instead"
+      );
     }
   }
 }

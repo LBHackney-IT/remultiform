@@ -13,6 +13,11 @@ and this project adheres to
 - Added `provideDatabase` to `Orchestrator`'s props to support manually wrapping
   steps with a `DatabaseProvider`
 
+### Fixed
+
+- Stopped throwing an error when attempting to transition to slugs that aren't
+  in the managed steps while `onNextSlug` is provided
+
 ## [0.0.1] - 05-12-2019
 
 ### Added
