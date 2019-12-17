@@ -13,6 +13,8 @@ and this project adheres to
 - Renamed `DatabaseMap` to `ComponentDatabaseMap`
 - Made `defaultValue` required for `DynamicComponent`s
 - Improved prop type inference for `StaticComponent`s
+- Removed the empty string from types that will never handle the artificial
+  empty value
 
 ## [0.0.3] - 18-12-2019
 

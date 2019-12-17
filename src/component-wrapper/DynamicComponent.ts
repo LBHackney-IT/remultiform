@@ -37,7 +37,7 @@ export interface DynamicComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicComponentControlledProps.value}.
    */
-  onValueChange(value: "" | Value): void;
+  onValueChange(value: Value): void;
 
   /**
    * A flag for whether or not the component is disabled for input.
@@ -114,8 +114,8 @@ export interface DynamicComponentOptions<
    */
   renderWhen?(stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | undefined;
   }): boolean;
 
   /**
@@ -234,8 +234,8 @@ export class DynamicComponent<
   readonly props: Props;
   readonly renderWhen: (stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | undefined;
   }) => boolean;
   readonly databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
   readonly defaultValue:

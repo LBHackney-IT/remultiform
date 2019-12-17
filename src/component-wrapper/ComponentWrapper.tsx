@@ -152,8 +152,8 @@ export class ComponentWrapper<
    */
   readonly renderWhen: (stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | undefined;
   }) => boolean;
 
   /**
@@ -187,8 +187,8 @@ export class ComponentWrapper<
     ) => JSX.Element,
     renderWhen: (stepValues: {
       [key: string]:
-        | ""
-        | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+        | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+        | undefined;
     }) => boolean,
     databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
     defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,

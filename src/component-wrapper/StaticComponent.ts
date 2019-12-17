@@ -38,8 +38,8 @@ export interface StaticComponentOptions<
    */
   renderWhen?(stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | undefined;
   }): boolean;
 }
 
@@ -85,8 +85,8 @@ export class StaticComponent<
     : {};
   readonly renderWhen: (stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | undefined;
   }) => boolean;
 
   constructor(options: StaticComponentOptions<ComponentType, DBSchema>) {
