@@ -167,7 +167,7 @@ describe("#transaction()", () => {
     const key = "testKey";
 
     await upgrade.transaction([testStoreName], async stores => {
-      await expect(stores[testStoreName].add(1, key)).resolves.toEqual(key);
+      await expect(stores[testStoreName].add(key, 1)).resolves.toEqual(key);
     });
   });
 
@@ -232,7 +232,7 @@ describe("#transaction()", () => {
     const value = 1;
 
     await upgrade.transaction([testStoreName], async stores => {
-      await stores[testStoreName].add(value, key);
+      await stores[testStoreName].add(key, 1);
 
       await promiseToWaitForNextTick();
 
@@ -248,12 +248,12 @@ describe("#transaction()", () => {
     const value = 1;
 
     await upgrade.transaction([testStoreName], async stores => {
-      await stores[testStoreName].add(value, key);
+      await stores[testStoreName].add(key, value);
 
       await promiseToWaitForNextTick();
 
       await expectPromise(() =>
-        stores[testStoreName].add(2, "anotherKey")
+        stores[testStoreName].add("anotherKey", 2)
       ).rejects.toThrowError(
         "A request was placed against a transaction which is currently not active, or which is finished"
       );

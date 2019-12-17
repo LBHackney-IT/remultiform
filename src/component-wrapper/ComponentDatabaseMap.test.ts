@@ -13,7 +13,7 @@ type TestSchema = NamedSchema<
 
     anotherTestStore: {
       key: number;
-      value: number;
+      value: { a: { test: number } };
     };
   }
 >;
@@ -44,5 +44,34 @@ describe("#key", () => {
     });
 
     expect(databaseMap.key).toEqual(key);
+  });
+});
+
+describe("#property", () => {
+  it("is undefined by default", () => {
+    const databaseMap = new ComponentDatabaseMap<
+      TestSchema,
+      "anotherTestStore"
+    >({
+      storeName: "anotherTestStore",
+      key: 3
+    });
+
+    expect(databaseMap.property).toBeUndefined();
+  });
+
+  it("matches the `property` provided to the constructor", () => {
+    const property: ["a", "test"] = ["a", "test"];
+
+    const databaseMap = new ComponentDatabaseMap<
+      TestSchema,
+      "anotherTestStore"
+    >({
+      storeName: "anotherTestStore",
+      key: 3,
+      property
+    });
+
+    expect(databaseMap.property).toEqual(property);
   });
 });

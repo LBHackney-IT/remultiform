@@ -524,7 +524,7 @@ describe("#transaction()", () => {
     await db.transaction(
       [testStoreName],
       async stores => {
-        await stores[testStoreName].add(value, key);
+        await stores[testStoreName].add(key, value);
 
         await promiseToWaitForNextTick();
 
@@ -544,12 +544,12 @@ describe("#transaction()", () => {
     await db.transaction(
       [testStoreName],
       async stores => {
-        await stores[testStoreName].add(value, key);
+        await stores[testStoreName].add(key, value);
 
         await promiseToWaitForNextTick();
 
         await expectPromise(() =>
-          stores[testStoreName].add({ a: "another", b: 2 }, "anotherKey")
+          stores[testStoreName].add("anotherKey", { a: "another", b: 2 })
         ).rejects.toThrowError(
           "A request was placed against a transaction which is currently not active, or which is finished"
         );
@@ -579,7 +579,7 @@ describe("#transaction()", () => {
         [testStoreName],
         async stores => {
           await expectPromise(() =>
-            stores[testStoreName].add({ a: "test", b: 1 }, "testKey")
+            stores[testStoreName].add("testKey", { a: "test", b: 1 })
           ).rejects.toThrowError(
             'The mutating operation was attempted in a "readonly" transaction'
           );
@@ -612,7 +612,7 @@ describe("#transaction()", () => {
         [testStoreName],
         async stores => {
           await expect(
-            stores[testStoreName].add({ a: "test", b: 1 }, key)
+            stores[testStoreName].add(key, { a: "test", b: 1 })
           ).resolves.toEqual(key);
         },
         TransactionMode.ReadWrite
@@ -639,7 +639,7 @@ describe("#close()", () => {
     await db.transaction(
       [testStoreName],
       async stores => {
-        await stores[testStoreName].add({ a: "test", b: 1 }, "testKey");
+        await stores[testStoreName].add("testKey", { a: "test", b: 1 });
 
         db.close();
 

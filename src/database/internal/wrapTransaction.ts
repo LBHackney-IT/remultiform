@@ -1,4 +1,5 @@
-import { Schema, StoreMap, StoreNames, Transaction } from "../types";
+import { StoreMap, Store } from "../Store";
+import { Schema, StoreNames, Transaction } from "../types";
 
 export const wrapTransaction = async <
   S extends Schema,
@@ -11,7 +12,7 @@ export const wrapTransaction = async <
   const stores = storeNames.reduce(
     (stores, storeName) => ({
       ...stores,
-      [storeName]: transaction.objectStore(storeName)
+      [storeName]: new Store(transaction.objectStore(storeName))
     }),
     {} as StoreMap<S, Names>
   );

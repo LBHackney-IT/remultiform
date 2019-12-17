@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- `Store` to wrap IndexedDB's store
+- Support for storing non-primitive objects in `Store`s
+
 ### Changed
 
 - Renamed `DatabaseMap` to `ComponentDatabaseMap`

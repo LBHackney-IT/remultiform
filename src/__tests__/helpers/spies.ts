@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Database, TransactionMode } from "../../database/Database";
 import { OpenOptions } from "../../database/OpenOptions";
-import { NamedSchema, Schema, StoreMap } from "../../database/types";
+import { Store, StoreMap } from "../../database/Store";
+import { NamedSchema, Schema } from "../../database/types";
 
 import { promiseToWaitForNextTick } from "./promise";
 
@@ -122,12 +123,14 @@ export const spyOnDatabaseTransaction = (): {
     const theseStores = storeNames.reduce(
       (s, storeName) => ({
         ...s,
-        [storeName]: {
+        [storeName]: new Store({
           ...jest.fn()(),
-          get: jest.fn(),
+          createIndex: jest.fn(),
+          add: jest.fn(),
           put: jest.fn(),
+          get: jest.fn(),
           delete: jest.fn()
-        }
+        })
       }),
       {}
     );

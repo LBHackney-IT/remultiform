@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
-import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
+import { NamedSchema, Schema, StoreNames } from "../database/types";
+
+import { ComponentValue } from "./ComponentDatabaseMap";
 
 /**
  * The options for {@link StaticComponent}.
@@ -38,7 +40,7 @@ export interface StaticComponentOptions<
    */
   renderWhen?(stepValues: {
     [key: string]:
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
       | undefined;
   }): boolean;
 }
@@ -85,7 +87,7 @@ export class StaticComponent<
     : {};
   readonly renderWhen: (stepValues: {
     [key: string]:
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>
+      | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
       | undefined;
   }) => boolean;
 
