@@ -41,7 +41,7 @@ and this project adheres to
 - `StepDefinition` for defining a single step in the multipage form
 - `Orchestrator` to orchestrate rendering the appropriate `StepDefinition`
 - `next-kittens` example
-- IndexedDB store wrappers
+- `Database` and `Upgrade` to wrap IndexedDB's database
 - `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing
   `Database` to components via context
 - `StaticComponent`, `DynamicComponent`, `DatabaseMap`, `ComponentWrapper`, and
