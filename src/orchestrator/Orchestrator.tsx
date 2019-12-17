@@ -44,17 +44,29 @@ export interface OrchestratorProps<
   manageStepTransitions?: boolean | null;
 
   /**
+   * Whether the {@link Orchestrator} should wrap the steps in a
+   * {@link DatabaseProvider} for you or you want to do that yourself.
+   *
+   * You might want to disable this if you have pages that exist outside of the
+   * {@link Orchestrator}.
+   *
+   * Defaults to `true`.
+   */
+  provideDatabase?: boolean | null;
+
+  /**
    * The callback to call when the {@link Orchestrator} is about to transition
    * to the next {@link StepDefinition}.
    *
    * This is called after the step has been submitted, and the
-   * {@link Database} transaction has completed.
-   *
-   * If {@link OrchestratorProps.manageStepTransitions} is `true` this is
-   * called immediately before it renders the new {@link StepDefinition}.
+   * {@link Database} transaction has completed. It is called immediately before
+   * it renders the new {@link StepDefinition} (if
+   * {@link OrchestratorProps.manageStepTransitions} is `true`).
    *
    * Use this for any side effects that you might want when transitioning
-   * {@link StepDefinition|Steps}.
+   * {@link StepDefinition|steps} and for handling transitions to a
+   * {@link StepDefinition.nextSlug} that isn't managed by the
+   * {@link Orchestrator}.
    *
    * @param slug - The next {@link StepDefinition.slug}.
    */
@@ -92,7 +104,8 @@ export class Orchestrator<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     OrchestratorProps<NamedSchema<string, number, any>, string>
   > = {
-    manageStepTransitions: true
+    manageStepTransitions: true,
+    provideDatabase: true
   };
 
   state: OrchestratorState = {};
@@ -101,29 +114,14 @@ export class Orchestrator<
    * @ignore
    */
   render(): JSX.Element {
-    const { context } = this.props;
+    const { context, provideDatabase } = this.props;
 
     const { slug, componentWrappers, Submit } = this.currentStep();
 
-    if (context) {
-      return (
-        <DatabaseProvider context={context}>
-          <Step
-            key={slug}
-            context={context}
-            componentWrappers={componentWrappers}
-            Submit={Submit}
-            afterSubmit={(): void => {
-              this.handleSubmit();
-            }}
-          />
-        </DatabaseProvider>
-      );
-    }
-
-    return (
+    const step = (
       <Step
         key={slug}
+        context={context}
         componentWrappers={componentWrappers}
         Submit={Submit}
         afterSubmit={(): void => {
@@ -131,6 +129,12 @@ export class Orchestrator<
         }}
       />
     );
+
+    if (provideDatabase && context) {
+      return <DatabaseProvider context={context}>{step}</DatabaseProvider>;
+    }
+
+    return step;
   }
 
   private currentStep(): StepDefinition<DBSchema, StoreName> {
@@ -156,15 +160,25 @@ export class Orchestrator<
   }
 
   private handleSubmit(): void {
-    const { manageStepTransitions, onNextStep } = this.props;
+    const { steps, manageStepTransitions, onNextStep } = this.props;
     const { nextSlug } = this.currentStep();
 
     if (onNextStep) {
       onNextStep(nextSlug);
     }
 
-    if (manageStepTransitions) {
+    if (!manageStepTransitions) {
+      return;
+    }
+
+    if (steps.map(step => step.slug).includes(nextSlug)) {
       this.setState(state => ({ ...state, currentSlug: nextSlug }));
+    } else if (!onNextStep) {
+      throw new Error(
+        `Unable to transition to next slug "${nextSlug}" due to it not ` +
+          "existing in the managed steps, and there is no onNextStep prop to " +
+          "call instead"
+      );
     }
   }
 }
