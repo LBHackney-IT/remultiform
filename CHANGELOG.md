@@ -11,6 +11,7 @@ and this project adheres to
 ### Changed
 
 - Renamed `DatabaseMap` to `ComponentDatabaseMap`
+- Made `defaultValue` required for `DynamicComponent`s
 
 ## [0.0.3] - 18-12-2019
 

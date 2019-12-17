@@ -1,4 +1,3 @@
-import { nullAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -23,7 +22,7 @@ export const TestDynamicComponent: React.FunctionComponent<TestDynamicComponentP
       <div>{content}</div>
       <input
         data-testid="input"
-        value={nullAsUndefined(value)}
+        value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
           onValueChange(event.target.value);
         }}
@@ -37,5 +36,5 @@ TestDynamicComponent.displayName = "TestDynamicComponent";
 
 TestDynamicComponent.propTypes = {
   content: PropTypes.string.isRequired,
-  ...DynamicComponent.controlledPropTypes(PropTypes.string)
+  ...DynamicComponent.controlledPropTypes(PropTypes.string.isRequired)
 };

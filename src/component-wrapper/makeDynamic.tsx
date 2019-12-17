@@ -110,12 +110,12 @@ const mapComponentPropTypesToDynamicPropTypes = <
   delete copyOfComponentPropTypes[disabled];
 
   const valuePropType = componentPropTypes
-    ? ((componentPropTypes[value] as unknown) as PropTypes.Requireable<Value>)
-    : PropTypes.any;
+    ? ((componentPropTypes[value] as unknown) as PropTypes.Validator<Value>)
+    : PropTypes.any.isRequired;
 
   return {
     ...copyOfComponentPropTypes,
-    ...DynamicComponent.controlledPropTypes(valuePropType)
+    ...DynamicComponent.controlledPropTypes<Value>(valuePropType)
   } as React.WeakValidationMap<
     Subtract<Props, PropsToMap> & DynamicComponentControlledProps<Value>
   >;
@@ -202,7 +202,7 @@ export const makeDynamic = <
     // We don't know the type of `Value` at runtime to use for the proptypes,
     // so we allow `any`.
     Dynamic.propTypes = DynamicComponent.controlledPropTypes<Value>(
-      PropTypes.any
+      PropTypes.any.isRequired
     ) as React.WeakValidationMap<DynamicProps>;
   } else {
     Dynamic.displayName = `makeDynamic(${Component.displayName ||

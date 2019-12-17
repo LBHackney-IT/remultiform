@@ -27,7 +27,7 @@ export interface DynamicComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicComponentControlledProps.onValueChange}.
    */
-  value: "" | Value | null | undefined;
+  value: "" | Value;
 
   /**
    * The callback to call when the component's value changes.
@@ -129,10 +129,10 @@ export interface DynamicComponentOptions<
   /**
    * The value to default to when nothing exists in the provided database store.
    *
-   * If you leave this unspecified, it will use whatever the default value for
-   * the component is.
+   * If this is undefined, it will use whatever the default value for the
+   * component is.
    */
-  defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+  defaultValue: StoreValue<DBSchema["schema"], StoreName> | undefined;
 
   /**
    * The value representing an empty value for this component.
@@ -220,7 +220,7 @@ export class DynamicComponent<
    * {@link DynamicComponentControlledProps.value}.
    */
   static controlledPropTypes<Value>(
-    valuePropType: PropTypes.Requireable<Value>
+    valuePropType: PropTypes.Validator<Value>
   ): PropTypes.ValidationMap<DynamicComponentControlledProps<Value>> {
     return {
       value: valuePropType,
@@ -238,7 +238,10 @@ export class DynamicComponent<
       | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
   }) => boolean;
   readonly databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
-  readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+  readonly defaultValue:
+    | StoreValue<DBSchema["schema"], StoreName>
+    | null
+    | undefined;
   readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
 
   constructor(

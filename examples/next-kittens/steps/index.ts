@@ -2,11 +2,10 @@ import {
   ComponentWrapper,
   StaticComponent
 } from "remultiform/component-wrapper";
-import { StepDefinition } from "remultiform/step";
 
 import { makeSubmit } from "../components/makeSubmit";
 
-const steps: StepDefinition[] = [
+const steps = [
   {
     slug: "small-kitten",
     nextSlug: "big-kitten",

@@ -62,13 +62,14 @@ it("renders correctly with all non-context props", () => {
   `);
 });
 
-it("renders correctly without a default value for the component", () => {
+it("renders correctly with an undefined default value for the component", () => {
   const dynamicComponent = new DynamicComponent({
     key: "test-component",
     Component: TestDynamicComponent,
     props: {
       content: "test content"
     },
+    defaultValue: undefined as string | undefined,
     databaseMap: testDatabaseMap
   });
 
@@ -247,7 +248,7 @@ it("uses the default value when fetching the stored value returns `undefined`", 
   `);
 });
 
-it("uses the empty value when fetching the stored value returns `undefined` and there is no default value", async () => {
+it("uses the empty value when fetching the stored value returns `undefined` and the default value is undefined", async () => {
   const get = spyOnDatabaseGet(false);
 
   const dynamicComponent = new DynamicComponent({
@@ -256,6 +257,7 @@ it("uses the empty value when fetching the stored value returns `undefined` and 
     props: {
       content: "test content"
     },
+    defaultValue: undefined,
     emptyValue: "test empty",
     databaseMap: testDatabaseMap
   });

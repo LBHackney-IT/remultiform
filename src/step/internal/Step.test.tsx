@@ -5,7 +5,10 @@ import { create } from "react-test-renderer";
 
 import { SimpleSubmit } from "../../__fixtures__/components/SimpleSubmit";
 import { TestDynamicComponent } from "../../__fixtures__/components/TestDynamicComponent";
-import { dynamicForm } from "../../__fixtures__/forms/dynamicForm";
+import {
+  DynamicFormSchema,
+  dynamicForm
+} from "../../__fixtures__/forms/dynamicForm";
 import { staticForm } from "../../__fixtures__/forms/staticForm";
 
 import {
@@ -28,7 +31,7 @@ jest.mock("../../component-wrapper/ComponentWrapper");
 jest.mock("../../database/Database");
 
 it("renders correctly with all props", async () => {
-  const database = await Database.open("testDBName", 1);
+  const database = await Database.open<DynamicFormSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(database);
 
   const component = create(
@@ -194,7 +197,7 @@ it("calls the after submit callback after submission", () => {
 it("calls the after submit callback after submission when it contains dynamic components", async () => {
   const afterSubmit = jest.fn();
 
-  const database = await Database.open("testDBName", 1);
+  const database = await Database.open<DynamicFormSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(database);
 
   const { getByTestId } = render(
@@ -244,6 +247,7 @@ it("persists data to the database when submitted", async () => {
           key: "test-key",
           content: "test content"
         },
+        defaultValue: "test default value",
         databaseMap
       })
     )
@@ -321,6 +325,7 @@ it("deletes the corresponding data from the database when submitted with the emp
           key: "test-key",
           content: "test content"
         },
+        defaultValue: "test default value",
         emptyValue,
         databaseMap
       })

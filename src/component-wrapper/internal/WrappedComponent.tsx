@@ -51,7 +51,7 @@ interface WrappedComponentState<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
-  value?: "" | StoreValue<DBSchema["schema"], StoreName>;
+  value: "" | StoreValue<DBSchema["schema"], StoreName>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   isFetching: boolean;

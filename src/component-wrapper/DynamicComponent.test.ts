@@ -82,6 +82,7 @@ describe("#renderWhen", () => {
       Component: TestDynamicComponent,
       props: { content: "test content" },
       renderWhen,
+      defaultValue: "test value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -96,6 +97,7 @@ describe("#renderWhen", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
+      defaultValue: "test value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -127,7 +129,7 @@ describe("#databaseMap", () => {
 
 describe("#defaultValue", () => {
   it("matches the `defaultValue` provided to the constructor", () => {
-    const defaultValue = "test value";
+    const defaultValue = "test default value";
 
     const component = new DynamicComponent({
       key: "test-key",
@@ -141,20 +143,6 @@ describe("#defaultValue", () => {
     });
 
     expect(component.defaultValue).toEqual(defaultValue);
-  });
-
-  it("is undefined when no `defaultValue` is provided to the constructor", () => {
-    const component = new DynamicComponent({
-      key: "test-key",
-      Component: TestDynamicComponent,
-      props: { content: "test content" },
-      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
-        storeName: "testStore",
-        key: 0
-      })
-    });
-
-    expect(component.defaultValue).toBeUndefined();
   });
 });
 
@@ -185,7 +173,8 @@ describe("#emptyValue", () => {
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
-      })
+      }),
+      defaultValue: "test default value"
     });
 
     expect(component.emptyValue).toEqual("");
