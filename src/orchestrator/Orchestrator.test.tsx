@@ -30,6 +30,7 @@ it("renders correctly with all props", async () => {
       steps={staticForm.steps}
       initialSlug={staticForm.steps[1].slug}
       manageStepTransitions={false}
+      provideDatabase={false}
       onNextStep={(): void => {}}
     />
   );

@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Added `provideDatabase` to `Orchestrator`'s props to support manually wrapping
+  steps with a `DatabaseProvider`
+
 ## [0.0.1] - 05-12-2019
 
 ### Added

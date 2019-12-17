@@ -44,6 +44,17 @@ export interface OrchestratorProps<
   manageStepTransitions?: boolean | null;
 
   /**
+   * Whether the {@link Orchestrator} should wrap the steps in a
+   * {@link DatabaseProvider} for you or you want to do that yourself.
+   *
+   * You might want to disable this if you have pages that exist outside of the
+   * {@link Orchestrator}.
+   *
+   * Defaults to `true`.
+   */
+  provideDatabase?: boolean | null;
+
+  /**
    * The callback to call when the {@link Orchestrator} is about to transition
    * to the next {@link StepDefinition}.
    *
@@ -92,7 +103,8 @@ export class Orchestrator<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     OrchestratorProps<NamedSchema<string, number, any>, string>
   > = {
-    manageStepTransitions: true
+    manageStepTransitions: true,
+    provideDatabase: true
   };
 
   state: OrchestratorState = {};
@@ -101,29 +113,14 @@ export class Orchestrator<
    * @ignore
    */
   render(): JSX.Element {
-    const { context } = this.props;
+    const { context, provideDatabase } = this.props;
 
     const { slug, componentWrappers, Submit } = this.currentStep();
 
-    if (context) {
-      return (
-        <DatabaseProvider context={context}>
-          <Step
-            key={slug}
-            context={context}
-            componentWrappers={componentWrappers}
-            Submit={Submit}
-            afterSubmit={(): void => {
-              this.handleSubmit();
-            }}
-          />
-        </DatabaseProvider>
-      );
-    }
-
-    return (
+    const step = (
       <Step
         key={slug}
+        context={context}
         componentWrappers={componentWrappers}
         Submit={Submit}
         afterSubmit={(): void => {
@@ -131,6 +128,12 @@ export class Orchestrator<
         }}
       />
     );
+
+    if (provideDatabase && context) {
+      return <DatabaseProvider context={context}>{step}</DatabaseProvider>;
+    }
+
+    return step;
   }
 
   private currentStep(): StepDefinition<DBSchema, StoreName> {
