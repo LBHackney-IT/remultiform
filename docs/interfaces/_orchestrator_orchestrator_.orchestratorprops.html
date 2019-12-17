@@ -106,6 +106,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_orchestrator_orchestrator_.orchestratorprops.html#initialslug" class="tsd-kind-icon">initial<wbr>Slug</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_orchestrator_orchestrator_.orchestratorprops.html#managesteptransitions" class="tsd-kind-icon">manage<wbr>Step<wbr>Transitions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_orchestrator_orchestrator_.orchestratorprops.html#onnextstep" class="tsd-kind-icon">on<wbr>Next<wbr>Step</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_orchestrator_orchestrator_.orchestratorprops.html#providedatabase" class="tsd-kind-icon">provide<wbr>Database</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_orchestrator_orchestrator_.orchestratorprops.html#steps" class="tsd-kind-icon">steps</a></li>
 							</ul>
 						</section>
@@ -171,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">on<wbr>Next<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/orchestrator/Orchestrator.tsx#L61">src/orchestrator/Orchestrator.tsx:61</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/orchestrator/Orchestrator.tsx#L73">src/orchestrator/Orchestrator.tsx:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -180,16 +181,37 @@
 							to the next <a href="_step_stepdefinition_.stepdefinition.html">StepDefinition</a>.</p>
 						</div>
 						<p>This is called after the step has been submitted, and the
-						<a href="../classes/_database_database_.database.html">Database</a> transaction has completed.</p>
-						<p>If <a href="_orchestrator_orchestrator_.orchestratorprops.html#managesteptransitions">OrchestratorProps.manageStepTransitions</a> is <code>true</code> this is
-						called immediately before it renders the new <a href="_step_stepdefinition_.stepdefinition.html">StepDefinition</a>.</p>
+							<a href="../classes/_database_database_.database.html">Database</a> transaction has completed. It is called immediately before
+							it renders the new <a href="_step_stepdefinition_.stepdefinition.html">StepDefinition</a> (if
+						<a href="_orchestrator_orchestrator_.orchestratorprops.html#managesteptransitions">OrchestratorProps.manageStepTransitions</a> is <code>true</code>).</p>
 						<p>Use this for any side effects that you might want when transitioning
-						<a href="_step_stepdefinition_.stepdefinition.html">Steps</a>.</p>
+							<a href="_step_stepdefinition_.stepdefinition.html">steps</a> and for handling transitions to a
+							<a href="_step_stepdefinition_.stepdefinition.html#nextslug">StepDefinition.nextSlug</a> that isn&#39;t managed by the
+						<a href="../classes/_orchestrator_orchestrator_.orchestrator.html">Orchestrator</a>.</p>
 						<dl class="tsd-comment-tags">
 							<dt>param</dt>
 							<dd><p>The next <a href="_step_stepdefinition_.stepdefinition.html#slug">StepDefinition.slug</a>.</p>
 							</dd>
 						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="providedatabase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> provide<wbr>Database</h3>
+					<div class="tsd-signature tsd-kind-icon">provide<wbr>Database<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/orchestrator/Orchestrator.tsx#L55">src/orchestrator/Orchestrator.tsx:55</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Whether the <a href="../classes/_orchestrator_orchestrator_.orchestrator.html">Orchestrator</a> should wrap the steps in a
+							<a href="../classes/_database_context_databaseprovider_.databaseprovider.html">DatabaseProvider</a> for you or you want to do that yourself.</p>
+						</div>
+						<p>You might want to disable this if you have pages that exist outside of the
+						<a href="../classes/_orchestrator_orchestrator_.orchestrator.html">Orchestrator</a>.</p>
+						<p>Defaults to <code>true</code>.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -283,6 +305,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_orchestrator_orchestrator_.orchestratorprops.html#onnextstep" class="tsd-kind-icon">on<wbr>Next<wbr>Step</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_orchestrator_orchestrator_.orchestratorprops.html#providedatabase" class="tsd-kind-icon">provide<wbr>Database</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_orchestrator_orchestrator_.orchestratorprops.html#steps" class="tsd-kind-icon">steps</a>
