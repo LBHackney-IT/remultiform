@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.0.2] - 17-12-2019
+
 ### Changed
 
 - Added `provideDatabase` to `Orchestrator`'s props to support manually wrapping
@@ -37,5 +39,6 @@ and this project adheres to
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward
 
-[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.1...HEAD
+[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/LBHackney-IT/remultiform/releases/tag/v0.0.1
