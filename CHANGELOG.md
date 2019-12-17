@@ -17,6 +17,8 @@ and this project adheres to
 
 - Stopped throwing an error when attempting to transition to slugs that aren't
   in the managed steps while `onNextSlug` is provided
+- Changed to correctly using a read-write transition when persisting data to a
+  `Database`
 
 ## [0.0.1] - 05-12-2019
 

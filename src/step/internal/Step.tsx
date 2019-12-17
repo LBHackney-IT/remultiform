@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
-import { Database } from "../../database/Database";
+import { Database, TransactionMode } from "../../database/Database";
 import {
   NamedSchema,
   Schema,
@@ -155,8 +155,10 @@ export class Step<
             storeName && array.indexOf(storeName) === index
         ) as StoreName[];
 
-      await database.transaction(storeNames, stores =>
-        this.persistValuesToDatabase(stores)
+      await database.transaction(
+        storeNames,
+        stores => this.persistValuesToDatabase(stores),
+        "readwrite" as TransactionMode
       );
     }
 

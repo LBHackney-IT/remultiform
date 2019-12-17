@@ -206,6 +206,11 @@ it("persists data to the database when submitted", async () => {
   fireEvent.click(getByTestId("submit"));
 
   expect(transaction.spy).toHaveBeenCalledTimes(1);
+  expect(transaction.spy).toHaveBeenCalledWith(
+    ["testStore"],
+    transaction.spy.mock.calls[0][1],
+    "readwrite"
+  );
 
   await transaction.settle;
 
@@ -277,6 +282,11 @@ it("deletes the corresponding data from the database when submitted with the emp
   fireEvent.click(getByTestId("submit"));
 
   expect(transaction.spy).toHaveBeenCalledTimes(1);
+  expect(transaction.spy).toHaveBeenCalledWith(
+    ["testStore"],
+    transaction.spy.mock.calls[0][1],
+    "readwrite"
+  );
 
   await transaction.settle;
 
