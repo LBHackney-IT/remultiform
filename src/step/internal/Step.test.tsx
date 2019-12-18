@@ -13,8 +13,10 @@ import {
   spyOnDatabaseTransaction
 } from "../../__tests__/helpers/spies";
 
+import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
 import { DatabaseMap } from "../../component-wrapper/DatabaseMap";
 import { DynamicComponent } from "../../component-wrapper/DynamicComponent";
+import { StaticComponent } from "../../component-wrapper/StaticComponent";
 import { Database } from "../../database/Database";
 import { NamedSchema } from "../../database/types";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
@@ -100,6 +102,68 @@ it("renders correctly without optional props", () => {
         Wrapped
          
         TestClassComponent
+      </div>,
+      <button
+        data-testid="submit"
+        onClick={[Function]}
+      >
+        Next step
+      </button>,
+    ]
+  `);
+});
+
+it("only renders components whose `renderWhen` returns `true` or is undefined", async () => {
+  const database = await Database.open("testDBName", 1);
+  const DBContext = new DatabaseContext(database);
+
+  const component = create(
+    <Step
+      context={DBContext}
+      componentWrappers={[
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
+            key: "div-to-render-by-default",
+            Component: "div",
+            props: {}
+          })
+        ),
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
+            key: "div-to-explicitly-render",
+            Component: "div",
+            props: {},
+            renderWhen: (): boolean => true
+          })
+        ),
+        ComponentWrapper.wrapStatic(
+          new StaticComponent({
+            key: "div-to-not-render",
+            Component: "div",
+            props: {},
+            renderWhen: (): boolean => false
+          })
+        )
+      ]}
+      Submit={SimpleSubmit}
+    />
+  );
+
+  expect(component).toMatchInlineSnapshot(`
+    Array [
+      <div
+        data-testid="div-to-render-by-default"
+      >
+        Wrapped
+         
+        div
+      </div>,
+      <div
+        data-testid="div-to-explicitly-render"
+      >
+        Wrapped
+         
+        div
       </div>,
       <button
         data-testid="submit"

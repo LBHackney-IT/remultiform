@@ -41,3 +41,28 @@ describe("#props", () => {
     expect(component.props).toEqual(props);
   });
 });
+
+describe("#renderWhen", () => {
+  it("matches the `renderWhen` provided to the constructor", () => {
+    const renderWhen = jest.fn();
+
+    const component = new StaticComponent({
+      key: "test-key",
+      Component: "div",
+      props: {},
+      renderWhen
+    });
+
+    expect(component.renderWhen).toEqual(renderWhen);
+  });
+
+  it("defaults to an identity function when no `renderWhen` is provided to the constructor", () => {
+    const component = new StaticComponent({
+      key: "test-key",
+      Component: "div",
+      props: {}
+    });
+
+    expect(component.renderWhen({})).toEqual(true);
+  });
+});

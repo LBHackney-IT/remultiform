@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- `renderWhen` to components to support conditional renders
+
 ### Fixed
 
 - Connected the data fetched by `WrappedComponent` to the `Step`'s
