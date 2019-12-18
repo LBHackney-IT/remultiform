@@ -101,6 +101,24 @@ export interface DynamicComponentOptions<
   props: Props;
 
   /**
+   * A callback to determine when the component should be rendered.
+   *
+   * If this is not specified, the component will always be rendered.
+   *
+   * ```ts
+   * const renderWhen = values => values["my-radio-buttons"] === "Yes"
+   * ```
+   *
+   * @param stepValues - A map of the keys to the current values for all of the
+   * components in the currently rendered {@link StepDefinition}.
+   */
+  renderWhen?(stepValues: {
+    [key: string]:
+      | ""
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+  }): boolean;
+
+  /**
    * The configuration telling the {@link DynamicComponent} how to interface
    * with the {@link Database}.
    *
@@ -182,6 +200,7 @@ export class DynamicComponent<
     key: PropTypes.string.isRequired,
     Component: PropTypes.func.isRequired,
     props: PropTypes.object.isRequired,
+    renderWhen: PropTypes.func.isRequired,
     databaseMap: DatabaseMap.propType.isRequired,
     defaultValue: PropTypes.any,
     emptyValue: PropTypes.any.isRequired
@@ -210,6 +229,11 @@ export class DynamicComponent<
   readonly key: string;
   readonly Component: ComponentType;
   readonly props: Props;
+  readonly renderWhen: (stepValues: {
+    [key: string]:
+      | ""
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+  }) => boolean;
   readonly databaseMap: DatabaseMap<DBSchema, StoreName>;
   readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
   readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
@@ -221,6 +245,7 @@ export class DynamicComponent<
       key,
       Component,
       props,
+      renderWhen,
       databaseMap,
       defaultValue,
       emptyValue
@@ -231,6 +256,9 @@ export class DynamicComponent<
     this.props = props;
     this.databaseMap = databaseMap;
     this.defaultValue = defaultValue;
+
+    this.renderWhen =
+      renderWhen === undefined ? (): boolean => true : renderWhen;
 
     // We need to do this to keep the component as a controlled component. The
     // controlled prop must always be defined.

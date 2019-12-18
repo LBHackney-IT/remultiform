@@ -30,20 +30,27 @@ export class ComponentWrapper<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > extends ActualComponentWrapper<DBSchema, StoreName> {
-  static wrapStatic<Props>(
-    component: StaticComponent<React.ElementType<Props>, Props>
+  static wrapStatic<
+    Props,
+    DBSchema extends NamedSchema<string, number, Schema>
+  >(
+    component: StaticComponent<React.ElementType<Props>, Props, DBSchema>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): ComponentWrapper<any, string> {
-    const { key, Component } = component;
+    const { key, Component, renderWhen } = component;
 
-    return new ComponentWrapper(key, () => (
-      <div key={key} data-testid={key}>
-        Wrapped{" "}
-        {typeof Component === "string"
-          ? Component
-          : Component.displayName || Component.name}
-      </div>
-    ));
+    return new ComponentWrapper(
+      key,
+      () => (
+        <div key={key} data-testid={key}>
+          Wrapped{" "}
+          {typeof Component === "string"
+            ? Component
+            : Component.displayName || Component.name}
+        </div>
+      ),
+      renderWhen
+    );
   }
 
   static wrapDynamic<
@@ -58,7 +65,14 @@ export class ComponentWrapper<
       StoreName
     >
   ): ComponentWrapper<DBSchema, StoreName> {
-    const { key, Component, databaseMap, defaultValue, emptyValue } = component;
+    const {
+      key,
+      Component,
+      renderWhen,
+      databaseMap,
+      defaultValue,
+      emptyValue
+    } = component;
 
     return new ComponentWrapper(
       key,
@@ -67,6 +81,7 @@ export class ComponentWrapper<
           Wrapped {Component.displayName || Component.name}
         </div>
       ),
+      renderWhen,
       databaseMap,
       defaultValue,
       emptyValue
@@ -78,10 +93,15 @@ export class ComponentWrapper<
     render: (
       props: ComponentWrapperRenderProps<DBSchema, StoreName>
     ) => JSX.Element,
+    renderWhen: (stepValues: {
+      [key: string]:
+        | ""
+        | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+    }) => boolean,
     databaseMap?: DatabaseMap<DBSchema, StoreName>,
     defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,
     emptyValue?: "" | StoreValue<DBSchema["schema"], StoreName>
   ) {
-    super(key, render, databaseMap, defaultValue, emptyValue);
+    super(key, render, renderWhen, databaseMap, defaultValue, emptyValue);
   }
 }

@@ -98,40 +98,48 @@ export class Step<
    * @ignore
    */
   render(): JSX.Element {
-    const { context, componentWrappers, Submit } = this.props;
+    const { context } = this.props;
 
     if (context) {
       return (
         <context.Consumer>
-          {(database): JSX.Element[] => [
-            ...componentWrappers.map(({ key, render }) =>
-              render({
-                database,
-                onChange: value => this.handleChange(key, value)
-              })
-            ),
-            <Submit
-              key="submit"
-              onSubmit={(): Promise<void> => this.handleSubmit(database)}
-            />
-          ]}
+          {(database): JSX.Element => this.renderComponents(database)}
         </context.Consumer>
       );
     }
 
+    return this.renderComponents();
+  }
+
+  private renderComponents(database?: Database<DBSchema>): JSX.Element {
+    const { componentWrappers, Submit } = this.props;
+
     return (
       <>
-        {componentWrappers.map(({ key, render }) =>
-          render({
-            onChange: value => this.handleChange(key, value)
-          })
+        {componentWrappers.map(component =>
+          this.renderComponent(component, database)
         )}
         <Submit
           key="submit"
-          onSubmit={(): Promise<void> => this.handleSubmit()}
+          onSubmit={(): Promise<void> => this.handleSubmit(database)}
         />
       </>
     );
+  }
+
+  private renderComponent(
+    component: ComponentWrapper<DBSchema, StoreName>,
+    database?: Database<DBSchema>
+  ): void | JSX.Element {
+    const { wrapperValues } = this.state;
+    const { key, render, renderWhen } = component;
+
+    if (renderWhen(wrapperValues)) {
+      return render({
+        database,
+        onChange: value => this.handleChange(key, value)
+      });
+    }
   }
 
   private handleChange(

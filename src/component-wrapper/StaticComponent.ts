@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 
+import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
+
 /**
  * The options for {@link StaticComponent}.
  */
 export interface StaticComponentOptions<
   ComponentType extends React.ElementType<Props>,
-  Props
+  Props,
+  DBSchema extends NamedSchema<string, number, Schema>
 > {
   /**
    * A unique identifier for this component.
@@ -21,6 +24,24 @@ export interface StaticComponentOptions<
    * The props to pass to {@link StaticComponentOptions.Component}.
    */
   props: Props;
+
+  /**
+   * A callback to determine when the component should be rendered.
+   *
+   * If this is not specified, the component will always be rendered.
+   *
+   * ```ts
+   * const renderWhen = values => values["my-radio-buttons"] === "Yes"
+   * ```
+   *
+   * @param stepValues - A map of the keys to the current values for all of the
+   * components in the currently rendered {@link StepDefinition}.
+   */
+  renderWhen?(stepValues: {
+    [key: string]:
+      | ""
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+  }): boolean;
 }
 
 /**
@@ -42,7 +63,8 @@ export interface StaticComponentOptions<
  */
 export class StaticComponent<
   ComponentType extends React.ElementType<Props>,
-  Props
+  Props,
+  DBSchema extends NamedSchema<string, number, Schema>
 > {
   /**
    * The proptype validator for a {@link StaticComponent}.
@@ -52,7 +74,9 @@ export class StaticComponent<
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       React.ElementType<any>,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      any
+      any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      NamedSchema<string, number, any>
     >
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
@@ -61,18 +85,26 @@ export class StaticComponent<
       React.ElementType<any>
     >).isRequired,
     props: PropTypes.object.isRequired,
-    defaultValue: PropTypes.any.isRequired
+    renderWhen: PropTypes.func.isRequired
   });
 
   readonly key: string;
   readonly Component: ComponentType;
   readonly props: Props;
+  readonly renderWhen: (stepValues: {
+    [key: string]:
+      | ""
+      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+  }) => boolean;
 
-  constructor(options: StaticComponentOptions<ComponentType, Props>) {
-    const { key, Component, props } = options;
+  constructor(options: StaticComponentOptions<ComponentType, Props, DBSchema>) {
+    const { key, Component, props, renderWhen } = options;
 
     this.key = key;
     this.Component = Component;
     this.props = props;
+
+    this.renderWhen =
+      renderWhen === undefined ? (): boolean => true : renderWhen;
   }
 }

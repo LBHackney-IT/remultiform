@@ -73,6 +73,39 @@ describe("#props", () => {
   });
 });
 
+describe("#renderWhen", () => {
+  it("matches the `renderWhen` provided to the constructor", () => {
+    const renderWhen = jest.fn();
+
+    const component = new DynamicComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      renderWhen,
+      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(component.renderWhen).toEqual(renderWhen);
+  });
+
+  it("defaults to an identity function when no `renderWhen` is provided to the constructor", () => {
+    const component = new DynamicComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      databaseMap: new DatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(component.renderWhen({})).toEqual(true);
+  });
+});
+
 describe("#databaseMap", () => {
   it("matches the `databaseMap` provided to the constructor", () => {
     const databaseMap = new DatabaseMap<TestSchema, "testStore">({
