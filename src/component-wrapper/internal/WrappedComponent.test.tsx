@@ -122,6 +122,7 @@ it("renders correctly with a database context", async () => {
 
 it("fetches the stored value specified by the `databaseMap` when a database provided by context finishes opening", async () => {
   const get = spyOnDatabaseGet();
+  const onChange = jest.fn();
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(openPromise);
@@ -133,7 +134,11 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
       <DatabaseProvider context={DBContext}>
         <DBContext.Consumer>
           {(database): JSX.Element => (
-            <WrappedComponent database={database} component={testComponent} />
+            <WrappedComponent
+              database={database}
+              component={testComponent}
+              onChange={onChange}
+            />
           )}
         </DBContext.Consumer>
       </DatabaseProvider>
@@ -144,6 +149,11 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
   });
 
   expect(get.spy).toHaveBeenCalledTimes(1);
+
+  expect(onChange).toHaveBeenCalledTimes(1);
+  expect(onChange).toHaveBeenCalledWith(
+    `${testDatabaseMap.storeName}/${testDatabaseMap.key}`
+  );
 
   expect(component).toMatchInlineSnapshot(`
     <div>
