@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Connected the data fetched by `WrappedComponent` to the `Step`'s
+  representation of that data to prevent deleting values that are unchanged
+
 ## [0.0.2] - 17-12-2019
 
 ### Changed

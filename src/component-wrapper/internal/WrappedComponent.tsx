@@ -206,6 +206,10 @@ export class WrappedComponent<
         stateUpdate.value = emptyValue;
       }
 
+      this.onValueChange(
+        stateUpdate.value as StoreValue<DBSchema["schema"], StoreName>
+      );
+
       // Clear the error if it was set.
       stateUpdate.error = undefined;
     } catch (err) {
