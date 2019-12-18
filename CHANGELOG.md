@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.0.3] - 18-12-2019
+
 ### Added
 
 - `renderWhen` to components to support conditional renders
@@ -48,6 +50,7 @@ and this project adheres to
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward
 
-[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.2...HEAD
+[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/LBHackney-IT/remultiform/releases/tag/v0.0.1
