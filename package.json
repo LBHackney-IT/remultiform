@@ -48,7 +48,7 @@
     "@babel/runtime-corejs2": "^7.7.7",
     "@testing-library/react": "^9.4.0",
     "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.21",
+    "@types/node": "^13.1.1",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-test-renderer": "^16.9.1",
