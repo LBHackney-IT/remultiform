@@ -33,7 +33,9 @@ export const spyOnDatabaseOpen = (): jest.SpyInstance<
 };
 
 export const spyOnDatabaseGet = (
-  getSomething = true
+  getSomething = true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resolveValue?: any
 ): {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   spy: jest.SpyInstance<Promise<any>, [string, any]>;
@@ -70,7 +72,11 @@ export const spyOnDatabaseGet = (
 
     settleThis();
 
-    return getSomething ? `${storeName}/${key}` : undefined;
+    return getSomething
+      ? resolveValue === undefined
+        ? `${storeName}/${key}`
+        : resolveValue
+      : undefined;
   });
 
   return get;
