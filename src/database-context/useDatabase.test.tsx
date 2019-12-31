@@ -6,15 +6,14 @@ import { TestErrorBoundary } from "../__fixtures__/components/TestErrorBoundary"
 import { spyOnConsoleError } from "../__tests__/helpers/spies";
 
 import { Database } from "../database/Database";
-import { NamedSchema } from "../database/types";
+import { NamedSchema, Schema } from "../database/types";
 
 import { DatabaseContext } from "./DatabaseContext";
 import { useDatabase } from "./useDatabase";
 
 jest.mock("../database/Database");
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let openDatabasePromise: Promise<Database<NamedSchema<string, number, any>>>;
+let openDatabasePromise: Promise<Database<NamedSchema<string, number, Schema>>>;
 
 beforeEach(() => {
   openDatabasePromise = Database.open("testDBName", 1);

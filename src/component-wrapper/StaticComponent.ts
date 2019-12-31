@@ -68,8 +68,7 @@ export class StaticComponent<
    * The proptype validator for a {@link StaticComponent}.
    */
   static propType: PropTypes.Requireable<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    StaticComponent<React.ElementType, NamedSchema<string, number, any>>
+    StaticComponent<React.ElementType, NamedSchema<string, number, Schema>>
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
     Component: (PropTypes.elementType as PropTypes.Requireable<

@@ -90,8 +90,7 @@ export class DatabaseProvider<
   never
 > {
   static propTypes: PropTypes.ValidationMap<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    DatabaseProviderProps<NamedSchema<string, number, any>>
+    DatabaseProviderProps<NamedSchema<string, number, Schema>>
   > = {
     context: PropTypes.instanceOf(DatabaseContext).isRequired,
     children: PropTypes.node.isRequired

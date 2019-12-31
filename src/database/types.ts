@@ -11,8 +11,7 @@ import {
  *
  * Stores are semantically similar to tables in other databases.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface StoreSchema<Value = any> {
+export interface StoreSchema<Value> {
   /**
    * The type of keys used by the store.
    */
@@ -35,8 +34,9 @@ export interface StoreSchema<Value = any> {
  * IndexedDB databases are made up of stores, mapping store name to
  * {@link StoreSchema}.
  */
-export interface Schema {
-  [storeName: string]: StoreSchema;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface Schema<Value = any> {
+  [storeName: string]: StoreSchema<Value>;
 }
 
 /**

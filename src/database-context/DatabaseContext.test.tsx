@@ -2,14 +2,13 @@ import React, { useContext } from "react";
 import { create } from "react-test-renderer";
 
 import { Database } from "../database/Database";
-import { NamedSchema } from "../database/types";
+import { NamedSchema, Schema } from "../database/types";
 
 import { DatabaseContext } from "./DatabaseContext";
 
 jest.mock("../database/Database");
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let openDatabasePromise: Promise<Database<NamedSchema<string, number, any>>>;
+let openDatabasePromise: Promise<Database<NamedSchema<string, number, Schema>>>;
 
 beforeEach(() => {
   openDatabasePromise = Database.open("testDBName", 1);
