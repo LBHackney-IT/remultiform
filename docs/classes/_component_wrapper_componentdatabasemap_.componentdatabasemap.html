@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DatabaseMapOptions | Remultiform</title>
+	<title>ComponentDatabaseMap | Remultiform</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_component_wrapper_databasemap_.html">&quot;component-wrapper/DatabaseMap&quot;</a>
+					<a href="../modules/_component_wrapper_componentdatabasemap_.html">&quot;component-wrapper/ComponentDatabaseMap&quot;</a>
 				</li>
 				<li>
-					<a href="_component_wrapper_databasemap_.databasemapoptions.html">DatabaseMapOptions</a>
+					<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html">ComponentDatabaseMap</a>
 				</li>
 			</ul>
-			<h1>Interface DatabaseMapOptions&lt;DBSchema, StoreName&gt;</h1>
+			<h1>Class ComponentDatabaseMap&lt;DBSchema, StoreName&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -72,18 +72,33 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>The options for <a href="../classes/_component_wrapper_databasemap_.databasemap.html">DatabaseMap</a>.</p>
+						<p>A class to tell a <a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> how its
+						<a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html">DynamicComponentControlledProps</a> maps to the <a href="_database_database_.database.html">Database</a>.</p>
 					</div>
+					<p>Unlike most generic types in this library, you will need to explicitly set
+						the type parameters on construction, as there&#39;s no way to infer a
+						<a href="../interfaces/_database_types_.namedschema.html">NamedSchema</a> from any of the arguments to its constructor, but they
+					constrain the possible values of its properties.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>The schema of the <a href="_database_database_.database.html">Database</a> this maps to.</p>
+							</div>
+						</div>
 					</li>
 					<li>
 						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>The name of the <a href="_database_database_.database.html">Database</a> store this maps to.</p>
+							</div>
+						</div>
 					</li>
 				</ul>
 			</section>
@@ -91,7 +106,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DatabaseMapOptions</span>
+						<span class="target">ComponentDatabaseMap</span>
 					</li>
 				</ul>
 			</section>
@@ -100,44 +115,93 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_component_wrapper_databasemap_.databasemapoptions.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_component_wrapper_databasemap_.databasemapoptions.html#storename" class="tsd-kind-icon">store<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#property" class="tsd-kind-icon">property</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#storename" class="tsd-kind-icon">store<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#proptype" class="tsd-kind-icon">prop<wbr>Type</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Component<wbr>Database<wbr>Map<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_component_wrapper_componentdatabasemap_.componentdatabasemapoptions.html" class="tsd-signature-type">ComponentDatabaseMapOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html" class="tsd-signature-type">ComponentDatabaseMap</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L147">src/component-wrapper/ComponentDatabaseMap.ts:147</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/_component_wrapper_componentdatabasemap_.componentdatabasemapoptions.html" class="tsd-signature-type">ComponentDatabaseMapOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html" class="tsd-signature-type">ComponentDatabaseMap</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="key" class="tsd-anchor"></a>
 					<h3>key</h3>
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <a href="../modules/_database_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DatabaseMap.ts#L20">src/component-wrapper/DatabaseMap.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L141">src/component-wrapper/ComponentDatabaseMap.ts:141</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The key in <a href="_component_wrapper_databasemap_.databasemapoptions.html#storename">DatabaseMapOptions.storeName</a> to fetch and update.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="property" class="tsd-anchor"></a>
+					<h3>property</h3>
+					<div class="tsd-signature tsd-kind-icon">property<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L142">src/component-wrapper/ComponentDatabaseMap.ts:142</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="storename" class="tsd-anchor"></a>
 					<h3>store<wbr>Name</h3>
 					<div class="tsd-signature tsd-kind-icon">store<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StoreName</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DatabaseMap.ts#L15">src/component-wrapper/DatabaseMap.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L140">src/component-wrapper/ComponentDatabaseMap.ts:140</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="proptype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> prop<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">prop<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html" class="tsd-signature-type">ComponentDatabaseMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.exact({storeName: PropTypes.string.isRequired,key: PropTypes.oneOfType([PropTypes.string.isRequired,PropTypes.number.isRequired]).isRequired,// We need to cast this because &#x60;PropTypes.array&#x60; doesn&#x27;t know how to// limit the number of elements in the array, as so creates the// incompatible type of &#x60;(string | number | symbol)[]&#x60;.property: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string.isRequired,PropTypes.number.isRequired,PropTypes.symbol.isRequired]).isRequired) as PropTypes.Requireable&lt;StoreValuePropertyPath&lt;StoreValue&lt;// eslint-disable-next-line @typescript-eslint/no-explicit-anyany,string&gt;&gt;&gt;})</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L108">src/component-wrapper/ComponentDatabaseMap.ts:108</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The name of the <a href="../classes/_database_database_.database.html">Database</a> store to fetch and update.</p>
+							<p>The proptype validator for a <a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html">ComponentDatabaseMap</a>.</p>
 						</div>
 					</div>
 				</section>
@@ -149,11 +213,11 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_component_wrapper_componentdatabasemap_.html">&quot;component-<wbr>wrapper/<wbr>Component<wbr>Database<wbr>Map&quot;</a>
+					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_component_wrapper_componentwrapper_.html">&quot;component-<wbr>wrapper/<wbr>Component<wbr>Wrapper&quot;</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_component_wrapper_databasemap_.html">&quot;component-<wbr>wrapper/<wbr>Database<wbr>Map&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_component_wrapper_dynamiccomponent_.html">&quot;component-<wbr>wrapper/<wbr>Dynamic<wbr>Component&quot;</a>
@@ -180,6 +244,9 @@
 						<a href="../modules/_database_openoptions_.html">&quot;database/<wbr>Open<wbr>Options&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_database_store_.html">&quot;database/<wbr>Store&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_database_upgrade_.html">&quot;database/<wbr>Upgrade&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -198,24 +265,42 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../classes/_component_wrapper_databasemap_.databasemap.html" class="tsd-kind-icon">Database<wbr>Map</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="_component_wrapper_databasemap_.databasemapoptions.html" class="tsd-kind-icon">Database<wbr>Map<wbr>Options</a>
+					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html" class="tsd-kind-icon">Component<wbr>Database<wbr>Map</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_component_wrapper_databasemap_.databasemapoptions.html#key" class="tsd-kind-icon">key</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_component_wrapper_databasemap_.databasemapoptions.html#storename" class="tsd-kind-icon">store<wbr>Name</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#property" class="tsd-kind-icon">property</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#storename" class="tsd-kind-icon">store<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html#proptype" class="tsd-kind-icon">prop<wbr>Type</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../interfaces/_component_wrapper_componentdatabasemap_.componentdatabasemapoptions.html" class="tsd-kind-icon">Component<wbr>Database<wbr>Map<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-kind-icon">Component<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvaluelevelone" class="tsd-kind-icon">Component<wbr>Value<wbr>Level<wbr>One</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalueleveltwo" class="tsd-kind-icon">Component<wbr>Value<wbr>Level<wbr>Two</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

@@ -62,7 +62,7 @@
 					<a href="_component_wrapper_staticcomponent_.staticcomponentoptions.html">StaticComponentOptions</a>
 				</li>
 			</ul>
-			<h1>Interface StaticComponentOptions&lt;ComponentType, Props, DBSchema&gt;</h1>
+			<h1>Interface StaticComponentOptions&lt;ComponentType, DBSchema&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -80,10 +80,7 @@
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>ComponentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-					<li>
-						<h4>Props</h4>
+						<h4>ComponentType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">React.ElementType</span></h4>
 					</li>
 					<li>
 						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -127,7 +124,7 @@
 					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L21">src/component-wrapper/StaticComponent.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L22">src/component-wrapper/StaticComponent.ts:22</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -142,7 +139,7 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L16">src/component-wrapper/StaticComponent.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L17">src/component-wrapper/StaticComponent.ts:17</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,10 +151,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="props" class="tsd-anchor"></a>
 					<h3>props</h3>
-					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Props</span></div>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType extends React.ElementType&lt;infer Props&gt; ? Props : __type</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L26">src/component-wrapper/StaticComponent.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L27">src/component-wrapper/StaticComponent.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -179,7 +176,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L40">src/component-wrapper/StaticComponent.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L41">src/component-wrapper/StaticComponent.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +196,7 @@
 									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_database_types_.html#storevalue" class="tsd-signature-type">StoreValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 										</li>
 									</ul>
 								</li>
@@ -217,10 +214,10 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_component_wrapper_componentwrapper_.html">&quot;component-<wbr>wrapper/<wbr>Component<wbr>Wrapper&quot;</a>
+						<a href="../modules/_component_wrapper_componentdatabasemap_.html">&quot;component-<wbr>wrapper/<wbr>Component<wbr>Database<wbr>Map&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_component_wrapper_databasemap_.html">&quot;component-<wbr>wrapper/<wbr>Database<wbr>Map&quot;</a>
+						<a href="../modules/_component_wrapper_componentwrapper_.html">&quot;component-<wbr>wrapper/<wbr>Component<wbr>Wrapper&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_component_wrapper_dynamiccomponent_.html">&quot;component-<wbr>wrapper/<wbr>Dynamic<wbr>Component&quot;</a>
@@ -245,6 +242,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_database_openoptions_.html">&quot;database/<wbr>Open<wbr>Options&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_database_store_.html">&quot;database/<wbr>Store&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_database_upgrade_.html">&quot;database/<wbr>Upgrade&quot;</a>
