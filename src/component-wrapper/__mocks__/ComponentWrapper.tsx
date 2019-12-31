@@ -30,13 +30,10 @@ export class ComponentWrapper<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > extends ActualComponentWrapper<DBSchema, StoreName> {
-  static wrapStatic<
-    Props,
-    DBSchema extends NamedSchema<string, number, Schema>
-  >(
-    component: StaticComponent<React.ElementType<Props>, Props, DBSchema>
+  static wrapStatic<DBSchema extends NamedSchema<string, number, Schema>>(
+    component: StaticComponent<React.ElementType, DBSchema>
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): ComponentWrapper<any, string> {
+  ): ComponentWrapper<NamedSchema<string, number, any>, string> {
     const { key, Component, renderWhen } = component;
 
     return new ComponentWrapper(

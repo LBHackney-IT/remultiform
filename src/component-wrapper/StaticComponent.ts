@@ -6,8 +6,7 @@ import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
  * The options for {@link StaticComponent}.
  */
 export interface StaticComponentOptions<
-  ComponentType extends React.ElementType<Props>,
-  Props,
+  ComponentType extends React.ElementType,
   DBSchema extends NamedSchema<string, number, Schema>
 > {
   /**
@@ -23,7 +22,7 @@ export interface StaticComponentOptions<
   /**
    * The props to pass to {@link StaticComponentOptions.Component}.
    */
-  props: Props;
+  props: ComponentType extends React.ElementType<infer Props> ? Props : {};
 
   /**
    * A callback to determine when the component should be rendered.
@@ -62,27 +61,19 @@ export interface StaticComponentOptions<
  * ```
  */
 export class StaticComponent<
-  ComponentType extends React.ElementType<Props>,
-  Props,
+  ComponentType extends React.ElementType,
   DBSchema extends NamedSchema<string, number, Schema>
 > {
   /**
    * The proptype validator for a {@link StaticComponent}.
    */
   static propType: PropTypes.Requireable<
-    StaticComponent<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      React.ElementType<any>,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      any,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      NamedSchema<string, number, any>
-    >
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    StaticComponent<React.ElementType, NamedSchema<string, number, any>>
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
     Component: (PropTypes.elementType as PropTypes.Requireable<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      React.ElementType<any>
+      React.ElementType
     >).isRequired,
     props: PropTypes.object.isRequired,
     renderWhen: PropTypes.func.isRequired
@@ -90,14 +81,16 @@ export class StaticComponent<
 
   readonly key: string;
   readonly Component: ComponentType;
-  readonly props: Props;
+  readonly props: ComponentType extends React.ElementType<infer Props>
+    ? Props
+    : {};
   readonly renderWhen: (stepValues: {
     [key: string]:
       | ""
       | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
   }) => boolean;
 
-  constructor(options: StaticComponentOptions<ComponentType, Props, DBSchema>) {
+  constructor(options: StaticComponentOptions<ComponentType, DBSchema>) {
     const { key, Component, props, renderWhen } = options;
 
     this.key = key;

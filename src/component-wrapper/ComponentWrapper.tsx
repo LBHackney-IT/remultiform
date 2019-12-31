@@ -59,14 +59,13 @@ export class ComponentWrapper<
    * Wrap a {@link StaticComponent} in a {@link ComponentWrapper} ready
    * to be included in a {@link StepDefinition}.
    *
-   * You shouldn't need to provide any of the type parameters. They should be
-   * infered from the {@link StaticComponent} passed in.
+   * @typeparam DBSchema - The schema used by the
+   * {@link DynamicComponent|DynamicComponents} of this {@link StepDefinition}.
+   * It's possible to infer this if {@link StaticComponent.renderWhen} is
+   * implemented on `component`.
    */
-  static wrapStatic<
-    Props,
-    DBSchema extends NamedSchema<string, number, Schema>
-  >(
-    component: StaticComponent<React.ElementType<Props>, Props, DBSchema>
+  static wrapStatic<DBSchema extends NamedSchema<string, number, Schema>>(
+    component: StaticComponent<React.ElementType, DBSchema>
   ): ComponentWrapper<DBSchema, StoreNames<DBSchema["schema"]>> {
     const { key, Component, renderWhen } = component;
 
@@ -76,18 +75,13 @@ export class ComponentWrapper<
       const {
         Component: IntrinsicElement,
         props
-      } = component as StaticComponent<
-        keyof JSX.IntrinsicElements,
-        {},
-        DBSchema
-      >;
+      } = component as StaticComponent<keyof JSX.IntrinsicElements, DBSchema>;
 
       // eslint-disable-next-line react/display-name
       render = (): JSX.Element => <IntrinsicElement key={key} {...props} />;
     } else {
       const { Component: ReactComponent, props } = component as StaticComponent<
-        React.ComponentType<Props>,
-        Props,
+        React.ComponentType,
         DBSchema
       >;
 

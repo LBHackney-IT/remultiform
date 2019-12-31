@@ -12,6 +12,7 @@ and this project adheres to
 
 - Renamed `DatabaseMap` to `ComponentDatabaseMap`
 - Made `defaultValue` required for `DynamicComponent`s
+- Improved prop type inference for `StaticComponent`s
 
 ## [0.0.3] - 18-12-2019
 
