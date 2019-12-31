@@ -7,8 +7,7 @@ export interface TestDatabaseConsumerProps<
   DBSchema extends NamedSchema<string, number, Schema> = NamedSchema<
     string,
     number,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    any
+    Schema
   >
 > {
   context: DatabaseContext<DBSchema>;

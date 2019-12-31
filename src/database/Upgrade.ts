@@ -1,8 +1,9 @@
-import { IDBPDatabase } from "idb";
+import { IDBPDatabase, IDBPObjectStore } from "idb";
 
 import { wrapTransaction } from "./internal/wrapTransaction";
 
-import { Schema, StoreMap, StoreNames, Store, Transaction } from "./types";
+import { Store, StoreMap } from "./Store";
+import { Schema, StoreNames, Transaction } from "./types";
 
 /**
  * A wrapper for the opening database and transaction during an upgrade.
@@ -57,11 +58,13 @@ export class Upgrade<DBSchema extends Schema> {
   createStore<Name extends StoreNames<DBSchema>>(
     storeName: Name
   ): Store<DBSchema, StoreNames<DBSchema>[], Name> {
-    return this.db.createObjectStore(storeName) as Store<
-      DBSchema,
-      StoreNames<DBSchema>[],
-      Name
-    >;
+    return new Store(
+      this.db.createObjectStore(storeName) as IDBPObjectStore<
+        DBSchema,
+        StoreNames<DBSchema>[],
+        Name
+      >
+    );
   }
 
   /**

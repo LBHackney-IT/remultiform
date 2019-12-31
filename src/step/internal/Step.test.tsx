@@ -1,20 +1,24 @@
-/* eslint-disable @typescript-eslint/no-empty-function, @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { render, fireEvent } from "@testing-library/react";
 import React from "react";
 import { create } from "react-test-renderer";
 
 import { SimpleSubmit } from "../../__fixtures__/components/SimpleSubmit";
 import { TestDynamicComponent } from "../../__fixtures__/components/TestDynamicComponent";
-import { dynamicForm } from "../../__fixtures__/forms/dynamicForm";
+import {
+  DynamicFormSchema,
+  dynamicForm
+} from "../../__fixtures__/forms/dynamicForm";
 import { staticForm } from "../../__fixtures__/forms/staticForm";
 
 import {
   spyOnDatabaseGet,
   spyOnDatabaseTransaction
 } from "../../__tests__/helpers/spies";
+import { promiseToWaitForNextTick } from "../../__tests__/helpers/promise";
 
+import { ComponentDatabaseMap } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
-import { DatabaseMap } from "../../component-wrapper/DatabaseMap";
 import { DynamicComponent } from "../../component-wrapper/DynamicComponent";
 import { StaticComponent } from "../../component-wrapper/StaticComponent";
 import { Database } from "../../database/Database";
@@ -23,12 +27,13 @@ import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { DatabaseProvider } from "../../database-context/DatabaseProvider";
 
 import { Step } from "./Step";
+import { Store } from "../../database/Store";
 
 jest.mock("../../component-wrapper/ComponentWrapper");
 jest.mock("../../database/Database");
 
 it("renders correctly with all props", async () => {
-  const database = await Database.open("testDBName", 1);
+  const database = await Database.open<DynamicFormSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(database);
 
   const component = create(
@@ -194,7 +199,7 @@ it("calls the after submit callback after submission", () => {
 it("calls the after submit callback after submission when it contains dynamic components", async () => {
   const afterSubmit = jest.fn();
 
-  const database = await Database.open("testDBName", 1);
+  const database = await Database.open<DynamicFormSchema>("testDBName", 1);
   const DBContext = new DatabaseContext(database);
 
   const { getByTestId } = render(
@@ -218,6 +223,7 @@ it("persists data to the database when submitted", async () => {
 
   const get = spyOnDatabaseGet();
   const transaction = spyOnDatabaseTransaction();
+  const storePut = jest.spyOn(Store.prototype, "put");
 
   type TestSchema = NamedSchema<
     string,
@@ -230,7 +236,7 @@ it("persists data to the database when submitted", async () => {
     }
   >;
 
-  const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
     key: 0
   });
@@ -244,6 +250,7 @@ it("persists data to the database when submitted", async () => {
           key: "test-key",
           content: "test content"
         },
+        defaultValue: "test default value",
         databaseMap
       })
     )
@@ -263,6 +270,7 @@ it("persists data to the database when submitted", async () => {
   );
 
   await get.settle;
+  await promiseToWaitForNextTick();
 
   const newValue = "new value";
 
@@ -278,12 +286,8 @@ it("persists data to the database when submitted", async () => {
 
   await transaction.settle;
 
-  const store = transaction.stores[databaseMap.storeName];
-
-  expect(store).toBeDefined();
-
-  expect(store.put).toHaveBeenCalledTimes(1);
-  expect(store.put).toHaveBeenCalledWith(newValue, databaseMap.key);
+  expect(storePut).toHaveBeenCalledTimes(1);
+  expect(storePut).toHaveBeenCalledWith(databaseMap.key, newValue);
 });
 
 it("deletes the corresponding data from the database when submitted with the empty value", async () => {
@@ -293,6 +297,7 @@ it("deletes the corresponding data from the database when submitted with the emp
 
   const get = spyOnDatabaseGet();
   const transaction = spyOnDatabaseTransaction();
+  const storeDelete = jest.spyOn(Store.prototype, "delete");
 
   type TestSchema = NamedSchema<
     string,
@@ -305,7 +310,7 @@ it("deletes the corresponding data from the database when submitted with the emp
     }
   >;
 
-  const databaseMap = new DatabaseMap<TestSchema, "testStore">({
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
     key: 0
   });
@@ -321,6 +326,7 @@ it("deletes the corresponding data from the database when submitted with the emp
           key: "test-key",
           content: "test content"
         },
+        defaultValue: "test default value",
         emptyValue,
         databaseMap
       })
@@ -341,6 +347,7 @@ it("deletes the corresponding data from the database when submitted with the emp
   );
 
   await get.settle;
+  await promiseToWaitForNextTick();
 
   fireEvent.change(getByTestId("input"), { target: { value: emptyValue } });
   fireEvent.click(getByTestId("submit"));
@@ -354,10 +361,158 @@ it("deletes the corresponding data from the database when submitted with the emp
 
   await transaction.settle;
 
-  const store = transaction.stores[databaseMap.storeName];
+  expect(storeDelete).toHaveBeenCalledTimes(1);
+  expect(storeDelete).toHaveBeenCalledWith(databaseMap.key);
+});
 
-  expect(store).toBeDefined();
+it("persists child property data to the database when submitted", async () => {
+  const { ComponentWrapper } = jest.requireActual(
+    "../../component-wrapper/ComponentWrapper"
+  );
 
-  expect(store.delete).toHaveBeenCalledTimes(1);
-  expect(store.delete).toHaveBeenCalledWith(databaseMap.key);
+  const get = spyOnDatabaseGet(true, { a: { value: "old value" } });
+  const transaction = spyOnDatabaseTransaction();
+  const storePut = jest.spyOn(Store.prototype, "put");
+
+  type TestSchema = NamedSchema<
+    string,
+    number,
+    {
+      testStore: {
+        key: number;
+        value: {
+          a: { value: string };
+        };
+      };
+    }
+  >;
+
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
+    storeName: "testStore",
+    key: 0,
+    property: ["a", "value"]
+  });
+
+  const wrappers = [
+    ComponentWrapper.wrapDynamic(
+      new DynamicComponent({
+        key: "test-component",
+        Component: TestDynamicComponent,
+        props: {
+          key: "test-key",
+          content: "test content"
+        },
+        defaultValue: "test default value",
+        databaseMap
+      })
+    )
+  ];
+
+  const database = await Database.open("testDBName", 1);
+  const DBContext = new DatabaseContext(database);
+
+  const { getByTestId } = render(
+    <DatabaseProvider context={DBContext} allowUnmounting>
+      <Step
+        context={DBContext}
+        componentWrappers={wrappers}
+        Submit={SimpleSubmit}
+      />
+    </DatabaseProvider>
+  );
+
+  await get.settle;
+  await promiseToWaitForNextTick();
+
+  const newValue = "new value";
+
+  fireEvent.change(getByTestId("input"), { target: { value: newValue } });
+  fireEvent.click(getByTestId("submit"));
+
+  expect(transaction.spy).toHaveBeenCalledTimes(1);
+
+  await transaction.settle;
+
+  expect(storePut).toHaveBeenCalledTimes(1);
+  expect(storePut).toHaveBeenCalledWith(databaseMap.key, {
+    a: { value: newValue }
+  });
+});
+
+it("removes the corresponding child property data from the database when submitted with the empty value", async () => {
+  const { ComponentWrapper } = jest.requireActual(
+    "../../component-wrapper/ComponentWrapper"
+  );
+
+  const oldValue = { a: { value: "old value" } };
+
+  const get = spyOnDatabaseGet(true, oldValue);
+  const transaction = spyOnDatabaseTransaction();
+  const storeGet = jest.spyOn(Store.prototype, "get");
+  const storePut = jest.spyOn(Store.prototype, "put");
+
+  storeGet.mockResolvedValue(oldValue);
+
+  type TestSchema = NamedSchema<
+    string,
+    number,
+    {
+      testStore: {
+        key: number;
+        value: {
+          a: { value: string };
+        };
+      };
+    }
+  >;
+
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
+    storeName: "testStore",
+    key: 0,
+    property: ["a", "value"]
+  });
+
+  const emptyValue = "test empty value";
+
+  const wrappers = [
+    ComponentWrapper.wrapDynamic(
+      new DynamicComponent({
+        key: "test-component",
+        Component: TestDynamicComponent,
+        props: {
+          key: "test-key",
+          content: "test content"
+        },
+        defaultValue: "test default value",
+        emptyValue,
+        databaseMap
+      })
+    )
+  ];
+
+  const database = await Database.open("testDBName", 1);
+  const DBContext = new DatabaseContext(database);
+
+  const { getByTestId } = render(
+    <DatabaseProvider context={DBContext} allowUnmounting>
+      <Step
+        context={DBContext}
+        componentWrappers={wrappers}
+        Submit={SimpleSubmit}
+      />
+    </DatabaseProvider>
+  );
+
+  await get.settle;
+  await promiseToWaitForNextTick();
+
+  fireEvent.change(getByTestId("input"), { target: { value: emptyValue } });
+  fireEvent.click(getByTestId("submit"));
+
+  expect(transaction.spy).toHaveBeenCalledTimes(1);
+
+  await transaction.settle;
+
+  expect(storePut).toHaveBeenCalledTimes(1);
+  expect(storePut).toHaveBeenCalledWith(databaseMap.key, { a: {} });
 });

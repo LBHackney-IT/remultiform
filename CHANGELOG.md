@@ -8,6 +8,19 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- `Store` to wrap IndexedDB's store
+- Support for storing non-primitive objects in `Store`s
+
+### Changed
+
+- Renamed `DatabaseMap` to `ComponentDatabaseMap`
+- Made `defaultValue` required for `DynamicComponent`s
+- Improved prop type inference for `StaticComponent`s
+- Removed the empty string from types that will never handle the artificial
+  empty value
+
 ## [0.0.3] - 18-12-2019
 
 ### Added
@@ -41,12 +54,11 @@ and this project adheres to
 - `StepDefinition` for defining a single step in the multipage form
 - `Orchestrator` to orchestrate rendering the appropriate `StepDefinition`
 - `next-kittens` example
-- IndexedDB store wrappers
+- `Database` and `Upgrade` to wrap IndexedDB's database
 - `DatabaseContext`, `DatabaseProvider`, and `useDatabase` for passing
   `Database` to components via context
-- `StaticComponent`, `DynamicComponent`, `DynamicComponentDatabaseMap`,
-  `ComponentWrapper`, and `WrappedComponent` for wrapping components and
-  connecting them to a `Database`
+- `StaticComponent`, `DynamicComponent`, `DatabaseMap`, `ComponentWrapper`, and
+  `WrappedComponent` for wrapping components and connecting them to a `Database`
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward
 

@@ -1,17 +1,15 @@
-import { IDBPDatabase } from "idb";
+import {
+  IDBPDatabase,
+  StoreKey as IDBPStoreKey,
+  StoreValue as IDBPStoreValue
+} from "idb";
 
 import { wrapOpenDB } from "./internal/wrapOpenDB";
 import { wrapTransaction } from "./internal/wrapTransaction";
 
 import { OpenOptions } from "./OpenOptions";
-import {
-  NamedSchema,
-  Schema,
-  StoreKey,
-  StoreMap,
-  StoreNames,
-  StoreValue
-} from "./types";
+import { StoreMap } from "./Store";
+import { NamedSchema, Schema, StoreKey, StoreNames, StoreValue } from "./types";
 
 /**
  * Possible modes for transactions created by {@link Database.transaction}.
@@ -87,7 +85,11 @@ export class Database<DBSchema extends NamedSchema<string, number, Schema>> {
     key: StoreKey<DBSchema["schema"], DBStoreName>,
     value: StoreValue<DBSchema["schema"], DBStoreName>
   ): Promise<void> {
-    await this.db.put(storeName, value, key);
+    await this.db.put(
+      storeName,
+      (value as unknown) as IDBPStoreValue<DBSchema["schema"], DBStoreName>,
+      key as IDBPStoreKey<DBSchema["schema"], DBStoreName>
+    );
   }
 
   /**
@@ -96,11 +98,14 @@ export class Database<DBSchema extends NamedSchema<string, number, Schema>> {
    * Resolves to `undefined` if no value exists for the given key in the given
    * store.
    */
-  async get<DBStoreName extends StoreNames<DBSchema["schema"]>>(
+  get<DBStoreName extends StoreNames<DBSchema["schema"]>>(
     storeName: DBStoreName,
     key: StoreKey<DBSchema["schema"], DBStoreName>
   ): Promise<StoreValue<DBSchema["schema"], DBStoreName> | undefined> {
-    return this.db.get(storeName, key);
+    return this.db.get(
+      storeName,
+      key as IDBPStoreKey<DBSchema["schema"], DBStoreName>
+    );
   }
 
   /**

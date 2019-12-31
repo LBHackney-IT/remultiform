@@ -2,11 +2,11 @@ import { IDBPDatabase } from "idb";
 
 import { promiseToWaitForNextTick } from "../../__tests__/helpers/promise";
 
+import { StoreMap } from "../Store";
 import {
   NamedSchema,
   Schema,
   StoreKey,
-  StoreMap,
   StoreNames,
   StoreValue
 } from "../types";

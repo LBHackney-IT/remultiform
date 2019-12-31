@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
+import { NamedSchema, Schema, StoreNames } from "../database/types";
 
-import { DatabaseMap } from "./DatabaseMap";
+import { ComponentDatabaseMap, ComponentValue } from "./ComponentDatabaseMap";
 
 /**
  * The proptypes of the extra props injected when rendering the
@@ -27,7 +27,7 @@ export interface DynamicComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicComponentControlledProps.onValueChange}.
    */
-  value: "" | Value | null | undefined;
+  value: "" | Value;
 
   /**
    * The callback to call when the component's value changes.
@@ -37,7 +37,7 @@ export interface DynamicComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicComponentControlledProps.value}.
    */
-  onValueChange(value: "" | Value): void;
+  onValueChange(value: Value): void;
 
   /**
    * A flag for whether or not the component is disabled for input.
@@ -58,8 +58,8 @@ export interface DynamicComponentControlledProps<Value> {
  * @typeparam Props - The proptypes for the component, excluding the
  * {@link DynamicComponentControlledProps}.
  *
- * @typeparam Value - The {@link StoreValue} of the value this component
- * represents in the {@link Database}.
+ * @typeparam Value - The {@link ComponentValue} of the value or value property
+ * this component represents in the {@link Database}.
  */
 export type DynamicComponentType<Props, Value> = React.ComponentType<
   Props & DynamicComponentControlledProps<Value>
@@ -69,13 +69,11 @@ export type DynamicComponentType<Props, Value> = React.ComponentType<
  * The options for {@link DynamicComponent}.
  */
 export interface DynamicComponentOptions<
-  ComponentType extends DynamicComponentType<
-    Props,
-    StoreValue<DBSchema["schema"], StoreName>
-  >,
+  ComponentType extends DynamicComponentType<Props, Value>,
   Props,
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > {
   /**
    * A unique identifier for this component.
@@ -114,25 +112,25 @@ export interface DynamicComponentOptions<
    */
   renderWhen?(stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+      | undefined;
   }): boolean;
 
   /**
    * The configuration telling the {@link DynamicComponent} how to interface
    * with the {@link Database}.
    *
-   * See {@link DatabaseMap} for more details.
+   * See {@link ComponentDatabaseMap} for more details.
    */
-  databaseMap: DatabaseMap<DBSchema, StoreName>;
+  databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
 
   /**
    * The value to default to when nothing exists in the provided database store.
    *
-   * If you leave this unspecified, it will use whatever the default value for
-   * the component is.
+   * If this is undefined, it will use whatever the default value for the
+   * component is.
    */
-  defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+  defaultValue: Value | undefined;
 
   /**
    * The value representing an empty value for this component.
@@ -140,7 +138,7 @@ export interface DynamicComponentOptions<
    * If you leave this unspecified, it will assume the empty value is an empty
    * string.
    */
-  emptyValue?: StoreValue<DBSchema["schema"], StoreName>;
+  emptyValue?: Value;
 }
 
 /**
@@ -157,9 +155,13 @@ export interface DynamicComponentOptions<
  * ```ts
  * const storeName = "myStore";
  *
- * const myDatabaseMap = new DatabaseMap<MyDBSchema, typeof storeName>({
+ * const myDatabaseMap = new ComponentDatabaseMap<
+ *   MyDBSchema,
+ *   typeof storeName
+ * >({
  *   storeName,
- *   key: "input-0"
+ *   key: "input-0",
+ *   property: ["my", "property"]
  * });
  *
  * const myInput = new DynamicComponent({
@@ -175,33 +177,37 @@ export interface DynamicComponentOptions<
  * ```
  */
 export class DynamicComponent<
-  ComponentType extends DynamicComponentType<
-    Props,
-    StoreValue<DBSchema["schema"], StoreName>
-  >,
+  ComponentType extends DynamicComponentType<Props, Value>,
   Props,
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > {
   /**
    * The proptype validator for a {@link DynamicComponent}.
    */
   static propType: PropTypes.Requireable<
     DynamicComponent<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      DynamicComponentType<any, StoreValue<any, string>>,
+      DynamicComponentType<
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        any,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ComponentValue<NamedSchema<string, number, any>, string>
+      >,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       any,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       NamedSchema<string, number, any>,
-      string
+      string,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ComponentValue<NamedSchema<string, number, any>, string>
     >
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
     Component: PropTypes.func.isRequired,
     props: PropTypes.object.isRequired,
     renderWhen: PropTypes.func.isRequired,
-    databaseMap: DatabaseMap.propType.isRequired,
+    databaseMap: ComponentDatabaseMap.propType.isRequired,
     defaultValue: PropTypes.any,
     emptyValue: PropTypes.any.isRequired
   });
@@ -217,7 +223,7 @@ export class DynamicComponent<
    * {@link DynamicComponentControlledProps.value}.
    */
   static controlledPropTypes<Value>(
-    valuePropType: PropTypes.Requireable<Value>
+    valuePropType: PropTypes.Validator<Value>
   ): PropTypes.ValidationMap<DynamicComponentControlledProps<Value>> {
     return {
       value: valuePropType,
@@ -231,15 +237,21 @@ export class DynamicComponent<
   readonly props: Props;
   readonly renderWhen: (stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+      | undefined;
   }) => boolean;
-  readonly databaseMap: DatabaseMap<DBSchema, StoreName>;
-  readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
-  readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
+  readonly databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
+  readonly defaultValue: Value | null | undefined;
+  readonly emptyValue: "" | Value;
 
   constructor(
-    options: DynamicComponentOptions<ComponentType, Props, DBSchema, StoreName>
+    options: DynamicComponentOptions<
+      ComponentType,
+      Props,
+      DBSchema,
+      StoreName,
+      Value
+    >
   ) {
     const {
       key,

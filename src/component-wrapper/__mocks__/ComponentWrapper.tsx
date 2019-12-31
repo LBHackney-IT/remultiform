@@ -1,14 +1,9 @@
 import React from "react";
 
 import { Database } from "../../database/Database";
-import {
-  NamedSchema,
-  Schema,
-  StoreNames,
-  StoreValue
-} from "../../database/types";
+import { NamedSchema, Schema, StoreNames } from "../../database/types";
 
-import { DatabaseMap } from "../DatabaseMap";
+import { ComponentDatabaseMap, ComponentValue } from "../ComponentDatabaseMap";
 import { DynamicComponentType, DynamicComponent } from "../DynamicComponent";
 import { StaticComponent } from "../StaticComponent";
 
@@ -23,20 +18,16 @@ export interface ComponentWrapperRenderProps<
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   database?: Database<DBSchema>;
-  onChange(value: StoreValue<DBSchema["schema"], StoreName>): void;
+  onChange(value: "" | ComponentValue<DBSchema, StoreName>): void;
 }
 
 export class ComponentWrapper<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > extends ActualComponentWrapper<DBSchema, StoreName> {
-  static wrapStatic<
-    Props,
-    DBSchema extends NamedSchema<string, number, Schema>
-  >(
-    component: StaticComponent<React.ElementType<Props>, Props, DBSchema>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ): ComponentWrapper<any, string> {
+  static wrapStatic<DBSchema extends NamedSchema<string, number, Schema>>(
+    component: StaticComponent<React.ElementType, DBSchema>
+  ): ComponentWrapper<DBSchema, StoreNames<DBSchema["schema"]>> {
     const { key, Component, renderWhen } = component;
 
     return new ComponentWrapper(
@@ -56,13 +47,15 @@ export class ComponentWrapper<
   static wrapDynamic<
     Props,
     DBSchema extends NamedSchema<string, number, Schema>,
-    StoreName extends StoreNames<DBSchema["schema"]>
+    StoreName extends StoreNames<DBSchema["schema"]>,
+    Value extends ComponentValue<DBSchema, StoreName>
   >(
     component: DynamicComponent<
-      DynamicComponentType<Props, StoreValue<DBSchema["schema"], StoreName>>,
+      DynamicComponentType<Props, Value>,
       Props,
       DBSchema,
-      StoreName
+      StoreName,
+      Value
     >
   ): ComponentWrapper<DBSchema, StoreName> {
     const {
@@ -95,12 +88,12 @@ export class ComponentWrapper<
     ) => JSX.Element,
     renderWhen: (stepValues: {
       [key: string]:
-        | ""
-        | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+        | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+        | undefined;
     }) => boolean,
-    databaseMap?: DatabaseMap<DBSchema, StoreName>,
-    defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,
-    emptyValue?: "" | StoreValue<DBSchema["schema"], StoreName>
+    databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
+    defaultValue?: ComponentValue<DBSchema, StoreName> | null,
+    emptyValue?: "" | ComponentValue<DBSchema, StoreName>
   ) {
     super(key, render, renderWhen, databaseMap, defaultValue, emptyValue);
   }

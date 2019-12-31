@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Database, TransactionMode } from "../../database/Database";
 import { OpenOptions } from "../../database/OpenOptions";
-import { NamedSchema, StoreMap } from "../../database/types";
+import { Store, StoreMap } from "../../database/Store";
+import { NamedSchema, Schema } from "../../database/types";
 
 import { promiseToWaitForNextTick } from "./promise";
 
@@ -18,10 +19,8 @@ export const spyOnConsoleError = (): jest.SpyInstance<
 };
 
 export const spyOnDatabaseOpen = (): jest.SpyInstance<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Promise<Database<NamedSchema<string, number, any>>>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [string, number?, OpenOptions<any>?]
+  Promise<Database<NamedSchema<string, number, Schema>>>,
+  [string, number?, OpenOptions<Schema>?]
 > => {
   const spy = jest.spyOn(Database, "open");
 
@@ -35,7 +34,9 @@ export const spyOnDatabaseOpen = (): jest.SpyInstance<
 };
 
 export const spyOnDatabaseGet = (
-  getSomething = true
+  getSomething = true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resolveValue?: any
 ): {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   spy: jest.SpyInstance<Promise<any>, [string, any]>;
@@ -72,7 +73,11 @@ export const spyOnDatabaseGet = (
 
     settleThis();
 
-    return getSomething ? `${storeName}/${key}` : undefined;
+    return getSomething
+      ? resolveValue === undefined
+        ? `${storeName}/${key}`
+        : resolveValue
+      : undefined;
   });
 
   return get;
@@ -84,12 +89,12 @@ export const spyOnDatabaseTransaction = (): {
     [
       string[],
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (stores: StoreMap<any, string[]>) => void | Promise<void>,
+      (stores: StoreMap<any>) => void | Promise<void>,
       (TransactionMode | undefined)?
     ]
   >;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  stores: StoreMap<any, string[]>;
+  stores: StoreMap<any>;
   settle: Promise<void[]>;
   calls: Promise<void>[];
 } => {
@@ -97,7 +102,7 @@ export const spyOnDatabaseTransaction = (): {
   const transaction = {
     spy: jest.spyOn(Database.prototype, "transaction"),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    stores: {} as StoreMap<any, string[]>,
+    stores: {} as StoreMap<any>,
     settle: Promise.all([
       new Promise<void>(resolve => {
         settleInitial = resolve;
@@ -118,12 +123,14 @@ export const spyOnDatabaseTransaction = (): {
     const theseStores = storeNames.reduce(
       (s, storeName) => ({
         ...s,
-        [storeName]: {
+        [storeName]: new Store({
           ...jest.fn()(),
-          get: jest.fn(),
+          createIndex: jest.fn(),
+          add: jest.fn(),
           put: jest.fn(),
+          get: jest.fn(),
           delete: jest.fn()
-        }
+        })
       }),
       {}
     );

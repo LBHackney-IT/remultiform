@@ -11,16 +11,14 @@ import {
 
 import { Database } from "../database/Database";
 import { OpenOptions } from "../database/OpenOptions";
-import { NamedSchema } from "../database/types";
+import { NamedSchema, Schema } from "../database/types";
 
 import { DatabaseContext } from "./DatabaseContext";
 import { DatabaseProvider } from "./DatabaseProvider";
 
 let databseOpenSpy: jest.SpyInstance<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Promise<Database<NamedSchema<string, number, any>>>,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [string, number?, OpenOptions<any>?]
+  Promise<Database<NamedSchema<string, number, Schema>>>,
+  [string, number?, OpenOptions<Schema>?]
 >;
 
 beforeEach(() => {

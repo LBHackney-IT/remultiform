@@ -1,9 +1,8 @@
+import { ComponentDatabaseMap } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
-import { DatabaseMap } from "../../component-wrapper/DatabaseMap";
 import { DynamicComponent } from "../../component-wrapper/DynamicComponent";
 import { StaticComponent } from "../../component-wrapper/StaticComponent";
 import { NamedSchema } from "../../database/types";
-import { StepDefinition } from "../../step/StepDefinition";
 
 import { SimpleSubmit } from "../components/SimpleSubmit";
 import { TestDynamicComponent } from "../components/TestDynamicComponent";
@@ -19,14 +18,14 @@ export type DynamicFormSchema = NamedSchema<
   }
 >;
 
-export const dynamicForm: { steps: StepDefinition[] } = {
+export const dynamicForm = {
   steps: [
     {
       slug: "test-step-1",
       nextSlug: "test-step-2",
       Submit: SimpleSubmit,
       componentWrappers: [
-        ComponentWrapper.wrapStatic(
+        ComponentWrapper.wrapStatic<DynamicFormSchema>(
           new StaticComponent({
             key: "test-img",
             Component: "img",
@@ -42,10 +41,14 @@ export const dynamicForm: { steps: StepDefinition[] } = {
             props: {
               content: "test content"
             },
-            databaseMap: new DatabaseMap<DynamicFormSchema, "testStore">({
+            databaseMap: new ComponentDatabaseMap<
+              DynamicFormSchema,
+              "testStore"
+            >({
               storeName: "testStore",
               key: 0
-            })
+            }),
+            defaultValue: "test default"
           })
         )
       ]
@@ -55,7 +58,7 @@ export const dynamicForm: { steps: StepDefinition[] } = {
       nextSlug: "test-step-1",
       Submit: SimpleSubmit,
       componentWrappers: [
-        ComponentWrapper.wrapStatic(
+        ComponentWrapper.wrapStatic<DynamicFormSchema>(
           new StaticComponent({
             key: "test-img-2",
             Component: "img",
@@ -71,10 +74,14 @@ export const dynamicForm: { steps: StepDefinition[] } = {
             props: {
               content: "more test content"
             },
-            databaseMap: new DatabaseMap<DynamicFormSchema, "testStore">({
+            databaseMap: new ComponentDatabaseMap<
+              DynamicFormSchema,
+              "testStore"
+            >({
               storeName: "testStore",
               key: 1
-            })
+            }),
+            defaultValue: "test default"
           })
         )
       ]

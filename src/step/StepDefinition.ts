@@ -11,10 +11,8 @@ import { SubmitType } from "./Submit";
  * This represents a single step in the flow of the multipage form.
  */
 export interface StepDefinition<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  DBSchema extends NamedSchema<string, number, Schema> = any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  StoreName extends StoreNames<DBSchema["schema"]> = any
+  DBSchema extends NamedSchema<string, number, Schema>,
+  StoreName extends StoreNames<DBSchema["schema"]>
 > {
   /**
    * The slug to uniquely identify the step.

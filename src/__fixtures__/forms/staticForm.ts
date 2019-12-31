@@ -1,12 +1,11 @@
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
 import { StaticComponent } from "../../component-wrapper/StaticComponent";
-import { StepDefinition } from "../../step/StepDefinition";
-import { SimpleSubmit } from "../components/SimpleSubmit";
 
+import { SimpleSubmit } from "../components/SimpleSubmit";
 import { TestClassComponent } from "../components/TestClassComponent";
 import { TestFunctionComponent } from "../components/TestFunctionComponent";
 
-export const staticForm: { steps: StepDefinition[] } = {
+export const staticForm = {
   steps: [
     {
       slug: "test-step-1",

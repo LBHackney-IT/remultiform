@@ -275,7 +275,7 @@ it("creates a component with the correct proptypes when the original component i
   );
 
   expect(Component.propTypes).toEqual(
-    DynamicComponent.controlledPropTypes(PropTypes.any)
+    DynamicComponent.controlledPropTypes(PropTypes.any.isRequired)
   );
 });
 
@@ -326,7 +326,7 @@ it("creates a component with the correct proptypes when the original component h
   );
 
   expect(Component.propTypes).toEqual(
-    DynamicComponent.controlledPropTypes(PropTypes.any)
+    DynamicComponent.controlledPropTypes(PropTypes.any.isRequired)
   );
 });
 

@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { Database } from "../database/Database";
-import { NamedSchema, Schema, StoreNames, StoreValue } from "../database/types";
+import { NamedSchema, Schema, StoreNames } from "../database/types";
 
 import { WrappedComponent } from "./internal/WrappedComponent";
 
-import { DatabaseMap } from "./DatabaseMap";
+import { ComponentDatabaseMap, ComponentValue } from "./ComponentDatabaseMap";
 import { DynamicComponentType, DynamicComponent } from "./DynamicComponent";
 import { StaticComponent } from "./StaticComponent";
 
@@ -18,7 +18,7 @@ export interface ComponentWrapperRenderProps<
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   database?: Database<DBSchema>;
-  onChange(value: StoreValue<DBSchema["schema"], StoreName>): void;
+  onChange(value: "" | ComponentValue<DBSchema, StoreName>): void;
 }
 
 /**
@@ -41,13 +41,17 @@ export class ComponentWrapper<
    * The proptype validator for a {@link ComponentWrapper}.
    */
   static readonly propType: PropTypes.Requireable<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ComponentWrapper<NamedSchema<string, number, any>, string>
+    ComponentWrapper<NamedSchema<string, number, Schema>, StoreNames<Schema>>
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     renderWhen: PropTypes.func.isRequired,
-    databaseMap: PropTypes.instanceOf(DatabaseMap),
+    databaseMap: PropTypes.instanceOf<
+      ComponentDatabaseMap<
+        NamedSchema<string, number, Schema>,
+        StoreNames<Schema>
+      >
+    >(ComponentDatabaseMap),
     defaultValue: PropTypes.any,
     emptyValue: PropTypes.any.isRequired
   });
@@ -56,43 +60,21 @@ export class ComponentWrapper<
    * Wrap a {@link StaticComponent} in a {@link ComponentWrapper} ready
    * to be included in a {@link StepDefinition}.
    *
-   * You shouldn't need to provide any of the type parameters. They should be
-   * infered from the {@link StaticComponent} passed in.
+   * @typeparam DBSchema - The schema used by the
+   * {@link DynamicComponent|DynamicComponents} of this {@link StepDefinition}.
+   * It's possible to infer this if {@link StaticComponent.renderWhen} is
+   * implemented on `component`.
    */
-  static wrapStatic<
-    Props,
-    DBSchema extends NamedSchema<string, number, Schema>
-  >(
-    component: StaticComponent<React.ElementType<Props>, Props, DBSchema>
+  static wrapStatic<DBSchema extends NamedSchema<string, number, Schema>>(
+    component: StaticComponent<React.ElementType, DBSchema>
   ): ComponentWrapper<DBSchema, StoreNames<DBSchema["schema"]>> {
-    const { key, Component, renderWhen } = component;
+    const { key, Component, props, renderWhen } = component;
 
-    let render: () => JSX.Element;
-
-    if (typeof Component === "string") {
-      const {
-        Component: IntrinsicElement,
-        props
-      } = component as StaticComponent<
-        keyof JSX.IntrinsicElements,
-        {},
-        DBSchema
-      >;
-
-      // eslint-disable-next-line react/display-name
-      render = (): JSX.Element => <IntrinsicElement key={key} {...props} />;
-    } else {
-      const { Component: ReactComponent, props } = component as StaticComponent<
-        React.ComponentType<Props>,
-        Props,
-        DBSchema
-      >;
-
-      // eslint-disable-next-line react/display-name
-      render = (): JSX.Element => <ReactComponent key={key} {...props} />;
-    }
-
-    return new ComponentWrapper(key, render, renderWhen);
+    return new ComponentWrapper(
+      key,
+      (): JSX.Element => <Component key={key} {...props} />,
+      renderWhen
+    );
   }
 
   /**
@@ -105,13 +87,15 @@ export class ComponentWrapper<
   static wrapDynamic<
     Props,
     DBSchema extends NamedSchema<string, number, Schema>,
-    StoreName extends StoreNames<DBSchema["schema"]>
+    StoreName extends StoreNames<DBSchema["schema"]>,
+    Value extends ComponentValue<DBSchema, StoreName>
   >(
     component: DynamicComponent<
-      DynamicComponentType<Props, StoreValue<DBSchema["schema"], StoreName>>,
+      DynamicComponentType<Props, Value>,
       Props,
       DBSchema,
-      StoreName
+      StoreName,
+      Value
     >
   ): ComponentWrapper<DBSchema, StoreName> {
     const {
@@ -155,26 +139,26 @@ export class ComponentWrapper<
    */
   readonly renderWhen: (stepValues: {
     [key: string]:
-      | ""
-      | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+      | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+      | undefined;
   }) => boolean;
 
   /**
    * The properies needed to map the user-entered value for the wrapped
    * component to the {@link Database}.
    */
-  readonly databaseMap?: DatabaseMap<DBSchema, StoreName> | null;
+  readonly databaseMap?: ComponentDatabaseMap<DBSchema, StoreName> | null;
 
   /**
    * The optional default value to store in the {@link Database} if the
    * component hasn't been changed by the user.
    */
-  readonly defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null;
+  readonly defaultValue?: ComponentValue<DBSchema, StoreName> | null;
 
   /**
    * The value to consider as an empty input when updating the {@link Database}.
    */
-  readonly emptyValue: "" | StoreValue<DBSchema["schema"], StoreName>;
+  readonly emptyValue: "" | ComponentValue<DBSchema, StoreName>;
 
   /**
    * Do not use this directly. Use {@link ComponentWrapper.wrapStatic} or
@@ -190,12 +174,12 @@ export class ComponentWrapper<
     ) => JSX.Element,
     renderWhen: (stepValues: {
       [key: string]:
-        | ""
-        | StoreValue<DBSchema["schema"], StoreNames<DBSchema["schema"]>>;
+        | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+        | undefined;
     }) => boolean,
-    databaseMap?: DatabaseMap<DBSchema, StoreName>,
-    defaultValue?: StoreValue<DBSchema["schema"], StoreName> | null,
-    emptyValue: "" | StoreValue<DBSchema["schema"], StoreName> = ""
+    databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
+    defaultValue?: ComponentValue<DBSchema, StoreName> | null,
+    emptyValue: "" | ComponentValue<DBSchema, StoreName> = ""
   ) {
     this.key = key;
     this.render = render;

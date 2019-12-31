@@ -6,10 +6,11 @@ import { Database } from "../../database/Database";
 import {
   NamedSchema,
   Schema,
-  StoreValue,
-  StoreNames
+  StoreNames,
+  StoreValueProperties
 } from "../../database/types";
 
+import { ComponentDatabaseMap, ComponentValue } from "../ComponentDatabaseMap";
 import {
   DynamicComponent,
   DynamicComponentControlledProps,
@@ -22,7 +23,8 @@ import {
 export interface WrappedComponentProps<
   Props,
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > {
   /**
    * An open {@link Database}.
@@ -36,22 +38,22 @@ export interface WrappedComponentProps<
    * The {@link DynamicComponent} to wrap.
    */
   component: DynamicComponent<
-    DynamicComponentType<Props, StoreValue<DBSchema["schema"], StoreName>>,
+    DynamicComponentType<Props, Value>,
     Props,
     DBSchema,
-    StoreName
+    StoreName,
+    Value
   >;
 
-  onChange?:
-    | ((value: StoreValue<DBSchema["schema"], StoreName>) => void)
-    | null;
+  onChange?: ((value: "" | Value) => void) | null;
 }
 
 interface WrappedComponentState<
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > {
-  value?: "" | StoreValue<DBSchema["schema"], StoreName>;
+  value: "" | Value;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   isFetching: boolean;
@@ -63,7 +65,7 @@ interface WrappedComponentState<
  * This handles interfacing between the
  * {@link DynamicComponentControlledProps} of a component and a
  * {@link Database} instance via a {@link DatabaseContext} and a
- * {@link DatabaseMap}.
+ * {@link ComponentDatabaseMap}.
  *
  * This component passes {@link DynamicComponentControlledProps.disabled}
  * as `true` when waiting for {@link Database} operations to settle. The
@@ -73,10 +75,11 @@ interface WrappedComponentState<
 export class WrappedComponent<
   Props,
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > extends React.Component<
-  WrappedComponentProps<Props, DBSchema, StoreName>,
-  WrappedComponentState<DBSchema, StoreName>,
+  WrappedComponentProps<Props, DBSchema, StoreName, Value>,
+  WrappedComponentState<DBSchema, StoreName, Value>,
   never
 > {
   static propTypes: PropTypes.ValidationMap<
@@ -85,7 +88,9 @@ export class WrappedComponent<
       any,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       NamedSchema<string, number, any>,
-      string
+      string,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ComponentValue<NamedSchema<string, number, any>, string>
     >
   > = {
     database: PropTypes.instanceOf(Database),
@@ -96,7 +101,7 @@ export class WrappedComponent<
   /**
    * @ignore
    */
-  state: WrappedComponentState<DBSchema, StoreName> = {
+  state: WrappedComponentState<DBSchema, StoreName, Value> = {
     value: this.props.component.emptyValue,
     isFetching: false
   };
@@ -119,7 +124,9 @@ export class WrappedComponent<
    * @ignore
    */
   async componentDidUpdate(
-    prevProps: Readonly<WrappedComponentProps<Props, DBSchema, StoreName>>
+    prevProps: Readonly<
+      WrappedComponentProps<Props, DBSchema, StoreName, Value>
+    >
   ): Promise<void> {
     // We only want to load from the database if it has just opened. We
     // shouldn't be changing the underlying database while this is mounted, but
@@ -150,10 +157,7 @@ export class WrappedComponent<
     const { value, isFetching } = this.state;
     const { key, Component, props } = component;
 
-    const controlledProps: DynamicComponentControlledProps<StoreValue<
-      DBSchema["schema"],
-      StoreName
-    >> = {
+    const controlledProps: DynamicComponentControlledProps<Value> = {
       value,
       onValueChange: this.onValueChange.bind(this),
       disabled: !database || isFetching
@@ -183,18 +187,18 @@ export class WrappedComponent<
       return;
     }
 
-    const { storeName, key } = databaseMap;
-
     this.setState(state => ({ ...state, isFetching: true }));
 
-    const stateUpdate: Partial<WrappedComponentState<DBSchema, StoreName>> = {
+    const stateUpdate: Partial<WrappedComponentState<
+      DBSchema,
+      StoreName,
+      Value
+    >> = {
       isFetching: false
     };
 
     try {
-      // If `database.get` resolves to be undefined, this will remove the
-      // current `value` from the state, if one is set.
-      stateUpdate.value = await database.get(storeName, key);
+      stateUpdate.value = await this.fetchDeepValue(database, databaseMap);
 
       if (stateUpdate.value === undefined) {
         stateUpdate.value = nullAsUndefined(defaultValue);
@@ -206,9 +210,9 @@ export class WrappedComponent<
         stateUpdate.value = emptyValue;
       }
 
-      this.onValueChange(
-        stateUpdate.value as StoreValue<DBSchema["schema"], StoreName>
-      );
+      if (stateUpdate.value !== this.state.value) {
+        this.onValueChange(stateUpdate.value);
+      }
 
       // Clear the error if it was set.
       stateUpdate.error = undefined;
@@ -223,9 +227,7 @@ export class WrappedComponent<
     this.setState(state => ({ ...state, ...stateUpdate }));
   }
 
-  private onValueChange(
-    value: StoreValue<DBSchema["schema"], StoreName>
-  ): void {
+  private onValueChange(value: "" | Value): void {
     if (this.isUnmounted) {
       return;
     }
@@ -237,5 +239,28 @@ export class WrappedComponent<
     }
 
     this.setState(state => ({ ...state, value }));
+  }
+
+  private async fetchDeepValue(
+    database: Database<DBSchema>,
+    databaseMap: ComponentDatabaseMap<DBSchema, StoreName>
+  ): Promise<Value | undefined> {
+    const { storeName, key, property } = databaseMap;
+
+    let value = (await database.get(storeName, key)) as Value | undefined;
+
+    if (property) {
+      const propertyKeys = [...property] as typeof property;
+
+      while (propertyKeys.length > 0 && value !== undefined) {
+        const k = (propertyKeys.shift() as unknown) as keyof StoreValueProperties<
+          Value
+        >;
+
+        value = (value[k] as unknown) as Value;
+      }
+    }
+
+    return value;
   }
 }

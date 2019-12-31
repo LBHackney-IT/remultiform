@@ -1,3 +1,4 @@
+import { nullValuesAsUndefined } from "null-as-undefined";
 import React from "react";
 import { ReactTestRenderer, act, create } from "react-test-renderer";
 
@@ -10,8 +11,11 @@ import { NamedSchema } from "../../database/types";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { DatabaseProvider } from "../../database-context/DatabaseProvider";
 
-import { DatabaseMap } from "../DatabaseMap";
-import { DynamicComponent } from "../DynamicComponent";
+import { ComponentDatabaseMap } from "../ComponentDatabaseMap";
+import {
+  DynamicComponent,
+  DynamicComponentControlledProps
+} from "../DynamicComponent";
 
 import { WrappedComponent } from "./WrappedComponent";
 
@@ -25,10 +29,17 @@ type TestSchema = NamedSchema<
       key: number;
       value: string;
     };
+
+    anotherTestStore: {
+      key: number;
+      value: {
+        a?: { value?: string };
+      };
+    };
   }
 >;
 
-const testDatabaseMap = new DatabaseMap<TestSchema, "testStore">({
+const testDatabaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
   storeName: "testStore",
   key: 0
 });
@@ -62,13 +73,14 @@ it("renders correctly with all non-context props", () => {
   `);
 });
 
-it("renders correctly without a default value for the component", () => {
+it("renders correctly with an undefined default value for the component", () => {
   const dynamicComponent = new DynamicComponent({
     key: "test-component",
     Component: TestDynamicComponent,
     props: {
       content: "test content"
     },
+    defaultValue: undefined as string | undefined,
     databaseMap: testDatabaseMap
   });
 
@@ -170,6 +182,136 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
   `);
 });
 
+it("fetches the stored value specified by the `databaseMap` and uses the specified child property", async () => {
+  const get = spyOnDatabaseGet(true, { a: { value: "new value" } });
+
+  const Component = (
+    props: DynamicComponentControlledProps<
+      TestSchema["schema"]["anotherTestStore"]["value"]["a"]
+    >
+  ): JSX.Element => {
+    const { value, onValueChange, disabled } = nullValuesAsUndefined(props);
+
+    return (
+      <input
+        value={JSON.stringify(value)}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
+          // This is bad practice in real situations. Don't allow a user to
+          // modify the object themselves.
+          onValueChange(JSON.parse(event.target.value));
+        }}
+        disabled={disabled}
+      />
+    );
+  };
+
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "anotherTestStore">({
+    storeName: "anotherTestStore",
+    key: 0,
+    property: "a"
+  });
+
+  const dynamicComponent = new DynamicComponent({
+    key: "test-component",
+    Component,
+    props: {},
+    defaultValue: {},
+    databaseMap
+  });
+
+  const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
+
+  let component: ReactTestRenderer | undefined = undefined;
+
+  await act(async () => {
+    component = create(
+      <DatabaseProvider context={DBContext}>
+        <DBContext.Consumer>
+          {(database): JSX.Element => (
+            <WrappedComponent
+              database={database}
+              component={dynamicComponent}
+            />
+          )}
+        </DBContext.Consumer>
+      </DatabaseProvider>
+    );
+
+    await openPromise;
+    await get.settle;
+  });
+
+  expect(get.spy).toHaveBeenCalledTimes(1);
+
+  expect(component).toMatchInlineSnapshot(`
+    <input
+      disabled={false}
+      onChange={[Function]}
+      value="{\\"value\\":\\"new value\\"}"
+    />
+  `);
+});
+
+it("fetches the stored value specified by the `databaseMap` and uses the specified child property path", async () => {
+  const get = spyOnDatabaseGet(true, { a: { value: "new value" } });
+
+  const databaseMap = new ComponentDatabaseMap<TestSchema, "anotherTestStore">({
+    storeName: "anotherTestStore",
+    key: 0,
+    property: ["a", "value"]
+  });
+
+  const dynamicComponent = new DynamicComponent({
+    key: "test-component",
+    Component: TestDynamicComponent,
+    props: {
+      content: "test content"
+    },
+    defaultValue: "test default value",
+    databaseMap
+  });
+
+  const openPromise = Database.open<TestSchema>("testDBName", 1);
+  const DBContext = new DatabaseContext(openPromise);
+
+  let component: ReactTestRenderer | undefined = undefined;
+
+  await act(async () => {
+    component = create(
+      <DatabaseProvider context={DBContext}>
+        <DBContext.Consumer>
+          {(database): JSX.Element => (
+            <WrappedComponent
+              database={database}
+              component={dynamicComponent}
+            />
+          )}
+        </DBContext.Consumer>
+      </DatabaseProvider>
+    );
+
+    await openPromise;
+    await get.settle;
+  });
+
+  expect(get.spy).toHaveBeenCalledTimes(1);
+
+  expect(component).toMatchInlineSnapshot(`
+    <div>
+      <div>
+        test content
+      </div>
+      <input
+        data-testid="input"
+        disabled={false}
+        onChange={[Function]}
+        value="new value"
+      />
+    </div>
+  `);
+});
+
 it("uses the empty value before it fetches from the database", async () => {
   const get = spyOnDatabaseGet();
 
@@ -247,7 +389,7 @@ it("uses the default value when fetching the stored value returns `undefined`", 
   `);
 });
 
-it("uses the empty value when fetching the stored value returns `undefined` and there is no default value", async () => {
+it("uses the empty value when fetching the stored value returns `undefined` and the default value is undefined", async () => {
   const get = spyOnDatabaseGet(false);
 
   const dynamicComponent = new DynamicComponent({
@@ -256,6 +398,7 @@ it("uses the empty value when fetching the stored value returns `undefined` and 
     props: {
       content: "test content"
     },
+    defaultValue: undefined,
     emptyValue: "test empty",
     databaseMap: testDatabaseMap
   });
