@@ -81,6 +81,7 @@ it("renders correctly with an undefined default value for the component", () => 
       content: "test content"
     },
     defaultValue: undefined as string | undefined,
+    emptyValue: "test empty",
     databaseMap: testDatabaseMap
   });
 
@@ -95,7 +96,7 @@ it("renders correctly with an undefined default value for the component", () => 
         data-testid="input"
         disabled={true}
         onChange={[Function]}
-        value=""
+        value="test empty"
       />
     </div>
   `);
@@ -215,7 +216,8 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
     key: "test-component",
     Component,
     props: {},
-    defaultValue: {},
+    defaultValue: {} as TestSchema["schema"]["anotherTestStore"]["value"]["a"],
+    emptyValue: {} as TestSchema["schema"]["anotherTestStore"]["value"]["a"],
     databaseMap
   });
 
@@ -269,6 +271,7 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
       content: "test content"
     },
     defaultValue: "test default value",
+    emptyValue: "test empty",
     databaseMap
   });
 
@@ -451,6 +454,7 @@ it("is disabled while the database is opening", async () => {
     Component: Tester,
     props: {},
     defaultValue: "test default",
+    emptyValue: "test empty",
     databaseMap: testDatabaseMap
   });
 
@@ -489,6 +493,7 @@ it("is disabled while fetching the stored value from the database", async () => 
     Component: Tester,
     props: {},
     defaultValue: "test default",
+    emptyValue: "test empty",
     databaseMap: testDatabaseMap
   });
 

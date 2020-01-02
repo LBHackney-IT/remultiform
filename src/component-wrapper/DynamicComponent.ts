@@ -27,7 +27,7 @@ export interface DynamicComponentControlledProps<Value> {
    * controlled component} pattern with
    * {@link DynamicComponentControlledProps.onValueChange}.
    */
-  value: "" | Value;
+  value: Value;
 
   /**
    * The callback to call when the component's value changes.
@@ -135,10 +135,10 @@ export interface DynamicComponentOptions<
   /**
    * The value representing an empty value for this component.
    *
-   * If you leave this unspecified, it will assume the empty value is an empty
-   * string.
+   * In order for React to manage a controlled component, the controlled prop
+   * must always be defined.
    */
-  emptyValue?: Value;
+  emptyValue: Value;
 }
 
 /**
@@ -242,7 +242,7 @@ export class DynamicComponent<
   }) => boolean;
   readonly databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
   readonly defaultValue: Value | null | undefined;
-  readonly emptyValue: "" | Value;
+  readonly emptyValue: Value;
 
   constructor(
     options: DynamicComponentOptions<
@@ -268,12 +268,9 @@ export class DynamicComponent<
     this.props = props;
     this.databaseMap = databaseMap;
     this.defaultValue = defaultValue;
+    this.emptyValue = emptyValue;
 
     this.renderWhen =
       renderWhen === undefined ? (): boolean => true : renderWhen;
-
-    // We need to do this to keep the component as a controlled component. The
-    // controlled prop must always be defined.
-    this.emptyValue = emptyValue === undefined ? "" : emptyValue;
   }
 }

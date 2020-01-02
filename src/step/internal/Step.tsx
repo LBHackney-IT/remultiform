@@ -1,3 +1,4 @@
+import { nullAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -66,7 +67,7 @@ interface StepState<
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   componentValues: {
-    [key: string]: "" | ComponentValue<DBSchema, StoreName>;
+    [key: string]: ComponentValue<DBSchema, StoreName> | undefined;
   };
 }
 
@@ -93,7 +94,10 @@ export class Step<
 
   state: StepState<DBSchema, StoreName> = {
     componentValues: this.props.componentWrappers.reduce(
-      (values, { key, emptyValue }) => ({ ...values, [key]: emptyValue }),
+      (values, { key, emptyValue }) => ({
+        ...values,
+        [key]: nullAsUndefined(emptyValue)
+      }),
       {} as StepState<DBSchema, StoreName>["componentValues"]
     )
   };
@@ -187,15 +191,24 @@ export class Step<
 
     for (const { key, databaseMap, emptyValue } of componentWrappers) {
       if (databaseMap) {
+        // If `databaseMap` is defined, then `emptyValue` will also be
+        // defined.
+        const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
         const { storeName, property } = databaseMap;
 
         const store = stores[storeName];
-        const value = componentValues[key];
+
+        // If `databaseMap` is defined, then the component's value will also be
+        // defined.
+        const value = componentValues[key] as ComponentValue<
+          DBSchema,
+          StoreName
+        >;
 
         if (property) {
-          await this.persistProperty(store, databaseMap, value, emptyValue);
+          await this.persistProperty(store, databaseMap, value, empty);
         } else {
-          await this.persistValue(store, databaseMap, value, emptyValue);
+          await this.persistValue(store, databaseMap, value, empty);
         }
       }
     }
@@ -204,8 +217,8 @@ export class Step<
   private async persistProperty(
     store: Store<DBSchema["schema"], StoreName[], StoreName>,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
-    propertyValue: "" | ComponentValue<DBSchema, StoreName>,
-    emptyValue: "" | ComponentValue<DBSchema, StoreName>
+    propertyValue: ComponentValue<DBSchema, StoreName>,
+    emptyValue: ComponentValue<DBSchema, StoreName>
   ): Promise<void> {
     const { key, property } = databaseMap;
 
@@ -252,9 +265,6 @@ export class Step<
       if (propertyValue === emptyValue) {
         delete child[k1];
       } else {
-        // `propertyValue`'s type includes `""` because that's the default
-        // `emptyValue`. If the user has provided a different `emptyValue`,
-        // it's not relevant to the real type of `propertyValue`.
         child[
           k1
         ] = (propertyValue as unknown) as ChildValue[keyof StoreValueProperties<
@@ -267,9 +277,6 @@ export class Step<
       if (propertyValue === emptyValue) {
         delete value[k0];
       } else {
-        // `propertyValue`'s type includes `""` because that's the default
-        // `emptyValue`. If the user has provided a different `emptyValue`,
-        // it's not relevant to the real type of `propertyValue`.
         value[k0] = propertyValue as SValue[keyof StoreValueProperties<SValue>];
       }
     }
@@ -280,17 +287,14 @@ export class Step<
   private async persistValue(
     store: Store<DBSchema["schema"], StoreName[], StoreName>,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
-    value: "" | ComponentValue<DBSchema, StoreName>,
-    emptyValue: "" | ComponentValue<DBSchema, StoreName>
+    value: ComponentValue<DBSchema, StoreName>,
+    emptyValue: ComponentValue<DBSchema, StoreName>
   ): Promise<void> {
     const { key } = databaseMap;
 
     if (value === emptyValue) {
       await store.delete(key);
     } else {
-      // `value`'s type includes `""` because that's the default
-      // `emptyValue`. If the user has provided a different `emptyValue`,
-      // it's not relevant to the real type of `value`.
       await store.put(key, value as StoreValue<DBSchema["schema"], StoreName>);
     }
   }

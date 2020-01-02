@@ -45,7 +45,7 @@ export interface WrappedComponentProps<
     Value
   >;
 
-  onChange?: ((value: "" | Value) => void) | null;
+  onChange?: ((value: Value) => void) | null;
 }
 
 interface WrappedComponentState<
@@ -53,7 +53,7 @@ interface WrappedComponentState<
   StoreName extends StoreNames<DBSchema["schema"]>,
   Value extends ComponentValue<DBSchema, StoreName>
 > {
-  value: "" | Value;
+  value: Value;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
   isFetching: boolean;
@@ -227,7 +227,7 @@ export class WrappedComponent<
     this.setState(state => ({ ...state, ...stateUpdate }));
   }
 
-  private onValueChange(value: "" | Value): void {
+  private onValueChange(value: Value): void {
     if (this.isUnmounted) {
       return;
     }

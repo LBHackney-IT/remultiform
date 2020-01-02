@@ -62,6 +62,7 @@ describe(".wrapDynamic()", () => {
           content: "test content"
         },
         defaultValue: "test default",
+        emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
@@ -101,6 +102,7 @@ describe("#key", () => {
           content: "test content"
         },
         defaultValue: "test default",
+        emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
           key: 0
@@ -189,7 +191,7 @@ describe("#defaultValue", () => {
 });
 
 describe("#emptyValue", () => {
-  it("is an empty string when wrapping a `StaticComponent`", () => {
+  it("is undefined when wrapping a `StaticComponent`", () => {
     const componentWrapper = ComponentWrapper.wrapStatic(
       new StaticComponent({
         key: "test-key",
@@ -200,7 +202,7 @@ describe("#emptyValue", () => {
       })
     );
 
-    expect(componentWrapper.emptyValue).toEqual("");
+    expect(componentWrapper.emptyValue).toBeUndefined();
   });
 
   it("matches the database map provided when wrapping a `DynamicComponent`", () => {

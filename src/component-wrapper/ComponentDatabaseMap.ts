@@ -117,24 +117,16 @@ export class ComponentDatabaseMap<
       PropTypes.string.isRequired,
       PropTypes.number.isRequired
     ]).isRequired,
-    // We need to cast this because `PropTypes.array` doesn't know how to
-    // limit the number of elements in the array, as so creates the
-    // incompatible type of `(string | number | symbol)[]`.
+    // We need to cast this because `PropTypes.arrayOf` doesn't know how to
+    // limit the number of elements in the array, and so creates the
+    // incompatible type of `(string | symbol)[]`. This does mean the
+    // prop validatiion will let through some invalid `property`s.
     property: PropTypes.arrayOf(
       PropTypes.oneOfType([
         PropTypes.string.isRequired,
-        PropTypes.number.isRequired,
         PropTypes.symbol.isRequired
       ]).isRequired
-    ) as PropTypes.Requireable<
-      StoreValuePropertyPath<
-        StoreValue<
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          any,
-          string
-        >
-      >
-    >
+    ) as PropTypes.Requireable<[string] | [string, string | symbol]>
   });
 
   readonly storeName: StoreName;
