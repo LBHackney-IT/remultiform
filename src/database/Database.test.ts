@@ -6,8 +6,8 @@ import { expectPromise } from "../__tests__/helpers/expect";
 import { promiseToWaitForNextTick } from "../__tests__/helpers/promise";
 import { spyOnConsoleError } from "../__tests__/helpers/spies";
 
-import { Database, TransactionMode } from "./Database";
-import { NamedSchema } from "./types";
+import { Database } from "./Database";
+import { NamedSchema, TransactionMode } from "./types";
 
 const testDBName = "databaseTestDB";
 const testStoreName = "testStore";

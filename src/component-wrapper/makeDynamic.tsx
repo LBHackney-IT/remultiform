@@ -27,17 +27,17 @@ export interface MakeDynamicPropMap<PropsToMap> {
   /**
    * The name of the prop on the wrapped component to map `value` to.
    */
-  value: keyof PropsToMap;
+  value: keyof PropsToMap & string;
 
   /**
    * The name of the prop on the wrapped component to map `onValueChange` to.
    */
-  onValueChange: keyof PropsToMap;
+  onValueChange: keyof PropsToMap & string;
 
   /**
    * The name of the prop on the wrapped component to map `disabled` to.
    */
-  disabled: keyof PropsToMap;
+  disabled: keyof PropsToMap & string;
 }
 
 /**
@@ -182,13 +182,8 @@ export const makeDynamic = <
 
     if (typeof Component === "string") {
       const IntrinsicElement = Component as keyof JSX.IntrinsicElements;
-      // Infering the type of the React props acceptable for any possible
-      // `JSX.IntrinsicElements` is Hard. The type of this never leaves this
-      // scope, so we cheat, given that the author is confident about the types
-      // actually matching, whatever TypeScript says.
-      const intrinsicElementProps = mappedProps as {};
 
-      return <IntrinsicElement {...intrinsicElementProps} />;
+      return <IntrinsicElement {...mappedProps} />;
     } else {
       return <Component {...mappedProps} />;
     }
@@ -198,10 +193,9 @@ export const makeDynamic = <
     const IntrinsicElement = Component as keyof JSX.IntrinsicElements;
 
     Dynamic.displayName = `makeDynamic(${IntrinsicElement})`;
-
-    // We don't know the type of `Value` at runtime to use for the proptypes,
-    // so we allow `any`.
-    Dynamic.propTypes = DynamicComponent.controlledPropTypes<Value>(
+    Dynamic.propTypes = DynamicComponent.controlledPropTypes(
+      // As this is an intrinsic element, we don't know what type `value` will
+      // be at runtime.
       PropTypes.any.isRequired
     ) as React.WeakValidationMap<DynamicProps>;
   } else {

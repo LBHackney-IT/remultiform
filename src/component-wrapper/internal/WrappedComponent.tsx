@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { Database } from "../../database/Database";
-import {
-  NamedSchema,
-  Schema,
-  StoreNames,
-  StoreValueProperties
-} from "../../database/types";
+import { NamedSchema, Schema, StoreNames } from "../../database/types";
 
 import { ComponentDatabaseMap, ComponentValue } from "../ComponentDatabaseMap";
 import {
@@ -247,15 +242,19 @@ export class WrappedComponent<
   ): Promise<Value | undefined> {
     const { storeName, key, property } = databaseMap;
 
-    let value = (await database.get(storeName, key)) as Value | undefined;
+    const storedValue = await database.get(storeName, key);
+
+    if (storedValue === undefined) {
+      return undefined;
+    }
+
+    let value = storedValue as Value;
 
     if (property) {
       const propertyKeys = [...property] as typeof property;
 
       while (propertyKeys.length > 0 && value !== undefined) {
-        const k = (propertyKeys.shift() as unknown) as keyof StoreValueProperties<
-          Value
-        >;
+        const k = propertyKeys.shift() as keyof Value;
 
         value = (value[k] as unknown) as Value;
       }

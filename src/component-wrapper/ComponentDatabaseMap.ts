@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 
 import {
   NamedSchema,
+  PickStoreValueProperties,
   Schema,
   StoreKey,
   StoreNames,
   StoreValue,
-  StoreValueProperties,
   StoreValuePropertyPath
 } from "../database/types";
 
@@ -19,13 +19,13 @@ type ComponentValueLevelOne<Value> = {
 // Value["a"]["b"]
 // This follows the same pattern as `StoreValuePropertyPathLevelTwo`.
 type ComponentValueLevelTwo<Value> = {
-  [K in keyof Value]: keyof StoreValueProperties<
+  [K in keyof Value]: keyof PickStoreValueProperties<
     NonNullable<Value[K]>
   > extends never // If `Value[K]` is a primitive...
     ? never // ...ignore it...
-    : StoreValueProperties<NonNullable<Value[K]>>[keyof StoreValueProperties<
+    : PickStoreValueProperties<
         NonNullable<Value[K]>
-      >]; // ...otherwise, include its children.
+      >[keyof PickStoreValueProperties<NonNullable<Value[K]>>]; // ...otherwise, include its children.
 }[keyof Value];
 
 /**
@@ -76,12 +76,14 @@ export interface ComponentDatabaseMapOptions<
    * Leave this blank to fetch and update the entire value directly, for
    * example, if you're storing primitives in this {@link Store}.
    */
-  property?: keyof StoreValueProperties<
+  property?: keyof PickStoreValueProperties<
     StoreValue<DBSchema["schema"], StoreName>
   > extends never
     ? never
     :
-        | keyof StoreValueProperties<StoreValue<DBSchema["schema"], StoreName>>
+        | keyof PickStoreValueProperties<
+            StoreValue<DBSchema["schema"], StoreName>
+          >
         | StoreValuePropertyPath<StoreValue<DBSchema["schema"], StoreName>>;
 }
 

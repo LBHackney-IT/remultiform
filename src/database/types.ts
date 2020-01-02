@@ -18,7 +18,7 @@ type StorePropertyTypeProperties =
 /**
  * The type `T` without its inherent primitive prototype properties.
  */
-export type StoreValueProperties<T> = Omit<T, StorePropertyTypeProperties>;
+export type PickStoreValueProperties<T> = Omit<T, StorePropertyTypeProperties>;
 
 /**
  * The type of a possible value in a {@link StoreSchema}.
@@ -152,21 +152,23 @@ export type StoreValue<
 // ["a"] | ["z"]
 // This follows the same pattern as `ComponentValueLevelOne`.
 type StoreValuePropertyPathLevelOne<Value extends {}> = {
-  [K in keyof StoreValueProperties<Value>]: [K];
-}[keyof StoreValueProperties<Value>];
+  [K in keyof PickStoreValueProperties<Value>]: [K];
+}[keyof PickStoreValueProperties<Value>];
 
 // ["a", "b"] | ["z", "y"]
 // This follows the same pattern as `ComponentValueLevelTwo`.
 type StoreValuePropertyPathLevelTwo<Value extends {}> = {
-  [K in keyof StoreValueProperties<Value>]: keyof StoreValueProperties<
-    NonNullable<StoreValueProperties<Value>[K]>
+  [K in keyof PickStoreValueProperties<Value>]: keyof PickStoreValueProperties<
+    NonNullable<PickStoreValueProperties<Value>[K]>
   > extends never // If `Value[K]` is a primitive...
     ? never // ...ignore it...
     : [
         K,
-        keyof StoreValueProperties<NonNullable<StoreValueProperties<Value>[K]>>
+        keyof PickStoreValueProperties<
+          NonNullable<PickStoreValueProperties<Value>[K]>
+        >
       ]; // ...otherwise, allow referencing its children.
-}[keyof StoreValueProperties<Value>];
+}[keyof PickStoreValueProperties<Value>];
 
 /**
  * The type describing the "path" to a deep property of a {@link StoreValue}.
@@ -208,3 +210,11 @@ export type Transaction<
   DBSchema extends Schema,
   TxStoreNames extends StoreNames<DBSchema>[] = StoreNames<DBSchema>[]
 > = IDBPTransaction<DBSchema, TxStoreNames>;
+
+/**
+ * Possible modes for transactions created by {@link Database.transaction}.
+ */
+export enum TransactionMode {
+  ReadOnly = "readonly",
+  ReadWrite = "readwrite"
+}
