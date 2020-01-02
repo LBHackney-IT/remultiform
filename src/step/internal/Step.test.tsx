@@ -251,6 +251,7 @@ it("persists data to the database when submitted", async () => {
           content: "test content"
         },
         defaultValue: "test default value",
+        emptyValue: "test empty value",
         databaseMap
       })
     )
@@ -403,6 +404,7 @@ it("persists child property data to the database when submitted", async () => {
           content: "test content"
         },
         defaultValue: "test default value",
+        emptyValue: "test empty value",
         databaseMap
       })
     )

@@ -18,7 +18,7 @@ export interface ComponentWrapperRenderProps<
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   database?: Database<DBSchema>;
-  onChange(value: "" | ComponentValue<DBSchema, StoreName>): void;
+  onChange(value: ComponentValue<DBSchema, StoreName>): void;
 }
 
 export class ComponentWrapper<
@@ -93,7 +93,7 @@ export class ComponentWrapper<
     }) => boolean,
     databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
     defaultValue?: ComponentValue<DBSchema, StoreName> | null,
-    emptyValue?: "" | ComponentValue<DBSchema, StoreName>
+    emptyValue?: ComponentValue<DBSchema, StoreName> | null
   ) {
     super(key, render, renderWhen, databaseMap, defaultValue, emptyValue);
   }

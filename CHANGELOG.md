@@ -20,6 +20,7 @@ and this project adheres to
 - Improved prop type inference for `StaticComponent`s
 - Removed the empty string from types that will never handle the artificial
   empty value
+- Made `emptyValue` required for `DynamicComponent`s
 
 ## [0.0.3] - 18-12-2019
 

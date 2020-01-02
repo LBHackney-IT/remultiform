@@ -18,7 +18,7 @@ export interface ComponentWrapperRenderProps<
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   database?: Database<DBSchema>;
-  onChange(value: "" | ComponentValue<DBSchema, StoreName>): void;
+  onChange(value: ComponentValue<DBSchema, StoreName>): void;
 }
 
 /**
@@ -53,7 +53,7 @@ export class ComponentWrapper<
       >
     >(ComponentDatabaseMap),
     defaultValue: PropTypes.any,
-    emptyValue: PropTypes.any.isRequired
+    emptyValue: PropTypes.any
   });
 
   /**
@@ -157,8 +157,11 @@ export class ComponentWrapper<
 
   /**
    * The value to consider as an empty input when updating the {@link Database}.
+   *
+   * If {@link ComponentWrapper.databaseMap} is defined, then willd also be
+   * defined.
    */
-  readonly emptyValue: "" | ComponentValue<DBSchema, StoreName>;
+  readonly emptyValue?: ComponentValue<DBSchema, StoreName> | null;
 
   /**
    * Do not use this directly. Use {@link ComponentWrapper.wrapStatic} or
@@ -179,7 +182,7 @@ export class ComponentWrapper<
     }) => boolean,
     databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
     defaultValue?: ComponentValue<DBSchema, StoreName> | null,
-    emptyValue: "" | ComponentValue<DBSchema, StoreName> = ""
+    emptyValue?: ComponentValue<DBSchema, StoreName> | null
   ) {
     this.key = key;
     this.render = render;

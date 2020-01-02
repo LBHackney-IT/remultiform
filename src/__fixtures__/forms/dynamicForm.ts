@@ -41,14 +41,15 @@ export const dynamicForm = {
             props: {
               content: "test content"
             },
+            defaultValue: "test default",
+            emptyValue: "",
             databaseMap: new ComponentDatabaseMap<
               DynamicFormSchema,
               "testStore"
             >({
               storeName: "testStore",
               key: 0
-            }),
-            defaultValue: "test default"
+            })
           })
         )
       ]
@@ -74,14 +75,15 @@ export const dynamicForm = {
             props: {
               content: "more test content"
             },
+            defaultValue: "test default",
+            emptyValue: "",
             databaseMap: new ComponentDatabaseMap<
               DynamicFormSchema,
               "testStore"
             >({
               storeName: "testStore",
               key: 1
-            }),
-            defaultValue: "test default"
+            })
           })
         )
       ]

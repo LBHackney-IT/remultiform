@@ -24,7 +24,8 @@ describe("#key", () => {
       key,
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      defaultValue: "test value",
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -43,7 +44,8 @@ describe("#Component", () => {
       key: "test-key",
       Component,
       props: { content: "test content" },
-      defaultValue: "test value",
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -62,7 +64,8 @@ describe("#props", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props,
-      defaultValue: "test value",
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -82,7 +85,8 @@ describe("#renderWhen", () => {
       Component: TestDynamicComponent,
       props: { content: "test content" },
       renderWhen,
-      defaultValue: "test value",
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -97,7 +101,8 @@ describe("#renderWhen", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      defaultValue: "test value",
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -119,7 +124,8 @@ describe("#databaseMap", () => {
       key: "test-key",
       Component: TestDynamicComponent,
       props: { content: "test content" },
-      defaultValue: "test value",
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
       databaseMap
     });
 
@@ -136,6 +142,7 @@ describe("#defaultValue", () => {
       Component: TestDynamicComponent,
       props: { content: "test content" },
       defaultValue,
+      emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
         key: 0
@@ -163,20 +170,5 @@ describe("#emptyValue", () => {
     });
 
     expect(component.emptyValue).toEqual(emptyValue);
-  });
-
-  it("is an empty string when no `emptyValue` is provided to the constructor", () => {
-    const component = new DynamicComponent({
-      key: "test-key",
-      Component: TestDynamicComponent,
-      props: { content: "test content" },
-      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
-        storeName: "testStore",
-        key: 0
-      }),
-      defaultValue: "test default value"
-    });
-
-    expect(component.emptyValue).toEqual("");
   });
 });
