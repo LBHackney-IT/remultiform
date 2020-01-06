@@ -7,14 +7,16 @@ import {
   ComponentValue
 } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
-import { Database, TransactionMode } from "../../database/Database";
+import { Database } from "../../database/Database";
 import { Store, StoreMap } from "../../database/Store";
 import {
   NamedSchema,
+  PickStoreValueProperties,
   Schema,
   StoreNames,
   StoreValue,
-  StoreValueProperties
+  StoreValuePropertyPath,
+  TransactionMode
 } from "../../database/types";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
 
@@ -168,14 +170,18 @@ export class Step<
         .map(({ databaseMap }) => databaseMap && databaseMap.storeName)
         .filter(
           (storeName, index, array) =>
-            storeName && array.indexOf(storeName) === index
+            storeName &&
+            // Find unique `storeName`s:
+            array.indexOf(storeName) === index
         ) as StoreName[];
 
-      await database.transaction(
-        storeNames,
-        stores => this.persistValuesToDatabase(stores),
-        "readwrite" as TransactionMode
-      );
+      if (storeNames.length > 0) {
+        await database.transaction(
+          storeNames,
+          stores => this.persistValuesToDatabase(stores),
+          TransactionMode.ReadWrite
+        );
+      }
     }
 
     if (afterSubmit) {
@@ -191,23 +197,33 @@ export class Step<
 
     for (const { key, databaseMap, emptyValue } of componentWrappers) {
       if (databaseMap) {
-        // If `databaseMap` is defined, then `emptyValue` will also be
-        // defined.
-        const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
         const { storeName, property } = databaseMap;
 
         const store = stores[storeName];
 
-        // If `databaseMap` is defined, then the component's value will also be
-        // defined.
-        const value = componentValues[key] as ComponentValue<
-          DBSchema,
-          StoreName
-        >;
-
         if (property) {
+          // If `databaseMap` is defined, then `emptyValue` will also be
+          // defined.
+          const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
+          // If `databaseMap` is defined, then the component's value will also
+          // be defined.
+          const value = componentValues[key] as ComponentValue<
+            DBSchema,
+            StoreName
+          >;
+
           await this.persistProperty(store, databaseMap, value, empty);
         } else {
+          // If `databaseMap` is defined, then `emptyValue` will also be
+          // defined.
+          const empty = emptyValue as StoreValue<DBSchema["schema"], StoreName>;
+          // If `databaseMap` is defined, then the component's value will also
+          // be defined.
+          const value = componentValues[key] as StoreValue<
+            DBSchema["schema"],
+            StoreName
+          >;
+
           await this.persistValue(store, databaseMap, value, empty);
         }
       }
@@ -223,61 +239,59 @@ export class Step<
     const { key, property } = databaseMap;
 
     if (!property) {
-      await this.persistValue(store, databaseMap, propertyValue, emptyValue);
+      await this.persistValue(
+        store,
+        databaseMap,
+        propertyValue as StoreValue<DBSchema["schema"], StoreName>,
+        emptyValue as StoreValue<DBSchema["schema"], StoreName>
+      );
 
       return;
     }
 
-    type SValue = StoreValue<DBSchema["schema"], StoreName> & {};
-    type ChildValue = StoreValueProperties<
-      {
-        [K in keyof StoreValueProperties<SValue>]: StoreValueProperties<
-          SValue
-        >[K];
-      }[keyof StoreValueProperties<SValue>]
-    >;
+    const storedValue = await store.get(key);
 
-    const originalValue = (await store.get(key)) as SValue | undefined;
-
-    if (originalValue === undefined && propertyValue === emptyValue) {
+    if (storedValue === undefined && propertyValue === emptyValue) {
       // We would clear the property value from the store if there was
       // anything to clear, but there isn't, so we do nothing and early exit.
       return;
     }
 
     const value =
-      originalValue === undefined
+      storedValue === undefined
         ? // Using an empty object means the schema might not be correct, as the
           // store may end up with partial data. There's not much we do to
           // detect or enforce this at runtime, as the schema only exists in
           // type land, but we should consider requiring the user to specify a
           // base value to use in this case as part of setting up the database.
-          ({} as SValue)
-        : originalValue;
+          ({} as StoreValue<DBSchema["schema"], StoreName>)
+        : storedValue;
 
-    const propertyKeys = [...property] as typeof property;
+    const propertyKeys = [...property] as StoreValuePropertyPath<
+      StoreValue<DBSchema["schema"], StoreName>
+    >;
+
     const k0 = propertyKeys[0];
 
     if (propertyKeys.length > 1) {
-      const child = (value[k0] === undefined ? {} : value[k0]) as ChildValue;
-      const k1 = propertyKeys[1] as keyof ChildValue;
+      const child =
+        value[k0] === undefined ? ({} as typeof value[typeof k0]) : value[k0];
+      const k1 = propertyKeys[1] as keyof PickStoreValueProperties<
+        typeof child
+      >;
 
       if (propertyValue === emptyValue) {
         delete child[k1];
       } else {
-        child[
-          k1
-        ] = (propertyValue as unknown) as ChildValue[keyof StoreValueProperties<
-          ChildValue
-        >];
+        child[k1] = propertyValue as typeof child[typeof k1];
       }
 
-      value[k0] = child as SValue[keyof StoreValueProperties<SValue>];
+      value[k0] = child;
     } else {
       if (propertyValue === emptyValue) {
         delete value[k0];
       } else {
-        value[k0] = propertyValue as SValue[keyof StoreValueProperties<SValue>];
+        value[k0] = propertyValue as typeof value[typeof k0];
       }
     }
 
@@ -287,15 +301,15 @@ export class Step<
   private async persistValue(
     store: Store<DBSchema["schema"], StoreName[], StoreName>,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
-    value: ComponentValue<DBSchema, StoreName>,
-    emptyValue: ComponentValue<DBSchema, StoreName>
+    value: StoreValue<DBSchema["schema"], StoreName>,
+    emptyValue: StoreValue<DBSchema["schema"], StoreName>
   ): Promise<void> {
     const { key } = databaseMap;
 
     if (value === emptyValue) {
       await store.delete(key);
     } else {
-      await store.put(key, value as StoreValue<DBSchema["schema"], StoreName>);
+      await store.put(key, value);
     }
   }
 }

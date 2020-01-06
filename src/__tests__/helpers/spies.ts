@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Database, TransactionMode } from "../../database/Database";
+import { Database } from "../../database/Database";
 import { OpenOptions } from "../../database/OpenOptions";
 import { Store, StoreMap } from "../../database/Store";
-import { NamedSchema, Schema } from "../../database/types";
+import { NamedSchema, Schema, TransactionMode } from "../../database/types";
 
 import { promiseToWaitForNextTick } from "./promise";
 

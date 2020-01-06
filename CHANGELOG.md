@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Stopped trying to persist data in `Step`, when the step has no
+  `DynamicComponent`s
+
 ## [0.0.4] - 02-01-2020
 
 ### Added

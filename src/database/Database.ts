@@ -9,15 +9,14 @@ import { wrapTransaction } from "./internal/wrapTransaction";
 
 import { OpenOptions } from "./OpenOptions";
 import { StoreMap } from "./Store";
-import { NamedSchema, Schema, StoreKey, StoreNames, StoreValue } from "./types";
-
-/**
- * Possible modes for transactions created by {@link Database.transaction}.
- */
-export enum TransactionMode {
-  ReadOnly = "readonly",
-  ReadWrite = "readwrite"
-}
+import {
+  NamedSchema,
+  Schema,
+  StoreKey,
+  StoreNames,
+  StoreValue,
+  TransactionMode
+} from "./types";
 
 /**
  * A wrapper for an IndexedDB connection.
