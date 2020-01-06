@@ -175,11 +175,13 @@ export class Step<
             array.indexOf(storeName) === index
         ) as StoreName[];
 
-      await database.transaction(
-        storeNames,
-        stores => this.persistValuesToDatabase(stores),
-        TransactionMode.ReadWrite
-      );
+      if (storeNames.length > 0) {
+        await database.transaction(
+          storeNames,
+          stores => this.persistValuesToDatabase(stores),
+          TransactionMode.ReadWrite
+        );
+      }
     }
 
     if (afterSubmit) {
