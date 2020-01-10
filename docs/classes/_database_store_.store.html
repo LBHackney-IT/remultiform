@@ -69,14 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A wrapper for an IndexedDB store.</p>
-					</div>
-					<p>Stores are semantically similar to tables in other databases.</p>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -165,11 +157,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Store.ts#L24">src/database/Store.ts:24</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the store.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -187,12 +174,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Store.ts#L52">src/database/Store.ts:52</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Adds a value to the store.</p>
-								</div>
-								<p>Throws if the store already has a value for the given key.</p>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -210,7 +191,7 @@
 					<a name="createindex" class="tsd-anchor"></a>
 					<h3>create<wbr>Index</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Index&lt;IndexName&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IndexName</span>, keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">IDBIndexParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDBPIndex</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TxStoreNames</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">IndexName</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Index&lt;IndexName&gt;<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IndexName</span>, keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDBIndexParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IDBPIndex</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TxStoreNames</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">IndexName</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -219,12 +200,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Store.ts#L39">src/database/Store.ts:39</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Creates a new index for the store.</p>
-								</div>
-								<p>This should only be called during an <a href="_database_upgrade_.upgrade.html">Upgrade</a>.</p>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -260,11 +235,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Store.ts#L96">src/database/Store.ts:96</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Deletes the record matching the given key in the store.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -288,12 +258,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Store.ts#L83">src/database/Store.ts:83</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Retrieves the value matching the given key in the store, or undefined if
-									there is no value for that key.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -317,11 +281,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Store.ts#L67">src/database/Store.ts:67</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create or update the value for the given key in the store.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>

@@ -69,13 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The options to pass to <a href="../classes/_database_database_.database.html#open">Database.open</a>.</p>
-					</div>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -124,21 +117,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/OpenOptions.ts#L73">src/database/OpenOptions.ts:73</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A flag for whether or not to automically close a database connection when
-							it blocks another from opening.</p>
-						</div>
-						<p>If true, automatically call <a href="../classes/_database_database_.database.html#close">Database.close</a> when this database is
-						blocking another database from opening.</p>
-						<p>In this case, the database will close itself after the <code>blocking</code> callback
-							(if one exists) has been run. It will close even if <code>blocking</code> throws an
-							exception, ensuring the database stops blocking other versions from
-						opening, regardless of whether it can tidy itself up cleanly.</p>
-						<p>Otherwise, the <code>blocking</code> callback should close the database for itself, if
-						appropriate.</p>
-						<p>Defaults to <code>false</code>.</p>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -156,16 +134,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/OpenOptions.ts#L36">src/database/OpenOptions.ts:36</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A callback called when this database is blocked from opening by an existing
-									one.</p>
-								</div>
-								<p>This happens when a new database is being opened with a schema version
-								that is newer than the schema version any existing ones are open on.</p>
-								<p>Any exceptions in this callback will raise out of the <a href="../classes/_database_database_.database.html#open">Database.open</a>
-								call and cause the database to close itself.</p>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span>
@@ -186,19 +154,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/OpenOptions.ts#L54">src/database/OpenOptions.ts:54</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A callback called when this database is blocking another from opening.</p>
-								</div>
-								<p>This happens when a new database is being opened with a schema version
-									that is newer than the schema version this one is running on. The usual
-									resolution is to clean this database up and close it. See
-								<a href="_database_openoptions_.openoptions.html#autocloseonblocking">OpenOptions.autoCloseOnBlocking</a> for an automatic way of doing that.</p>
-								<p>Note that all operations in this callback should be synchronous, and close
-									the database, or otherwise resolve the block, before handing control back.
-									This is because the blocked database may give up in the next tick, and
-								cause unexpected behaviour.</p>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -216,22 +171,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/OpenOptions.ts#L24">src/database/OpenOptions.ts:24</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A callback called when this database is opening with a newer schema version
-									than the last database to open in this environment.</p>
-								</div>
-								<p>The purpose of this callback is to upgrade the database to match the new
-									version of the schema. Once the transaction created by this callback
-									completes, the opportunity to edit the stores and indexes closes, to make
-									sure not to run <em>any</em> asynchronous code that doesn&#39;t modify the
-									transaction, to keep it open. See <a href="../classes/_database_upgrade_.upgrade.html#transaction">Upgrade.transaction</a> for more
-								details.</p>
-								<p>Any exceptions in this callback will raise out of the <a href="../classes/_database_database_.database.html#open">Database.open</a>
-									call and cause the database to close itself. In some cases, this can mean
-									the internal database will have performed a partial upgrade and consider
-								itself on the new version, so some care is advised.</p>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>

@@ -69,20 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A wrapper for an IndexedDB connection.</p>
-					</div>
-					<p>Call <a href="_database_database_.database.html#open">Database.open</a> to create a new database connection.</p>
-					<dl class="tsd-comment-tags">
-						<dt>typeparam</dt>
-						<dd><p>The schema for the database, along with the
-							allowed names for databases using that schema.</p>
-						</dd>
-					</dl>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -133,11 +119,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Database.ts#L60">src/database/Database.ts:60</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the IndexedDB database.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -155,14 +136,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Database.ts#L144">src/database/Database.ts:144</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Request to close the database connection.</p>
-								</div>
-								<p>If there are no open transactions, this will close immediately. If any
-									transactions are open, it will wait for them to complete before closing.
-								This happens asynchronously, out of band.</p>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -180,13 +153,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Database.ts#L100">src/database/Database.ts:100</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Get a value from a store.</p>
-								</div>
-								<p>Resolves to <code>undefined</code> if no value exists for the given key in the given
-								store.</p>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -219,11 +185,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Database.ts#L82">src/database/Database.ts:82</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create or update a value in a store.</p>
-								</div>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -259,11 +220,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Database.ts#L122">src/database/Database.ts:122</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create a transaction on one or more stores.</p>
-								</div>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -274,18 +230,9 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>storeNames: <span class="tsd-signature-type">DBStoreNames</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The stores to open the transaction over.</p>
-									</div>
 								</li>
 								<li>
 									<h5>tx: <span class="tsd-signature-type">function</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>A callback for the transaction to call. Be aware that this
-											callback, although possibly asynchronous, needs to be updating the
-											transaction every tick. If no changes to the transaction happen in a tick,
-										it will automatically commit itself and the transaction will close.</p>
-									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
@@ -310,9 +257,6 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> mode: <a href="../enums/_database_types_.transactionmode.html" class="tsd-signature-type">TransactionMode</a><span class="tsd-signature-symbol"> =&nbsp;TransactionMode.ReadOnly</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The mode to open the transaction in.</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -332,17 +276,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/Database.ts#L47">src/database/Database.ts:47</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Open a new database connection.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>typeparam</dt>
-									<dd><p>The schema for the database, along with the
-										allowed names for databases using that schema.</p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -353,24 +286,12 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>name: <span class="tsd-signature-type">DBSchema[&quot;dbNames&quot;]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The name of the database.</p>
-									</div>
 								</li>
 								<li>
 									<h5>version: <span class="tsd-signature-type">DBSchema[&quot;versions&quot;]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The schema version you want to open. This can only ever
-											increase. See <a href="../interfaces/_database_openoptions_.openoptions.html#upgrade">OpenOptions.upgrade</a> for how to upgrade the schema
-										when changing version.</p>
-									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> openOptions: <a href="../interfaces/_database_openoptions_.openoptions.html" class="tsd-signature-type">OpenOptions</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The options and callbacks for opening the database.
-										See <a href="../interfaces/_database_openoptions_.openoptions.html">OpenOptions</a> for details.</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_database_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>

@@ -69,41 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A component along with the associated properties needed to render it as part
-						of a <a href="../interfaces/_step_stepdefinition_.stepdefinition.html">StepDefinition</a>.</p>
-					</div>
-					<p>Unlike <a href="_component_wrapper_staticcomponent_.staticcomponent.html">StaticComponent</a>, we inject some additional
-						<a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html">DynamicComponentControlledProps</a> into the component to support
-						interfacing with a <a href="_database_database_.database.html">Database</a>. The
-						<a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentoptions.html#component">DynamicComponentOptions.Component</a> needs to support those extra
-						props if it needs to interface with a <a href="_database_database_.database.html">Database</a>. If not, use a
-					<a href="_component_wrapper_staticcomponent_.staticcomponent.html">StaticComponent</a> instead.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">const</span> storeName = <span class="hljs-string">"myStore"</span>;
-
-<span class="hljs-keyword">const</span> myDatabaseMap = <span class="hljs-keyword">new</span> ComponentDatabaseMap&lt;
-  MyDBSchema,
-  <span class="hljs-keyword">typeof</span> storeName
-&gt;({
-  storeName,
-  key: <span class="hljs-string">"input-0"</span>,
-  property: [<span class="hljs-string">"my"</span>, <span class="hljs-string">"property"</span>]
-});
-
-<span class="hljs-keyword">const</span> myInput = <span class="hljs-keyword">new</span> DynamicComponent({
-  key: <span class="hljs-string">"my-input"</span>,
-  Component: MyInput,
-  props: {
-    className: <span class="hljs-string">"my-input-class"</span>
-  },
-  defaultValue: <span class="hljs-string">"Nothing here..."</span>,
-  emptyValue: <span class="hljs-string">""</span>,
-  databaseMap: myDatabaseMap
-});</code></pre>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -297,11 +262,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L189">src/component-wrapper/DynamicComponent.ts:189</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The proptype validator for a <a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a>.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -319,14 +279,6 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L225">src/component-wrapper/DynamicComponent.ts:225</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The proptypes for <a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html">DynamicComponentControlledProps</a>.</p>
-								</div>
-								<p>This is generic to support being specific about the type of
-									<a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html#value">DynamicComponentControlledProps.value</a>. The type should be
-								infered from the arguments.</p>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -337,10 +289,6 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>valuePropType: <span class="tsd-signature-type">Validator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>An optional proptype validator for the type of
-										<a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html#value">DynamicComponentControlledProps.value</a>.</p>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PropTypes.ValidationMap</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html" class="tsd-signature-type">DynamicComponentControlledProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>

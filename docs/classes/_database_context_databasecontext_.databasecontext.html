@@ -69,33 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A wrapper for a React context for passing a database connection to
-						<a href="_component_wrapper_componentwrapper_.componentwrapper.html">ComponentWrappers</a>.</p>
-					</div>
-					<p>Normally, you use this by creating an instance somewhere and sharing it
-					between components via <a href="_database_context_databaseprovider_.databaseprovider.html">DatabaseProvider</a> and <a href="../modules/_database_context_usedatabase_.html#usedatabase">useDatabase</a>.</p>
-					<pre><code class="language-ts"><span class="hljs-keyword">type</span> DBSchema = NamedSchema&lt;
-  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
-  <span class="hljs-number">5</span>,
-  {
-    favouriteColour: {
-      key: <span class="hljs-built_in">string</span>;
-      value: {
-        r: <span class="hljs-built_in">number</span>;
-        g: <span class="hljs-built_in">number</span>;
-        b: <span class="hljs-built_in">number</span>;
-      };
-    };
-  }
-&gt;;
-
-<span class="hljs-keyword">const</span> databasePromise = Database.open(<span class="hljs-string">"myDatabase"</span>, <span class="hljs-number">5</span>);
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext(databasePromise);</code></pre>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -147,22 +120,10 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database-context/DatabaseContext.ts#L58">src/database-context/DatabaseContext.ts:58</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Create a new <a href="_database_context_databasecontext_.databasecontext.html">DatabaseContext</a>.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>openDatabaseOrPromise: <a href="_database_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_database_database_.database.html" class="tsd-signature-type">Database</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>An open <a href="_database_database_.database.html">Database</a> or a promise that
-												will resolve to an one. Normally, you would want to pass the return value
-											of <a href="_database_database_.database.html#open">Database.open</a> in here directly.</p>
-										</div>
-									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_database_context_databasecontext_.databasecontext.html" class="tsd-signature-type">DatabaseContext</a></h4>
@@ -181,13 +142,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database-context/DatabaseContext.ts#L56">src/database-context/DatabaseContext.ts:56</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The consumer component for this context.</p>
-						</div>
-						<p>Use it to wrap components that need the database in the usual React
-						consumer way.</p>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="database" class="tsd-anchor"></a>
@@ -198,11 +152,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database-context/DatabaseContext.ts#L41">src/database-context/DatabaseContext.ts:41</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An open <a href="_database_database_.database.html">Database</a> or a promise that will resolve to an one.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>

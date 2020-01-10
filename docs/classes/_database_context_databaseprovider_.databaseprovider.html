@@ -69,47 +69,6 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A React context provider for a <a href="_database_database_.database.html">Database</a>.</p>
-					</div>
-					<p>This will wait for the database to finish opening on mount. Until
-						<a href="_database_context_databasecontext_.databasecontext.html#database">DatabaseContext.database</a> settles, the <a href="_database_context_databasecontext_.databasecontext.html">DatabaseContext</a> will
-					store <code>undefined</code>, the default value.</p>
-					<p><strong>Important!</strong> You will need to ensure the database closes itself if you ever
-						need to change <a href="_database_context_databasecontext_.databasecontext.html#database">DatabaseContext.database</a>, or if you unmount this
-						component. If either of those things happen, this component will <strong>throw an
-						exception</strong>, (unless unmounting after an error). It is therefore recommended
-						that this component is contained within an error boundary that handles
-					exceptions gracefully, probably calling <a href="_database_database_.database.html#close">Database.close</a>.</p>
-					<pre><code class="language-js"><span class="hljs-keyword">const</span> databasePromise = Database.open(<span class="hljs-string">"myDatabaseWithAnError"</span>, <span class="hljs-number">1</span>);
-<span class="hljs-keyword">const</span> DBContext = <span class="hljs-keyword">new</span> DatabaseContext(databasePromise);
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Component</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-  <span class="hljs-keyword">static</span> getDerivedStateFromError(error) {
-    <span class="hljs-keyword">return</span> { error };
-  }
-
-  state = {};
-
-  render() {
-    <span class="hljs-keyword">const</span> { error } = <span class="hljs-keyword">this</span>.state;
-
-    <span class="hljs-keyword">if</span> (error) {
-      <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Something went wrong!<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>
-    }
-
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">DatabaseProvider</span>
-        <span class="hljs-attr">context</span>=<span class="hljs-string">{DBContext}</span>
-      &gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Some content that relies on the database.<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">DatabaseProvider</span>&gt;</span></span>
-  }
-}</code></pre>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -182,7 +141,7 @@
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_database_context_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_database_context_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_database_context_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_database_context_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Database<wbr>Provider<span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_database_context_databaseprovider_.databaseproviderprops.html" class="tsd-signature-type">DatabaseProviderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span>, context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_database_context_databaseprovider_.databaseprovider.html" class="tsd-signature-type">DatabaseProvider</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -207,15 +166,6 @@
 									<li>Defined in node_modules/@types/react/index.d.ts:449</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd></dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/docs/legacy-context.html">https://reactjs.org/docs/legacy-context.html</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -242,23 +192,6 @@
 							<li>Defined in node_modules/@types/react/index.d.ts:447</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>If using the new style context, re-declare this in your class to be the
-								<code>React.ContextType</code> of your <code>static contextType</code>.
-							Should be used with type annotation or static contextType.</p>
-						</div>
-						<pre><code class="language-ts"><span class="hljs-keyword">static</span> contextType = MyContext
-<span class="hljs-comment">// For TS pre-3.7:</span>
-context!: React.ContextType&lt;<span class="hljs-keyword">typeof</span> MyContext&gt;
-<span class="hljs-comment">// For TS 3.7 and above:</span>
-<span class="hljs-keyword">declare</span> context: React.ContextType&lt;<span class="hljs-keyword">typeof</span> MyContext&gt;</code></pre>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p><a href="https://reactjs.org/docs/context.html">https://reactjs.org/docs/context.html</a></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="props" class="tsd-anchor"></a>
@@ -281,13 +214,6 @@ context!: React.ContextType&lt;<span class="hljs-keyword">typeof</span> MyContex
 							<li>Defined in node_modules/@types/react/index.d.ts:478</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>deprecated</dt>
-							<dd><p><a href="https://reactjs.org/docs/refs-and-the-dom.html#legacy-api-string-refs">https://reactjs.org/docs/refs-and-the-dom.html#legacy-api-string-refs</a></p>
-							</dd>
-						</dl>
-					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -307,27 +233,6 @@ context!: React.ContextType&lt;<span class="hljs-keyword">typeof</span> MyContex
 							<li>Defined in node_modules/@types/react/index.d.ts:429</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>If set, <code>this.context</code> will be set at runtime to the current value of the given Context.</p>
-						</div>
-						<p>Usage:</p>
-						<pre><code class="language-ts">type MyContext = number
-const Ctx = React.createContext&lt;MyContext&gt;(0)
-
-class Foo extends React.Component {
-  static contextType = Ctx
-  context!: React.ContextType&lt;typeof Ctx&gt;
-  render () {
-    return &lt;&gt;My context's value: {this.context}&lt;/&gt;;
-  }
-}</code></pre>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p><a href="https://reactjs.org/docs/context.html#classcontexttype">https://reactjs.org/docs/context.html#classcontexttype</a></p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
@@ -346,26 +251,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:660</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called immediately before mounting occurs, and before <code>Component#render</code>.
-									Avoid introducing any side-effects or subscriptions in this method.</p>
-								</div>
-								<p>This method will not stop working in React 17.</p>
-								<p>Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
-								prevents this from being invoked.</p>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>16.3, use componentDidMount or the constructor instead</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#initializing-state">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#initializing-state</a></p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -384,28 +269,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:692</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called when the component may be receiving new props.
-										React may call this even if props have not changed, so be sure to compare new and existing
-									props if you only want to handle changes.</p>
-								</div>
-								<p>Calling <code>Component#setState</code> generally does not trigger this method.</p>
-								<p>This method will not stop working in React 17.</p>
-								<p>Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
-								prevents this from being invoked.</p>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>16.3, use static getDerivedStateFromProps instead</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#updating-state-based-on-props">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#updating-state-based-on-props</a></p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -433,26 +296,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:720</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called immediately before rendering when new props or state is received. Not called for the initial render.</p>
-								</div>
-								<p>Note: You cannot call <code>Component#setState</code> here.</p>
-								<p>This method will not stop working in React 17.</p>
-								<p>Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
-								prevents this from being invoked.</p>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>16.3, use getSnapshotBeforeUpdate instead</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#reading-dom-properties-before-an-update">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#reading-dom-properties-before-an-update</a></p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -483,12 +326,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:589</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Catches exceptions generated in descendant components. Unhandled exceptions will cause
-									the entire component tree to unmount.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -516,25 +353,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:646</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called immediately before mounting occurs, and before <code>Component#render</code>.
-									Avoid introducing any side-effects or subscriptions in this method.</p>
-								</div>
-								<p>Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
-								prevents this from being invoked.</p>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>16.3, use componentDidMount or the constructor instead; will stop working in React 17</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#initializing-state">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#initializing-state</a></p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -553,27 +371,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:675</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called when the component may be receiving new props.
-										React may call this even if props have not changed, so be sure to compare new and existing
-									props if you only want to handle changes.</p>
-								</div>
-								<p>Calling <code>Component#setState</code> generally does not trigger this method.</p>
-								<p>Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
-								prevents this from being invoked.</p>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>16.3, use static getDerivedStateFromProps instead; will stop working in React 17</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#updating-state-based-on-props">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#updating-state-based-on-props</a></p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -601,25 +398,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:705</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called immediately before rendering when new props or state is received. Not called for the initial render.</p>
-								</div>
-								<p>Note: You cannot call <code>Component#setState</code> here.</p>
-								<p>Note: the presence of getSnapshotBeforeUpdate or getDerivedStateFromProps
-								prevents this from being invoked.</p>
-								<dl class="tsd-comment-tags">
-									<dt>deprecated</dt>
-									<dd><p>16.3, use getSnapshotBeforeUpdate instead; will stop working in React 17</p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#reading-dom-properties-before-an-update">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#reading-dom-properties-before-an-update</a></p>
-									</dd>
-									<dt>see</dt>
-									<dd><p><a href="https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path">https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html#gradual-migration-path</a></p>
-									</dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -640,7 +418,7 @@ class Foo extends React.Component {
 					<a name="forceupdate" class="tsd-anchor"></a>
 					<h3>force<wbr>Update</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">force<wbr>Update<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">force<wbr>Update<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -674,15 +452,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:625</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Runs before React applies the result of <code>render</code> to the document, and
-										returns an object to be given to componentDidUpdate. Useful for saving
-									things such as scroll position before <code>render</code> causes changes to it.</p>
-								</div>
-								<p>Note: the presence of getSnapshotBeforeUpdate prevents any of the deprecated
-								lifecycle events from running.</p>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -703,7 +472,7 @@ class Foo extends React.Component {
 					<a name="setstate" class="tsd-anchor"></a>
 					<h3>set<wbr>State</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>State&lt;K&gt;<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span>, callback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>State&lt;K&gt;<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">S</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -746,16 +515,6 @@ class Foo extends React.Component {
 									<li>Defined in node_modules/@types/react/index.d.ts:579</li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Called to determine whether the change in props and state should trigger a re-render.</p>
-								</div>
-								<p><code>Component</code> always returns true.
-									<code>PureComponent</code> implements a shallow comparison on props and state and returns true if any
-								props or states have changed.</p>
-								<p>If false is returned, <code>Component#render</code>, <code>componentWillUpdate</code>
-								and <code>componentDidUpdate</code> will not be called.</p>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>

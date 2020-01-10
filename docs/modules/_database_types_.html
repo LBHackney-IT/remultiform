@@ -114,11 +114,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L21">src/database/types.ts:21</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type <code>T</code> without its inherent primitive prototype properties.</p>
-						</div>
-					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
@@ -135,11 +130,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L139">src/database/types.ts:139</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type of keys for the given store.</p>
-						</div>
-					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
@@ -159,11 +149,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L133">src/database/types.ts:133</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Known store names extracted from the schema.</p>
-						</div>
-					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
@@ -200,11 +185,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L26">src/database/types.ts:26</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type of a possible value in a <a href="../interfaces/_database_types_.storeschema.html">StoreSchema</a>.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter">
 					<a name="storevalue" class="tsd-anchor"></a>
@@ -215,11 +195,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L147">src/database/types.ts:147</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type of values in the given store.</p>
-						</div>
-					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
@@ -239,27 +214,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L202">src/database/types.ts:202</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The type describing the &quot;path&quot; to a deep property of a <a href="_database_types_.html#storevalue">StoreValue</a>.</p>
-						</div>
-						<p>The resulting type is a union of arrays describing all valid &quot;paths&quot; to deep
-						properties.</p>
-						<p>This only goes two levels deep, at the most, including the base level. If
-							your <a href="../interfaces/_database_types_.schema.html">Schema</a> has deeper nesting than that and it needs to connect a
-							<a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> to a deep property, consider refactoring. More than
-							two levels implies a schema of some complexity that will be difficult to
-						maintain.</p>
-						<p>For example</p>
-						<pre><code class="language-ts"><span class="hljs-keyword">type</span> PropertyPath = StoreValuePropertyPath&lt;{
-  a: { b: <span class="hljs-built_in">boolean</span> };
-  z: <span class="hljs-built_in">number</span>;
-}&gt;;</code></pre>
-						<p>is the same as</p>
-						<pre><code class="language-ts"><span class="hljs-keyword">type</span> PropertyPath =
-  | [<span class="hljs-string">"a"</span>] | [<span class="hljs-string">"z"</span>]
-  | [<span class="hljs-string">"a"</span>, <span class="hljs-string">"b"</span>];</code></pre>
-					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
@@ -308,11 +262,6 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L209">src/database/types.ts:209</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A transaction on one or more stores.</p>
-						</div>
-					</div>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
