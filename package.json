@@ -81,7 +81,7 @@
     "ts-jest": "^24.3.0",
     "tslib": "^1.10.0",
     "typedoc": "^0.15.6",
-    "typescript": "^3.7.4",
+    "typescript": "^3.7.5",
     "utility-types": "^3.10.0"
   },
   "husky": {
