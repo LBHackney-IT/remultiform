@@ -19,7 +19,6 @@ import {
   TransactionMode
 } from "../../database/types";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
-
 import { SubmitType } from "../Submit";
 
 /**
@@ -52,7 +51,7 @@ export interface StepProps<
    *
    * This must implement {@link SubmitProps} to function correctly.
    */
-  Submit: SubmitType;
+  submit?: ((nextSlug?: string) => SubmitType) | null;
 
   /**
    * The callback called after the {@link Step} has been submitted, and the
@@ -62,6 +61,10 @@ export interface StepProps<
    * submission.
    */
   afterSubmit?: (() => void) | null;
+  /**
+   * The slug for the next step.
+   */
+  nextSlug?: string | null;
 }
 
 interface StepState<
@@ -90,8 +93,9 @@ export class Step<
     context: PropTypes.instanceOf(DatabaseContext),
     componentWrappers: PropTypes.arrayOf(ComponentWrapper.propType.isRequired)
       .isRequired,
-    Submit: PropTypes.func.isRequired,
-    afterSubmit: PropTypes.func
+    submit: PropTypes.func,
+    afterSubmit: PropTypes.func,
+    nextSlug: PropTypes.string
   };
 
   state: StepState<DBSchema, StoreName> = {
@@ -122,17 +126,19 @@ export class Step<
   }
 
   private renderComponents(database?: Database<DBSchema>): JSX.Element {
-    const { componentWrappers, Submit } = this.props;
-
+    const { componentWrappers, submit, nextSlug } = this.props;
+    const Submit = submit && submit(nullAsUndefined(nextSlug));
     return (
       <>
         {componentWrappers.map(component =>
           this.renderComponent(component, database)
         )}
-        <Submit
-          key="submit"
-          onSubmit={(): Promise<void> => this.handleSubmit(database)}
-        />
+        {Submit && (
+          <Submit
+            key="submit"
+            onSubmit={(): Promise<void> => this.handleSubmit(database)}
+          />
+        )}
       </>
     );
   }

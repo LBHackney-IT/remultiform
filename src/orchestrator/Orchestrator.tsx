@@ -114,14 +114,15 @@ export class Orchestrator<
   render(): JSX.Element {
     const { context, provideDatabase } = this.props;
 
-    const { slug, componentWrappers, Submit } = this.currentStep();
+    const { slug, nextSlug, componentWrappers, submit } = this.currentStep();
 
     const step = (
       <Step
         key={slug}
         context={context}
         componentWrappers={componentWrappers}
-        Submit={Submit}
+        submit={submit}
+        nextSlug={nextSlug}
         afterSubmit={(): void => {
           this.handleSubmit();
         }}

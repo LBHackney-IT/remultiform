@@ -6,6 +6,7 @@ import { NamedSchema } from "../../database/types";
 
 import { SimpleSubmit } from "../components/SimpleSubmit";
 import { TestDynamicComponent } from "../components/TestDynamicComponent";
+import { SubmitType } from "../../step/Submit";
 
 export type DynamicFormSchema = NamedSchema<
   string,
@@ -23,7 +24,9 @@ export const dynamicForm = {
     {
       slug: "test-step-1",
       nextSlug: "test-step-2",
-      Submit: SimpleSubmit,
+      submit(): SubmitType {
+        return SimpleSubmit;
+      },
       componentWrappers: [
         ComponentWrapper.wrapStatic<DynamicFormSchema>(
           new StaticComponent({
@@ -57,7 +60,9 @@ export const dynamicForm = {
     {
       slug: "test-step-2",
       nextSlug: "test-step-1",
-      Submit: SimpleSubmit,
+      submit(): SubmitType {
+        return SimpleSubmit;
+      },
       componentWrappers: [
         ComponentWrapper.wrapStatic<DynamicFormSchema>(
           new StaticComponent({

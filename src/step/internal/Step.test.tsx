@@ -28,6 +28,7 @@ import { DatabaseProvider } from "../../database-context/DatabaseProvider";
 
 import { Step } from "./Step";
 import { Store } from "../../database/Store";
+import { SubmitType } from "../Submit";
 
 jest.mock("../../component-wrapper/ComponentWrapper");
 jest.mock("../../database/Database");
@@ -40,8 +41,9 @@ it("renders correctly with all props", async () => {
     <Step
       context={DBContext}
       componentWrappers={dynamicForm.steps[0].componentWrappers}
-      Submit={SimpleSubmit}
+      submit={(): SubmitType => SimpleSubmit}
       afterSubmit={(): void => {}}
+      nextSlug="/next"
     />
   );
 
@@ -72,10 +74,7 @@ it("renders correctly with all props", async () => {
 
 it("renders correctly without optional props", () => {
   const component = create(
-    <Step
-      componentWrappers={staticForm.steps[0].componentWrappers}
-      Submit={SimpleSubmit}
-    />
+    <Step componentWrappers={staticForm.steps[0].componentWrappers} />
   );
 
   expect(component).toMatchInlineSnapshot(`
@@ -108,12 +107,6 @@ it("renders correctly without optional props", () => {
          
         TestClassComponent
       </div>,
-      <button
-        data-testid="submit"
-        onClick={[Function]}
-      >
-        Next step
-      </button>,
     ]
   `);
 });
@@ -150,7 +143,6 @@ it("only renders components whose `renderWhen` returns `true` or is undefined", 
           })
         )
       ]}
-      Submit={SimpleSubmit}
     />
   );
 
@@ -170,12 +162,6 @@ it("only renders components whose `renderWhen` returns `true` or is undefined", 
          
         div
       </div>,
-      <button
-        data-testid="submit"
-        onClick={[Function]}
-      >
-        Next step
-      </button>,
     ]
   `);
 });
@@ -186,8 +172,9 @@ it("calls the after submit callback after submission", () => {
   const { getByTestId } = render(
     <Step
       componentWrappers={staticForm.steps[0].componentWrappers}
-      Submit={SimpleSubmit}
+      submit={(): SubmitType => SimpleSubmit}
       afterSubmit={afterSubmit}
+      nextSlug="/next"
     />
   );
 
@@ -206,8 +193,9 @@ it("calls the after submit callback after submission when it contains dynamic co
     <Step
       context={DBContext}
       componentWrappers={dynamicForm.steps[0].componentWrappers}
-      Submit={SimpleSubmit}
+      submit={(): SubmitType => SimpleSubmit}
       afterSubmit={afterSubmit}
+      nextSlug="/next"
     />
   );
 
@@ -265,7 +253,8 @@ it("persists data to the database when submitted", async () => {
       <Step
         context={DBContext}
         componentWrappers={wrappers}
-        Submit={SimpleSubmit}
+        submit={(): SubmitType => SimpleSubmit}
+        nextSlug="/next"
       />
     </DatabaseProvider>
   );
@@ -342,7 +331,8 @@ it("deletes the corresponding data from the database when submitted with the emp
       <Step
         context={DBContext}
         componentWrappers={wrappers}
-        Submit={SimpleSubmit}
+        submit={(): SubmitType => SimpleSubmit}
+        nextSlug="/next"
       />
     </DatabaseProvider>
   );
@@ -418,7 +408,8 @@ it("persists child property data to the database when submitted", async () => {
       <Step
         context={DBContext}
         componentWrappers={wrappers}
-        Submit={SimpleSubmit}
+        submit={(): SubmitType => SimpleSubmit}
+        nextSlug="/next"
       />
     </DatabaseProvider>
   );
@@ -500,7 +491,8 @@ it("removes the corresponding child property data from the database when submitt
       <Step
         context={DBContext}
         componentWrappers={wrappers}
-        Submit={SimpleSubmit}
+        submit={(): SubmitType => SimpleSubmit}
+        nextSlug="/next"
       />
     </DatabaseProvider>
   );
