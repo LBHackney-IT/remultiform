@@ -69,6 +69,23 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A component along with the associated properties needed to render it as part
+						of a <a href="../interfaces/_step_stepdefinition_.stepdefinition.html">StepDefinition</a>.</p>
+					</div>
+					<p>If you need your component to interact with a <a href="_database_database_.database.html">Database</a>, use
+					a <a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> instead.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">const</span> myInput = <span class="hljs-keyword">new</span> Component({
+  key: <span class="hljs-string">"my-input"</span>,
+  Component: MyInput,
+  props: {
+    className: <span class="hljs-string">"my-input-class"</span>
+  }
+});</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -162,7 +179,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="props" class="tsd-anchor"></a>
 					<h3>props</h3>
-					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType extends React.ElementType&lt;infer Props&gt; ? Props : __type</span></div>
+					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> Props<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L85">src/component-wrapper/StaticComponent.ts:85</a></li>
@@ -172,7 +189,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="renderwhen" class="tsd-anchor"></a>
 					<h3>render<wbr>When</h3>
-					<div class="tsd-signature tsd-kind-icon">render<wbr>When<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">render<wbr>When<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L88">src/component-wrapper/StaticComponent.ts:88</a></li>
@@ -182,18 +199,18 @@
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>stepValues: <span class="tsd-signature-type">object</span></h5>
+												<h5>stepValues: <span class="tsd-signature-symbol">{}</span></h5>
 												<ul class="tsd-parameters">
 													<li class="tsd-parameter-index-signature">
-														<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+														<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 													</li>
 												</ul>
 											</li>
@@ -208,12 +225,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="proptype" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> prop<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">prop<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_component_wrapper_staticcomponent_.staticcomponent.html" class="tsd-signature-type">StaticComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;PropTypes.exact({key: PropTypes.string.isRequired,Component: (PropTypes.elementType as PropTypes.Requireable&lt;React.ElementType&gt;).isRequired,props: PropTypes.object.isRequired,renderWhen: PropTypes.func.isRequired})</span></div>
+					<div class="tsd-signature tsd-kind-icon">prop<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_component_wrapper_staticcomponent_.staticcomponent.html" class="tsd-signature-type">StaticComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = PropTypes.exact({key: PropTypes.string.isRequired,Component: (PropTypes.elementType as PropTypes.Requireable&lt;React.ElementType&gt;).isRequired,props: PropTypes.object.isRequired,renderWhen: PropTypes.func.isRequired})</span></div>
 					<aside class="tsd-sources">
 						<ul>
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/StaticComponent.ts#L72">src/component-wrapper/StaticComponent.ts:72</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The proptype validator for a <a href="_component_wrapper_staticcomponent_.staticcomponent.html">StaticComponent</a>.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>

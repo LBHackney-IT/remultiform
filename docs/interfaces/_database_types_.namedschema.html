@@ -69,6 +69,34 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The schema for the database, along with the allowed names for databases
+						using that schema.</p>
+					</div>
+					<p>Bear in mind that defining the schema alone won&#39;t set the
+						database up with that schema. It&#39;s used for providing type safety for
+					interacting with the database.</p>
+					<p>Use this interface by providing the generic type parameters, rather than
+					relying on type inference, for best results.</p>
+					<p>See <a href="../classes/_database_database_.database.html#open">Database.open</a> for how to set a database up.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">type</span> MySchema = NamedSchema&lt;
+  <span class="hljs-string">"myDatabase"</span> | <span class="hljs-string">"myOtherDatabase"</span>,
+  <span class="hljs-number">3</span>,
+  {
+    favouriteColour: {
+      key: <span class="hljs-built_in">string</span>;
+      value: {
+        r: <span class="hljs-built_in">number</span>;
+        g: <span class="hljs-built_in">number</span>;
+        b: <span class="hljs-built_in">number</span>;
+      };
+    };
+  }
+&gt;</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -117,6 +145,11 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L117">src/database/types.ts:117</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The database names permitted to use this schema.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="schema" class="tsd-anchor"></a>
@@ -127,6 +160,11 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L127">src/database/types.ts:127</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The database schema.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="versions" class="tsd-anchor"></a>
@@ -137,6 +175,11 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/database/types.ts#L122">src/database/types.ts:122</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The versions of the database this schema represents.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>

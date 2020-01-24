@@ -69,6 +69,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The options for <a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a>.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -82,7 +89,7 @@
 						<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 					<li>
-						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 					<li>
 						<h4>Value<span class="tsd-signature-symbol">: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -132,6 +139,14 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L91">src/component-wrapper/DynamicComponent.ts:91</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The component class or function to render.</p>
+						</div>
+						<p>The component must implement <a href="_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html">DynamicComponentControlledProps</a>
+						in addition to any of its own props.</p>
+						<p>Pass static prop values via <a href="_component_wrapper_dynamiccomponent_.dynamiccomponentoptions.html#props">DynamicComponentOptions.props</a>.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="databasemap" class="tsd-anchor"></a>
@@ -142,6 +157,13 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L125">src/component-wrapper/DynamicComponent.ts:125</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The configuration telling the <a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> how to interface
+							with the <a href="../classes/_database_database_.database.html">Database</a>.</p>
+						</div>
+						<p>See <a href="../classes/_component_wrapper_componentdatabasemap_.componentdatabasemap.html">ComponentDatabaseMap</a> for more details.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="defaultvalue" class="tsd-anchor"></a>
@@ -152,6 +174,13 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L133">src/component-wrapper/DynamicComponent.ts:133</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The value to default to when nothing exists in the provided database store.</p>
+						</div>
+						<p>If this is undefined, it will use whatever the default value for the
+						component is.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="emptyvalue" class="tsd-anchor"></a>
@@ -162,6 +191,13 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L141">src/component-wrapper/DynamicComponent.ts:141</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The value representing an empty value for this component.</p>
+						</div>
+						<p>In order for React to manage a controlled component, the controlled prop
+						must always be defined.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="key" class="tsd-anchor"></a>
@@ -172,6 +208,11 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L81">src/component-wrapper/DynamicComponent.ts:81</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A unique identifier for this component.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="props" class="tsd-anchor"></a>
@@ -182,6 +223,13 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L99">src/component-wrapper/DynamicComponent.ts:99</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The static props to pass to <a href="_component_wrapper_dynamiccomponent_.dynamiccomponentoptions.html#component">DynamicComponentOptions.Component</a>.</p>
+						</div>
+						<p>These should not include the <a href="_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html">DynamicComponentControlledProps</a>, which
+						are injected automatically.</p>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -190,7 +238,7 @@
 					<a name="renderwhen" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> render<wbr>When</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>When<span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">render<wbr>When<span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -199,13 +247,24 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L113">src/component-wrapper/DynamicComponent.ts:113</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A callback to determine when the component should be rendered.</p>
+								</div>
+								<p>If this is not specified, the component will always be rendered.</p>
+								<pre><code class="language-ts"><span class="hljs-keyword">const</span> renderWhen = <span class="hljs-function"><span class="hljs-params">values</span> =&gt;</span> values[<span class="hljs-string">"my-radio-buttons"</span>] === <span class="hljs-string">"Yes"</span></code></pre>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>stepValues: <span class="tsd-signature-type">object</span></h5>
+									<h5>stepValues: <span class="tsd-signature-symbol">{}</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A map of the keys to the current values for all of the
+										components in the currently rendered <a href="_step_stepdefinition_.stepdefinition.html">StepDefinition</a>.</p>
+									</div>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema[&quot;schema&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 										</li>
 									</ul>
 								</li>

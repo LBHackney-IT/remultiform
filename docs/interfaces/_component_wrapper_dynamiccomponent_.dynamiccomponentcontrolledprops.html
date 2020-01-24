@@ -69,6 +69,20 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The proptypes of the extra props injected when rendering the
+						<a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> to connect it to a <a href="../classes/_database_database_.database.html">Database</a>.</p>
+					</div>
+					<p>When implementing a <a href="../classes/_component_wrapper_dynamiccomponent_.dynamiccomponent.html">DynamicComponent</a> you should make sure to
+						hook these props up to the relevant props in the component you&#39;re wrapping in
+					order to integrate with the <a href="../classes/_database_database_.database.html">Database</a> correctly.</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">type</span> MyProps = DynamicComponentControlledProps&lt;<span class="hljs-built_in">string</span>&gt; &amp; {
+  content: <span class="hljs-built_in">string</span>;
+};</code></pre>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
@@ -116,6 +130,16 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L51">src/component-wrapper/DynamicComponent.ts:51</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A flag for whether or not the component is disabled for input.</p>
+						</div>
+						<p>This is set to <code>true</code> when waiting for <a href="../classes/_database_database_.database.html">Database</a> operations to
+							settle. The wrapped component should disable functionality appropriately.
+							If you choose not to handle this prop, be aware that unsaved user entered
+							data may be overwritten when the <a href="../classes/_database_database_.database.html">Database</a> operation does
+						eventually settle.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="value" class="tsd-anchor"></a>
@@ -126,6 +150,14 @@
 							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L30">src/component-wrapper/DynamicComponent.ts:30</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The current value of the component.</p>
+						</div>
+						<p>This should follow the standard
+							<a href="https://reactjs.org/docs/forms.html#controlled-components" class="external">React controlled component</a> pattern with
+						<a href="_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html#onvaluechange">DynamicComponentControlledProps.onValueChange</a>.</p>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -143,6 +175,14 @@
 									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/DynamicComponent.ts#L40">src/component-wrapper/DynamicComponent.ts:40</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The callback to call when the component&#39;s value changes.</p>
+								</div>
+								<p>This should follow the standard
+									<a href="https://reactjs.org/docs/forms.html#controlled-components" class="external">React controlled component</a> pattern with
+								<a href="_component_wrapper_dynamiccomponent_.dynamiccomponentcontrolledprops.html#value">DynamicComponentControlledProps.value</a>.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
