@@ -103,10 +103,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_step_stepdefinition_.stepdefinition.html#submit" class="tsd-kind-icon">Submit</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_step_stepdefinition_.stepdefinition.html#componentwrappers" class="tsd-kind-icon">component<wbr>Wrappers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_step_stepdefinition_.stepdefinition.html#nextslug" class="tsd-kind-icon">next<wbr>Slug</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_step_stepdefinition_.stepdefinition.html#slug" class="tsd-kind-icon">slug</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_step_stepdefinition_.stepdefinition.html#submit" class="tsd-kind-icon">submit</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,29 +115,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="submit" class="tsd-anchor"></a>
-					<h3>Submit</h3>
-					<div class="tsd-signature tsd-kind-icon">Submit<span class="tsd-signature-symbol">:</span> <a href="../modules/_step_submit_.html#submittype" class="tsd-signature-type">SubmitType</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L40">src/step/StepDefinition.ts:40</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A submit button or a similar component to be the main call to action, to
-							persist the data and navigate to the next step.</p>
-						</div>
-						<p>This must implement <a href="_step_submit_.submitprops.html">SubmitProps</a> to function correctly.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="componentwrappers" class="tsd-anchor"></a>
 					<h3>component<wbr>Wrappers</h3>
 					<div class="tsd-signature tsd-kind-icon">component<wbr>Wrappers<span class="tsd-signature-symbol">:</span> <a href="../classes/_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L32">src/step/StepDefinition.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L33">src/step/StepDefinition.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -151,16 +134,17 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="nextslug" class="tsd-anchor"></a>
-					<h3>next<wbr>Slug</h3>
-					<div class="tsd-signature tsd-kind-icon">next<wbr>Slug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> next<wbr>Slug</h3>
+					<div class="tsd-signature tsd-kind-icon">next<wbr>Slug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L45">src/step/StepDefinition.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L49">src/step/StepDefinition.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The slug of the <a href="_step_stepdefinition_.stepdefinition.html">StepDefinition</a> that follows this one.</p>
+							<p>The slug of the <a href="_step_stepdefinition_.stepdefinition.html">StepDefinition</a> that follows this one or a function
+							that returns it based on the current state of the step&#39;s values.</p>
 						</div>
 					</div>
 				</section>
@@ -170,7 +154,7 @@
 					<div class="tsd-signature tsd-kind-icon">slug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L23">src/step/StepDefinition.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L24">src/step/StepDefinition.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -179,6 +163,25 @@
 						</div>
 						<p>This is referenced by <a href="_orchestrator_orchestrator_.orchestratorprops.html#initialslug">OrchestratorProps.initialSlug</a> and
 						<a href="_step_stepdefinition_.stepdefinition.html#nextslug">StepDefinition.nextSlug</a>.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="submit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> submit</h3>
+					<div class="tsd-signature tsd-kind-icon">submit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>nextSlug<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../modules/_step_submit_.html#submittype" class="tsd-signature-type">SubmitType</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/step/StepDefinition.ts#L43">src/step/StepDefinition.ts:43</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An optional function that returns a submit button or a similar component.
+								This should be used for the main call to action, and will persist the data
+							and navigate to the next step when activated.</p>
+						</div>
+						<p>The returned component must implement <a href="_step_submit_.submitprops.html">SubmitProps</a> to function
+						correctly.</p>
 					</div>
 				</section>
 			</section>
@@ -247,9 +250,6 @@
 						<a href="_step_stepdefinition_.stepdefinition.html" class="tsd-kind-icon">Step<wbr>Definition</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_step_stepdefinition_.stepdefinition.html#submit" class="tsd-kind-icon">Submit</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_step_stepdefinition_.stepdefinition.html#componentwrappers" class="tsd-kind-icon">component<wbr>Wrappers</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -257,6 +257,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="_step_stepdefinition_.stepdefinition.html#slug" class="tsd-kind-icon">slug</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_step_stepdefinition_.stepdefinition.html#submit" class="tsd-kind-icon">submit</a>
 							</li>
 						</ul>
 					</li>
