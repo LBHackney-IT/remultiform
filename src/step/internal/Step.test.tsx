@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { render, fireEvent } from "@testing-library/react";
 import React from "react";
-import { create } from "react-test-renderer";
+import { act, create } from "react-test-renderer";
 
 import { SimpleSubmit } from "../../__fixtures__/components/SimpleSubmit";
 import { TestDynamicComponent } from "../../__fixtures__/components/TestDynamicComponent";
@@ -44,6 +44,7 @@ it("renders correctly with all props", async () => {
       submit={(): SubmitType => SimpleSubmit}
       afterSubmit={(): void => {}}
       nextSlug="/next"
+      onNextSlugChange={(): void => {}}
     />
   );
 
@@ -111,6 +112,24 @@ it("renders correctly without optional props", () => {
   `);
 });
 
+it("calls next slug when it's a function", () => {
+  const nextSlugFn = jest.fn();
+
+  act(() => {
+    create(
+      <Step
+        componentWrappers={dynamicForm.steps[0].componentWrappers}
+        nextSlug={nextSlugFn}
+      />
+    );
+  });
+
+  expect(nextSlugFn).toHaveBeenCalledTimes(1);
+  expect(nextSlugFn).toHaveBeenCalledWith({
+    "test-dynamic-component": ""
+  });
+});
+
 it("only renders components whose `renderWhen` returns `true` or is undefined", async () => {
   const database = await Database.open("testDBName", 1);
   const DBContext = new DatabaseContext(database);
@@ -174,13 +193,52 @@ it("calls the after submit callback after submission", () => {
       componentWrappers={staticForm.steps[0].componentWrappers}
       submit={(): SubmitType => SimpleSubmit}
       afterSubmit={afterSubmit}
-      nextSlug="/next"
     />
   );
 
   fireEvent.click(getByTestId("submit"));
 
   expect(afterSubmit).toHaveBeenCalledTimes(1);
+});
+
+it("passes the next slug to the submit function", () => {
+  let nextSlug: string | undefined = undefined;
+
+  act(() => {
+    create(
+      <Step
+        componentWrappers={staticForm.steps[0].componentWrappers}
+        submit={(slug?: string): SubmitType => {
+          nextSlug = slug;
+
+          return SimpleSubmit;
+        }}
+        nextSlug="/next"
+      />
+    );
+  });
+
+  expect(nextSlug).toEqual("/next");
+});
+
+it("passes the result of the next slug callback to the submit function", () => {
+  let nextSlug: string | undefined = undefined;
+
+  act(() => {
+    create(
+      <Step
+        componentWrappers={staticForm.steps[0].componentWrappers}
+        submit={(slug?: string): SubmitType => {
+          nextSlug = slug;
+
+          return SimpleSubmit;
+        }}
+        nextSlug={(): string => "/next"}
+      />
+    );
+  });
+
+  expect(nextSlug).toEqual("/next");
 });
 
 it("calls the after submit callback after submission when it contains dynamic components", async () => {
@@ -254,7 +312,6 @@ it("persists data to the database when submitted", async () => {
         context={DBContext}
         componentWrappers={wrappers}
         submit={(): SubmitType => SimpleSubmit}
-        nextSlug="/next"
       />
     </DatabaseProvider>
   );
@@ -332,7 +389,6 @@ it("deletes the corresponding data from the database when submitted with the emp
         context={DBContext}
         componentWrappers={wrappers}
         submit={(): SubmitType => SimpleSubmit}
-        nextSlug="/next"
       />
     </DatabaseProvider>
   );
@@ -409,7 +465,6 @@ it("persists child property data to the database when submitted", async () => {
         context={DBContext}
         componentWrappers={wrappers}
         submit={(): SubmitType => SimpleSubmit}
-        nextSlug="/next"
       />
     </DatabaseProvider>
   );
@@ -492,7 +547,6 @@ it("removes the corresponding child property data from the database when submitt
         context={DBContext}
         componentWrappers={wrappers}
         submit={(): SubmitType => SimpleSubmit}
-        nextSlug="/next"
       />
     </DatabaseProvider>
   );

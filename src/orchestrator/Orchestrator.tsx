@@ -70,11 +70,12 @@ export interface OrchestratorProps<
    *
    * @param slug - The next {@link StepDefinition.slug}.
    */
-  onNextStep?: ((slug: string) => void) | null;
+  onNextStep?: ((slug?: string) => void) | null;
 }
 
 interface OrchestratorState {
   currentSlug?: string;
+  nextSlug?: string;
 }
 
 /**
@@ -122,9 +123,12 @@ export class Orchestrator<
         context={context}
         componentWrappers={componentWrappers}
         submit={submit}
-        nextSlug={nextSlug}
         afterSubmit={(): void => {
           this.handleSubmit();
+        }}
+        nextSlug={nextSlug}
+        onNextSlugChange={(slug?: string): void => {
+          this.handleNextSlugChange(slug);
         }}
       />
     );
@@ -158,19 +162,25 @@ export class Orchestrator<
     return step;
   }
 
+  private handleNextSlugChange(slug?: string): void {
+    this.setState(state => ({ ...state, nextSlug: slug }));
+  }
+
   private handleSubmit(): void {
     const { steps, manageStepTransitions, onNextStep } = this.props;
-    const { nextSlug } = this.currentStep();
+    const { nextSlug } = this.state;
 
     if (onNextStep) {
       onNextStep(nextSlug);
     }
 
+    this.setState(state => ({ ...state, nextSlug: undefined }));
+
     if (!manageStepTransitions) {
       return;
     }
 
-    if (steps.map(step => step.slug).includes(nextSlug)) {
+    if (nextSlug && steps.map(step => step.slug).includes(nextSlug)) {
       this.setState(state => ({ ...state, currentSlug: nextSlug }));
     } else if (!onNextStep) {
       throw new Error(

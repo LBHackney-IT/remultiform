@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 
+import { ComponentValue } from "../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../component-wrapper/ComponentWrapper";
 import { NamedSchema, Schema, StoreNames } from "../database/types";
 
@@ -32,25 +33,36 @@ export interface StepDefinition<
   componentWrappers: ComponentWrapper<DBSchema, StoreName>[];
 
   /**
-   * A function that returns a submit button or a similar component.
+   * An optional function that returns a submit button or a similar component.
    * This should be used for the main call to action, and will persist the data
    * and navigate to the next step when activated.
    *
    * The returned component must implement {@link SubmitProps} to function
    * correctly.
    */
-  submit(nextSlug?: string): SubmitType;
+  submit?: ((nextSlug?: string) => SubmitType) | null;
 
   /**
-   * The slug of the {@link StepDefinition} that follows this one.
+   * The slug of the {@link StepDefinition} that follows this one or a function
+   * that returns it based on the current state of the step's values.
    */
-  nextSlug: string;
+  nextSlug?:
+    | ((stepValues: {
+        [key: string]:
+          | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+          | undefined;
+      }) => string)
+    | string
+    | null;
 }
 
 export const stepPropType = PropTypes.exact({
   slug: PropTypes.string.isRequired,
   componentWrappers: PropTypes.arrayOf(ComponentWrapper.propType.isRequired)
     .isRequired,
-  submit: PropTypes.func.isRequired,
-  nextSlug: PropTypes.string.isRequired
+  submit: PropTypes.func,
+  nextSlug: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.func.isRequired
+  ])
 });
