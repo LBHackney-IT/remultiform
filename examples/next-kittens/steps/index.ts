@@ -9,7 +9,8 @@ const steps = [
   {
     slug: "small-kitten",
     nextSlug: "big-kitten",
-    Submit: makeSubmit({ href: "/big-kitten", value: "Big kitten" }),
+    submit: (nextSlug): ReturnType<typeof makeSubmit> =>
+      makeSubmit({ href: `/${nextSlug}`, value: "Big kitten" }),
     componentWrappers: [
       ComponentWrapper.wrapStatic(
         new StaticComponent({
@@ -23,7 +24,8 @@ const steps = [
   {
     slug: "big-kitten",
     nextSlug: "small-kitten",
-    Submit: makeSubmit({ href: "/small-kitten", value: "Small kitten" }),
+    submit: (nextSlug): ReturnType<typeof makeSubmit> =>
+      makeSubmit({ href: `/${nextSlug}`, value: "Small kitten" }),
     componentWrappers: [
       ComponentWrapper.wrapStatic(
         new StaticComponent({

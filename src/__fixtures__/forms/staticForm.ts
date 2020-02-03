@@ -1,5 +1,6 @@
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
 import { StaticComponent } from "../../component-wrapper/StaticComponent";
+import { SubmitType } from "../../step/Submit";
 
 import { SimpleSubmit } from "../components/SimpleSubmit";
 import { TestClassComponent } from "../components/TestClassComponent";
@@ -10,7 +11,9 @@ export const staticForm = {
     {
       slug: "test-step-1",
       nextSlug: "test-step-2",
-      Submit: SimpleSubmit,
+      submit(): SubmitType {
+        return SimpleSubmit;
+      },
       componentWrappers: [
         ComponentWrapper.wrapStatic(
           new StaticComponent({
@@ -51,7 +54,9 @@ export const staticForm = {
     {
       slug: "test-step-2",
       nextSlug: "test-step-1",
-      Submit: SimpleSubmit,
+      submit(): SubmitType {
+        return SimpleSubmit;
+      },
       componentWrappers: [
         ComponentWrapper.wrapStatic(
           new StaticComponent({

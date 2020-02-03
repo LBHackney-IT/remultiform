@@ -1,4 +1,4 @@
-import { nullAsUndefined } from "null-as-undefined";
+import { nullAsUndefined, nullValuesAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -19,49 +19,25 @@ import {
   TransactionMode
 } from "../../database/types";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
-
 import { SubmitType } from "../Submit";
 
-/**
- * The proptypes for {@link Step}.
- */
 export interface StepProps<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
-  /**
-   * A context wrapper for a {@link Database} instance.
-   *
-   * You must provide this if any of your components are instances of
-   * {@link DynamicComponent} for them to work as expected.
-   */
   context?: DatabaseContext<DBSchema> | null;
-
-  /**
-   * An ordered array of wrapped components to display.
-   *
-   * Create {@link ComponentWrapper|ComponentWrappers} with
-   * {@link ComponentWrapper.wrapStatic} or
-   * {@link ComponentWrapper.wrapDynamic}.
-   */
   componentWrappers: ComponentWrapper<DBSchema, StoreName>[];
-
-  /**
-   * A submit button or a similar component to be the main call to action, to
-   * persist the data and navigate to the next step.
-   *
-   * This must implement {@link SubmitProps} to function correctly.
-   */
-  Submit: SubmitType;
-
-  /**
-   * The callback called after the {@link Step} has been submitted, and the
-   * {@link Database} transaction has completed.
-   *
-   * Use this to navigate to the next step, or any other after effects to
-   * submission.
-   */
+  submit?: ((nextSlug?: string) => SubmitType) | null;
   afterSubmit?: (() => void) | null;
+  nextSlug?:
+    | ((stepValues: {
+        [key: string]:
+          | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+          | undefined;
+      }) => string)
+    | string
+    | null;
+  onNextSlugChange?: ((nextSlug?: string) => void) | null;
 }
 
 interface StepState<
@@ -73,9 +49,6 @@ interface StepState<
   };
 }
 
-/**
- * A component for rendering a {@link StepDefinition} of a multipage form.
- */
 export class Step<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
@@ -90,8 +63,13 @@ export class Step<
     context: PropTypes.instanceOf(DatabaseContext),
     componentWrappers: PropTypes.arrayOf(ComponentWrapper.propType.isRequired)
       .isRequired,
-    Submit: PropTypes.func.isRequired,
-    afterSubmit: PropTypes.func
+    submit: PropTypes.func,
+    afterSubmit: PropTypes.func,
+    nextSlug: PropTypes.oneOfType([
+      PropTypes.string.isRequired,
+      PropTypes.func.isRequired
+    ]),
+    onNextSlugChange: PropTypes.func
   };
 
   state: StepState<DBSchema, StoreName> = {
@@ -103,6 +81,24 @@ export class Step<
       {} as StepState<DBSchema, StoreName>["componentValues"]
     )
   };
+
+  componentDidMount(): void {
+    const { componentValues } = this.state;
+
+    this.handleNextSlugChange(componentValues);
+  }
+
+  componentDidUpdate(
+    _prevProps: StepProps<DBSchema, StoreName>,
+    prevState: StepState<DBSchema, StoreName>
+  ): void {
+    if (
+      this.nextSlug(this.state.componentValues) !==
+      this.nextSlug(prevState.componentValues)
+    ) {
+      this.handleNextSlugChange(this.state.componentValues);
+    }
+  }
 
   /**
    * @ignore
@@ -122,17 +118,24 @@ export class Step<
   }
 
   private renderComponents(database?: Database<DBSchema>): JSX.Element {
-    const { componentWrappers, Submit } = this.props;
+    const { componentWrappers, submit } = this.props;
+    const { componentValues } = this.state;
+
+    const nextSlug = this.nextSlug(componentValues);
+
+    const Submit = submit && submit(nextSlug);
 
     return (
       <>
         {componentWrappers.map(component =>
           this.renderComponent(component, database)
         )}
-        <Submit
-          key="submit"
-          onSubmit={(): Promise<void> => this.handleSubmit(database)}
-        />
+        {Submit && (
+          <Submit
+            key="submit"
+            onSubmit={(): Promise<void> => this.handleSubmit(database)}
+          />
+        )}
       </>
     );
   }
@@ -152,14 +155,37 @@ export class Step<
     }
   }
 
+  private nextSlug(
+    componentValues: StepState<DBSchema, StoreName>["componentValues"]
+  ): string | undefined {
+    const { nextSlug } = nullValuesAsUndefined(this.props);
+
+    return (
+      nextSlug &&
+      (typeof nextSlug === "string" ? nextSlug : nextSlug(componentValues))
+    );
+  }
+
   private handleChange(
     key: string,
     value: ComponentValue<DBSchema, StoreName>
   ): void {
+    const { componentValues } = this.state;
+
     this.setState(state => ({
       ...state,
-      componentValues: { ...state.componentValues, [key]: value }
+      componentValues: { ...componentValues, [key]: value }
     }));
+  }
+
+  private handleNextSlugChange(
+    componentValues: StepState<DBSchema, StoreName>["componentValues"]
+  ): void {
+    const { onNextSlugChange } = this.props;
+
+    if (onNextSlugChange) {
+      onNextSlugChange(this.nextSlug(componentValues));
+    }
   }
 
   private async handleSubmit(database?: Database<DBSchema>): Promise<void> {
