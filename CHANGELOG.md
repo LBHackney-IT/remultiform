@@ -8,6 +8,11 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Support for steps to navigate to different slugs depending on the state of the
+  step
+
 ### Fixed
 
 - Stopped trying to persist data in `Step`, when the step has no
