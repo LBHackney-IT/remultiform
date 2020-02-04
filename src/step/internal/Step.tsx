@@ -13,6 +13,7 @@ import {
   NamedSchema,
   PickStoreValueProperties,
   Schema,
+  StoreKey,
   StoreNames,
   StoreValue,
   StoreValuePropertyPath,
@@ -201,14 +202,34 @@ export class Step<
     const { componentWrappers, afterSubmit } = this.props;
 
     if (database) {
-      const storeNames = componentWrappers
-        .map(({ databaseMap }) => databaseMap && databaseMap.storeName)
-        .filter(
-          (storeName, index, array) =>
-            storeName &&
-            // Find unique `storeName`s:
-            array.indexOf(storeName) === index
-        ) as StoreName[];
+      const storeNames = [
+        ...componentWrappers.map(({ databaseMap }) => databaseMap?.storeName),
+        ...componentWrappers
+          .map(({ databaseMap }) => {
+            if (!databaseMap) {
+              return undefined;
+            }
+
+            const k = databaseMap.key;
+
+            if (typeof k === "string" || typeof k === "number") {
+              return undefined;
+            }
+
+            return (k as {
+              storeNames?: StoreNames<DBSchema["schema"]>[] | null;
+            }).storeNames;
+          })
+          .reduce(
+            (n, names) => [...n, ...(names || [])],
+            [] as StoreNames<DBSchema["schema"]>[]
+          )
+      ].filter(
+        (storeName, index, array) =>
+          storeName &&
+          // Find unique `storeName`s:
+          array.indexOf(storeName) === index
+      ) as StoreNames<DBSchema["schema"]>[];
 
       if (storeNames.length > 0) {
         await database.transaction(
@@ -225,7 +246,7 @@ export class Step<
   }
 
   private async persistValuesToDatabase(
-    stores: StoreMap<DBSchema["schema"], StoreName[]>
+    stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
   ): Promise<void> {
     const { componentWrappers } = this.props;
     const { componentValues } = this.state;
@@ -233,6 +254,11 @@ export class Step<
     for (const { key, databaseMap, emptyValue } of componentWrappers) {
       if (databaseMap) {
         const { storeName, property } = databaseMap;
+        const storeKey = await databaseMap.getKey(stores);
+
+        if (storeKey === undefined) {
+          continue;
+        }
 
         const store = stores[storeName];
 
@@ -247,7 +273,13 @@ export class Step<
             StoreName
           >;
 
-          await this.persistProperty(store, databaseMap, value, empty);
+          await this.persistProperty(
+            store,
+            databaseMap,
+            storeKey,
+            value,
+            empty
+          );
         } else {
           // If `databaseMap` is defined, then `emptyValue` will also be
           // defined.
@@ -259,24 +291,29 @@ export class Step<
             StoreName
           >;
 
-          await this.persistValue(store, databaseMap, value, empty);
+          await this.persistValue(store, storeKey, value, empty);
         }
       }
     }
   }
 
   private async persistProperty(
-    store: Store<DBSchema["schema"], StoreName[], StoreName>,
+    store: Store<
+      DBSchema["schema"],
+      StoreNames<DBSchema["schema"]>[],
+      StoreName
+    >,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
+    key: StoreKey<DBSchema["schema"], StoreName>,
     propertyValue: ComponentValue<DBSchema, StoreName>,
     emptyValue: ComponentValue<DBSchema, StoreName>
   ): Promise<void> {
-    const { key, property } = databaseMap;
+    const { property } = databaseMap;
 
     if (!property) {
       await this.persistValue(
         store,
-        databaseMap,
+        key,
         propertyValue as StoreValue<DBSchema["schema"], StoreName>,
         emptyValue as StoreValue<DBSchema["schema"], StoreName>
       );
@@ -334,13 +371,15 @@ export class Step<
   }
 
   private async persistValue(
-    store: Store<DBSchema["schema"], StoreName[], StoreName>,
-    databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
+    store: Store<
+      DBSchema["schema"],
+      StoreNames<DBSchema["schema"]>[],
+      StoreName
+    >,
+    key: StoreKey<DBSchema["schema"], StoreName>,
     value: StoreValue<DBSchema["schema"], StoreName>,
     emptyValue: StoreValue<DBSchema["schema"], StoreName>
   ): Promise<void> {
-    const { key } = databaseMap;
-
     if (value === emptyValue) {
       await store.delete(key);
     } else {

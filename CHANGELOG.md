@@ -12,6 +12,7 @@ and this project adheres to
 
 - Support for steps to navigate to different slugs depending on the state of the
   step
+- Support for specifying dynamic keys for `ComponentDatabaseMap`s
 
 ### Changed
 
