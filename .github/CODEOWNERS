@@ -4,17 +4,15 @@
 # repository.
 
 # The default, matching to all changes, overriden by any later rules.
-*             @erbridge @CJWaszczuk
+*             @erbridge @LBHELewis
 
 # Any changes in the root of the repository.
-/*            @erbridge @CJWaszczuk @LBHELewis
+/*            @erbridge @LBHELewis
 
 # Any changes in a directory starting with `.` in the root of the repository.
 /.*/          @LBHackney-IT/mat-developers @LBHELewis
 
-/docs/        @erbridge @CJWaszczuk @LBHELewis
-/docs/adr/    @LBHackney-IT/mat-developers @LBHELewis
-
+/docs/        @LBHackney-IT/mat-developers @LBHELewis
 /src/         @LBHackney-IT/mat-developers @LBHELewis
 /examples/    @LBHackney-IT/mat-developers @LBHELewis
 
