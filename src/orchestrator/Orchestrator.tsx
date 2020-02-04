@@ -91,7 +91,8 @@ export class Orchestrator<
   never
 > {
   static propTypes: PropTypes.ValidationMap<
-    OrchestratorProps<NamedSchema<string, number, Schema>, StoreNames<Schema>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    OrchestratorProps<NamedSchema<string, number, any>, string>
   > = {
     context: PropTypes.instanceOf(DatabaseContext),
     steps: PropTypes.arrayOf(stepPropType.isRequired).isRequired,
@@ -101,7 +102,8 @@ export class Orchestrator<
   };
 
   static defaultProps: Partial<
-    OrchestratorProps<NamedSchema<string, number, Schema>, StoreNames<Schema>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    OrchestratorProps<NamedSchema<string, number, any>, string>
   > = {
     manageStepTransitions: true,
     provideDatabase: true

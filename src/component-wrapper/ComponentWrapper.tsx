@@ -41,15 +41,17 @@ export class ComponentWrapper<
    * The proptype validator for a {@link ComponentWrapper}.
    */
   static readonly propType: PropTypes.Requireable<
-    ComponentWrapper<NamedSchema<string, number, Schema>, StoreNames<Schema>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ComponentWrapper<NamedSchema<string, number, any>, string>
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     renderWhen: PropTypes.func.isRequired,
     databaseMap: PropTypes.instanceOf<
       ComponentDatabaseMap<
-        NamedSchema<string, number, Schema>,
-        StoreNames<Schema>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        NamedSchema<string, number, any>,
+        string
       >
     >(ComponentDatabaseMap),
     defaultValue: PropTypes.any,

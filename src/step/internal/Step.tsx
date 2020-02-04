@@ -58,7 +58,8 @@ export class Step<
   never
 > {
   static propTypes: PropTypes.ValidationMap<
-    StepProps<NamedSchema<string, number, Schema>, StoreNames<Schema>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    StepProps<NamedSchema<string, number, any>, string>
   > = {
     context: PropTypes.instanceOf(DatabaseContext),
     componentWrappers: PropTypes.arrayOf(ComponentWrapper.propType.isRequired)
