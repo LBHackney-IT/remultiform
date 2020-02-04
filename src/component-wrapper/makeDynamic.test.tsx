@@ -16,6 +16,7 @@ it("renders correctly for function components", () => {
 
     inputValue?: string | null;
     onInputValueChange(value: React.ChangeEvent<HTMLInputElement>): void;
+    inputRequired: boolean;
     inputDisabled: boolean;
   }
 
@@ -27,6 +28,7 @@ it("renders correctly for function components", () => {
       type,
       inputValue,
       onInputValueChange,
+      inputRequired,
       inputDisabled
     } = nullValuesAsUndefined(props);
 
@@ -36,6 +38,7 @@ it("renders correctly for function components", () => {
         type={type}
         value={inputValue}
         onChange={onInputValueChange}
+        required={inputRequired}
         disabled={inputDisabled}
       />
     );
@@ -43,13 +46,14 @@ it("renders correctly for function components", () => {
 
   const Component = makeDynamic<
     TestProps,
-    "inputValue" | "onInputValueChange" | "inputDisabled",
+    "inputValue" | "onInputValueChange" | "inputRequired" | "inputDisabled",
     string
   >(
     TestFunctionComponent,
     {
       value: "inputValue",
       onValueChange: "onInputValueChange",
+      required: "inputRequired",
       disabled: "inputDisabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -61,6 +65,7 @@ it("renders correctly for function components", () => {
       type="text"
       value="test value"
       onValueChange={jest.fn()}
+      required={true}
       disabled={true}
     />
   );
@@ -70,6 +75,7 @@ it("renders correctly for function components", () => {
       className="test-class"
       disabled={true}
       onChange={[Function]}
+      required={true}
       type="text"
       value="test value"
     />
@@ -83,6 +89,7 @@ it("renders correctly for class components", () => {
 
     inputValue?: string | null;
     onInputValueChange(value: React.ChangeEvent<HTMLInputElement>): void;
+    inputRequired: boolean;
     inputDisabled: boolean;
   }
 
@@ -93,6 +100,7 @@ it("renders correctly for class components", () => {
         type,
         inputValue,
         onInputValueChange,
+        inputRequired,
         inputDisabled
       } = nullValuesAsUndefined(this.props);
 
@@ -102,6 +110,7 @@ it("renders correctly for class components", () => {
           type={type}
           value={inputValue}
           onChange={onInputValueChange}
+          required={inputRequired}
           disabled={inputDisabled}
         />
       );
@@ -110,13 +119,14 @@ it("renders correctly for class components", () => {
 
   const Component = makeDynamic<
     TestProps,
-    "inputValue" | "onInputValueChange" | "inputDisabled",
+    "inputValue" | "onInputValueChange" | "inputRequired" | "inputDisabled",
     string
   >(
     TestClassComponent,
     {
       value: "inputValue",
       onValueChange: "onInputValueChange",
+      required: "inputRequired",
       disabled: "inputDisabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -128,6 +138,7 @@ it("renders correctly for class components", () => {
       type="text"
       value="test value"
       onValueChange={jest.fn()}
+      required={true}
       disabled={true}
     />
   );
@@ -137,6 +148,7 @@ it("renders correctly for class components", () => {
       className="test-class"
       disabled={true}
       onChange={[Function]}
+      required={true}
       type="text"
       value="test value"
     />
@@ -146,13 +158,14 @@ it("renders correctly for class components", () => {
 it("creates a component with a sensible display name when the original component is an intrinsic element", () => {
   const Component = makeDynamic<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "value" | "onChange" | "disabled",
+    "value" | "onChange" | "required" | "disabled",
     string
   >(
     "input",
     {
       value: "value",
       onValueChange: "onChange",
+      required: "required",
       disabled: "disabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -168,6 +181,7 @@ it("creates a component with a sensible display name when the original component
 
     inputValue?: string | null;
     onInputValueChange(value: React.ChangeEvent<HTMLInputElement>): void;
+    inputRequired: boolean;
     inputDisabled: boolean;
   }
 
@@ -179,6 +193,7 @@ it("creates a component with a sensible display name when the original component
       type,
       inputValue,
       onInputValueChange,
+      inputRequired,
       inputDisabled
     } = nullValuesAsUndefined(props);
 
@@ -188,6 +203,7 @@ it("creates a component with a sensible display name when the original component
         type={type}
         value={inputValue}
         onChange={onInputValueChange}
+        required={inputRequired}
         disabled={inputDisabled}
       />
     );
@@ -195,13 +211,14 @@ it("creates a component with a sensible display name when the original component
 
   const Component = makeDynamic<
     TestProps,
-    "inputValue" | "onInputValueChange" | "inputDisabled",
+    "inputValue" | "onInputValueChange" | "inputRequired" | "inputDisabled",
     string
   >(
     TestFunctionComponent,
     {
       value: "inputValue",
       onValueChange: "onInputValueChange",
+      required: "inputRequired",
       disabled: "inputDisabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -217,6 +234,7 @@ it("creates a component with a sensible display name when the original component
 
     inputValue?: string | null;
     onInputValueChange(value: React.ChangeEvent<HTMLInputElement>): void;
+    inputRequired: boolean;
     inputDisabled: boolean;
   }
 
@@ -227,6 +245,7 @@ it("creates a component with a sensible display name when the original component
         type,
         inputValue,
         onInputValueChange,
+        inputRequired,
         inputDisabled
       } = nullValuesAsUndefined(this.props);
 
@@ -236,6 +255,7 @@ it("creates a component with a sensible display name when the original component
           type={type}
           value={inputValue}
           onChange={onInputValueChange}
+          required={inputRequired}
           disabled={inputDisabled}
         />
       );
@@ -244,13 +264,14 @@ it("creates a component with a sensible display name when the original component
 
   const Component = makeDynamic<
     TestProps,
-    "inputValue" | "onInputValueChange" | "inputDisabled",
+    "inputValue" | "onInputValueChange" | "inputRequired" | "inputDisabled",
     string
   >(
     TestClassComponent,
     {
       value: "inputValue",
       onValueChange: "onInputValueChange",
+      required: "inputRequired",
       disabled: "inputDisabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -262,13 +283,14 @@ it("creates a component with a sensible display name when the original component
 it("creates a component with the correct proptypes when the original component is an intrinsic element", () => {
   const Component = makeDynamic<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "value" | "onChange" | "disabled",
+    "value" | "onChange" | "required" | "disabled",
     string
   >(
     "input",
     {
       value: "value",
       onValueChange: "onChange",
+      required: "required",
       disabled: "disabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -286,6 +308,7 @@ it("creates a component with the correct proptypes when the original component h
 
     inputValue?: string | null;
     onInputValueChange(value: React.ChangeEvent<HTMLInputElement>): void;
+    inputRequired: boolean;
     inputDisabled: boolean;
   }
 
@@ -297,6 +320,7 @@ it("creates a component with the correct proptypes when the original component h
       type,
       inputValue,
       onInputValueChange,
+      inputRequired,
       inputDisabled
     } = nullValuesAsUndefined(props);
 
@@ -306,6 +330,7 @@ it("creates a component with the correct proptypes when the original component h
         type={type}
         value={inputValue}
         onChange={onInputValueChange}
+        required={inputRequired}
         disabled={inputDisabled}
       />
     );
@@ -313,13 +338,14 @@ it("creates a component with the correct proptypes when the original component h
 
   const Component = makeDynamic<
     TestProps,
-    "inputValue" | "onInputValueChange" | "inputDisabled",
+    "inputValue" | "onInputValueChange" | "inputRequired" | "inputDisabled",
     string
   >(
     TestFunctionComponent,
     {
       value: "inputValue",
       onValueChange: "onInputValueChange",
+      required: "inputRequired",
       disabled: "inputDisabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -337,6 +363,7 @@ it("creates a component with the correct proptypes when the original component h
 
     inputValue?: string | null;
     onInputValueChange(value: React.ChangeEvent<HTMLInputElement>): void;
+    inputRequired: boolean;
     inputDisabled: boolean;
   }
 
@@ -348,6 +375,7 @@ it("creates a component with the correct proptypes when the original component h
       type,
       inputValue,
       onInputValueChange,
+      inputRequired,
       inputDisabled
     } = nullValuesAsUndefined(props);
 
@@ -357,6 +385,7 @@ it("creates a component with the correct proptypes when the original component h
         type={type}
         value={inputValue}
         onChange={onInputValueChange}
+        required={inputRequired}
         disabled={inputDisabled}
       />
     );
@@ -367,18 +396,20 @@ it("creates a component with the correct proptypes when the original component h
     type: PropTypes.oneOf<"text">(["text"]).isRequired,
     inputValue: PropTypes.string,
     onInputValueChange: PropTypes.func.isRequired,
+    inputRequired: PropTypes.bool.isRequired,
     inputDisabled: PropTypes.bool.isRequired
   };
 
   const Component = makeDynamic<
     TestProps,
-    "inputValue" | "onInputValueChange" | "inputDisabled",
+    "inputValue" | "onInputValueChange" | "inputRequired" | "inputDisabled",
     string
   >(
     TestFunctionComponent,
     {
       value: "inputValue",
       onValueChange: "onInputValueChange",
+      required: "inputRequired",
       disabled: "inputDisabled"
     },
     (event: React.ChangeEvent<HTMLInputElement>) => event.target.value
@@ -393,6 +424,7 @@ it("creates a component with the correct proptypes when the original component h
       type: "text",
       value: "value",
       onValueChange: () => {},
+      required: true,
       disabled: true
     },
     "prop",
@@ -408,6 +440,7 @@ it("creates a component with the correct proptypes when the original component h
       type: "not-text",
       value: 1,
       onValueChange: "on-change",
+      required: "required",
       disabled: "disabled"
     },
     "prop",
@@ -427,6 +460,9 @@ it("creates a component with the correct proptypes when the original component h
       ],
       Array [
         "Warning: Failed prop type: Invalid prop \`onValueChange\` of type \`string\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`function\`.",
+      ],
+      Array [
+        "Warning: Failed prop type: Invalid prop \`required\` of type \`string\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`boolean\`.",
       ],
       Array [
         "Warning: Failed prop type: Invalid prop \`disabled\` of type \`string\` supplied to \`makeDynamic(TestFunctionComponent)\`, expected \`boolean\`.",

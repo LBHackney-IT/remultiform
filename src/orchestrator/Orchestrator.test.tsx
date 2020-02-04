@@ -32,6 +32,7 @@ it("renders correctly with all props", async () => {
       manageStepTransitions={false}
       provideDatabase={false}
       onNextStep={(): void => {}}
+      onIncompleteStep={(): void => {}}
     />
   );
 

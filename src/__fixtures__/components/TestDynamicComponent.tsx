@@ -15,7 +15,7 @@ export type TestDynamicComponentProps = DynamicComponentControlledProps<
 export const TestDynamicComponent: React.FunctionComponent<TestDynamicComponentProps> = (
   props: TestDynamicComponentProps
 ): JSX.Element => {
-  const { content, value, onValueChange, disabled } = props;
+  const { content, value, onValueChange, required, disabled } = props;
 
   return (
     <div>
@@ -26,6 +26,7 @@ export const TestDynamicComponent: React.FunctionComponent<TestDynamicComponentP
         onChange={(event: React.ChangeEvent<HTMLInputElement>): void => {
           onValueChange(event.target.value);
         }}
+        required={required}
         disabled={disabled}
       />
     </div>

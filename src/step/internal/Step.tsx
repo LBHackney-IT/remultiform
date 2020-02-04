@@ -34,6 +34,7 @@ export interface StepProps<
   >[];
   submit?: ((nextSlug?: string) => SubmitType) | null;
   afterSubmit?: (() => void) | null;
+  onIncompleteSubmit?: ((keysMissingValues?: string[]) => void) | null;
   nextSlug?:
     | ((stepValues: {
         [key: string]:
@@ -155,11 +156,13 @@ export class Step<
     database?: Database<DBSchema>
   ): void | JSX.Element {
     const { componentValues } = this.state;
-    const { key, render, renderWhen } = component;
+    const { key, render, renderWhen, required } = component;
 
     if (renderWhen(componentValues)) {
       return render({
         database,
+        required:
+          typeof required === "boolean" ? required : required(componentValues),
         onChange: value => this.handleChange(key, value)
       });
     }
@@ -199,7 +202,33 @@ export class Step<
   }
 
   private async handleSubmit(database?: Database<DBSchema>): Promise<void> {
-    const { componentWrappers, afterSubmit } = this.props;
+    const { componentWrappers, afterSubmit, onIncompleteSubmit } = this.props;
+    const { componentValues } = this.state;
+
+    const keysMissingValues = componentWrappers
+      .map(({ key, renderWhen, emptyValue, required }) => {
+        if (
+          renderWhen(componentValues) &&
+          required &&
+          (required === true || required(componentValues))
+        ) {
+          return componentValues[key] === undefined ||
+            componentValues[key] === emptyValue
+            ? key
+            : undefined;
+        }
+
+        return undefined;
+      })
+      .filter(Boolean) as string[];
+
+    if (keysMissingValues.length > 0) {
+      if (onIncompleteSubmit) {
+        onIncompleteSubmit(keysMissingValues);
+      }
+
+      return;
+    }
 
     if (database) {
       const storeNames = [

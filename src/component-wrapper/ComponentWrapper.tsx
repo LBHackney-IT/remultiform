@@ -19,6 +19,7 @@ export interface ComponentWrapperRenderProps<
   Value extends ComponentValue<DBSchema, StoreName>
 > {
   database?: Database<DBSchema>;
+  required?: boolean;
   onChange(value: Value): void;
 }
 
@@ -57,7 +58,11 @@ export class ComponentWrapper<
       >
     >(ComponentDatabaseMap),
     defaultValue: PropTypes.any,
-    emptyValue: PropTypes.any
+    emptyValue: PropTypes.any,
+    required: PropTypes.oneOfType([
+      PropTypes.func.isRequired,
+      PropTypes.bool.isRequired
+    ]).isRequired
   });
 
   /**
@@ -110,13 +115,19 @@ export class ComponentWrapper<
       renderWhen,
       databaseMap,
       defaultValue,
-      emptyValue
+      emptyValue,
+      required
     } = component;
 
     const render = (
       props: ComponentWrapperRenderProps<DBSchema, StoreName, Value>
     ): JSX.Element => (
-      <WrappedComponent key={key} component={component} {...props} />
+      <WrappedComponent
+        key={key}
+        component={component}
+        required={false}
+        {...props}
+      />
     );
 
     return new ComponentWrapper(
@@ -125,7 +136,8 @@ export class ComponentWrapper<
       renderWhen,
       databaseMap,
       defaultValue,
-      emptyValue
+      emptyValue,
+      required
     );
   }
 
@@ -165,10 +177,24 @@ export class ComponentWrapper<
   /**
    * The value to consider as an empty input when updating the {@link Database}.
    *
-   * If {@link ComponentWrapper.databaseMap} is defined, then willd also be
+   * If {@link ComponentWrapper.databaseMap} is defined, then this will also be
    * defined.
    */
   readonly emptyValue?: Value | null;
+
+  /**
+   * Whether or not to require an answer to this component if it is visible.
+   *
+   * This will be ignored unless {@link ComponentWrapper.databaseMap} is
+   * defined.
+   */
+  readonly required:
+    | ((stepValues: {
+        [key: string]:
+          | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+          | undefined;
+      }) => boolean)
+    | boolean;
 
   /**
    * Do not use this directly. Use {@link ComponentWrapper.wrapStatic} or
@@ -189,7 +215,14 @@ export class ComponentWrapper<
     }) => boolean,
     databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
     defaultValue?: Value | null,
-    emptyValue?: Value | null
+    emptyValue?: Value | null,
+    required?:
+      | ((stepValues: {
+          [key: string]:
+            | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+            | undefined;
+        }) => boolean)
+      | boolean
   ) {
     this.key = key;
     this.render = render;
@@ -197,5 +230,7 @@ export class ComponentWrapper<
     this.databaseMap = databaseMap;
     this.defaultValue = defaultValue;
     this.emptyValue = emptyValue;
+
+    this.required = required === undefined ? false : required;
   }
 }

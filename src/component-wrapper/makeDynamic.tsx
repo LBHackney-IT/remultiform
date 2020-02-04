@@ -35,6 +35,11 @@ export interface MakeDynamicPropMap<PropsToMap> {
   onValueChange: keyof PropsToMap & string;
 
   /**
+   * The name of the prop on the wrapped component to map `required` to.
+   */
+  required: keyof PropsToMap & string;
+
+  /**
    * The name of the prop on the wrapped component to map `disabled` to.
    */
   disabled: keyof PropsToMap & string;
@@ -63,7 +68,7 @@ const mapDynamicPropsToComponentProps = <
   dynamicProps: Readonly<
     Subtract<Props, PropsToMap> & DynamicComponentControlledProps<Value>
   >,
-  { value, onValueChange, disabled }: MakeDynamicPropMap<PropsToMap>,
+  { value, onValueChange, required, disabled }: MakeDynamicPropMap<PropsToMap>,
   valueChangeAdapter: MakeDynamicValueChangeAdapter<Value>
 ): Props => {
   const copyOfDynamicProps = {
@@ -73,6 +78,7 @@ const mapDynamicPropsToComponentProps = <
 
   delete copyOfDynamicProps.value;
   delete copyOfDynamicProps.onValueChange;
+  delete copyOfDynamicProps.required;
   delete copyOfDynamicProps.disabled;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,6 +92,7 @@ const mapDynamicPropsToComponentProps = <
     ...copyOfDynamicProps,
     [value]: dynamicProps.value,
     [onValueChange]: handleValueChange,
+    [required]: dynamicProps.required,
     [disabled]: dynamicProps.disabled
   } as Props;
 };
@@ -96,7 +103,7 @@ const mapComponentPropTypesToDynamicPropTypes = <
   Value
 >(
   componentPropTypes: Readonly<React.WeakValidationMap<Props>> | undefined,
-  { value, onValueChange, disabled }: MakeDynamicPropMap<PropsToMap>
+  { value, onValueChange, required, disabled }: MakeDynamicPropMap<PropsToMap>
 ): React.WeakValidationMap<Subtract<Props, PropsToMap> &
   DynamicComponentControlledProps<Value>> => {
   const copyOfComponentPropTypes = {
@@ -107,6 +114,7 @@ const mapComponentPropTypesToDynamicPropTypes = <
 
   delete copyOfComponentPropTypes[value];
   delete copyOfComponentPropTypes[onValueChange];
+  delete copyOfComponentPropTypes[required];
   delete copyOfComponentPropTypes[disabled];
 
   const valuePropType = componentPropTypes

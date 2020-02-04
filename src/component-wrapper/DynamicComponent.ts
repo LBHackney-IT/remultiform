@@ -40,6 +40,11 @@ export interface DynamicComponentControlledProps<Value> {
   onValueChange(value: Value): void;
 
   /**
+   * A flag for whether or not the component is required.
+   */
+  required: boolean;
+
+  /**
    * A flag for whether or not the component is disabled for input.
    *
    * This is set to `true` when waiting for {@link Database} operations to
@@ -138,6 +143,17 @@ export interface DynamicComponentOptions<
    * must always be defined.
    */
   emptyValue: Value;
+
+  /**
+   * Whether or not to require an answer to this component if it is visible.
+   */
+  required?:
+    | ((stepValues: {
+        [key: string]:
+          | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+          | undefined;
+      }) => boolean)
+    | boolean;
 }
 
 /**
@@ -200,7 +216,8 @@ export class DynamicComponent<
     renderWhen: PropTypes.func.isRequired,
     databaseMap: ComponentDatabaseMap.propType.isRequired,
     defaultValue: PropTypes.any,
-    emptyValue: PropTypes.any.isRequired
+    emptyValue: PropTypes.any.isRequired,
+    required: PropTypes.bool.isRequired
   });
 
   /**
@@ -219,6 +236,7 @@ export class DynamicComponent<
     return {
       value: valuePropType,
       onValueChange: PropTypes.func.isRequired,
+      required: PropTypes.bool.isRequired,
       disabled: PropTypes.bool.isRequired
     };
   }
@@ -234,6 +252,13 @@ export class DynamicComponent<
   readonly databaseMap: ComponentDatabaseMap<DBSchema, StoreName>;
   readonly defaultValue: Value | null | undefined;
   readonly emptyValue: Value;
+  readonly required:
+    | ((stepValues: {
+        [key: string]:
+          | ComponentValue<DBSchema, StoreNames<DBSchema["schema"]>>
+          | undefined;
+      }) => boolean)
+    | boolean;
 
   constructor(
     options: DynamicComponentOptions<Props, DBSchema, StoreName, Value>
@@ -245,7 +270,8 @@ export class DynamicComponent<
       renderWhen,
       databaseMap,
       defaultValue,
-      emptyValue
+      emptyValue,
+      required
     } = options;
 
     this.key = key;
@@ -257,5 +283,6 @@ export class DynamicComponent<
 
     this.renderWhen =
       renderWhen === undefined ? (): boolean => true : renderWhen;
+    this.required = required === undefined ? false : required;
   }
 }
