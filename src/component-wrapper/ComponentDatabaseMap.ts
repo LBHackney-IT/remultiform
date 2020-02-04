@@ -7,26 +7,23 @@ import {
   StoreKey,
   StoreNames,
   StoreValue,
-  StoreValuePropertyPath
+  StoreValuePropertyPath,
+  StoreValuePropertyPathLevelOne,
+  StoreValuePropertyPathLevelTwo
 } from "../database/types";
 
 // Value["a"]
-// This follows the same pattern as `StoreValuePropertyPathLevelOne`.
 type ComponentValueLevelOne<Value> = {
-  [K in keyof Value]: Value[K];
-}[keyof Value];
+  [K in StoreValuePropertyPathLevelOne<Value>[0]]: Value[K];
+}[StoreValuePropertyPathLevelOne<Value>[0]];
 
 // Value["a"]["b"]
-// This follows the same pattern as `StoreValuePropertyPathLevelTwo`.
 type ComponentValueLevelTwo<Value> = {
-  [K in keyof Value]: keyof PickStoreValueProperties<
-    NonNullable<Value[K]>
-  > extends never // If `Value[K]` is a primitive...
-    ? never // ...ignore it...
-    : PickStoreValueProperties<
-        NonNullable<Value[K]>
-      >[keyof PickStoreValueProperties<NonNullable<Value[K]>>]; // ...otherwise, include its children.
-}[keyof Value];
+  [K in StoreValuePropertyPathLevelTwo<Value>[0]]: {
+    [J in StoreValuePropertyPathLevelTwo<Value>[1] &
+      keyof Value[K]]: Value[K][J];
+  }[StoreValuePropertyPathLevelTwo<Value>[1] & keyof Value[K]];
+}[StoreValuePropertyPathLevelTwo<Value>[0]];
 
 /**
  * The possible values a {@link ComponentDatabaseMap} could map to.

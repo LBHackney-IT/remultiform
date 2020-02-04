@@ -98,6 +98,7 @@ export class Orchestrator<
     steps: PropTypes.arrayOf(stepPropType.isRequired).isRequired,
     initialSlug: PropTypes.string,
     manageStepTransitions: PropTypes.bool,
+    provideDatabase: PropTypes.bool,
     onNextStep: PropTypes.func
   };
 

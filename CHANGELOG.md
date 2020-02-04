@@ -13,6 +13,10 @@ and this project adheres to
 - Support for steps to navigate to different slugs depending on the state of the
   step
 
+### Changed
+
+- Simplifed some generic types
+
 ### Fixed
 
 - Stopped trying to persist data in `Step`, when the step has no

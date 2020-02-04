@@ -26,7 +26,11 @@ export interface StepProps<
   StoreName extends StoreNames<DBSchema["schema"]>
 > {
   context?: DatabaseContext<DBSchema> | null;
-  componentWrappers: ComponentWrapper<DBSchema, StoreName>[];
+  componentWrappers: ComponentWrapper<
+    DBSchema,
+    StoreName,
+    ComponentValue<DBSchema, StoreName>
+  >[];
   submit?: ((nextSlug?: string) => SubmitType) | null;
   afterSubmit?: (() => void) | null;
   nextSlug?:
@@ -142,7 +146,11 @@ export class Step<
   }
 
   private renderComponent(
-    component: ComponentWrapper<DBSchema, StoreName>,
+    component: ComponentWrapper<
+      DBSchema,
+      StoreName,
+      ComponentValue<DBSchema, StoreName>
+    >,
     database?: Database<DBSchema>
   ): void | JSX.Element {
     const { componentValues } = this.state;

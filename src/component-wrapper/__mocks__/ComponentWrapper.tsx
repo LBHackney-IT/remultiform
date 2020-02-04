@@ -4,7 +4,7 @@ import { Database } from "../../database/Database";
 import { NamedSchema, Schema, StoreNames } from "../../database/types";
 
 import { ComponentDatabaseMap, ComponentValue } from "../ComponentDatabaseMap";
-import { DynamicComponentType, DynamicComponent } from "../DynamicComponent";
+import { DynamicComponent } from "../DynamicComponent";
 import { StaticComponent } from "../StaticComponent";
 
 const { ComponentWrapper: ActualComponentWrapper } = jest.requireActual(
@@ -25,9 +25,14 @@ export class ComponentWrapper<
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>
 > extends ActualComponentWrapper<DBSchema, StoreName> {
-  static wrapStatic<DBSchema extends NamedSchema<string, number, Schema>>(
+  static wrapStatic<
+    DBSchema extends NamedSchema<string, number, Schema>,
+    StoreName extends StoreNames<DBSchema["schema"]> = StoreNames<
+      DBSchema["schema"]
+    >
+  >(
     component: StaticComponent<React.ElementType, DBSchema>
-  ): ComponentWrapper<DBSchema, StoreNames<DBSchema["schema"]>> {
+  ): ComponentWrapper<DBSchema, StoreName> {
     const { key, Component, renderWhen } = component;
 
     return new ComponentWrapper(
@@ -45,18 +50,12 @@ export class ComponentWrapper<
   }
 
   static wrapDynamic<
-    Props,
+    Props extends {},
     DBSchema extends NamedSchema<string, number, Schema>,
     StoreName extends StoreNames<DBSchema["schema"]>,
     Value extends ComponentValue<DBSchema, StoreName>
   >(
-    component: DynamicComponent<
-      DynamicComponentType<Props, Value>,
-      Props,
-      DBSchema,
-      StoreName,
-      Value
-    >
+    component: DynamicComponent<Props, DBSchema, StoreName, Value>
   ): ComponentWrapper<DBSchema, StoreName> {
     const {
       key,
