@@ -241,27 +241,33 @@ export class WrappedComponent<
       return undefined;
     }
 
-    let value = storedValue as ComponentValue<DBSchema, StoreName>;
+    let value = storedValue as ComponentValue<DBSchema, StoreName> | undefined;
 
     if (property) {
-      if (property.length > 0) {
-        const k = property[0] as StoreValuePropertyPathLevelOne<
-          ComponentValue<DBSchema, StoreName>
-        >[0];
-
-        value = value[k] as ComponentValue<DBSchema, StoreName>;
+      if (value === undefined) {
+        value = {};
       }
 
+      const k = property[0] as StoreValuePropertyPathLevelOne<
+        ComponentValue<DBSchema, StoreName>
+      >[0];
+
+      value = value[k] as ComponentValue<DBSchema, StoreName>;
+
       if (property.length > 1) {
-        const k = property[1] as StoreValuePropertyPathLevelTwo<
+        if (value === undefined) {
+          value = {};
+        }
+
+        const j = property[1] as StoreValuePropertyPathLevelTwo<
           ComponentValue<DBSchema, StoreName>
         >[1];
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        value = (value as any)[k] as ComponentValue<DBSchema, StoreName>;
+        value = (value as any)[j] as ComponentValue<DBSchema, StoreName>;
       }
     }
 
-    return value as Value;
+    return value as Value | undefined;
   }
 }
