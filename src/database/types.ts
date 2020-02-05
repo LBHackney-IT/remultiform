@@ -149,15 +149,19 @@ export type StoreValue<
   StoreName extends StoreNames<DBSchema>
 > = DBSchema[StoreName]["value"];
 
+/**
+ * @ignore
+ */
 // ["a"] | ["z"]
-// This follows the same pattern as `ComponentValueLevelOne`.
-type StoreValuePropertyPathLevelOne<Value extends {}> = {
+export type StoreValuePropertyPathLevelOne<Value extends {}> = {
   [K in keyof PickStoreValueProperties<Value>]: [K];
 }[keyof PickStoreValueProperties<Value>];
 
+/**
+ * @ignore
+ */
 // ["a", "b"] | ["z", "y"]
-// This follows the same pattern as `ComponentValueLevelTwo`.
-type StoreValuePropertyPathLevelTwo<Value extends {}> = {
+export type StoreValuePropertyPathLevelTwo<Value extends {}> = {
   [K in keyof PickStoreValueProperties<Value>]: keyof PickStoreValueProperties<
     NonNullable<PickStoreValueProperties<Value>[K]>
   > extends never // If `Value[K]` is a primitive...

@@ -61,7 +61,7 @@ export interface DynamicComponentControlledProps<Value> {
  * @typeparam Value - The {@link ComponentValue} of the value or value property
  * this component represents in the {@link Database}.
  */
-export type DynamicComponentType<Props, Value> = React.ComponentType<
+export type DynamicComponentType<Props extends {}, Value> = React.ComponentType<
   Props & DynamicComponentControlledProps<Value>
 >;
 
@@ -69,8 +69,7 @@ export type DynamicComponentType<Props, Value> = React.ComponentType<
  * The options for {@link DynamicComponent}.
  */
 export interface DynamicComponentOptions<
-  ComponentType extends DynamicComponentType<Props, Value>,
-  Props,
+  Props extends {},
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>,
   Value extends ComponentValue<DBSchema, StoreName>
@@ -88,7 +87,7 @@ export interface DynamicComponentOptions<
    *
    * Pass static prop values via {@link DynamicComponentOptions.props}.
    */
-  Component: ComponentType;
+  Component: DynamicComponentType<Props, Value>;
 
   /**
    * The static props to pass to {@link DynamicComponentOptions.Component}.
@@ -177,8 +176,7 @@ export interface DynamicComponentOptions<
  * ```
  */
 export class DynamicComponent<
-  ComponentType extends DynamicComponentType<Props, Value>,
-  Props,
+  Props extends {},
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>,
   Value extends ComponentValue<DBSchema, StoreName>
@@ -188,19 +186,12 @@ export class DynamicComponent<
    */
   static propType: PropTypes.Requireable<
     DynamicComponent<
-      DynamicComponentType<
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        any,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ComponentValue<NamedSchema<string, number, any>, string>
-      >,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      any,
+      {},
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       NamedSchema<string, number, any>,
       string,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ComponentValue<NamedSchema<string, number, any>, string>
+      any
     >
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
@@ -233,7 +224,7 @@ export class DynamicComponent<
   }
 
   readonly key: string;
-  readonly Component: ComponentType;
+  readonly Component: DynamicComponentType<Props, Value>;
   readonly props: Props;
   readonly renderWhen: (stepValues: {
     [key: string]:
@@ -245,13 +236,7 @@ export class DynamicComponent<
   readonly emptyValue: Value;
 
   constructor(
-    options: DynamicComponentOptions<
-      ComponentType,
-      Props,
-      DBSchema,
-      StoreName,
-      Value
-    >
+    options: DynamicComponentOptions<Props, DBSchema, StoreName, Value>
   ) {
     const {
       key,

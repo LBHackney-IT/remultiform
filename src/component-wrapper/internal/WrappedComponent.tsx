@@ -3,44 +3,29 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { Database } from "../../database/Database";
-import { NamedSchema, Schema, StoreNames } from "../../database/types";
+import {
+  NamedSchema,
+  Schema,
+  StoreNames,
+  StoreValuePropertyPathLevelTwo,
+  StoreValuePropertyPathLevelOne
+} from "../../database/types";
 
 import { ComponentDatabaseMap, ComponentValue } from "../ComponentDatabaseMap";
 import {
   DynamicComponent,
-  DynamicComponentControlledProps,
-  DynamicComponentType
+  DynamicComponentControlledProps
 } from "../DynamicComponent";
 
-/**
- * The proptypes for {@link WrappedComponent}.
- */
 export interface WrappedComponentProps<
-  Props,
+  Props extends {},
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>,
   Value extends ComponentValue<DBSchema, StoreName>
 > {
-  /**
-   * An open {@link Database}.
-   *
-   * This is usually provided by a {@link DatabaseContext.Consumer} and is
-   * optional to allow waiting for {@link Database.open} to settle.
-   */
-  database?: Database<DBSchema> | null;
-
-  /**
-   * The {@link DynamicComponent} to wrap.
-   */
-  component: DynamicComponent<
-    DynamicComponentType<Props, Value>,
-    Props,
-    DBSchema,
-    StoreName,
-    Value
-  >;
-
+  component: DynamicComponent<Props, DBSchema, StoreName, Value>;
   onChange?: ((value: Value) => void) | null;
+  database?: Database<DBSchema> | null;
 }
 
 interface WrappedComponentState<
@@ -68,7 +53,7 @@ interface WrappedComponentState<
  * doesn't get out of sync.
  */
 export class WrappedComponent<
-  Props,
+  Props extends {},
   DBSchema extends NamedSchema<string, number, Schema>,
   StoreName extends StoreNames<DBSchema["schema"]>,
   Value extends ComponentValue<DBSchema, StoreName>
@@ -79,18 +64,17 @@ export class WrappedComponent<
 > {
   static propTypes: PropTypes.ValidationMap<
     WrappedComponentProps<
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      any,
+      {},
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       NamedSchema<string, number, any>,
       string,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ComponentValue<NamedSchema<string, number, any>, string>
+      any
     >
   > = {
-    database: PropTypes.instanceOf(Database),
     component: DynamicComponent.propType.isRequired,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    database: PropTypes.instanceOf(Database)
   };
 
   /**
@@ -240,26 +224,41 @@ export class WrappedComponent<
     database: Database<DBSchema>,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>
   ): Promise<Value | undefined> {
-    const { storeName, key, property } = databaseMap;
+    const { storeName, property } = databaseMap;
 
-    const storedValue = await database.get(storeName, key);
+    const storeKey = await databaseMap.getKey(database);
+
+    if (storeKey === undefined) {
+      return undefined;
+    }
+
+    const storedValue = await database.get(storeName, storeKey);
 
     if (storedValue === undefined) {
       return undefined;
     }
 
-    let value = storedValue as Value;
+    let value = storedValue as ComponentValue<DBSchema, StoreName>;
 
     if (property) {
-      const propertyKeys = [...property] as typeof property;
+      if (property.length > 0) {
+        const k = property[0] as StoreValuePropertyPathLevelOne<
+          ComponentValue<DBSchema, StoreName>
+        >[0];
 
-      while (propertyKeys.length > 0 && value !== undefined) {
-        const k = propertyKeys.shift() as keyof Value;
+        value = value[k] as ComponentValue<DBSchema, StoreName>;
+      }
 
-        value = (value[k] as unknown) as Value;
+      if (property.length > 1) {
+        const k = property[1] as StoreValuePropertyPathLevelTwo<
+          ComponentValue<DBSchema, StoreName>
+        >[1];
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        value = (value as any)[k] as ComponentValue<DBSchema, StoreName>;
       }
     }
 
-    return value;
+    return value as Value;
   }
 }

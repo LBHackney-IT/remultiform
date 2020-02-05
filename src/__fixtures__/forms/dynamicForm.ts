@@ -28,7 +28,7 @@ export const dynamicForm = {
         return SimpleSubmit;
       },
       componentWrappers: [
-        ComponentWrapper.wrapStatic<DynamicFormSchema>(
+        ComponentWrapper.wrapStatic<DynamicFormSchema, "testStore">(
           new StaticComponent({
             key: "test-img",
             Component: "img",
@@ -64,7 +64,7 @@ export const dynamicForm = {
         return SimpleSubmit;
       },
       componentWrappers: [
-        ComponentWrapper.wrapStatic<DynamicFormSchema>(
+        ComponentWrapper.wrapStatic<DynamicFormSchema, "testStore">(
           new StaticComponent({
             key: "test-img-2",
             Component: "img",

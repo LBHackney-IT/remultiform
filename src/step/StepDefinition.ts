@@ -30,7 +30,11 @@ export interface StepDefinition<
    * {@link ComponentWrapper.wrapStatic} and
    * {@link ComponentWrapper.wrapDynamic}.
    */
-  componentWrappers: ComponentWrapper<DBSchema, StoreName>[];
+  componentWrappers: ComponentWrapper<
+    DBSchema,
+    StoreName,
+    ComponentValue<DBSchema, StoreName>
+  >[];
 
   /**
    * An optional function that returns a submit button or a similar component.

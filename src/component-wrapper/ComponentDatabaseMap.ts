@@ -1,5 +1,8 @@
+import { nullValuesAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 
+import { Database } from "../database/Database";
+import { StoreMap } from "../database/Store";
 import {
   NamedSchema,
   PickStoreValueProperties,
@@ -7,26 +10,23 @@ import {
   StoreKey,
   StoreNames,
   StoreValue,
-  StoreValuePropertyPath
+  StoreValuePropertyPath,
+  StoreValuePropertyPathLevelOne,
+  StoreValuePropertyPathLevelTwo
 } from "../database/types";
 
 // Value["a"]
-// This follows the same pattern as `StoreValuePropertyPathLevelOne`.
 type ComponentValueLevelOne<Value> = {
-  [K in keyof Value]: Value[K];
-}[keyof Value];
+  [K in StoreValuePropertyPathLevelOne<Value>[0]]: Value[K];
+}[StoreValuePropertyPathLevelOne<Value>[0]];
 
 // Value["a"]["b"]
-// This follows the same pattern as `StoreValuePropertyPathLevelTwo`.
 type ComponentValueLevelTwo<Value> = {
-  [K in keyof Value]: keyof PickStoreValueProperties<
-    NonNullable<Value[K]>
-  > extends never // If `Value[K]` is a primitive...
-    ? never // ...ignore it...
-    : PickStoreValueProperties<
-        NonNullable<Value[K]>
-      >[keyof PickStoreValueProperties<NonNullable<Value[K]>>]; // ...otherwise, include its children.
-}[keyof Value];
+  [K in StoreValuePropertyPathLevelTwo<Value>[0]]: {
+    [J in StoreValuePropertyPathLevelTwo<Value>[1] &
+      keyof Value[K]]: Value[K][J];
+  }[StoreValuePropertyPathLevelTwo<Value>[1] & keyof Value[K]];
+}[StoreValuePropertyPathLevelTwo<Value>[0]];
 
 /**
  * The possible values a {@link ComponentDatabaseMap} could map to.
@@ -60,9 +60,23 @@ export interface ComponentDatabaseMapOptions<
   storeName: StoreName;
 
   /**
-   * The key in {@link ComponentDatabaseMapOptions.storeName} to fetch and update.
+   * The key in {@link ComponentDatabaseMapOptions.storeName} to fetch
+   * and update, or an object describing how to fetch that key from the
+   * {@link Database}.
+   *
+   * `key.tx` is called inside a {@link Database.transaction}, so all the
+   * warnings there apply.
    */
-  key: StoreKey<DBSchema["schema"], StoreName>;
+  key:
+    | StoreKey<DBSchema["schema"], StoreName>
+    | {
+        storeNames?: StoreNames<DBSchema["schema"]>[] | null;
+        tx(
+          stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
+        ):
+          | StoreKey<DBSchema["schema"], StoreName>
+          | Promise<StoreKey<DBSchema["schema"], StoreName>>;
+      };
 
   /**
    * The name of the property of the value in the {@link Store} to fetch and
@@ -117,7 +131,11 @@ export class ComponentDatabaseMap<
     storeName: PropTypes.string.isRequired,
     key: PropTypes.oneOfType([
       PropTypes.string.isRequired,
-      PropTypes.number.isRequired
+      PropTypes.number.isRequired,
+      PropTypes.shape({
+        storeNames: PropTypes.arrayOf(PropTypes.string.isRequired),
+        tx: PropTypes.func.isRequired
+      }).isRequired
     ]).isRequired,
     // We need to cast this because `PropTypes.arrayOf` doesn't know how to
     // limit the number of elements in the array, and so creates the
@@ -128,11 +146,21 @@ export class ComponentDatabaseMap<
         PropTypes.string.isRequired,
         PropTypes.symbol.isRequired
       ]).isRequired
-    ) as PropTypes.Requireable<[string] | [string, string | symbol]>
+    ) as PropTypes.Requireable<[string] | [string, string | symbol]>,
+    getKey: PropTypes.func.isRequired
   });
 
   readonly storeName: StoreName;
-  readonly key: StoreKey<DBSchema["schema"], StoreName>;
+  readonly key:
+    | StoreKey<DBSchema["schema"], StoreName>
+    | {
+        storeNames?: StoreNames<DBSchema["schema"]>[] | null;
+        tx(
+          stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
+        ):
+          | StoreKey<DBSchema["schema"], StoreName>
+          | Promise<StoreKey<DBSchema["schema"], StoreName>>;
+      };
   readonly property:
     | (StoreValue<DBSchema["schema"], StoreName> extends {}
         ? StoreValuePropertyPath<StoreValue<DBSchema["schema"], StoreName>>
@@ -150,5 +178,43 @@ export class ComponentDatabaseMap<
           ? StoreValuePropertyPath<StoreValue<DBSchema["schema"], StoreName>>
           : never)
       | undefined;
+  }
+
+  /**
+   * @ignore
+   */
+  async getKey(
+    databaseOrStores:
+      | Database<DBSchema>
+      | StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
+  ): Promise<StoreKey<DBSchema["schema"], StoreName> | undefined> {
+    if (typeof this.key === "string" || typeof this.key === "number") {
+      return this.key;
+    }
+
+    const { storeNames, tx } = nullValuesAsUndefined(this.key) as {
+      storeNames?: StoreNames<DBSchema["schema"]>[];
+      tx(
+        stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
+      ):
+        | StoreKey<DBSchema["schema"], StoreName>
+        | Promise<StoreKey<DBSchema["schema"], StoreName>>;
+    };
+
+    let key: StoreKey<DBSchema["schema"], StoreName> | undefined = undefined;
+
+    if (!storeNames || storeNames.length === 0) {
+      key = await tx(
+        {} as StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
+      );
+    } else if (databaseOrStores instanceof Database) {
+      await databaseOrStores.transaction(storeNames, async stores => {
+        key = await tx(stores);
+      });
+    } else {
+      key = await tx(databaseOrStores);
+    }
+
+    return key;
   }
 }

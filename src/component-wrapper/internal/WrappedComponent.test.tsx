@@ -33,7 +33,7 @@ type TestSchema = NamedSchema<
     anotherTestStore: {
       key: number;
       value: {
-        a?: { value?: string };
+        a: { value: string };
       };
     };
   }
@@ -216,8 +216,8 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
     key: "test-component",
     Component,
     props: {},
-    defaultValue: {} as TestSchema["schema"]["anotherTestStore"]["value"]["a"],
-    emptyValue: {} as TestSchema["schema"]["anotherTestStore"]["value"]["a"],
+    defaultValue: { value: "" },
+    emptyValue: { value: "" },
     databaseMap
   });
 
@@ -344,9 +344,9 @@ it("uses the empty value before it fetches from the database", async () => {
       </div>
       <input
         data-testid="input"
-        disabled={false}
+        disabled={true}
         onChange={[Function]}
-        value="testStore/0"
+        value="test empty"
       />
     </div>
   `);

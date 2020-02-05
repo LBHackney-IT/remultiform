@@ -7,7 +7,7 @@ import { NamedSchema, Schema, StoreNames } from "../database/types";
 import { WrappedComponent } from "./internal/WrappedComponent";
 
 import { ComponentDatabaseMap, ComponentValue } from "./ComponentDatabaseMap";
-import { DynamicComponentType, DynamicComponent } from "./DynamicComponent";
+import { DynamicComponent } from "./DynamicComponent";
 import { StaticComponent } from "./StaticComponent";
 
 /**
@@ -15,10 +15,11 @@ import { StaticComponent } from "./StaticComponent";
  */
 export interface ComponentWrapperRenderProps<
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > {
   database?: Database<DBSchema>;
-  onChange(value: ComponentValue<DBSchema, StoreName>): void;
+  onChange(value: Value): void;
 }
 
 /**
@@ -35,21 +36,24 @@ export interface ComponentWrapperRenderProps<
 // it. This gives us strong typing with little effort for the user.
 export class ComponentWrapper<
   DBSchema extends NamedSchema<string, number, Schema>,
-  StoreName extends StoreNames<DBSchema["schema"]>
+  StoreName extends StoreNames<DBSchema["schema"]>,
+  Value extends ComponentValue<DBSchema, StoreName>
 > {
   /**
    * The proptype validator for a {@link ComponentWrapper}.
    */
   static readonly propType: PropTypes.Requireable<
-    ComponentWrapper<NamedSchema<string, number, Schema>, StoreNames<Schema>>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ComponentWrapper<NamedSchema<string, number, any>, string, any>
   > = PropTypes.exact({
     key: PropTypes.string.isRequired,
     render: PropTypes.func.isRequired,
     renderWhen: PropTypes.func.isRequired,
     databaseMap: PropTypes.instanceOf<
       ComponentDatabaseMap<
-        NamedSchema<string, number, Schema>,
-        StoreNames<Schema>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        NamedSchema<string, number, any>,
+        string
       >
     >(ComponentDatabaseMap),
     defaultValue: PropTypes.any,
@@ -65,9 +69,18 @@ export class ComponentWrapper<
    * It's possible to infer this if {@link StaticComponent.renderWhen} is
    * implemented on `component`.
    */
-  static wrapStatic<DBSchema extends NamedSchema<string, number, Schema>>(
+  static wrapStatic<
+    DBSchema extends NamedSchema<string, number, Schema>,
+    StoreName extends StoreNames<DBSchema["schema"]> = StoreNames<
+      DBSchema["schema"]
+    >,
+    Value extends ComponentValue<DBSchema, StoreName> = ComponentValue<
+      DBSchema,
+      StoreName
+    >
+  >(
     component: StaticComponent<React.ElementType, DBSchema>
-  ): ComponentWrapper<DBSchema, StoreNames<DBSchema["schema"]>> {
+  ): ComponentWrapper<DBSchema, StoreName, Value> {
     const { key, Component, props, renderWhen } = component;
 
     return new ComponentWrapper(
@@ -85,19 +98,13 @@ export class ComponentWrapper<
    * infered from the {@link DynamicComponent} passed in.
    */
   static wrapDynamic<
-    Props,
+    Props extends {},
     DBSchema extends NamedSchema<string, number, Schema>,
     StoreName extends StoreNames<DBSchema["schema"]>,
     Value extends ComponentValue<DBSchema, StoreName>
   >(
-    component: DynamicComponent<
-      DynamicComponentType<Props, Value>,
-      Props,
-      DBSchema,
-      StoreName,
-      Value
-    >
-  ): ComponentWrapper<DBSchema, StoreName> {
+    component: DynamicComponent<Props, DBSchema, StoreName, Value>
+  ): ComponentWrapper<DBSchema, StoreName, Value> {
     const {
       key,
       renderWhen,
@@ -107,7 +114,7 @@ export class ComponentWrapper<
     } = component;
 
     const render = (
-      props: ComponentWrapperRenderProps<DBSchema, StoreName>
+      props: ComponentWrapperRenderProps<DBSchema, StoreName, Value>
     ): JSX.Element => (
       <WrappedComponent key={key} component={component} {...props} />
     );
@@ -128,7 +135,7 @@ export class ComponentWrapper<
    * A function to render an instance of the component.
    */
   readonly render: (
-    props: ComponentWrapperRenderProps<DBSchema, StoreName>
+    props: ComponentWrapperRenderProps<DBSchema, StoreName, Value>
   ) => JSX.Element;
 
   /**
@@ -153,7 +160,7 @@ export class ComponentWrapper<
    * The optional default value to store in the {@link Database} if the
    * component hasn't been changed by the user.
    */
-  readonly defaultValue?: ComponentValue<DBSchema, StoreName> | null;
+  readonly defaultValue?: Value | null;
 
   /**
    * The value to consider as an empty input when updating the {@link Database}.
@@ -161,7 +168,7 @@ export class ComponentWrapper<
    * If {@link ComponentWrapper.databaseMap} is defined, then willd also be
    * defined.
    */
-  readonly emptyValue?: ComponentValue<DBSchema, StoreName> | null;
+  readonly emptyValue?: Value | null;
 
   /**
    * Do not use this directly. Use {@link ComponentWrapper.wrapStatic} or
@@ -173,7 +180,7 @@ export class ComponentWrapper<
   constructor(
     key: string,
     render: (
-      props: ComponentWrapperRenderProps<DBSchema, StoreName>
+      props: ComponentWrapperRenderProps<DBSchema, StoreName, Value>
     ) => JSX.Element,
     renderWhen: (stepValues: {
       [key: string]:
@@ -181,8 +188,8 @@ export class ComponentWrapper<
         | undefined;
     }) => boolean,
     databaseMap?: ComponentDatabaseMap<DBSchema, StoreName>,
-    defaultValue?: ComponentValue<DBSchema, StoreName> | null,
-    emptyValue?: ComponentValue<DBSchema, StoreName> | null
+    defaultValue?: Value | null,
+    emptyValue?: Value | null
   ) {
     this.key = key;
     this.render = render;
