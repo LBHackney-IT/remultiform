@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.0.6] - 06-02-2020
+
 ### Fixed
 
 - Fixed errors accessing structured data that is missing from a `Store`
@@ -87,7 +89,8 @@ and this project adheres to
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward
 
-[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.5...HEAD
+[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.2...v0.0.3
