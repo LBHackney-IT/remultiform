@@ -62,7 +62,7 @@
 					<a href="_component_wrapper_componentwrapper_.componentwrapper.html">ComponentWrapper</a>
 				</li>
 			</ul>
-			<h1>Class ComponentWrapper&lt;DBSchema, StoreName&gt;</h1>
+			<h1>Class ComponentWrapper&lt;DBSchema, StoreName, Value&gt;</h1>
 		</div>
 	</div>
 </header>
@@ -87,6 +87,9 @@
 					</li>
 					<li>
 						<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+					<li>
+						<h4>Value<span class="tsd-signature-symbol">: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -132,7 +135,7 @@
 					<div class="tsd-signature tsd-kind-icon">database<wbr>Map<span class="tsd-signature-symbol">:</span> <a href="_component_wrapper_componentdatabasemap_.componentdatabasemap.html" class="tsd-signature-type">ComponentDatabaseMap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L150">src/component-wrapper/ComponentWrapper.tsx:150</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L157">src/component-wrapper/ComponentWrapper.tsx:157</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -145,10 +148,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="defaultvalue" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default<wbr>Value</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Value<span class="tsd-signature-symbol">:</span> <a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L156">src/component-wrapper/ComponentWrapper.tsx:156</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L163">src/component-wrapper/ComponentWrapper.tsx:163</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,10 +164,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="emptyvalue" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> empty<wbr>Value</h3>
-					<div class="tsd-signature tsd-kind-icon">empty<wbr>Value<span class="tsd-signature-symbol">:</span> <a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<div class="tsd-signature tsd-kind-icon">empty<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L164">src/component-wrapper/ComponentWrapper.tsx:164</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L171">src/component-wrapper/ComponentWrapper.tsx:171</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -181,17 +184,17 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L125">src/component-wrapper/ComponentWrapper.tsx:125</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L132">src/component-wrapper/ComponentWrapper.tsx:132</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="render" class="tsd-anchor"></a>
 					<h3>render</h3>
-					<div class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_component_wrapper_componentwrapper_.componentwrapperrenderprops.html" class="tsd-signature-type">ComponentWrapperRenderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Element</span></div>
+					<div class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_component_wrapper_componentwrapper_.componentwrapperrenderprops.html" class="tsd-signature-type">ComponentWrapperRenderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Element</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L130">src/component-wrapper/ComponentWrapper.tsx:130</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L137">src/component-wrapper/ComponentWrapper.tsx:137</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -204,14 +207,14 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_component_wrapper_componentwrapper_.componentwrapperrenderprops.html" class="tsd-signature-type">ComponentWrapperRenderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>props<span class="tsd-signature-symbol">: </span><a href="../interfaces/_component_wrapper_componentwrapper_.componentwrapperrenderprops.html" class="tsd-signature-type">ComponentWrapperRenderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>props: <a href="../interfaces/_component_wrapper_componentwrapper_.componentwrapperrenderprops.html" class="tsd-signature-type">ComponentWrapperRenderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h5>
+												<h5>props: <a href="../interfaces/_component_wrapper_componentwrapper_.componentwrapperrenderprops.html" class="tsd-signature-type">ComponentWrapperRenderProps</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Element</span></h4>
@@ -227,7 +230,7 @@
 					<div class="tsd-signature tsd-kind-icon">render<wbr>When<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>stepValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L140">src/component-wrapper/ComponentWrapper.tsx:140</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L147">src/component-wrapper/ComponentWrapper.tsx:147</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -271,10 +274,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="proptype" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> prop<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">prop<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = PropTypes.exact({key: PropTypes.string.isRequired,render: PropTypes.func.isRequired,renderWhen: PropTypes.func.isRequired,databaseMap: PropTypes.instanceOf&lt;ComponentDatabaseMap&lt;NamedSchema&lt;string, number, Schema&gt;,StoreNames&lt;Schema&gt;&gt;&gt;(ComponentDatabaseMap),defaultValue: PropTypes.any,emptyValue: PropTypes.any})</span></div>
+					<div class="tsd-signature tsd-kind-icon">prop<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Requireable</span><span class="tsd-signature-symbol">&lt;</span><a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = PropTypes.exact({key: PropTypes.string.isRequired,render: PropTypes.func.isRequired,renderWhen: PropTypes.func.isRequired,databaseMap: PropTypes.instanceOf&lt;ComponentDatabaseMap&lt;// eslint-disable-next-line @typescript-eslint/no-explicit-anyNamedSchema&lt;string, number, any&gt;,string&gt;&gt;(ComponentDatabaseMap),defaultValue: PropTypes.any,emptyValue: PropTypes.any})</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L43">src/component-wrapper/ComponentWrapper.tsx:43</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L45">src/component-wrapper/ComponentWrapper.tsx:45</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -290,13 +293,13 @@
 					<a name="wrapdynamic" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> wrap<wbr>Dynamic</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">wrap<wbr>Dynamic&lt;Props, DBSchema, StoreName, Value&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html" class="tsd-signature-type">DynamicComponent</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_component_wrapper_dynamiccomponent_.html#dynamiccomponenttype" class="tsd-signature-type">DynamicComponentType</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">wrap<wbr>Dynamic&lt;Props, DBSchema, StoreName, Value&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html" class="tsd-signature-type">DynamicComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L87">src/component-wrapper/ComponentWrapper.tsx:87</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L100">src/component-wrapper/ComponentWrapper.tsx:100</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -310,7 +313,7 @@
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>Props</h4>
+									<h4>Props<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></h4>
 								</li>
 								<li>
 									<h4>DBSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_database_types_.namedschema.html" class="tsd-signature-type">NamedSchema</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_database_types_.schema.html" class="tsd-signature-type">Schema</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -325,10 +328,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>component: <a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html" class="tsd-signature-type">DynamicComponent</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_component_wrapper_dynamiccomponent_.html#dynamiccomponenttype" class="tsd-signature-type">DynamicComponentType</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>component: <a href="_component_wrapper_dynamiccomponent_.dynamiccomponent.html" class="tsd-signature-type">DynamicComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Props</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -336,13 +339,13 @@
 					<a name="wrapstatic" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> wrap<wbr>Static</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">wrap<wbr>Static&lt;DBSchema&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="_component_wrapper_staticcomponent_.staticcomponent.html" class="tsd-signature-type">StaticComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">wrap<wbr>Static&lt;DBSchema, StoreName, Value&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><a href="_component_wrapper_staticcomponent_.staticcomponent.html" class="tsd-signature-type">StaticComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L68">src/component-wrapper/ComponentWrapper.tsx:68</a></li>
+									<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentWrapper.tsx#L72">src/component-wrapper/ComponentWrapper.tsx:72</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -362,6 +365,12 @@
 										implemented on <code>component</code>.</p>
 									</div>
 								</li>
+								<li>
+									<h4>StoreName<span class="tsd-signature-symbol">: </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+								<li>
+									<h4>Value<span class="tsd-signature-symbol">: </span><a href="../modules/_component_wrapper_componentdatabasemap_.html#componentvalue" class="tsd-signature-type">ComponentValue</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -369,7 +378,7 @@
 									<h5>component: <a href="_component_wrapper_staticcomponent_.staticcomponent.html" class="tsd-signature-type">StaticComponent</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">React.ElementType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_component_wrapper_componentwrapper_.componentwrapper.html" class="tsd-signature-type">ComponentWrapper</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Value</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>

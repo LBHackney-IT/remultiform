@@ -115,16 +115,20 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="key" class="tsd-anchor"></a>
 					<h3>key</h3>
-					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <a href="../modules/_database_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <a href="../modules/_database_types_.html#storekey" class="tsd-signature-type">StoreKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>storeNames<span class="tsd-signature-symbol">?: </span><a href="../modules/_database_types_.html#storenames" class="tsd-signature-type">StoreNames</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>tx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L65">src/component-wrapper/ComponentDatabaseMap.ts:65</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L70">src/component-wrapper/ComponentDatabaseMap.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The key in <a href="_component_wrapper_componentdatabasemap_.componentdatabasemapoptions.html#storename">ComponentDatabaseMapOptions.storeName</a> to fetch and update.</p>
+							<p>The key in <a href="_component_wrapper_componentdatabasemap_.componentdatabasemapoptions.html#storename">ComponentDatabaseMapOptions.storeName</a> to fetch
+								and update, or an object describing how to fetch that key from the
+							<a href="../classes/_database_database_.database.html">Database</a>.</p>
 						</div>
+						<p><code>key.tx</code> is called inside a <a href="../classes/_database_database_.database.html#transaction">Database.transaction</a>, so all the
+						warnings there apply.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -133,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">property<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">PickStoreValueProperties</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StoreValue</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">PickStoreValueProperties</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StoreValue</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">StoreValuePropertyPath</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">StoreValue</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DBSchema</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"schema"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">StoreName</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L79">src/component-wrapper/ComponentDatabaseMap.ts:79</a></li>
+							<li>Defined in <a href="https://github.com/LBHackney-IT/remultiform/blob/master/src/component-wrapper/ComponentDatabaseMap.ts#L93">src/component-wrapper/ComponentDatabaseMap.ts:93</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
