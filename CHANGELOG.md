@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed errors accessing structured data that is missing from a `Store`
+
 ## [0.0.5] - 06-02-2020
 
 ### Added
