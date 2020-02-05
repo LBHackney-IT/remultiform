@@ -71,6 +71,12 @@ export interface OrchestratorProps<
    * @param slug - The next {@link StepDefinition.slug}.
    */
   onNextStep?: ((slug?: string) => void) | null;
+
+  /**
+   * The callback to call when the {@link Orchestrator} has failed to
+   * transition to the next {@link StepDefinition} due to missing values.
+   */
+  onIncompleteStep?: ((keysMissingValues?: string[]) => void) | null;
 }
 
 interface OrchestratorState {
@@ -116,7 +122,7 @@ export class Orchestrator<
    * @ignore
    */
   render(): JSX.Element {
-    const { context, provideDatabase } = this.props;
+    const { context, provideDatabase, onIncompleteStep } = this.props;
 
     const { slug, nextSlug, componentWrappers, submit } = this.currentStep();
 
@@ -129,6 +135,7 @@ export class Orchestrator<
         afterSubmit={(): void => {
           this.handleSubmit();
         }}
+        onIncompleteSubmit={onIncompleteStep}
         nextSlug={nextSlug}
         onNextSlugChange={(slug?: string): void => {
           this.handleNextSlugChange(slug);

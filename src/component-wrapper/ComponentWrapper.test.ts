@@ -167,7 +167,7 @@ describe("#defaultValue", () => {
     expect(componentWrapper.defaultValue).toBeUndefined();
   });
 
-  it("matches the database map provided when wrapping a `DynamicComponent`", () => {
+  it("matches the default value provided when wrapping a `DynamicComponent`", () => {
     const defaultValue = "test default";
 
     const componentWrapper = ComponentWrapper.wrapDynamic(
@@ -205,7 +205,7 @@ describe("#emptyValue", () => {
     expect(componentWrapper.emptyValue).toBeUndefined();
   });
 
-  it("matches the database map provided when wrapping a `DynamicComponent`", () => {
+  it("matches the empty value provided when wrapping a `DynamicComponent`", () => {
     const emptyValue = "test empty";
 
     const componentWrapper = ComponentWrapper.wrapDynamic(
@@ -225,6 +225,45 @@ describe("#emptyValue", () => {
     );
 
     expect(componentWrapper.emptyValue).toEqual(emptyValue);
+  });
+});
+
+describe("#required", () => {
+  it("is false when wrapping a `StaticComponent`", () => {
+    const componentWrapper = ComponentWrapper.wrapStatic(
+      new StaticComponent({
+        key: "test-key",
+        Component: TestClassComponent,
+        props: {
+          content: "test class content"
+        }
+      })
+    );
+
+    expect(componentWrapper.required).toEqual(false);
+  });
+
+  it("matches the required callback provided when wrapping a `DynamicComponent`", () => {
+    const required = jest.fn();
+
+    const componentWrapper = ComponentWrapper.wrapDynamic(
+      new DynamicComponent({
+        key: "test-key",
+        Component: TestDynamicComponent,
+        props: {
+          content: "test content"
+        },
+        defaultValue: "test default",
+        emptyValue: "test empty",
+        required,
+        databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
+          storeName,
+          key: 0
+        })
+      })
+    );
+
+    expect(componentWrapper.required).toEqual(required);
   });
 });
 
@@ -317,6 +356,7 @@ describe("#render()", () => {
           data-testid="input"
           disabled={true}
           onChange={[Function]}
+          required={false}
           value="test empty"
         />
       </div>
@@ -363,6 +403,7 @@ describe("#render()", () => {
           data-testid="input"
           disabled={false}
           onChange={[Function]}
+          required={false}
           value="testStore/0"
         />
       </div>

@@ -24,6 +24,7 @@ export interface WrappedComponentProps<
   Value extends ComponentValue<DBSchema, StoreName>
 > {
   component: DynamicComponent<Props, DBSchema, StoreName, Value>;
+  required: boolean;
   onChange?: ((value: Value) => void) | null;
   database?: Database<DBSchema> | null;
 }
@@ -73,6 +74,7 @@ export class WrappedComponent<
     >
   > = {
     component: DynamicComponent.propType.isRequired,
+    required: PropTypes.bool.isRequired,
     onChange: PropTypes.func,
     database: PropTypes.instanceOf(Database)
   };
@@ -132,13 +134,14 @@ export class WrappedComponent<
       return <div>Something went wrong!</div>;
     }
 
-    const { database } = this.props;
+    const { database, required } = this.props;
     const { value, isFetching } = this.state;
     const { key, Component, props } = component;
 
     const controlledProps: DynamicComponentControlledProps<Value> = {
       value,
       onValueChange: this.onValueChange.bind(this),
+      required,
       disabled: !database || isFetching
     };
 

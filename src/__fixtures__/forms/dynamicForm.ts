@@ -82,6 +82,7 @@ export const dynamicForm = {
             },
             defaultValue: "test default",
             emptyValue: "",
+            required: true,
             databaseMap: new ComponentDatabaseMap<
               DynamicFormSchema,
               "testStore"

@@ -172,3 +172,40 @@ describe("#emptyValue", () => {
     expect(component.emptyValue).toEqual(emptyValue);
   });
 });
+
+describe("#required", () => {
+  it("matches the `required` provided to the constructor", () => {
+    const required = jest.fn();
+
+    const component = new DynamicComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
+      required,
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(component.required).toEqual(required);
+  });
+
+  it("defaults to false when no `required` is provided to the constructor", () => {
+    const component = new DynamicComponent({
+      key: "test-key",
+      Component: TestDynamicComponent,
+      props: { content: "test content" },
+      defaultValue: "test default value",
+      emptyValue: "test empty value",
+      databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
+        storeName: "testStore",
+        key: 0
+      })
+    });
+
+    expect(component.required).toEqual(false);
+  });
+});

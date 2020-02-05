@@ -56,7 +56,9 @@ const testComponent = new DynamicComponent({
 });
 
 it("renders correctly with all non-context props", () => {
-  const component = create(<WrappedComponent component={testComponent} />);
+  const component = create(
+    <WrappedComponent component={testComponent} required />
+  );
 
   expect(component).toMatchInlineSnapshot(`
     <div>
@@ -67,6 +69,7 @@ it("renders correctly with all non-context props", () => {
         data-testid="input"
         disabled={true}
         onChange={[Function]}
+        required={true}
         value="test empty"
       />
     </div>
@@ -85,7 +88,9 @@ it("renders correctly with an undefined default value for the component", () => 
     databaseMap: testDatabaseMap
   });
 
-  const component = create(<WrappedComponent component={dynamicComponent} />);
+  const component = create(
+    <WrappedComponent component={dynamicComponent} required />
+  );
 
   expect(component).toMatchInlineSnapshot(`
     <div>
@@ -96,6 +101,7 @@ it("renders correctly with an undefined default value for the component", () => 
         data-testid="input"
         disabled={true}
         onChange={[Function]}
+        required={true}
         value="test empty"
       />
     </div>
@@ -110,7 +116,11 @@ it("renders correctly with a database context", async () => {
     <DatabaseProvider context={DBContext}>
       <DBContext.Consumer>
         {(database): JSX.Element => (
-          <WrappedComponent database={database} component={testComponent} />
+          <WrappedComponent
+            database={database}
+            component={testComponent}
+            required
+          />
         )}
       </DBContext.Consumer>
     </DatabaseProvider>
@@ -125,6 +135,7 @@ it("renders correctly with a database context", async () => {
         data-testid="input"
         disabled={true}
         onChange={[Function]}
+        required={true}
         value="test empty"
       />
     </div>
@@ -150,6 +161,7 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
             <WrappedComponent
               database={database}
               component={testComponent}
+              required
               onChange={onChange}
             />
           )}
@@ -177,6 +189,7 @@ it("fetches the stored value specified by the `databaseMap` when a database prov
         data-testid="input"
         disabled={false}
         onChange={[Function]}
+        required={true}
         value="testStore/0"
       />
     </div>
@@ -234,6 +247,7 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
             <WrappedComponent
               database={database}
               component={dynamicComponent}
+              required
             />
           )}
         </DBContext.Consumer>
@@ -288,6 +302,7 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
             <WrappedComponent
               database={database}
               component={dynamicComponent}
+              required
             />
           )}
         </DBContext.Consumer>
@@ -309,6 +324,7 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
         data-testid="input"
         disabled={false}
         onChange={[Function]}
+        required={true}
         value="new value"
       />
     </div>
@@ -328,7 +344,11 @@ it("uses the empty value before it fetches from the database", async () => {
       <DatabaseProvider context={DBContext}>
         <DBContext.Consumer>
           {(database): JSX.Element => (
-            <WrappedComponent database={database} component={testComponent} />
+            <WrappedComponent
+              database={database}
+              component={testComponent}
+              required
+            />
           )}
         </DBContext.Consumer>
       </DatabaseProvider>
@@ -346,6 +366,7 @@ it("uses the empty value before it fetches from the database", async () => {
         data-testid="input"
         disabled={true}
         onChange={[Function]}
+        required={true}
         value="test empty"
       />
     </div>
@@ -367,7 +388,11 @@ it("uses the default value when fetching the stored value returns `undefined`", 
       <DatabaseProvider context={DBContext}>
         <DBContext.Consumer>
           {(database): JSX.Element => (
-            <WrappedComponent database={database} component={testComponent} />
+            <WrappedComponent
+              database={database}
+              component={testComponent}
+              required
+            />
           )}
         </DBContext.Consumer>
       </DatabaseProvider>
@@ -386,6 +411,7 @@ it("uses the default value when fetching the stored value returns `undefined`", 
         data-testid="input"
         disabled={false}
         onChange={[Function]}
+        required={true}
         value="test default"
       />
     </div>
@@ -419,6 +445,7 @@ it("uses the empty value when fetching the stored value returns `undefined` and 
             <WrappedComponent
               database={database}
               component={dynamicComponent}
+              required
             />
           )}
         </DBContext.Consumer>
@@ -438,6 +465,7 @@ it("uses the empty value when fetching the stored value returns `undefined` and 
         data-testid="input"
         disabled={false}
         onChange={[Function]}
+        required={true}
         value="test empty"
       />
     </div>
@@ -467,7 +495,11 @@ it("is disabled while the database is opening", async () => {
     <DatabaseProvider context={DBContext}>
       <DBContext.Consumer>
         {(database): JSX.Element => (
-          <WrappedComponent database={database} component={dynamicComponent} />
+          <WrappedComponent
+            database={database}
+            component={dynamicComponent}
+            required
+          />
         )}
       </DBContext.Consumer>
     </DatabaseProvider>
@@ -506,7 +538,11 @@ it("is disabled while fetching the stored value from the database", async () => 
     <DatabaseProvider context={DBContext}>
       <DBContext.Consumer>
         {(database): JSX.Element => (
-          <WrappedComponent database={database} component={dynamicComponent} />
+          <WrappedComponent
+            database={database}
+            component={dynamicComponent}
+            required
+          />
         )}
       </DBContext.Consumer>
     </DatabaseProvider>
