@@ -13,7 +13,6 @@ import {
   NamedSchema,
   PickStoreValueProperties,
   Schema,
-  StoreKey,
   StoreNames,
   StoreValue,
   StoreValuePropertyPath,
@@ -283,11 +282,6 @@ export class Step<
     for (const { key, databaseMap, emptyValue } of componentWrappers) {
       if (databaseMap) {
         const { storeName, property } = databaseMap;
-        const storeKey = await databaseMap.getKey(stores);
-
-        if (storeKey === undefined) {
-          continue;
-        }
 
         const store = stores[storeName];
 
@@ -302,13 +296,7 @@ export class Step<
             StoreName
           >;
 
-          await this.persistProperty(
-            store,
-            databaseMap,
-            storeKey,
-            value,
-            empty
-          );
+          await this.persistProperty(store, databaseMap, value, empty);
         } else {
           // If `databaseMap` is defined, then `emptyValue` will also be
           // defined.
@@ -320,7 +308,7 @@ export class Step<
             StoreName
           >;
 
-          await this.persistValue(store, storeKey, value, empty);
+          await this.persistValue(store, databaseMap, value, empty);
         }
       }
     }
@@ -333,16 +321,17 @@ export class Step<
       StoreName
     >,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
-    key: StoreKey<DBSchema["schema"], StoreName>,
     propertyValue: ComponentValue<DBSchema, StoreName>,
     emptyValue: ComponentValue<DBSchema, StoreName>
   ): Promise<void> {
-    const { property } = databaseMap;
+    const { key, property } = databaseMap;
+
+    const storeKey = typeof key === "function" ? key() : key;
 
     if (!property) {
       await this.persistValue(
         store,
-        key,
+        databaseMap,
         propertyValue as StoreValue<DBSchema["schema"], StoreName>,
         emptyValue as StoreValue<DBSchema["schema"], StoreName>
       );
@@ -350,7 +339,7 @@ export class Step<
       return;
     }
 
-    const storedValue = await store.get(key);
+    const storedValue = await store.get(storeKey);
 
     if (storedValue === undefined && propertyValue === emptyValue) {
       // We would clear the property value from the store if there was
@@ -396,7 +385,7 @@ export class Step<
       }
     }
 
-    await store.put(key, value);
+    await store.put(storeKey, value);
   }
 
   private async persistValue(
@@ -405,14 +394,18 @@ export class Step<
       StoreNames<DBSchema["schema"]>[],
       StoreName
     >,
-    key: StoreKey<DBSchema["schema"], StoreName>,
+    databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
     value: StoreValue<DBSchema["schema"], StoreName>,
     emptyValue: StoreValue<DBSchema["schema"], StoreName>
   ): Promise<void> {
+    const { key } = databaseMap;
+
+    const storeKey = typeof key === "function" ? key() : key;
+
     if (value === emptyValue) {
-      await store.delete(key);
+      await store.delete(storeKey);
     } else {
-      await store.put(key, value);
+      await store.put(storeKey, value);
     }
   }
 }

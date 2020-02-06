@@ -339,7 +339,7 @@ it("uses the empty value before it fetches from the database", async () => {
 
   let component: ReactTestRenderer | undefined = undefined;
 
-  await act(async () => {
+  act(() => {
     component = create(
       <DatabaseProvider context={DBContext}>
         <DBContext.Consumer>
@@ -353,8 +353,6 @@ it("uses the empty value before it fetches from the database", async () => {
         </DBContext.Consumer>
       </DatabaseProvider>
     );
-
-    await openPromise;
   });
 
   expect(component).toMatchInlineSnapshot(`
@@ -372,6 +370,7 @@ it("uses the empty value before it fetches from the database", async () => {
     </div>
   `);
 
+  await openPromise;
   await get.settle;
 });
 

@@ -227,14 +227,9 @@ export class WrappedComponent<
     database: Database<DBSchema>,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>
   ): Promise<Value | undefined> {
-    const { storeName, property } = databaseMap;
+    const { storeName, key, property } = databaseMap;
 
-    const storeKey = await databaseMap.getKey(database);
-
-    if (storeKey === undefined) {
-      return undefined;
-    }
-
+    const storeKey = typeof key === "function" ? key() : key;
     const storedValue = await database.get(storeName, storeKey);
 
     if (storedValue === undefined) {
