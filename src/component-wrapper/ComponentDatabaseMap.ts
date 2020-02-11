@@ -1,8 +1,5 @@
-import { nullValuesAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 
-import { Database } from "../database/Database";
-import { StoreMap } from "../database/Store";
 import {
   NamedSchema,
   PickStoreValueProperties,
@@ -69,14 +66,7 @@ export interface ComponentDatabaseMapOptions<
    */
   key:
     | StoreKey<DBSchema["schema"], StoreName>
-    | {
-        storeNames?: StoreNames<DBSchema["schema"]>[] | null;
-        tx(
-          stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
-        ):
-          | StoreKey<DBSchema["schema"], StoreName>
-          | Promise<StoreKey<DBSchema["schema"], StoreName>>;
-      };
+    | (() => StoreKey<DBSchema["schema"], StoreName>);
 
   /**
    * The name of the property of the value in the {@link Store} to fetch and
@@ -132,10 +122,7 @@ export class ComponentDatabaseMap<
     key: PropTypes.oneOfType([
       PropTypes.string.isRequired,
       PropTypes.number.isRequired,
-      PropTypes.shape({
-        storeNames: PropTypes.arrayOf(PropTypes.string.isRequired),
-        tx: PropTypes.func.isRequired
-      }).isRequired
+      PropTypes.func.isRequired
     ]).isRequired,
     // We need to cast this because `PropTypes.arrayOf` doesn't know how to
     // limit the number of elements in the array, and so creates the
@@ -146,21 +133,13 @@ export class ComponentDatabaseMap<
         PropTypes.string.isRequired,
         PropTypes.symbol.isRequired
       ]).isRequired
-    ) as PropTypes.Requireable<[string] | [string, string | symbol]>,
-    getKey: PropTypes.func.isRequired
+    ) as PropTypes.Requireable<[string] | [string, string | symbol]>
   });
 
   readonly storeName: StoreName;
   readonly key:
     | StoreKey<DBSchema["schema"], StoreName>
-    | {
-        storeNames?: StoreNames<DBSchema["schema"]>[] | null;
-        tx(
-          stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
-        ):
-          | StoreKey<DBSchema["schema"], StoreName>
-          | Promise<StoreKey<DBSchema["schema"], StoreName>>;
-      };
+    | (() => StoreKey<DBSchema["schema"], StoreName>);
   readonly property:
     | (StoreValue<DBSchema["schema"], StoreName> extends {}
         ? StoreValuePropertyPath<StoreValue<DBSchema["schema"], StoreName>>
@@ -178,43 +157,5 @@ export class ComponentDatabaseMap<
           ? StoreValuePropertyPath<StoreValue<DBSchema["schema"], StoreName>>
           : never)
       | undefined;
-  }
-
-  /**
-   * @ignore
-   */
-  async getKey(
-    databaseOrStores:
-      | Database<DBSchema>
-      | StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
-  ): Promise<StoreKey<DBSchema["schema"], StoreName> | undefined> {
-    if (typeof this.key === "string" || typeof this.key === "number") {
-      return this.key;
-    }
-
-    const { storeNames, tx } = nullValuesAsUndefined(this.key) as {
-      storeNames?: StoreNames<DBSchema["schema"]>[];
-      tx(
-        stores: StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
-      ):
-        | StoreKey<DBSchema["schema"], StoreName>
-        | Promise<StoreKey<DBSchema["schema"], StoreName>>;
-    };
-
-    let key: StoreKey<DBSchema["schema"], StoreName> | undefined = undefined;
-
-    if (!storeNames || storeNames.length === 0) {
-      key = await tx(
-        {} as StoreMap<DBSchema["schema"], StoreNames<DBSchema["schema"]>[]>
-      );
-    } else if (databaseOrStores instanceof Database) {
-      await databaseOrStores.transaction(storeNames, async stores => {
-        key = await tx(stores);
-      });
-    } else {
-      key = await tx(databaseOrStores);
-    }
-
-    return key;
   }
 }

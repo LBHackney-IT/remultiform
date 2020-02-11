@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Simplified `StepDefinition.key`
+
 ## [0.0.6] - 06-02-2020
 
 ### Fixed
@@ -25,7 +29,7 @@ and this project adheres to
 
 ### Changed
 
-- Simplifed some generic types
+- Simplified some generic types
 
 ### Fixed
 
