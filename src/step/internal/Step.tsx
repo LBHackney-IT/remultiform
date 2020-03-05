@@ -276,7 +276,12 @@ export class Step<
     const { componentWrappers } = this.props;
     const { componentValues } = this.state;
 
-    for (const { key, databaseMap, emptyValue } of componentWrappers) {
+    for (const {
+      key,
+      renderWhen,
+      databaseMap,
+      emptyValue
+    } of componentWrappers) {
       if (!databaseMap) {
         continue;
       }
@@ -284,6 +289,15 @@ export class Step<
       const { storeName, property } = databaseMap;
 
       const store = stores[storeName];
+
+      if (!renderWhen(componentValues)) {
+        const { key } = databaseMap;
+
+        const storeKey = typeof key === "function" ? key() : key;
+
+        // Delete data that is currently hidden from the user.
+        await store.delete(storeKey);
+      }
 
       if (property) {
         // If `databaseMap` is defined, then `emptyValue` will also be
