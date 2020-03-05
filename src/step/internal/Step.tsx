@@ -1,12 +1,12 @@
 import { nullAsUndefined, nullValuesAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 import React from "react";
-
 import {
   ComponentDatabaseMap,
   ComponentValue
 } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
+import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { Database } from "../../database/Database";
 import { Store, StoreMap } from "../../database/Store";
 import {
@@ -18,7 +18,6 @@ import {
   StoreValuePropertyPath,
   TransactionMode
 } from "../../database/types";
-import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { SubmitType } from "../Submit";
 
 export interface StepProps<
@@ -216,8 +215,6 @@ export class Step<
             ? key
             : undefined;
         }
-
-        return undefined;
       })
       .filter(Boolean) as string[];
 
@@ -235,13 +232,13 @@ export class Step<
         ...componentWrappers
           .map(({ databaseMap }) => {
             if (!databaseMap) {
-              return undefined;
+              return;
             }
 
             const k = databaseMap.key;
 
             if (typeof k === "string" || typeof k === "number") {
-              return undefined;
+              return;
             }
 
             return (k as {
