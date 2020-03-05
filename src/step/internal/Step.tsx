@@ -277,36 +277,38 @@ export class Step<
     const { componentValues } = this.state;
 
     for (const { key, databaseMap, emptyValue } of componentWrappers) {
-      if (databaseMap) {
-        const { storeName, property } = databaseMap;
+      if (!databaseMap) {
+        continue;
+      }
 
-        const store = stores[storeName];
+      const { storeName, property } = databaseMap;
 
-        if (property) {
-          // If `databaseMap` is defined, then `emptyValue` will also be
-          // defined.
-          const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
-          // If `databaseMap` is defined, then the component's value will also
-          // be defined.
-          const value = componentValues[key] as ComponentValue<
-            DBSchema,
-            StoreName
-          >;
+      const store = stores[storeName];
 
-          await this.persistProperty(store, databaseMap, value, empty);
-        } else {
-          // If `databaseMap` is defined, then `emptyValue` will also be
-          // defined.
-          const empty = emptyValue as StoreValue<DBSchema["schema"], StoreName>;
-          // If `databaseMap` is defined, then the component's value will also
-          // be defined.
-          const value = componentValues[key] as StoreValue<
-            DBSchema["schema"],
-            StoreName
-          >;
+      if (property) {
+        // If `databaseMap` is defined, then `emptyValue` will also be
+        // defined.
+        const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
+        // If `databaseMap` is defined, then the component's value will also
+        // be defined.
+        const value = componentValues[key] as ComponentValue<
+          DBSchema,
+          StoreName
+        >;
 
-          await this.persistValue(store, databaseMap, value, empty);
-        }
+        await this.persistProperty(store, databaseMap, value, empty);
+      } else {
+        // If `databaseMap` is defined, then `emptyValue` will also be
+        // defined.
+        const empty = emptyValue as StoreValue<DBSchema["schema"], StoreName>;
+        // If `databaseMap` is defined, then the component's value will also
+        // be defined.
+        const value = componentValues[key] as StoreValue<
+          DBSchema["schema"],
+          StoreName
+        >;
+
+        await this.persistValue(store, databaseMap, value, empty);
       }
     }
   }
