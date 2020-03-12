@@ -8,6 +8,8 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [0.1.0] - 12-03-2020
+
 ### Changed
 
 - Made steps clear hidden answers when persisting to the store
@@ -99,7 +101,8 @@ and this project adheres to
 - `makeDatabase`, a Higher Order Component to make wrapping dynamic components
   more straightforward
 
-[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.7...HEAD
+[unreleased]: https://github.com/LBHackney-IT/remultiform/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.7...v0.1.0
 [0.0.7]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/LBHackney-IT/remultiform/compare/v0.0.4...v0.0.5
