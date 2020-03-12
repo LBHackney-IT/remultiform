@@ -1,12 +1,12 @@
 import { nullAsUndefined, nullValuesAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 import React from "react";
-
 import {
   ComponentDatabaseMap,
   ComponentValue
 } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
+import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { Database } from "../../database/Database";
 import { Store, StoreMap } from "../../database/Store";
 import {
@@ -18,7 +18,6 @@ import {
   StoreValuePropertyPath,
   TransactionMode
 } from "../../database/types";
-import { DatabaseContext } from "../../database-context/DatabaseContext";
 import { SubmitType } from "../Submit";
 
 export interface StepProps<
@@ -216,8 +215,6 @@ export class Step<
             ? key
             : undefined;
         }
-
-        return undefined;
       })
       .filter(Boolean) as string[];
 
@@ -235,13 +232,13 @@ export class Step<
         ...componentWrappers
           .map(({ databaseMap }) => {
             if (!databaseMap) {
-              return undefined;
+              return;
             }
 
             const k = databaseMap.key;
 
             if (typeof k === "string" || typeof k === "number") {
-              return undefined;
+              return;
             }
 
             return (k as {
@@ -279,37 +276,53 @@ export class Step<
     const { componentWrappers } = this.props;
     const { componentValues } = this.state;
 
-    for (const { key, databaseMap, emptyValue } of componentWrappers) {
-      if (databaseMap) {
-        const { storeName, property } = databaseMap;
+    for (const {
+      key,
+      renderWhen,
+      databaseMap,
+      emptyValue
+    } of componentWrappers) {
+      if (!databaseMap) {
+        continue;
+      }
 
-        const store = stores[storeName];
+      const { storeName, property } = databaseMap;
 
-        if (property) {
-          // If `databaseMap` is defined, then `emptyValue` will also be
-          // defined.
-          const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
-          // If `databaseMap` is defined, then the component's value will also
-          // be defined.
-          const value = componentValues[key] as ComponentValue<
-            DBSchema,
-            StoreName
-          >;
+      const store = stores[storeName];
 
-          await this.persistProperty(store, databaseMap, value, empty);
-        } else {
-          // If `databaseMap` is defined, then `emptyValue` will also be
-          // defined.
-          const empty = emptyValue as StoreValue<DBSchema["schema"], StoreName>;
-          // If `databaseMap` is defined, then the component's value will also
-          // be defined.
-          const value = componentValues[key] as StoreValue<
-            DBSchema["schema"],
-            StoreName
-          >;
+      if (!renderWhen(componentValues)) {
+        const { key } = databaseMap;
 
-          await this.persistValue(store, databaseMap, value, empty);
-        }
+        const storeKey = typeof key === "function" ? key() : key;
+
+        // Delete data that is currently hidden from the user.
+        await store.delete(storeKey);
+      }
+
+      if (property) {
+        // If `databaseMap` is defined, then `emptyValue` will also be
+        // defined.
+        const empty = emptyValue as ComponentValue<DBSchema, StoreName>;
+        // If `databaseMap` is defined, then the component's value will also
+        // be defined.
+        const value = componentValues[key] as ComponentValue<
+          DBSchema,
+          StoreName
+        >;
+
+        await this.persistProperty(store, databaseMap, value, empty);
+      } else {
+        // If `databaseMap` is defined, then `emptyValue` will also be
+        // defined.
+        const empty = emptyValue as StoreValue<DBSchema["schema"], StoreName>;
+        // If `databaseMap` is defined, then the component's value will also
+        // be defined.
+        const value = componentValues[key] as StoreValue<
+          DBSchema["schema"],
+          StoreName
+        >;
+
+        await this.persistValue(store, databaseMap, value, empty);
       }
     }
   }

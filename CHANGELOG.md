@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Changed
+
+- Made steps clear hidden answers when persisting to the store
+
 ## [0.0.7] - 11-02-2020
 
 ### Changed
