@@ -289,15 +289,7 @@ export class Step<
       const { storeName, property } = databaseMap;
 
       const store = stores[storeName];
-
-      if (!renderWhen(componentValues)) {
-        const { key } = databaseMap;
-
-        const storeKey = typeof key === "function" ? key() : key;
-
-        // Delete data that is currently hidden from the user.
-        await store.delete(storeKey);
-      }
+      const isRendered = renderWhen(componentValues);
 
       if (property) {
         // If `databaseMap` is defined, then `emptyValue` will also be
@@ -310,7 +302,13 @@ export class Step<
           StoreName
         >;
 
-        await this.persistProperty(store, databaseMap, value, empty);
+        await this.persistProperty(
+          store,
+          databaseMap,
+          value,
+          empty,
+          isRendered
+        );
       } else {
         // If `databaseMap` is defined, then `emptyValue` will also be
         // defined.
@@ -322,7 +320,7 @@ export class Step<
           StoreName
         >;
 
-        await this.persistValue(store, databaseMap, value, empty);
+        await this.persistValue(store, databaseMap, value, empty, isRendered);
       }
     }
   }
@@ -335,7 +333,8 @@ export class Step<
     >,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
     propertyValue: ComponentValue<DBSchema, StoreName>,
-    emptyValue: ComponentValue<DBSchema, StoreName>
+    emptyValue: ComponentValue<DBSchema, StoreName>,
+    isRendered: boolean
   ): Promise<void> {
     const { key, property } = databaseMap;
 
@@ -346,7 +345,8 @@ export class Step<
         store,
         databaseMap,
         propertyValue as StoreValue<DBSchema["schema"], StoreName>,
-        emptyValue as StoreValue<DBSchema["schema"], StoreName>
+        emptyValue as StoreValue<DBSchema["schema"], StoreName>,
+        isRendered
       );
 
       return;
@@ -354,7 +354,10 @@ export class Step<
 
     const storedValue = await store.get(storeKey);
 
-    if (storedValue === undefined && propertyValue === emptyValue) {
+    // Delete data that is currently hidden from the user.
+    const shouldDelete = propertyValue === emptyValue || !isRendered;
+
+    if (shouldDelete && storedValue === undefined) {
       // We would clear the property value from the store if there was
       // anything to clear, but there isn't, so we do nothing and early exit.
       return;
@@ -383,7 +386,7 @@ export class Step<
         typeof child
       >;
 
-      if (propertyValue === emptyValue) {
+      if (shouldDelete) {
         delete child[k1];
       } else {
         child[k1] = propertyValue as typeof child[typeof k1];
@@ -391,7 +394,7 @@ export class Step<
 
       value[k0] = child;
     } else {
-      if (propertyValue === emptyValue) {
+      if (shouldDelete) {
         delete value[k0];
       } else {
         value[k0] = propertyValue as typeof value[typeof k0];
@@ -409,13 +412,17 @@ export class Step<
     >,
     databaseMap: ComponentDatabaseMap<DBSchema, StoreName>,
     value: StoreValue<DBSchema["schema"], StoreName>,
-    emptyValue: StoreValue<DBSchema["schema"], StoreName>
+    emptyValue: StoreValue<DBSchema["schema"], StoreName>,
+    isRendered: boolean
   ): Promise<void> {
     const { key } = databaseMap;
 
     const storeKey = typeof key === "function" ? key() : key;
 
-    if (value === emptyValue) {
+    // Delete data that is currently hidden from the user.
+    const shouldDelete = value === emptyValue || !isRendered;
+
+    if (shouldDelete) {
       await store.delete(storeKey);
     } else {
       await store.put(storeKey, value);

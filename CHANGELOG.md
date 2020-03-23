@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Stopped saving hidden answers immediately after deleting them
+
 ## [0.1.0] - 12-03-2020
 
 ### Changed
