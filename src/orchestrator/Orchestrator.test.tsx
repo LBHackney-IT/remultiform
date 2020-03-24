@@ -1,20 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { render, fireEvent, waitForElement } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { create } from "react-test-renderer";
-
+import { DatabaseContext } from "../database-context/DatabaseContext";
+import { Database } from "../database/Database";
 import { TestErrorBoundary } from "../__fixtures__/components/TestErrorBoundary";
 import {
-  DynamicFormSchema,
-  dynamicForm
+  dynamicForm,
+  DynamicFormSchema
 } from "../__fixtures__/forms/dynamicForm";
 import { staticForm } from "../__fixtures__/forms/staticForm";
-
 import { spyOnConsoleError } from "../__tests__/helpers/spies";
-
-import { Database } from "../database/Database";
-import { DatabaseContext } from "../database-context/DatabaseContext";
-
 import { Orchestrator } from "./Orchestrator";
 
 jest.mock("../component-wrapper/ComponentWrapper");
@@ -191,7 +187,7 @@ it("throws when attempting to render from an unknown slug", () => {
 });
 
 it("renders the next step when the step is submitted", async () => {
-  const { container, getByTestId } = render(
+  const { container, findByTestId, getByTestId } = render(
     <Orchestrator
       steps={staticForm.steps}
       initialSlug={staticForm.steps[0].slug}
@@ -205,7 +201,7 @@ it("renders the next step when the step is submitted", async () => {
   );
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  await waitForElement(() => getByTestId(nextStep!.componentWrappers[0].key));
+  await findByTestId(nextStep!.componentWrappers[0].key);
 
   expect(container).toMatchInlineSnapshot(`
     <div>
@@ -226,7 +222,7 @@ it("renders the next step when the step is submitted", async () => {
 });
 
 it("doesn't render the next step after the step is submitted when `manageStepTransitions` is false", async () => {
-  const { container, getByTestId } = render(
+  const { container, findByTestId, getByTestId } = render(
     <Orchestrator
       steps={staticForm.steps}
       initialSlug={staticForm.steps[0].slug}
@@ -236,9 +232,7 @@ it("doesn't render the next step after the step is submitted when `manageStepTra
 
   fireEvent.click(getByTestId("submit"));
 
-  await waitForElement(() =>
-    getByTestId(staticForm.steps[0].componentWrappers[0].key)
-  );
+  await findByTestId(staticForm.steps[0].componentWrappers[0].key);
 
   expect(container).toMatchInlineSnapshot(`
     <div>
