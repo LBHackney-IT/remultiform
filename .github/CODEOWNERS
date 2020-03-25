@@ -4,17 +4,7 @@
 # repository.
 
 # The default, matching to all changes, overriden by any later rules.
-*             @erbridge @LBHELewis
-
-# Any changes in the root of the repository.
-/*            @erbridge @LBHELewis
-
-# Any changes in a directory starting with `.` in the root of the repository.
-/.*/          @LBHackney-IT/mat-developers @LBHELewis
-
-/docs/        @LBHackney-IT/mat-developers @LBHELewis
-/src/         @LBHackney-IT/mat-developers @LBHELewis
-/examples/    @LBHackney-IT/mat-developers @LBHELewis
+*             @LBHackney-IT/mat-developers
 
 # We disable these to reduce noise from Dependabot.
 package.json
