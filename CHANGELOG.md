@@ -15,6 +15,8 @@ and this project adheres to
 ### Fixed
 
 - Stopped saving hidden answers immediately after deleting them
+- Now consider empty arrays and objects without properties as "missing" for
+  required values
 
 ## [0.1.0] - 12-03-2020
 
