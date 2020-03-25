@@ -12,7 +12,7 @@ export const wrapTransaction = async <
   const stores = storeNames.reduce(
     (stores, storeName) => ({
       ...stores,
-      [storeName]: new Store(transaction.objectStore(storeName))
+      [storeName]: new Store(transaction.objectStore(storeName)),
     }),
     {} as StoreMap<S, Names>
   );

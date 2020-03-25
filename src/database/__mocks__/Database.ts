@@ -8,7 +8,7 @@ import {
   Schema,
   StoreKey,
   StoreNames,
-  StoreValue
+  StoreValue,
 } from "../types";
 
 const { Database: ActualDatabase } = jest.requireActual("../Database");

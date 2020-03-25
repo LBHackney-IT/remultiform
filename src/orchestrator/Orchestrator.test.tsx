@@ -7,7 +7,7 @@ import { Database } from "../database/Database";
 import { TestErrorBoundary } from "../__fixtures__/components/TestErrorBoundary";
 import {
   dynamicForm,
-  DynamicFormSchema
+  DynamicFormSchema,
 } from "../__fixtures__/forms/dynamicForm";
 import { staticForm } from "../__fixtures__/forms/staticForm";
 import { spyOnConsoleError } from "../__tests__/helpers/spies";

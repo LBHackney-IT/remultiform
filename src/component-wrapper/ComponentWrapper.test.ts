@@ -43,8 +43,8 @@ describe(".wrapStatic()", () => {
         key: "test-class",
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -59,14 +59,14 @@ describe(".wrapDynamic()", () => {
         key: "test-component",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 
@@ -83,8 +83,8 @@ describe("#key", () => {
         key,
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -99,14 +99,14 @@ describe("#key", () => {
         key,
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 
@@ -121,8 +121,8 @@ describe("#databaseMap", () => {
         key: "test-key",
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -132,7 +132,7 @@ describe("#databaseMap", () => {
   it("matches the database map provided when wrapping a `DynamicComponent`", () => {
     const databaseMap = new ComponentDatabaseMap<TestSchema, typeof storeName>({
       storeName,
-      key: 0
+      key: 0,
     });
 
     const componentWrapper = ComponentWrapper.wrapDynamic(
@@ -140,11 +140,11 @@ describe("#databaseMap", () => {
         key: "test-key",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue: "test empty",
-        databaseMap
+        databaseMap,
       })
     );
 
@@ -159,8 +159,8 @@ describe("#defaultValue", () => {
         key: "test-key",
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -175,14 +175,14 @@ describe("#defaultValue", () => {
         key: "test-key",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue,
         emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 
@@ -197,8 +197,8 @@ describe("#emptyValue", () => {
         key: "test-key",
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -213,14 +213,14 @@ describe("#emptyValue", () => {
         key: "test-key",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue,
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 
@@ -235,8 +235,8 @@ describe("#required", () => {
         key: "test-key",
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -251,15 +251,15 @@ describe("#required", () => {
         key: "test-key",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue: "test empty",
         required,
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 
@@ -274,8 +274,8 @@ describe("#render()", () => {
         key: "test-function",
         Component: "img",
         props: {
-          src: "test.png"
-        }
+          src: "test.png",
+        },
       })
     );
 
@@ -294,8 +294,8 @@ describe("#render()", () => {
         key: "test-class",
         Component: TestClassComponent,
         props: {
-          content: "test class content"
-        }
+          content: "test class content",
+        },
       })
     );
 
@@ -314,8 +314,8 @@ describe("#render()", () => {
         key: "test-function",
         Component: TestFunctionComponent,
         props: {
-          content: "test function content"
-        }
+          content: "test function content",
+        },
       })
     );
 
@@ -334,14 +334,14 @@ describe("#render()", () => {
         key: "test-component",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 
@@ -371,14 +371,14 @@ describe("#render()", () => {
         key: "test-component",
         Component: TestDynamicComponent,
         props: {
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default",
         emptyValue: "test empty",
         databaseMap: new ComponentDatabaseMap<TestSchema, typeof storeName>({
           storeName,
-          key: 0
-        })
+          key: 0,
+        }),
       })
     );
 

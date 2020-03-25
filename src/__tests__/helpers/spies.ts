@@ -47,16 +47,16 @@ export const spyOnDatabaseGet = (
   const get = {
     spy: jest.spyOn(Database.prototype, "get"),
     settle: Promise.all([
-      new Promise<void>(resolve => {
+      new Promise<void>((resolve) => {
         settleInitial = resolve;
-      })
+      }),
     ]),
-    calls: [] as Promise<void>[]
+    calls: [] as Promise<void>[],
   };
 
   get.spy.mockImplementation(async (storeName, key) => {
     let settleThis: () => void = () => {};
-    const promise = new Promise<void>(resolve => {
+    const promise = new Promise<void>((resolve) => {
       settleThis = resolve;
     });
 
@@ -104,16 +104,16 @@ export const spyOnDatabaseTransaction = (): {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     stores: {} as StoreMap<any>,
     settle: Promise.all([
-      new Promise<void>(resolve => {
+      new Promise<void>((resolve) => {
         settleInitial = resolve;
-      })
+      }),
     ]),
-    calls: [] as Promise<void>[]
+    calls: [] as Promise<void>[],
   };
 
   transaction.spy.mockImplementation(async (storeNames, tx) => {
     let settleThis: () => void = () => {};
-    const promise = new Promise<void>(resolve => {
+    const promise = new Promise<void>((resolve) => {
       settleThis = resolve;
     });
 
@@ -129,8 +129,8 @@ export const spyOnDatabaseTransaction = (): {
           add: jest.fn(),
           put: jest.fn(),
           get: jest.fn(),
-          delete: jest.fn()
-        })
+          delete: jest.fn(),
+        }),
       }),
       {}
     );

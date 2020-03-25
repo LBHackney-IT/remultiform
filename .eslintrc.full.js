@@ -15,7 +15,7 @@ const addMissingRecommendedTypeScriptRules = (parserOptions, overrides) => {
   const extendsInsertIndex =
     1 +
     override.extends.findIndex(
-      extend => extend === "plugin:@typescript-eslint/recommended"
+      (extend) => extend === "plugin:@typescript-eslint/recommended"
     );
 
   if (extendsInsertIndex === 0) {
@@ -25,7 +25,7 @@ const addMissingRecommendedTypeScriptRules = (parserOptions, overrides) => {
   parserOptions.project = [
     "./tsconfig.json",
     "./examples/*/tsconfig.json",
-    "./examples/*/__tests__/tsconfig.json"
+    "./examples/*/__tests__/tsconfig.json",
   ];
   parserOptions.tsconfigRootDir = __dirname;
 
@@ -34,8 +34,8 @@ const addMissingRecommendedTypeScriptRules = (parserOptions, overrides) => {
     extends: [
       ...override.extends.slice(0, extendsInsertIndex),
       "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      ...override.extends.slice(extendsInsertIndex)
-    ]
+      ...override.extends.slice(extendsInsertIndex),
+    ],
   };
 };
 
@@ -47,5 +47,5 @@ addMissingRecommendedTypeScriptRules(parserOptions, overrides);
 module.exports = {
   extends: ["./.eslintrc.js"],
   parserOptions,
-  overrides
+  overrides,
 };

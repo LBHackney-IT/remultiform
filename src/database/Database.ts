@@ -1,7 +1,7 @@
 import {
   IDBPDatabase,
   StoreKey as IDBPStoreKey,
-  StoreValue as IDBPStoreValue
+  StoreValue as IDBPStoreValue,
 } from "idb";
 
 import { wrapOpenDB } from "./internal/wrapOpenDB";
@@ -15,7 +15,7 @@ import {
   StoreKey,
   StoreNames,
   StoreValue,
-  TransactionMode
+  TransactionMode,
 } from "./types";
 
 /**

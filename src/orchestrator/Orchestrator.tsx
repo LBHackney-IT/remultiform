@@ -105,7 +105,7 @@ export class Orchestrator<
     initialSlug: PropTypes.string,
     manageStepTransitions: PropTypes.bool,
     provideDatabase: PropTypes.bool,
-    onNextStep: PropTypes.func
+    onNextStep: PropTypes.func,
   };
 
   static defaultProps: Partial<
@@ -113,7 +113,7 @@ export class Orchestrator<
     OrchestratorProps<NamedSchema<string, number, any>, string>
   > = {
     manageStepTransitions: true,
-    provideDatabase: true
+    provideDatabase: true,
   };
 
   state: OrchestratorState = {};
@@ -173,7 +173,7 @@ export class Orchestrator<
   }
 
   private handleNextSlugChange(slug?: string): void {
-    this.setState(state => ({ ...state, nextSlug: slug }));
+    this.setState((state) => ({ ...state, nextSlug: slug }));
   }
 
   private handleSubmit(): void {
@@ -184,14 +184,14 @@ export class Orchestrator<
       onNextStep(nextSlug);
     }
 
-    this.setState(state => ({ ...state, nextSlug: undefined }));
+    this.setState((state) => ({ ...state, nextSlug: undefined }));
 
     if (!manageStepTransitions) {
       return;
     }
 
-    if (nextSlug && steps.map(step => step.slug).includes(nextSlug)) {
-      this.setState(state => ({ ...state, currentSlug: nextSlug }));
+    if (nextSlug && steps.map((step) => step.slug).includes(nextSlug)) {
+      this.setState((state) => ({ ...state, currentSlug: nextSlug }));
     } else if (!onNextStep) {
       throw new Error(
         `Unable to transition to next slug "${nextSlug}" due to it not ` +

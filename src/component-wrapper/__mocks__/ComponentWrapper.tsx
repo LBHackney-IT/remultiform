@@ -63,7 +63,7 @@ export class ComponentWrapper<
       renderWhen,
       databaseMap,
       defaultValue,
-      emptyValue
+      emptyValue,
     } = component;
 
     return new ComponentWrapper(

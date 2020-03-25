@@ -61,8 +61,8 @@ export class ComponentWrapper<
     emptyValue: PropTypes.any,
     required: PropTypes.oneOfType([
       PropTypes.func.isRequired,
-      PropTypes.bool.isRequired
-    ]).isRequired
+      PropTypes.bool.isRequired,
+    ]).isRequired,
   });
 
   /**
@@ -116,7 +116,7 @@ export class ComponentWrapper<
       databaseMap,
       defaultValue,
       emptyValue,
-      required
+      required,
     } = component;
 
     const render = (

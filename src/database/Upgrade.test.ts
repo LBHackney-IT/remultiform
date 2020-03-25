@@ -77,7 +77,7 @@ describe("#createStore()", () => {
           } catch (err) {
             reject(err);
           }
-        }
+        },
       });
     });
   });
@@ -140,7 +140,7 @@ describe("#transaction()", () => {
           } catch (err) {
             reject(err);
           }
-        }
+        },
       });
     });
   });
@@ -156,7 +156,7 @@ describe("#transaction()", () => {
   });
 
   it("allows reading from the store", async () => {
-    await upgrade.transaction([testStoreName], async stores => {
+    await upgrade.transaction([testStoreName], async (stores) => {
       await expect(stores[testStoreName].get(initialData.key)).resolves.toEqual(
         initialData.value
       );
@@ -166,17 +166,20 @@ describe("#transaction()", () => {
   it("allows writing to the store", async () => {
     const key = "testKey";
 
-    await upgrade.transaction([testStoreName], async stores => {
+    await upgrade.transaction([testStoreName], async (stores) => {
       await expect(stores[testStoreName].add(key, 1)).resolves.toEqual(key);
     });
   });
 
   it("provides access to all the stores passed to it", async () => {
-    await upgrade.transaction([testStoreName, anotherTestStoreName], stores => {
-      expect(Object.keys(stores)).toEqual(
-        expect.arrayContaining([testStoreName, anotherTestStoreName])
-      );
-    });
+    await upgrade.transaction(
+      [testStoreName, anotherTestStoreName],
+      (stores) => {
+        expect(Object.keys(stores)).toEqual(
+          expect.arrayContaining([testStoreName, anotherTestStoreName])
+        );
+      }
+    );
   });
 
   it("throws when targeting a missing store", async () => {
@@ -231,7 +234,7 @@ describe("#transaction()", () => {
     const key = "testKey";
     const value = 1;
 
-    await upgrade.transaction([testStoreName], async stores => {
+    await upgrade.transaction([testStoreName], async (stores) => {
       await stores[testStoreName].add(key, 1);
 
       await promiseToWaitForNextTick();
@@ -247,7 +250,7 @@ describe("#transaction()", () => {
     const key = "testKey";
     const value = 1;
 
-    await upgrade.transaction([testStoreName], async stores => {
+    await upgrade.transaction([testStoreName], async (stores) => {
       await stores[testStoreName].add(key, value);
 
       await promiseToWaitForNextTick();

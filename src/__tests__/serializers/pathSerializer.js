@@ -10,5 +10,5 @@ module.exports = {
 
   print(value, serialize) {
     return serialize(value.replace(new RegExp(rootDirName, "g"), "<rootDir>"));
-  }
+  },
 };

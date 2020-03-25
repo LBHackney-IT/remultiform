@@ -3,7 +3,7 @@ const sharedPlugins = ["jsdoc", "react", "react-hooks", "prettier"];
 const sharedExtends = [
   "eslint:recommended",
   "plugin:jsdoc/recommended",
-  "plugin:react/recommended"
+  "plugin:react/recommended",
 ];
 const sharedPrettierExtends = ["prettier", "prettier/react"];
 const sharedRules = {
@@ -13,7 +13,7 @@ const sharedRules = {
   "jsdoc/require-param": "off",
   "jsdoc/require-param-type": "off",
   "jsdoc/require-returns": "off",
-  "jsdoc/require-returns-type": "off"
+  "jsdoc/require-returns-type": "off",
 };
 
 module.exports = {
@@ -88,12 +88,12 @@ module.exports = {
         typeparam: "typeparam",
         variation: false,
         version: false,
-        yields: false
-      }
+        yields: false,
+      },
     },
     react: {
-      version: "detect"
-    }
+      version: "detect",
+    },
   },
   overrides: [
     {
@@ -104,9 +104,9 @@ module.exports = {
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         ...sharedPrettierExtends,
-        "prettier/@typescript-eslint"
+        "prettier/@typescript-eslint",
       ],
-      rules: { ...sharedRules }
-    }
-  ]
+      rules: { ...sharedRules },
+    },
+  ],
 };

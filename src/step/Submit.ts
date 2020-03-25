@@ -29,5 +29,5 @@ export type SubmitType = React.ComponentType<SubmitProps>;
  * The proptypes for {@link SubmitType}.
  */
 export const submitPropTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
 };

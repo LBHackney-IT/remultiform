@@ -1,6 +1,6 @@
 import {
   ComponentWrapper,
-  StaticComponent
+  StaticComponent,
 } from "remultiform/component-wrapper";
 
 import { makeSubmit } from "../components/makeSubmit";
@@ -16,10 +16,10 @@ const steps = [
         new StaticComponent({
           key: "image",
           Component: "img",
-          props: { src: `https://placekitten.com/200/300` }
+          props: { src: `https://placekitten.com/200/300` },
         })
-      )
-    ]
+      ),
+    ],
   },
   {
     slug: "big-kitten",
@@ -31,11 +31,11 @@ const steps = [
         new StaticComponent({
           key: "image",
           Component: "img",
-          props: { src: `https://placekitten.com/900/600` }
+          props: { src: `https://placekitten.com/900/600` },
         })
-      )
-    ]
-  }
+      ),
+    ],
+  },
 ];
 
 export default steps;

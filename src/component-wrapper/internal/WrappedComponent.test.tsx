@@ -14,7 +14,7 @@ import { DatabaseProvider } from "../../database-context/DatabaseProvider";
 import { ComponentDatabaseMap } from "../ComponentDatabaseMap";
 import {
   DynamicComponent,
-  DynamicComponentControlledProps
+  DynamicComponentControlledProps,
 } from "../DynamicComponent";
 
 import { WrappedComponent } from "./WrappedComponent";
@@ -41,18 +41,18 @@ type TestSchema = NamedSchema<
 
 const testDatabaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
   storeName: "testStore",
-  key: 0
+  key: 0,
 });
 
 const testComponent = new DynamicComponent({
   key: "test-component",
   Component: TestDynamicComponent,
   props: {
-    content: "test content"
+    content: "test content",
   },
   defaultValue: "test default",
   emptyValue: "test empty",
-  databaseMap: testDatabaseMap
+  databaseMap: testDatabaseMap,
 });
 
 it("renders correctly with all non-context props", () => {
@@ -81,11 +81,11 @@ it("renders correctly with an undefined default value for the component", () => 
     key: "test-component",
     Component: TestDynamicComponent,
     props: {
-      content: "test content"
+      content: "test content",
     },
     defaultValue: undefined as string | undefined,
     emptyValue: "test empty",
-    databaseMap: testDatabaseMap
+    databaseMap: testDatabaseMap,
   });
 
   const component = create(
@@ -222,7 +222,7 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
   const databaseMap = new ComponentDatabaseMap<TestSchema, "anotherTestStore">({
     storeName: "anotherTestStore",
     key: 0,
-    property: "a"
+    property: "a",
   });
 
   const dynamicComponent = new DynamicComponent({
@@ -231,7 +231,7 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
     props: {},
     defaultValue: { value: "" },
     emptyValue: { value: "" },
-    databaseMap
+    databaseMap,
   });
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
@@ -275,18 +275,18 @@ it("fetches the stored value specified by the `databaseMap` and uses the specifi
   const databaseMap = new ComponentDatabaseMap<TestSchema, "anotherTestStore">({
     storeName: "anotherTestStore",
     key: 0,
-    property: ["a", "value"]
+    property: ["a", "value"],
   });
 
   const dynamicComponent = new DynamicComponent({
     key: "test-component",
     Component: TestDynamicComponent,
     props: {
-      content: "test content"
+      content: "test content",
     },
     defaultValue: "test default value",
     emptyValue: "test empty",
-    databaseMap
+    databaseMap,
   });
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
@@ -424,11 +424,11 @@ it("uses the empty value when fetching the stored value returns `undefined` and 
     key: "test-component",
     Component: TestDynamicComponent,
     props: {
-      content: "test content"
+      content: "test content",
     },
     defaultValue: undefined,
     emptyValue: "test empty",
-    databaseMap: testDatabaseMap
+    databaseMap: testDatabaseMap,
   });
 
   const openPromise = Database.open<TestSchema>("testDBName", 1);
@@ -482,7 +482,7 @@ it("is disabled while the database is opening", async () => {
     props: {},
     defaultValue: "test default",
     emptyValue: "test empty",
-    databaseMap: testDatabaseMap
+    databaseMap: testDatabaseMap,
   });
 
   const get = spyOnDatabaseGet();
@@ -525,7 +525,7 @@ it("is disabled while fetching the stored value from the database", async () => 
     props: {},
     defaultValue: "test default",
     emptyValue: "test empty",
-    databaseMap: testDatabaseMap
+    databaseMap: testDatabaseMap,
   });
 
   const get = spyOnDatabaseGet();

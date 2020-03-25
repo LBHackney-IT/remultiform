@@ -9,7 +9,7 @@ export class TestClassComponent extends React.Component<
   TestClassComponentProps
 > {
   static propTypes: PropTypes.ValidationMap<TestClassComponentProps> = {
-    content: PropTypes.string.isRequired
+    content: PropTypes.string.isRequired,
   };
 
   render(): JSX.Element {

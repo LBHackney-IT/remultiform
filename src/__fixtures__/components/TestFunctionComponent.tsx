@@ -16,5 +16,5 @@ export const TestFunctionComponent: React.FunctionComponent<TestFunctionComponen
 TestFunctionComponent.displayName = "TestFunctionComponent";
 
 TestFunctionComponent.propTypes = {
-  content: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired,
 };

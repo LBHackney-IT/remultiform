@@ -67,6 +67,6 @@ export const stepPropType = PropTypes.exact({
   submit: PropTypes.func,
   nextSlug: PropTypes.oneOfType([
     PropTypes.string.isRequired,
-    PropTypes.func.isRequired
-  ])
+    PropTypes.func.isRequired,
+  ]),
 });

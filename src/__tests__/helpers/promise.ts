@@ -1,4 +1,4 @@
 export const promiseToWaitForNextTick = (): Promise<void> =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     setImmediate(() => resolve());
   });

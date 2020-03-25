@@ -42,7 +42,7 @@ const createDBWithStore = async (
     upgrade(upgrade) {
       upgrade.createStore(testStoreName);
       upgrade.createStore(anotherTestStoreName);
-    }
+    },
   }));
 };
 
@@ -123,7 +123,7 @@ describe(".open()", () => {
       db = await Database.open<TestSchema>(testDBName, version, {
         upgrade(upgrade) {
           mock(upgrade.oldVersion, upgrade.newVersion);
-        }
+        },
       });
 
       expect(mock).toHaveBeenCalledTimes(1);
@@ -143,7 +143,7 @@ describe(".open()", () => {
       db = await Database.open<TestSchema>(testDBName, version, {
         upgrade(upgrade) {
           mock(upgrade.oldVersion, upgrade.newVersion);
-        }
+        },
       });
 
       expect(mock).not.toHaveBeenCalled();
@@ -163,7 +163,7 @@ describe(".open()", () => {
       db = await Database.open<TestSchema>(testDBName, currentVersion, {
         upgrade(upgrade) {
           mock(upgrade.oldVersion, upgrade.newVersion);
-        }
+        },
       });
 
       expect(mock).toHaveBeenCalledTimes(1);
@@ -185,7 +185,7 @@ describe(".open()", () => {
         db = await Database.open<TestSchema>(testDBName, currentVersion, {
           upgrade() {
             throw error;
-          }
+          },
         });
       }).rejects.toThrowError(error);
     });
@@ -205,7 +205,7 @@ describe(".open()", () => {
             await promiseToWaitForNextTick();
 
             throw error;
-          }
+          },
         });
       }).rejects.toThrowError(error);
     });
@@ -224,7 +224,7 @@ describe(".open()", () => {
           mock();
 
           initialDB.close();
-        }
+        },
       });
 
       expect(mock).toHaveBeenCalledTimes(1);
@@ -243,7 +243,7 @@ describe(".open()", () => {
         db = await Database.open<TestSchema>(testDBName, currentVersion, {
           blocked() {
             throw error;
-          }
+          },
         });
       }).rejects.toThrowError(error);
     });
@@ -261,7 +261,7 @@ describe(".open()", () => {
             await promiseToWaitForNextTick();
 
             throw error;
-          }
+          },
         });
       }).rejects.toThrowError(error);
     });
@@ -278,7 +278,7 @@ describe(".open()", () => {
           mock();
 
           initialDB.close();
-        }
+        },
       });
 
       db = await Database.open<TestSchema>(testDBName, currentVersion);
@@ -297,7 +297,7 @@ describe(".open()", () => {
       initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
         blocking() {
           throw error;
-        }
+        },
       });
 
       await expectPromise(async () => {
@@ -321,7 +321,7 @@ describe(".open()", () => {
           initialDB.close();
 
           throw error;
-        }
+        },
       });
 
       db = await Database.open<TestSchema>(testDBName, currentVersion);
@@ -337,7 +337,7 @@ describe(".open()", () => {
       const currentVersion = 7;
 
       initialDB = await Database.open<TestSchema>(testDBName, initialVersion, {
-        autoCloseOnBlocking: true
+        autoCloseOnBlocking: true,
       });
 
       db = await Database.open<TestSchema>(testDBName, currentVersion);
@@ -355,7 +355,7 @@ describe(".open()", () => {
         blocking() {
           throw error;
         },
-        autoCloseOnBlocking: true
+        autoCloseOnBlocking: true,
       });
 
       db = await Database.open<TestSchema>(testDBName, currentVersion);
@@ -372,7 +372,7 @@ describe("#name", () => {
   it("matches the name of the provided database", () => {
     const database = new Database<TestSchema>({
       ...jest.fn()(),
-      name: testDBName
+      name: testDBName,
     });
 
     expect(database.name).toEqual(testDBName);
@@ -405,7 +405,7 @@ describe("#put()", () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (db as Database<any>).put(missingStoreName, "testKey", {
         a: "test",
-        b: 1
+        b: 1,
       })
     ).rejects.toThrowError(
       `No objectStore named ${missingStoreName} in this database`
@@ -463,7 +463,7 @@ describe("#transaction()", () => {
   });
 
   it("provides access to all the stores passed to it", async () => {
-    await db.transaction([testStoreName, anotherTestStoreName], stores => {
+    await db.transaction([testStoreName, anotherTestStoreName], (stores) => {
       expect(Object.keys(stores)).toEqual(
         expect.arrayContaining([testStoreName, anotherTestStoreName])
       );
@@ -523,7 +523,7 @@ describe("#transaction()", () => {
 
     await db.transaction(
       [testStoreName],
-      async stores => {
+      async (stores) => {
         await stores[testStoreName].add(key, value);
 
         await promiseToWaitForNextTick();
@@ -543,7 +543,7 @@ describe("#transaction()", () => {
 
     await db.transaction(
       [testStoreName],
-      async stores => {
+      async (stores) => {
         await stores[testStoreName].add(key, value);
 
         await promiseToWaitForNextTick();
@@ -567,7 +567,7 @@ describe("#transaction()", () => {
 
       await db.transaction(
         [testStoreName],
-        async stores => {
+        async (stores) => {
           await expect(stores[testStoreName].get(key)).resolves.toEqual(value);
         },
         TransactionMode.ReadOnly
@@ -577,7 +577,7 @@ describe("#transaction()", () => {
     it("throws when attempting to write to the store", async () => {
       await db.transaction(
         [testStoreName],
-        async stores => {
+        async (stores) => {
           await expectPromise(() =>
             stores[testStoreName].add("testKey", { a: "test", b: 1 })
           ).rejects.toThrowError(
@@ -598,7 +598,7 @@ describe("#transaction()", () => {
 
       await db.transaction(
         [testStoreName],
-        async stores => {
+        async (stores) => {
           await expect(stores[testStoreName].get(key)).resolves.toEqual(value);
         },
         TransactionMode.ReadWrite
@@ -610,7 +610,7 @@ describe("#transaction()", () => {
 
       await db.transaction(
         [testStoreName],
-        async stores => {
+        async (stores) => {
           await expect(
             stores[testStoreName].add(key, { a: "test", b: 1 })
           ).resolves.toEqual(key);
@@ -638,7 +638,7 @@ describe("#close()", () => {
 
     await db.transaction(
       [testStoreName],
-      async stores => {
+      async (stores) => {
         await stores[testStoreName].add("testKey", { a: "test", b: 1 });
 
         db.close();
@@ -649,7 +649,7 @@ describe("#close()", () => {
       TransactionMode.ReadWrite
     );
 
-    const hasClosed = new Promise(resolve => {
+    const hasClosed = new Promise((resolve) => {
       const checkClosed = (): void => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if ((internalDB as any)._closed) {

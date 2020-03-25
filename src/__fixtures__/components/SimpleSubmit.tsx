@@ -20,5 +20,5 @@ export const SimpleSubmit: React.FunctionComponent<SimpleSubmitProps> = (
 SimpleSubmit.displayName = "SimpleSubmit";
 
 SimpleSubmit.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
 };

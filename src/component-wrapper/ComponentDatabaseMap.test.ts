@@ -27,7 +27,7 @@ describe("#storeName", () => {
       "anotherTestStore"
     >({
       storeName,
-      key: 0
+      key: 0,
     });
 
     expect(databaseMap.storeName).toEqual(storeName);
@@ -40,7 +40,7 @@ describe("#key", () => {
 
     const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
       storeName: "testStore",
-      key
+      key,
     });
 
     expect(databaseMap.key).toEqual(key);
@@ -54,7 +54,7 @@ describe("#property", () => {
       "anotherTestStore"
     >({
       storeName: "anotherTestStore",
-      key: 3
+      key: 3,
     });
 
     expect(databaseMap.property).toBeUndefined();
@@ -69,7 +69,7 @@ describe("#property", () => {
     >({
       storeName: "anotherTestStore",
       key: 3,
-      property
+      property,
     });
 
     expect(databaseMap.property).toEqual(property);
