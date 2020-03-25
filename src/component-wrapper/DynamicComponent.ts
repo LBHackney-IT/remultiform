@@ -217,7 +217,7 @@ export class DynamicComponent<
     databaseMap: ComponentDatabaseMap.propType.isRequired,
     defaultValue: PropTypes.any,
     emptyValue: PropTypes.any.isRequired,
-    required: PropTypes.bool.isRequired
+    required: PropTypes.bool.isRequired,
   });
 
   /**
@@ -237,7 +237,7 @@ export class DynamicComponent<
       value: valuePropType,
       onValueChange: PropTypes.func.isRequired,
       required: PropTypes.bool.isRequired,
-      disabled: PropTypes.bool.isRequired
+      disabled: PropTypes.bool.isRequired,
     };
   }
 
@@ -271,7 +271,7 @@ export class DynamicComponent<
       databaseMap,
       defaultValue,
       emptyValue,
-      required
+      required,
     } = options;
 
     this.key = key;

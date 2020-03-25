@@ -15,7 +15,7 @@ export class TestErrorBoundary extends React.Component<
   TestErrorBoundaryState
 > {
   static propTypes: PropTypes.ValidationMap<TestErrorBoundaryProps> = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
   };
 
   static getDerivedStateFromError(

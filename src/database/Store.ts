@@ -3,7 +3,7 @@ import {
   IDBPObjectStore,
   IndexNames,
   StoreKey as IDBPStoreKey,
-  StoreValue as IDBPStoreValue
+  StoreValue as IDBPStoreValue,
 } from "idb";
 import { Schema, StoreKey, StoreNames, StoreValue } from "./types";
 

@@ -3,7 +3,7 @@ import { IDBPTransaction, StoreNames as DBStoreNames } from "idb";
 import {
   BooleanProperties,
   NumberProperties,
-  StringProperties
+  StringProperties,
 } from "../helpers/internal/primitives";
 
 type StorePropertyType = string | number | boolean | Date;
@@ -220,5 +220,5 @@ export type Transaction<
  */
 export enum TransactionMode {
   ReadOnly = "readonly",
-  ReadWrite = "readwrite"
+  ReadWrite = "readwrite",
 }

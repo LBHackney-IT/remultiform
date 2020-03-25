@@ -7,13 +7,13 @@ import { SimpleSubmit } from "../../__fixtures__/components/SimpleSubmit";
 import { TestDynamicComponent } from "../../__fixtures__/components/TestDynamicComponent";
 import {
   DynamicFormSchema,
-  dynamicForm
+  dynamicForm,
 } from "../../__fixtures__/forms/dynamicForm";
 import { staticForm } from "../../__fixtures__/forms/staticForm";
 
 import {
   spyOnDatabaseGet,
-  spyOnDatabaseTransaction
+  spyOnDatabaseTransaction,
 } from "../../__tests__/helpers/spies";
 import { promiseToWaitForNextTick } from "../../__tests__/helpers/promise";
 
@@ -126,7 +126,7 @@ it("calls next slug when it's a function", () => {
 
   expect(nextSlugFn).toHaveBeenCalledTimes(1);
   expect(nextSlugFn).toHaveBeenCalledWith({
-    "test-dynamic-component": ""
+    "test-dynamic-component": "",
   });
 });
 
@@ -142,7 +142,7 @@ it("only renders components whose `renderWhen` returns `true` or is undefined", 
           new StaticComponent({
             key: "div-to-render-by-default",
             Component: "div",
-            props: {}
+            props: {},
           })
         ),
         ComponentWrapper.wrapStatic(
@@ -150,7 +150,7 @@ it("only renders components whose `renderWhen` returns `true` or is undefined", 
             key: "div-to-explicitly-render",
             Component: "div",
             props: {},
-            renderWhen: (): boolean => true
+            renderWhen: (): boolean => true,
           })
         ),
         ComponentWrapper.wrapStatic(
@@ -158,9 +158,9 @@ it("only renders components whose `renderWhen` returns `true` or is undefined", 
             key: "div-to-not-render",
             Component: "div",
             props: {},
-            renderWhen: (): boolean => false
+            renderWhen: (): boolean => false,
           })
-        )
+        ),
       ]}
     />
   );
@@ -284,7 +284,7 @@ it("persists data to the database when submitted", async () => {
 
   const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
-    key: 0
+    key: 0,
   });
 
   const wrappers = [
@@ -294,13 +294,13 @@ it("persists data to the database when submitted", async () => {
         Component: TestDynamicComponent,
         props: {
           key: "test-key",
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default value",
         emptyValue: "test empty value",
-        databaseMap
+        databaseMap,
       })
-    )
+    ),
   ];
 
   const database = await Database.open("testDBName", 1);
@@ -359,7 +359,7 @@ it("deletes the corresponding data from the database when submitted with the emp
 
   const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
-    key: 0
+    key: 0,
   });
 
   const emptyValue = "test empty value";
@@ -371,13 +371,13 @@ it("deletes the corresponding data from the database when submitted with the emp
         Component: TestDynamicComponent,
         props: {
           key: "test-key",
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default value",
         emptyValue,
-        databaseMap
+        databaseMap,
       })
-    )
+    ),
   ];
 
   const database = await Database.open("testDBName", 1);
@@ -437,7 +437,7 @@ it("persists child property data to the database when submitted", async () => {
   const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
     key: 0,
-    property: ["a", "value"]
+    property: ["a", "value"],
   });
 
   const wrappers = [
@@ -447,13 +447,13 @@ it("persists child property data to the database when submitted", async () => {
         Component: TestDynamicComponent,
         props: {
           key: "test-key",
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default value",
         emptyValue: "test empty value",
-        databaseMap
+        databaseMap,
       })
-    )
+    ),
   ];
 
   const database = await Database.open("testDBName", 1);
@@ -483,7 +483,7 @@ it("persists child property data to the database when submitted", async () => {
 
   expect(storePut).toHaveBeenCalledTimes(1);
   expect(storePut).toHaveBeenCalledWith(databaseMap.key, {
-    a: { value: newValue }
+    a: { value: newValue },
   });
 });
 
@@ -517,7 +517,7 @@ it("removes the corresponding child property data from the database when submitt
   const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
     storeName: "testStore",
     key: 0,
-    property: ["a", "value"]
+    property: ["a", "value"],
   });
 
   const emptyValue = "test empty value";
@@ -529,13 +529,13 @@ it("removes the corresponding child property data from the database when submitt
         Component: TestDynamicComponent,
         props: {
           key: "test-key",
-          content: "test content"
+          content: "test content",
         },
         defaultValue: "test default value",
         emptyValue,
-        databaseMap
+        databaseMap,
       })
-    )
+    ),
   ];
 
   const database = await Database.open("testDBName", 1);

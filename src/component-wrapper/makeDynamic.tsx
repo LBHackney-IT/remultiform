@@ -4,7 +4,7 @@ import { Subtract } from "utility-types";
 
 import {
   DynamicComponent,
-  DynamicComponentControlledProps
+  DynamicComponentControlledProps,
 } from "./DynamicComponent";
 
 /**
@@ -72,7 +72,7 @@ const mapDynamicPropsToComponentProps = <
   valueChangeAdapter: MakeDynamicValueChangeAdapter<Value>
 ): Props => {
   const copyOfDynamicProps = {
-    ...dynamicProps
+    ...dynamicProps,
   } as Subtract<Props, PropsToMap> &
     Partial<DynamicComponentControlledProps<Value>>;
 
@@ -93,7 +93,7 @@ const mapDynamicPropsToComponentProps = <
     [value]: dynamicProps.value,
     [onValueChange]: handleValueChange,
     [required]: dynamicProps.required,
-    [disabled]: dynamicProps.disabled
+    [disabled]: dynamicProps.disabled,
   } as Props;
 };
 
@@ -104,10 +104,11 @@ const mapComponentPropTypesToDynamicPropTypes = <
 >(
   componentPropTypes: Readonly<React.WeakValidationMap<Props>> | undefined,
   { value, onValueChange, required, disabled }: MakeDynamicPropMap<PropsToMap>
-): React.WeakValidationMap<Subtract<Props, PropsToMap> &
-  DynamicComponentControlledProps<Value>> => {
+): React.WeakValidationMap<
+  Subtract<Props, PropsToMap> & DynamicComponentControlledProps<Value>
+> => {
   const copyOfComponentPropTypes = {
-    ...componentPropTypes
+    ...componentPropTypes,
   } as PropTypes.ValidationMap<
     Subtract<Props, PropsToMap> & Partial<PropsToMap>
   >;
@@ -123,7 +124,7 @@ const mapComponentPropTypesToDynamicPropTypes = <
 
   return {
     ...copyOfComponentPropTypes,
-    ...DynamicComponent.controlledPropTypes<Value>(valuePropType)
+    ...DynamicComponent.controlledPropTypes<Value>(valuePropType),
   } as React.WeakValidationMap<
     Subtract<Props, PropsToMap> & DynamicComponentControlledProps<Value>
   >;
@@ -173,8 +174,10 @@ export const makeDynamic = <
   Component: React.ElementType<Props>,
   propMap: MakeDynamicPropMap<Pick<Props, PropNamesToMap>>,
   valueChangeAdapter: MakeDynamicValueChangeAdapter<Value>
-): React.FunctionComponent<Subtract<Props, Pick<Props, PropNamesToMap>> &
-  DynamicComponentControlledProps<Value>> => {
+): React.FunctionComponent<
+  Subtract<Props, Pick<Props, PropNamesToMap>> &
+    DynamicComponentControlledProps<Value>
+> => {
   type PropsToMap = Pick<Props, PropNamesToMap>;
   type DynamicProps = Subtract<Props, Pick<Props, PropNamesToMap>> &
     DynamicComponentControlledProps<Value>;
@@ -207,9 +210,9 @@ export const makeDynamic = <
       PropTypes.any.isRequired
     ) as React.WeakValidationMap<DynamicProps>;
   } else {
-    Dynamic.displayName = `makeDynamic(${Component.displayName ||
-      Component.name ||
-      "unknown"})`;
+    Dynamic.displayName = `makeDynamic(${
+      Component.displayName || Component.name || "unknown"
+    })`;
     Dynamic.propTypes = mapComponentPropTypesToDynamicPropTypes<
       Props,
       PropsToMap,

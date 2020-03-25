@@ -19,7 +19,7 @@ export const staticForm = {
           new StaticComponent({
             key: "test-div",
             Component: "div",
-            props: {}
+            props: {},
           })
         ),
         ComponentWrapper.wrapStatic(
@@ -27,8 +27,8 @@ export const staticForm = {
             key: "test-img",
             Component: "img",
             props: {
-              src: "test.png"
-            }
+              src: "test.png",
+            },
           })
         ),
         ComponentWrapper.wrapStatic(
@@ -36,8 +36,8 @@ export const staticForm = {
             key: "test-function",
             Component: TestFunctionComponent,
             props: {
-              content: "test function content"
-            }
+              content: "test function content",
+            },
           })
         ),
         ComponentWrapper.wrapStatic(
@@ -45,11 +45,11 @@ export const staticForm = {
             key: "test-class",
             Component: TestClassComponent,
             props: {
-              content: "test class content"
-            }
+              content: "test class content",
+            },
           })
-        )
-      ]
+        ),
+      ],
     },
     {
       slug: "test-step-2",
@@ -63,11 +63,11 @@ export const staticForm = {
             key: "test-img-2",
             Component: "img",
             props: {
-              src: "another.png"
-            }
+              src: "another.png",
+            },
           })
-        )
-      ]
-    }
-  ]
+        ),
+      ],
+    },
+  ],
 };

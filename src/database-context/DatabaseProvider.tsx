@@ -93,7 +93,7 @@ export class DatabaseProvider<
     DatabaseProviderProps<NamedSchema<string, number, Schema>>
   > = {
     context: PropTypes.instanceOf(DatabaseContext).isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
   };
 
   /**
@@ -110,7 +110,7 @@ export class DatabaseProvider<
     this.isUnmounted = false;
 
     const {
-      context: { database: openDatabaseOrPromise }
+      context: { database: openDatabaseOrPromise },
     } = this.props;
 
     const stateUpdate: Partial<DatabaseProviderState<DBSchema>> = {};
@@ -127,7 +127,7 @@ export class DatabaseProvider<
       return;
     }
 
-    this.setState(state => ({ ...state, ...stateUpdate }));
+    this.setState((state) => ({ ...state, ...stateUpdate }));
   }
 
   /**
@@ -145,7 +145,7 @@ export class DatabaseProvider<
     const updatedContext = (Object.keys(
       prevProps
     ) as (keyof typeof prevProps)[]).some(
-      propName =>
+      (propName) =>
         propName === "context" && prevProps[propName] !== this.props[propName]
     );
 
@@ -156,7 +156,7 @@ export class DatabaseProvider<
       this.setState({
         error: new Error(
           "Updating the context prop of a DatabaseProvider to one with a different database is unsupported"
-        )
+        ),
       });
     }
   }

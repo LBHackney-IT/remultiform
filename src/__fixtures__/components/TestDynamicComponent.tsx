@@ -3,7 +3,7 @@ import React from "react";
 
 import {
   DynamicComponent,
-  DynamicComponentControlledProps
+  DynamicComponentControlledProps,
 } from "../../component-wrapper/DynamicComponent";
 
 export type TestDynamicComponentProps = DynamicComponentControlledProps<
@@ -37,5 +37,5 @@ TestDynamicComponent.displayName = "TestDynamicComponent";
 
 TestDynamicComponent.propTypes = {
   content: PropTypes.string.isRequired,
-  ...DynamicComponent.controlledPropTypes(PropTypes.string.isRequired)
+  ...DynamicComponent.controlledPropTypes(PropTypes.string.isRequired),
 };

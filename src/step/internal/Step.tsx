@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import {
   ComponentDatabaseMap,
-  ComponentValue
+  ComponentValue,
 } from "../../component-wrapper/ComponentDatabaseMap";
 import { ComponentWrapper } from "../../component-wrapper/ComponentWrapper";
 import { DatabaseContext } from "../../database-context/DatabaseContext";
@@ -16,7 +16,7 @@ import {
   StoreNames,
   StoreValue,
   StoreValuePropertyPath,
-  TransactionMode
+  TransactionMode,
 } from "../../database/types";
 import { SubmitType } from "../Submit";
 
@@ -72,19 +72,19 @@ export class Step<
     afterSubmit: PropTypes.func,
     nextSlug: PropTypes.oneOfType([
       PropTypes.string.isRequired,
-      PropTypes.func.isRequired
+      PropTypes.func.isRequired,
     ]),
-    onNextSlugChange: PropTypes.func
+    onNextSlugChange: PropTypes.func,
   };
 
   state: StepState<DBSchema, StoreName> = {
     componentValues: this.props.componentWrappers.reduce(
       (values, { key, emptyValue }) => ({
         ...values,
-        [key]: nullAsUndefined(emptyValue)
+        [key]: nullAsUndefined(emptyValue),
       }),
       {} as StepState<DBSchema, StoreName>["componentValues"]
-    )
+    ),
   };
 
   componentDidMount(): void {
@@ -132,7 +132,7 @@ export class Step<
 
     return (
       <>
-        {componentWrappers.map(component =>
+        {componentWrappers.map((component) =>
           this.renderComponent(component, database)
         )}
         {Submit && (
@@ -161,7 +161,7 @@ export class Step<
         database,
         required:
           typeof required === "boolean" ? required : required(componentValues),
-        onChange: value => this.handleChange(key, value)
+        onChange: (value) => this.handleChange(key, value),
       });
     }
   }
@@ -183,9 +183,9 @@ export class Step<
   ): void {
     const { componentValues } = this.state;
 
-    this.setState(state => ({
+    this.setState((state) => ({
       ...state,
-      componentValues: { ...componentValues, [key]: value }
+      componentValues: { ...componentValues, [key]: value },
     }));
   }
 
@@ -248,7 +248,7 @@ export class Step<
           .reduce(
             (n, names) => [...n, ...(names || [])],
             [] as StoreNames<DBSchema["schema"]>[]
-          )
+          ),
       ].filter(
         (storeName, index, array) =>
           storeName &&
@@ -259,7 +259,7 @@ export class Step<
       if (storeNames.length > 0) {
         await database.transaction(
           storeNames,
-          stores => this.persistValuesToDatabase(stores),
+          (stores) => this.persistValuesToDatabase(stores),
           TransactionMode.ReadWrite
         );
       }
@@ -280,7 +280,7 @@ export class Step<
       key,
       renderWhen,
       databaseMap,
-      emptyValue
+      emptyValue,
     } of componentWrappers) {
       if (!databaseMap) {
         continue;

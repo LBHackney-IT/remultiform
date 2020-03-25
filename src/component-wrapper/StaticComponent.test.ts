@@ -7,7 +7,7 @@ describe("#key", () => {
     const component = new StaticComponent({
       key,
       Component: "div",
-      props: {}
+      props: {},
     });
 
     expect(component.key).toEqual(key);
@@ -21,7 +21,7 @@ describe("#Component", () => {
     const component = new StaticComponent({
       key: "test-key",
       Component,
-      props: {}
+      props: {},
     });
 
     expect(component.Component).toEqual(Component);
@@ -35,7 +35,7 @@ describe("#props", () => {
     const component = new StaticComponent({
       key: "test-key",
       Component: "img",
-      props
+      props,
     });
 
     expect(component.props).toEqual(props);
@@ -50,7 +50,7 @@ describe("#renderWhen", () => {
       key: "test-key",
       Component: "div",
       props: {},
-      renderWhen
+      renderWhen,
     });
 
     expect(component.renderWhen).toEqual(renderWhen);
@@ -60,7 +60,7 @@ describe("#renderWhen", () => {
     const component = new StaticComponent({
       key: "test-key",
       Component: "div",
-      props: {}
+      props: {},
     });
 
     expect(component.renderWhen({})).toEqual(true);

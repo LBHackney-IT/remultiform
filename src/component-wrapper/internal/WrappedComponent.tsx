@@ -8,13 +8,13 @@ import {
   Schema,
   StoreNames,
   StoreValuePropertyPathLevelTwo,
-  StoreValuePropertyPathLevelOne
+  StoreValuePropertyPathLevelOne,
 } from "../../database/types";
 
 import { ComponentDatabaseMap, ComponentValue } from "../ComponentDatabaseMap";
 import {
   DynamicComponent,
-  DynamicComponentControlledProps
+  DynamicComponentControlledProps,
 } from "../DynamicComponent";
 
 export interface WrappedComponentProps<
@@ -76,7 +76,7 @@ export class WrappedComponent<
     component: DynamicComponent.propType.isRequired,
     required: PropTypes.bool.isRequired,
     onChange: PropTypes.func,
-    database: PropTypes.instanceOf(Database)
+    database: PropTypes.instanceOf(Database),
   };
 
   /**
@@ -84,7 +84,7 @@ export class WrappedComponent<
    */
   state: WrappedComponentState<DBSchema, StoreName, Value> = {
     value: this.props.component.emptyValue,
-    isFetching: false
+    isFetching: false,
   };
 
   private isUnmounted = false;
@@ -142,7 +142,7 @@ export class WrappedComponent<
       value,
       onValueChange: this.onValueChange.bind(this),
       required,
-      disabled: !database || isFetching
+      disabled: !database || isFetching,
     };
 
     return <Component key={key} {...props} {...controlledProps} />;
@@ -162,21 +162,21 @@ export class WrappedComponent<
 
     const {
       database,
-      component: { databaseMap, defaultValue, emptyValue }
+      component: { databaseMap, defaultValue, emptyValue },
     } = this.props;
 
     if (!database || !databaseMap) {
       return;
     }
 
-    this.setState(state => ({ ...state, isFetching: true }));
+    this.setState((state) => ({ ...state, isFetching: true }));
 
     const stateUpdate: Partial<WrappedComponentState<
       DBSchema,
       StoreName,
       Value
     >> = {
-      isFetching: false
+      isFetching: false,
     };
 
     try {
@@ -206,7 +206,7 @@ export class WrappedComponent<
       return;
     }
 
-    this.setState(state => ({ ...state, ...stateUpdate }));
+    this.setState((state) => ({ ...state, ...stateUpdate }));
   }
 
   private onValueChange(value: Value): void {
@@ -220,7 +220,7 @@ export class WrappedComponent<
       onChange(value);
     }
 
-    this.setState(state => ({ ...state, value }));
+    this.setState((state) => ({ ...state, value }));
   }
 
   private async fetchDeepValue(

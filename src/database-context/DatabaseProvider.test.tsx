@@ -6,7 +6,7 @@ import { TestErrorBoundary } from "../__fixtures__/components/TestErrorBoundary"
 
 import {
   spyOnConsoleError,
-  spyOnDatabaseOpen
+  spyOnDatabaseOpen,
 } from "../__tests__/helpers/spies";
 
 import { Database } from "../database/Database";
@@ -87,7 +87,7 @@ it("renders correctly after the database resolves", async () => {
 it("throws if the database rejects", async () => {
   let resolveInternalDatabasePromise: () => void;
 
-  const internalDatabasePromise = new Promise(resolve => {
+  const internalDatabasePromise = new Promise((resolve) => {
     resolveInternalDatabasePromise = resolve;
   });
 
@@ -161,7 +161,7 @@ it("renders correctly when changing children", async () => {
   const DBContext = new DatabaseContext(database);
 
   const Wrapper = ({
-    children
+    children,
   }: {
     children: React.ReactNode;
   }): JSX.Element => (
@@ -206,7 +206,7 @@ it("throws when changing the `context` prop with a different database instance",
   const NewDBContext = new DatabaseContext(newDatabase);
 
   const Wrapper = ({
-    context
+    context,
   }: {
     context: DatabaseContext<TestSchema>;
   }): JSX.Element => (
@@ -277,7 +277,7 @@ it("renders correctly when changing the `context` prop with the same database in
   const NewDBContext = new DatabaseContext(database);
 
   const Wrapper = ({
-    context
+    context,
   }: {
     context: DatabaseContext<TestSchema>;
   }): JSX.Element => (

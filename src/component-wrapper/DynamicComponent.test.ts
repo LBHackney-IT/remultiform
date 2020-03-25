@@ -28,8 +28,8 @@ describe("#key", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.key).toEqual(key);
@@ -48,8 +48,8 @@ describe("#Component", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.Component).toEqual(Component);
@@ -68,8 +68,8 @@ describe("#props", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.props).toEqual(props);
@@ -89,8 +89,8 @@ describe("#renderWhen", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.renderWhen).toEqual(renderWhen);
@@ -105,8 +105,8 @@ describe("#renderWhen", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.renderWhen({})).toEqual(true);
@@ -117,7 +117,7 @@ describe("#databaseMap", () => {
   it("matches the `databaseMap` provided to the constructor", () => {
     const databaseMap = new ComponentDatabaseMap<TestSchema, "testStore">({
       storeName: "testStore",
-      key: 0
+      key: 0,
     });
 
     const component = new DynamicComponent({
@@ -126,7 +126,7 @@ describe("#databaseMap", () => {
       props: { content: "test content" },
       defaultValue: "test default value",
       emptyValue: "test empty value",
-      databaseMap
+      databaseMap,
     });
 
     expect(component.databaseMap).toStrictEqual(databaseMap);
@@ -145,8 +145,8 @@ describe("#defaultValue", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.defaultValue).toEqual(defaultValue);
@@ -165,8 +165,8 @@ describe("#emptyValue", () => {
       emptyValue,
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.emptyValue).toEqual(emptyValue);
@@ -186,8 +186,8 @@ describe("#required", () => {
       required,
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.required).toEqual(required);
@@ -202,8 +202,8 @@ describe("#required", () => {
       emptyValue: "test empty value",
       databaseMap: new ComponentDatabaseMap<TestSchema, "testStore">({
         storeName: "testStore",
-        key: 0
-      })
+        key: 0,
+      }),
     });
 
     expect(component.required).toEqual(false);

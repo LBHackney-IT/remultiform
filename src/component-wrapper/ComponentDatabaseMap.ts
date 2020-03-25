@@ -9,7 +9,7 @@ import {
   StoreValue,
   StoreValuePropertyPath,
   StoreValuePropertyPathLevelOne,
-  StoreValuePropertyPathLevelTwo
+  StoreValuePropertyPathLevelTwo,
 } from "../database/types";
 
 // Value["a"]
@@ -122,7 +122,7 @@ export class ComponentDatabaseMap<
     key: PropTypes.oneOfType([
       PropTypes.string.isRequired,
       PropTypes.number.isRequired,
-      PropTypes.func.isRequired
+      PropTypes.func.isRequired,
     ]).isRequired,
     // We need to cast this because `PropTypes.arrayOf` doesn't know how to
     // limit the number of elements in the array, and so creates the
@@ -131,9 +131,9 @@ export class ComponentDatabaseMap<
     property: PropTypes.arrayOf(
       PropTypes.oneOfType([
         PropTypes.string.isRequired,
-        PropTypes.symbol.isRequired
+        PropTypes.symbol.isRequired,
       ]).isRequired
-    ) as PropTypes.Requireable<[string] | [string, string | symbol]>
+    ) as PropTypes.Requireable<[string] | [string, string | symbol]>,
   });
 
   readonly storeName: StoreName;

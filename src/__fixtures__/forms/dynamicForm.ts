@@ -33,8 +33,8 @@ export const dynamicForm = {
             key: "test-img",
             Component: "img",
             props: {
-              src: "test.png"
-            }
+              src: "test.png",
+            },
           })
         ),
         ComponentWrapper.wrapDynamic(
@@ -42,7 +42,7 @@ export const dynamicForm = {
             key: "test-dynamic-component",
             Component: TestDynamicComponent,
             props: {
-              content: "test content"
+              content: "test content",
             },
             defaultValue: "test default",
             emptyValue: "",
@@ -51,11 +51,11 @@ export const dynamicForm = {
               "testStore"
             >({
               storeName: "testStore",
-              key: 0
-            })
+              key: 0,
+            }),
           })
-        )
-      ]
+        ),
+      ],
     },
     {
       slug: "test-step-2",
@@ -69,8 +69,8 @@ export const dynamicForm = {
             key: "test-img-2",
             Component: "img",
             props: {
-              src: "another.png"
-            }
+              src: "another.png",
+            },
           })
         ),
         ComponentWrapper.wrapDynamic(
@@ -78,7 +78,7 @@ export const dynamicForm = {
             key: "test-dynamic-component",
             Component: TestDynamicComponent,
             props: {
-              content: "more test content"
+              content: "more test content",
             },
             defaultValue: "test default",
             emptyValue: "",
@@ -88,11 +88,11 @@ export const dynamicForm = {
               "testStore"
             >({
               storeName: "testStore",
-              key: 1
-            })
+              key: 1,
+            }),
           })
-        )
-      ]
-    }
-  ]
+        ),
+      ],
+    },
+  ],
 };

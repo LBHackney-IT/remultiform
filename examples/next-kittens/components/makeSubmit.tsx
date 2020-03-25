@@ -4,7 +4,7 @@ import { SubmitProps, submitPropTypes } from "remultiform/step";
 
 export const makeSubmit = ({
   href,
-  value
+  value,
 }: {
   href: string;
   value: string;
@@ -20,7 +20,7 @@ export const makeSubmit = ({
   Submit.displayName = "Submit";
 
   Submit.propTypes = {
-    ...submitPropTypes
+    ...submitPropTypes,
   };
 
   return Submit;

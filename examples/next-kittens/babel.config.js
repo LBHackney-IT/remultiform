@@ -6,9 +6,9 @@ module.exports = {
       "module-resolver",
       {
         alias: {
-          remultiform: ["../../dist/esm"]
-        }
-      }
-    ]
-  ]
+          remultiform: ["../../dist/esm"],
+        },
+      },
+    ],
+  ],
 };

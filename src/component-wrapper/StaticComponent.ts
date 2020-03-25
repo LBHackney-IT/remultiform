@@ -77,7 +77,7 @@ export class StaticComponent<
       React.ElementType
     >).isRequired,
     props: PropTypes.object.isRequired,
-    renderWhen: PropTypes.func.isRequired
+    renderWhen: PropTypes.func.isRequired,
   });
 
   readonly key: string;

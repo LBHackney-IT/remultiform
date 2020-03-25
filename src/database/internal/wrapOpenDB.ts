@@ -112,7 +112,7 @@ export const wrapOpenDB = async <N extends string, S extends Schema>(
           if (autoCloseOnBlocking) {
             db.close();
           }
-        }
+        },
       });
 
       const requestToOpen = unwrap(promiseToOpen);
