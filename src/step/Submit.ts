@@ -12,8 +12,10 @@ export interface SubmitProps {
    * implementation of {@link StepDefinition.Submit} must catch any exceptions
    * thrown by the promise returned by this callback, and handle them
    * appropriately, so they aren't lost to the ether.
+   *
+   * Returns `true` if the submission succeeded. Otherwise returns `false.
    */
-  onSubmit(): Promise<void>;
+  onSubmit(): Promise<boolean>;
 }
 
 /**
