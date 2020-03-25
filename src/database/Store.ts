@@ -5,7 +5,6 @@ import {
   StoreKey as IDBPStoreKey,
   StoreValue as IDBPStoreValue
 } from "idb";
-
 import { Schema, StoreKey, StoreNames, StoreValue } from "./types";
 
 /**
@@ -28,7 +27,7 @@ export class Store<
   constructor(store: IDBPObjectStore<DBSchema, TxStoreNames, StoreName>) {
     this.store = store;
 
-    this.name = this.store.name;
+    this.name = this.store.name as StoreName;
   }
 
   /**
