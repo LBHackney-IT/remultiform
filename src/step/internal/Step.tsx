@@ -1,3 +1,4 @@
+import isEqual from "lodash.isequal";
 import { nullAsUndefined, nullValuesAsUndefined } from "null-as-undefined";
 import PropTypes from "prop-types";
 import React from "react";
@@ -210,10 +211,10 @@ export class Step<
           required &&
           (required === true || required(componentValues))
         ) {
-          return componentValues[key] === undefined ||
-            componentValues[key] === emptyValue
-            ? key
-            : undefined;
+          const value = componentValues[key];
+          const isMissing = value === undefined || isEqual(value, emptyValue);
+
+          return isMissing ? key : undefined;
         }
       })
       .filter(Boolean) as string[];
