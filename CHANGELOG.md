@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+## Changed
+
+- Bump `idb` from `4.0.5` to `5.0.1`
+
 ### Fixed
 
 - Stopped saving hidden answers immediately after deleting them
