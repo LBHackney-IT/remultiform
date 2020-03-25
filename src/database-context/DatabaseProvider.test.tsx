@@ -128,10 +128,10 @@ Array [
     at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:214:9)
     at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:87:17)
     at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:144:23)
-    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
-    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
-    at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15092:9)
-    at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:697:12)",
+    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10021:16)
+    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10073:31)
+    at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:13033:9)
+    at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:653:12)",
     [Error: test error],
   ],
   Array [
@@ -240,10 +240,10 @@ Array [
     at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:214:9)
     at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:87:17)
     at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:144:23)
-    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
-    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
-    at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:15092:9)
-    at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:697:12)",
+    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10021:16)
+    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10073:31)
+    at commitRootImpl (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:13033:9)
+    at unstable_runWithPriority (<rootDir>/node_modules/scheduler/cjs/scheduler.development.js:653:12)",
     [Error: Updating the context prop of a DatabaseProvider to one with a different database is unsupported],
   ],
   Array [
@@ -341,10 +341,10 @@ Array [
     at HTMLUnknownElementImpl._dispatch (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:214:9)
     at HTMLUnknownElementImpl.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:87:17)
     at HTMLUnknownElement.dispatchEvent (<rootDir>/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:144:23)
-    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11807:16)
-    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:11860:31)
-    at safelyCallComponentWillUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12018:5)
-    at commitUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:12507:11)",
+    at Object.invokeGuardedCallbackDev (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10021:16)
+    at invokeGuardedCallback (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10073:31)
+    at safelyCallComponentWillUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10201:5)
+    at commitUnmount (<rootDir>/node_modules/react-test-renderer/cjs/react-test-renderer.development.js:10721:11)",
     [Error: Unmounting a DatabaseProvider outside of an error is unsupported],
   ],
   Array [
