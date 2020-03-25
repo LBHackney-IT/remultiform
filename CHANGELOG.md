@@ -10,7 +10,8 @@ and this project adheres to
 
 ## Changed
 
-- Bump `idb` from `4.0.5` to `5.0.1`
+- Bumped `idb` from `4.0.5` to `5.0.1`
+- Changes the `onSubmit` prop for `SubmitType` to return a boolean status
 
 ### Fixed
 

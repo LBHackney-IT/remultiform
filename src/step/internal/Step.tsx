@@ -139,7 +139,7 @@ export class Step<
         {Submit && (
           <Submit
             key="submit"
-            onSubmit={(): Promise<void> => this.handleSubmit(database)}
+            onSubmit={(): Promise<boolean> => this.handleSubmit(database)}
           />
         )}
       </>
@@ -200,7 +200,7 @@ export class Step<
     }
   }
 
-  private async handleSubmit(database?: Database<DBSchema>): Promise<void> {
+  private async handleSubmit(database?: Database<DBSchema>): Promise<boolean> {
     const { componentWrappers, afterSubmit, onIncompleteSubmit } = this.props;
     const { componentValues } = this.state;
 
@@ -224,7 +224,7 @@ export class Step<
         onIncompleteSubmit(keysMissingValues);
       }
 
-      return;
+      return false;
     }
 
     if (database) {
@@ -269,6 +269,8 @@ export class Step<
     if (afterSubmit) {
       afterSubmit();
     }
+
+    return true;
   }
 
   private async persistValuesToDatabase(
