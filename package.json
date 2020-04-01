@@ -37,7 +37,7 @@
     "react": ">= 16"
   },
   "dependencies": {
-    "idb": "^5.0.1",
+    "idb": "^5.0.2",
     "lodash.isequal": "^4.5.0",
     "null-as-undefined": "^0.2.1",
     "prop-types": "^15.7.2"
