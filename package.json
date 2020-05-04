@@ -67,7 +67,7 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "fake-indexeddb": "^3.0.0",
     "husky": "^4.2.5",
-    "jest": "^25.5.3",
+    "jest": "^25.5.4",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
