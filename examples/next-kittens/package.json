@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "next": "^9.3.3",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
